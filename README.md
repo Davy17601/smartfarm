@@ -1,2 +1,160 @@
-# smartfarm
+# SmartFarm iOS App (កសិកម្ម ឆ្លាតវៃ)
 
+កម្មវិធី SwiftUI MVVM សម្រាប់កសិករខ្នាតតូច នឹង កម្រិតមធ្យម នៅកម្ពុជា — តាមដានហិរញ្ញវត្ថុ សកម្មភាពកសិកម្ម និងកាលវិភាគក្នុងកន្លែងតែមួយ។
+
+---
+
+## តម្រូវការ(Requirement)
+
+| ធាតុ | តម្រូវការ | កំណត់ចំណាំ |
+|------|-----------|------------|
+**Macos** | 11.x (គ្រប់កំណែ) | Davy និង Monineath ប្រើ នៅលើ Virtual VM |
+| **Xcode** | 13.x (គ្រប់កំណែ) | Davy និង Monineath ប្រើ Xcode 13 នៅលើ Virtual VM |
+| **Swift** | 5.5 | កំណែលំនាំដើមរបស់ Xcode 13 |
+| **iOS Deployment Target** | **14.0** | ប្រើបានជាមួយ Xcode 13.x គ្រប់កំណែ |
+| **SwiftUI** | iOS 14+ APIs តែប៉ុណ្ណោះ | គ្មាន SwiftData, គ្មាន Swift Charts, ប្រើ CoreData Persistence |
+| **Third-party dependencies** | គ្មាន | គ្មាន CocoaPods, គ្មាន SPM packages |
+
+### APIs ដែលត្រូវប្រើ (Xcode 13 safe)
+- `NavigationView` + `NavigationLink` — **មិន**ប្រើ `NavigationStack` (iOS 16+)
+- `TabView` ជាមួយ `tabItem`
+- `@StateObject`, `@ObservedObject`, `@EnvironmentObject`
+- `@FetchRequest` សម្រាប់ CoreData
+- `ToolbarItem` ជាមួយ `placement: .navigationBarTrailing / .navigationBarLeading`
+- `UNUserNotificationCenter` សម្រាប់ local notifications
+- `UIActivityViewController` បង្កប់ក្នុង `UIViewControllerRepresentable`
+- `UIDocumentPickerViewController` បង្កប់ក្នុង `UIViewControllerRepresentable`
+- `PDFKit` សម្រាប់បង្កើត PDF
+- `GeometryReader` + `Rectangle` shapes សម្រាប់ charts
+- `PreviewProvider` សម្រាប់ Xcode previews — **មិន**ប្រើ `#Preview {}` macro (Xcode 15+)
+
+### APIs ដែលត្រូវជៀសវាង (មិនអាចប្រើបាននៅ Xcode 13)
+- `NavigationStack`, `NavigationSplitView` — iOS 16+
+- `.searchable()` modifier — ប្រើ custom `TextField` search bar ជំនួស
+- `Charts` framework (Swift Charts) — iOS 16+
+- `SwiftData`, `@Model` — iOS 17+
+- `ShareLink` — iOS 16+, ប្រើ `UIActivityViewController` ជំនួស
+- `@Observable` macro — iOS 17+
+- `ContentUnavailableView` — iOS 17+
+- `#Preview {}` macro — Xcode 15+
+
+---
+
+## ក្រុមការងារ
+
+| តួនាទី | សមាជិក | ការទទួលខុសត្រូវ |
+|--------|--------|----------------|
+| **Project Supervisor** | Leader | Project Setup, Architecture |
+| **Member** | Davy | Finance Tracker Module,  CoreData, Navigation, Dashboard |
+| **Member** | Monineath | Calendar & Reminders Module, CoreData, UI, Export, Backup |
+
+---
+
+## ផែនការសាងសង់
+
+### Leader — Project Setup & MVVM Architecture
+
+- រៀបចំ Xcode project ជាមួយ folder structure សមស្រប និង iOS 14.0 deployment target
+- MVVM ជាមួយ `ObservableObject` និង `@Published` properties
+- បង្កើត data models ស្នូល: `Transaction`, `FarmActivity`
+- បង្កើត `FarmManager` (main view model) ដើម្បីសម្របសម្រួលមុខងារទាំងអស់
+- រៀបចំ project folders: `Models`, `ViewModels`, `Views`, `Utilities`
+- Implement `FarmViewModel` ជាមួយ `@Published` arrays
+- បង្កើត main tab view ជាមួយ 3 tabs: Finance, Calendar, Dashboard
+
+### Davy និង Monineath — CoreData Persistence
+
+- រៀបចំ `.xcdatamodeld` schema សម្រាប់ models ទាំងអស់
+- កំណត់ `NSPersistentContainer` និង `NSManagedObjectContext`
+- ប្រើ `@FetchRequest` សម្រាប់ UI updates ស្វ័យប្រវត្តិ
+- CRUD operations មូលដ្ឋាន (Create, Read, Update, Delete) ជាមួយ CoreData
+- បន្ថែម sample data នៅការចាប់ផ្ដើមដំបូងដោយប្រើ seed method
+- ផ្ទៀងផ្ទាត់ថាទិន្នន័យនៅតែមានក្រោយពីចាប់ផ្ដើម app ឡើងវិញ
+
+### Davy  — Navigation & Tab Coordination
+
+- `NavigationView` និង `NavigationLink` សម្រាប់ tabs នីមួយៗ
+- បង្កើត `NavigationCoordinator` ដោយប្រើ `@State` និង `@Binding`
+- បញ្ជូនទិន្នន័យរវាងអេក្រង់ (ឧ. ពីបញ្ជីទៅ detail)
+- បង្កើត list → detail navigation សម្រាប់ transactions
+- បន្ថែមមុខងារ "Edit" ជាមួយ navigation ត្រឹមត្រូវ
+
+### Davy — Dashboard & Cross-Module Integration
+
+- បង្កើត dashboard tab ជាមួយ summary cards
+- បង្ហាញ transactions ថ្មីៗ និងសកម្មភាពខាងមុខ
+- បង្ហាញ profit/loss សរុបសម្រាប់ខែបច្ចុប្បន្ន
+- បង្កើតប៊ូតុង "Quick Actions" សម្រាប់ការងារទូទៅ
+- Home tab ជាមួយ 4–6 summary cards
+- Navigation ពី card នីមួយៗទៅ tab ដែលពាក់ព័ន្ធ
+- បង្ហាញ reminders ក្នុង 7 ថ្ងៃខាងមុខ
+
+### Davy និង Monineath — Advanced UI & Animations
+
+- បង្កើត custom `ViewModifier`s សម្រាប់រចនាប័ទ្មស៊ីសង្វាក់
+- បង្កើត reusable components: `FarmCard`, `PrimaryButton`, `SectionHeader`
+- បន្ថែម animations ស្រើបៗ: fade-in សម្រាប់ lists, scale សម្រាប់ buttons
+- Implement pull-to-refresh និង loading states
+- គាំទ្រ dark mode និង accessibility
+- បង្កើតឯកសារ design system ជាមួយ colors, fonts, spacing
+
+### Davy និង Monineath — Data Export & Reports
+
+- Bar charts ប្រចាំខែ profit/loss ដោយប្រើ `GeometryReader` + `Rectangle` shapes (គ្មាន Swift Charts)
+- Export ទិន្នន័យជា CSV ឬ PDF
+- `UIActivityViewController` សម្រាប់ share reports
+- Simple PDF generator ដោយប្រើ `PDFKit`
+
+### Davy និង Monineath — Backup & Restore
+
+- Export/import CoreData records ទាំងអស់ជា JSON,CSV,PDF
+- `UIDocumentPickerViewController` បង្កប់ក្នុង `UIViewControllerRepresentable`
+- ការរំឭក backup ប្រចាំសប្ដាហ៍ស្វ័យប្រវត្តិ
+- iCloud Drive integration មូលដ្ឋាន
+
+---
+
+### Davy — Finance Tracker Module
+
+- បញ្ជី transactions ជាមួយការច្រោះ (expense / income / all)
+- ទម្រង់ "Add Transaction" ជាមួយ category picker
+- ការគណនាក្នុងពេលជាក់ស្ដែង (total expenses, income, profit)
+- ការធ្វើទ្រង់ទ្រាយរូបិយប័ណ្ណ: ការគាំទ្ររូបិយប័ណ្ណ Riel (KHR) និង Dollar (USD)
+- Summary card បង្ហាញ balance បច្ចុប្បន្ន, total expenses, total income
+- Category filtering: Seeds, Fertilizer, Labor, Tools, Sales
+
+---
+
+### Monineath — Calendar & Reminders Module
+
+- Calendar view ជាមួយ `DatePicker` និងបញ្ជីសកម្មភាព
+- `FarmActivity` model: date, type, notes
+- សុំការអនុញ្ញាត notifications
+- កំណត់ local notifications ជាមួយ `UNUserNotificationCenter` (1 ថ្ងៃមុន + នៅថ្ងៃនោះ)
+- ដោះស្រាយការចុច notification ដើម្បីបើក activity ជាក់លាក់
+- CRUD ពេញលេញ (Create, Read, Update, Delete) សម្រាប់ activities
+- ធ្វើតេស្ត notifications ដំណើរការទោះបីជា app បិទក្ដី
+
+---
+
+## សង្ខេប Modules
+
+| Module | ម្ចាស់ | មុខងារ |
+|--------|--------|--------|
+| **Project Setup & Architecture** | Leader | MVVM structure, folder setup, tab view |
+| **CoreData Persistence** | Davy និង Monineath  | Schema, CRUD, seed data |
+| **Navigation & Tab Coordination** | Davy និង Monineath | NavigationView, deep linking |
+| **Finance Tracker** | Davy | Income/expense tracking, profit reports, categories |
+| **Calendar & Reminders** | Monineath | Activity scheduling, local notifications |
+| **Dashboard** | Davy និង Monineath  | Unified view of all farm data |
+| **Reports & Charts** | Davy និង Monineath  | Visual profit/loss analysis |
+| **Backup & Restore** | Davy និង Monineath  | Data safety and portability |
+
+---
+
+## មូលហេតុដែលកម្មវិធីនេះល្អ
+
+1. **តម្លៃប្រើប្រាស់ពិតប្រាកដ** — កសិករពិតប្រាកដអាចប្រើកម្មវិធីនេះបាន
+2. **Portfolio-ready** — App ពេញលេញដែលមានមុខងារច្រើនបង្ហាញជំនាញដ៏គ្រប់ជ្រុងជ្រោយ
+3. **ស្របស្ថានភាពវប្បធម៌** — រចនាឡើងជាពិសេសសម្រាប់កសិករខ្នាត នឹង កម្រិតមធ្យម តូចនៅកម្ពុជា
+4. **SMART goals** — Specific, Measurable, Achievable, Realistic, Timely

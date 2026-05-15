@@ -13,6 +13,7 @@
 		5B3BCB1A2FAD97EC009A2991 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B3BCB192FAD97EC009A2991 /* Preview Assets.xcassets */; };
 		5B3BCB1C2FAD97EC009A2991 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3BCB1B2FAD97EC009A2991 /* Persistence.swift */; };
 		5B3BCB1F2FAD97EC009A2991 /* SmartFarm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5B3BCB1D2FAD97EC009A2991 /* SmartFarm.xcdatamodeld */; };
+		5B72011D2FB6BA1F007F69A5 /* TestUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B72011C2FB6BA1F007F69A5 /* TestUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		5B3BCB192FAD97EC009A2991 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5B3BCB1B2FAD97EC009A2991 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5B3BCB1E2FAD97EC009A2991 /* SmartFarm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SmartFarm.xcdatamodel; sourceTree = "<group>"; };
+		5B72011C2FB6BA1F007F69A5 /* TestUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				5B3BCB142FAD97EA009A2991 /* ContentView.swift */,
 				5B3BCB162FAD97EC009A2991 /* Assets.xcassets */,
 				5B3BCB1B2FAD97EC009A2991 /* Persistence.swift */,
+				5B72011C2FB6BA1F007F69A5 /* TestUIView.swift */,
 				5B3BCB1D2FAD97EC009A2991 /* SmartFarm.xcdatamodeld */,
 				5B3BCB182FAD97EC009A2991 /* Preview Content */,
 			);
@@ -147,6 +150,7 @@
 				5B3BCB152FAD97EA009A2991 /* ContentView.swift in Sources */,
 				5B3BCB132FAD97EA009A2991 /* SmartFarmApp.swift in Sources */,
 				5B3BCB1F2FAD97EC009A2991 /* SmartFarm.xcdatamodeld in Sources */,
+				5B72011D2FB6BA1F007F69A5 /* TestUIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

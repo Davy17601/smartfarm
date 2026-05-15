@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1619DDC22FB6BDDC00930946 /* SotheaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619DDC12FB6BDDC00930946 /* SotheaView.swift */; };
 		5B3BCB132FAD97EA009A2991 /* SmartFarmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3BCB122FAD97EA009A2991 /* SmartFarmApp.swift */; };
 		5B3BCB152FAD97EA009A2991 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3BCB142FAD97EA009A2991 /* ContentView.swift */; };
 		5B3BCB172FAD97EC009A2991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B3BCB162FAD97EC009A2991 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1619DDC12FB6BDDC00930946 /* SotheaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SotheaView.swift; sourceTree = "<group>"; };
 		5B3BCB0F2FAD97EA009A2991 /* SmartFarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartFarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B3BCB122FAD97EA009A2991 /* SmartFarmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartFarmApp.swift; sourceTree = "<group>"; };
 		5B3BCB142FAD97EA009A2991 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				5B72011C2FB6BA1F007F69A5 /* TestUIView.swift */,
 				5B3BCB1D2FAD97EC009A2991 /* SmartFarm.xcdatamodeld */,
 				5B3BCB182FAD97EC009A2991 /* Preview Content */,
+				1619DDC12FB6BDDC00930946 /* SotheaView.swift */,
 			);
 			path = SmartFarm;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 				5B3BCB152FAD97EA009A2991 /* ContentView.swift in Sources */,
 				5B3BCB132FAD97EA009A2991 /* SmartFarmApp.swift in Sources */,
 				5B3BCB1F2FAD97EC009A2991 /* SmartFarm.xcdatamodeld in Sources */,
+				1619DDC22FB6BDDC00930946 /* SotheaView.swift in Sources */,
 				5B72011D2FB6BA1F007F69A5 /* TestUIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

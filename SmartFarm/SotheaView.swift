@@ -9,10 +9,7 @@ import SwiftUI
 
 struct SotheaView: View {
     var body: some View {
-        Text("Hello, World! Sothea")
+        Text("Hello, World! Sothea ")
     }
 }
 
-#Preview {
-    SotheaView()
-}

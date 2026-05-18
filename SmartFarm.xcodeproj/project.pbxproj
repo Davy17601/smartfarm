@@ -15,6 +15,7 @@
 		5B3BCB1C2FAD97EC009A2991 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3BCB1B2FAD97EC009A2991 /* Persistence.swift */; };
 		5B3BCB1F2FAD97EC009A2991 /* SmartFarm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5B3BCB1D2FAD97EC009A2991 /* SmartFarm.xcdatamodeld */; };
 		5B72011D2FB6BA1F007F69A5 /* TestUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B72011C2FB6BA1F007F69A5 /* TestUIView.swift */; };
+		AA000012FFFFFFFF00000001 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000012FFFFFFFF00000000 /* Reminder.swift */; };
 		AA000010FFFFFFFF00000001 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000010FFFFFFFF00000000 /* Transaction.swift */; };
 		AA000011FFFFFFFF00000001 /* FarmActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000011FFFFFFFF00000000 /* FarmActivity.swift */; };
 		AA000020FFFFFFFF00000001 /* FarmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000020FFFFFFFF00000000 /* FarmViewModel.swift */; };
@@ -32,6 +33,7 @@
 		5B3BCB1B2FAD97EC009A2991 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5B3BCB1E2FAD97EC009A2991 /* SmartFarm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SmartFarm.xcdatamodel; sourceTree = "<group>"; };
 		5B72011C2FB6BA1F007F69A5 /* TestUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIView.swift; sourceTree = "<group>"; };
+		AA000012FFFFFFFF00000000 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		AA000010FFFFFFFF00000000 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		AA000011FFFFFFFF00000000 /* FarmActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmActivity.swift; sourceTree = "<group>"; };
 		AA000020FFFFFFFF00000000 /* FarmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmViewModel.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			children = (
 				AA000010FFFFFFFF00000000 /* Transaction.swift */,
 				AA000011FFFFFFFF00000000 /* FarmActivity.swift */,
+				AA000012FFFFFFFF00000000 /* Reminder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				5B3BCB1F2FAD97EC009A2991 /* SmartFarm.xcdatamodeld in Sources */,
 				1619DDC22FB6BDDC00930946 /* SotheaView.swift in Sources */,
 				5B72011D2FB6BA1F007F69A5 /* TestUIView.swift in Sources */,
+				AA000012FFFFFFFF00000001 /* Reminder.swift in Sources */,
 				AA000010FFFFFFFF00000001 /* Transaction.swift in Sources */,
 				AA000011FFFFFFFF00000001 /* FarmActivity.swift in Sources */,
 				AA000020FFFFFFFF00000001 /* FarmViewModel.swift in Sources */,

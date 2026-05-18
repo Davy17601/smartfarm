@@ -15,8 +15,17 @@
         <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="isCompleted" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
     </entity>
+    <entity name="ReminderEntity" representedClassName="ReminderEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" optional="NO" attributeType="String" defaultValueString=""/>
+        <attribute name="dueDate" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="note" optional="YES" attributeType="String"/>
+        <attribute name="isCompleted" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="repeatType" optional="NO" attributeType="String" defaultValueString="none"/>
+    </entity>
     <elements>
         <element name="TransactionEntity" positionX="-180" positionY="-18" width="128" height="119"/>
         <element name="FarmActivityEntity" positionX="20" positionY="-18" width="128" height="104"/>
+        <element name="ReminderEntity" positionX="220" positionY="-18" width="128" height="119"/>
     </elements>
 </model>

@@ -13,15 +13,20 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
+        let t = TransactionEntity(context: viewContext)
+        t.id = UUID()
+        t.title = "លក់ស្រូវ"
+        t.amount = 1_500_000
+        t.type = "Income"
+        t.date = Date()
+        let a = FarmActivityEntity(context: viewContext)
+        a.id = UUID()
+        a.title = "ស្រោចទឹក"
+        a.date = Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
+        a.isCompleted = false
         do {
             try viewContext.save()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }

@@ -5,6 +5,11 @@ struct MainTabView: View {
 
     var body: some View {
         TabView {
+            Text("Dashboard")
+                .tabItem {
+                    Label("Dashboard", systemImage: "chart.bar.fill")
+                }
+            
             Text("Finance")
                 .tabItem {
                     Label("Finance", systemImage: "dollarsign.circle.fill")
@@ -13,10 +18,12 @@ struct MainTabView: View {
                 .tabItem {
                     Label("Calendar", systemImage: "calendar")
                 }
-            Text("Dashboard")
+            Text("Setting")
                 .tabItem {
-                    Label("Dashboard", systemImage: "chart.bar.fill")
+                    Label("Setting", systemImage: "gearshape.fill")
                 }
+            
+           
         }
     }
 }

@@ -15,12 +15,18 @@
 		5B3BCB1C2FAD97EC009A2991 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3BCB1B2FAD97EC009A2991 /* Persistence.swift */; };
 		5B3BCB1F2FAD97EC009A2991 /* SmartFarm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5B3BCB1D2FAD97EC009A2991 /* SmartFarm.xcdatamodeld */; };
 		5B72011D2FB6BA1F007F69A5 /* TestUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B72011C2FB6BA1F007F69A5 /* TestUIView.swift */; };
-		AA000012FFFFFFFF00000001 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000012FFFFFFFF00000000 /* Reminder.swift */; };
 		AA000010FFFFFFFF00000001 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000010FFFFFFFF00000000 /* Transaction.swift */; };
 		AA000011FFFFFFFF00000001 /* FarmActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000011FFFFFFFF00000000 /* FarmActivity.swift */; };
+		AA000012FFFFFFFF00000001 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000012FFFFFFFF00000000 /* Reminder.swift */; };
 		AA000020FFFFFFFF00000001 /* FarmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000020FFFFFFFF00000000 /* FarmViewModel.swift */; };
 		AA000021FFFFFFFF00000001 /* FarmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000021FFFFFFFF00000000 /* FarmManager.swift */; };
 		AA000030FFFFFFFF00000001 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000030FFFFFFFF00000000 /* MainTabView.swift */; };
+		BB000001FFFFFFFF00000001 /* FarmActivityEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001FFFFFFFF00000000 /* FarmActivityEntity+CoreDataClass.swift */; };
+		BB000002FFFFFFFF00000001 /* FarmActivityEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000002FFFFFFFF00000000 /* FarmActivityEntity+CoreDataProperties.swift */; };
+		BB000003FFFFFFFF00000001 /* TransactionEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000003FFFFFFFF00000000 /* TransactionEntity+CoreDataClass.swift */; };
+		BB000004FFFFFFFF00000001 /* TransactionEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000004FFFFFFFF00000000 /* TransactionEntity+CoreDataProperties.swift */; };
+		BB000005FFFFFFFF00000001 /* ReminderEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000005FFFFFFFF00000000 /* ReminderEntity+CoreDataClass.swift */; };
+		BB000006FFFFFFFF00000001 /* ReminderEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000006FFFFFFFF00000000 /* ReminderEntity+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,12 +39,18 @@
 		5B3BCB1B2FAD97EC009A2991 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5B3BCB1E2FAD97EC009A2991 /* SmartFarm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SmartFarm.xcdatamodel; sourceTree = "<group>"; };
 		5B72011C2FB6BA1F007F69A5 /* TestUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIView.swift; sourceTree = "<group>"; };
-		AA000012FFFFFFFF00000000 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		AA000010FFFFFFFF00000000 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		AA000011FFFFFFFF00000000 /* FarmActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmActivity.swift; sourceTree = "<group>"; };
+		AA000012FFFFFFFF00000000 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		AA000020FFFFFFFF00000000 /* FarmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmViewModel.swift; sourceTree = "<group>"; };
 		AA000021FFFFFFFF00000000 /* FarmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmManager.swift; sourceTree = "<group>"; };
 		AA000030FFFFFFFF00000000 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		BB000001FFFFFFFF00000000 /* FarmActivityEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FarmActivityEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BB000002FFFFFFFF00000000 /* FarmActivityEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FarmActivityEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BB000003FFFFFFFF00000000 /* TransactionEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BB000004FFFFFFFF00000000 /* TransactionEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BB000005FFFFFFFF00000000 /* ReminderEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReminderEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BB000006FFFFFFFF00000000 /* ReminderEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReminderEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,15 +85,16 @@
 			children = (
 				5B3BCB122FAD97EA009A2991 /* SmartFarmApp.swift */,
 				5B3BCB142FAD97EA009A2991 /* ContentView.swift */,
-				5B3BCB162FAD97EC009A2991 /* Assets.xcassets */,
 				5B3BCB1B2FAD97EC009A2991 /* Persistence.swift */,
 				5B72011C2FB6BA1F007F69A5 /* TestUIView.swift */,
+				1619DDC12FB6BDDC00930946 /* SotheaView.swift */,
+				5B3BCB162FAD97EC009A2991 /* Assets.xcassets */,
 				5B3BCB1D2FAD97EC009A2991 /* SmartFarm.xcdatamodeld */,
 				5B3BCB182FAD97EC009A2991 /* Preview Content */,
-				1619DDC12FB6BDDC00930946 /* SotheaView.swift */,
-				AA000001FFFFFFFF00000000 /* Models */,
-				AA000002FFFFFFFF00000000 /* ViewModels */,
-				AA000003FFFFFFFF00000000 /* Views */,
+				AA000005FFFFFFFF00000000 /* Dashboard */,
+				AA000007FFFFFFFF00000000 /* CalendarReminders */,
+				AA000009FFFFFFFF00000000 /* Finance */,
+				AA00000BFFFFFFFF00000000 /* Settings */,
 				AA000004FFFFFFFF00000000 /* Utilities */,
 			);
 			path = SmartFarm;
@@ -95,17 +108,75 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		AA000001FFFFFFFF00000000 /* Models */ = {
+		AA000004FFFFFFFF00000000 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				AA000010FFFFFFFF00000000 /* Transaction.swift */,
-				AA000011FFFFFFFF00000000 /* FarmActivity.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		AA000005FFFFFFFF00000000 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				AA000041FFFFFFFF00000000 /* Models */,
+				AA000006FFFFFFFF00000000 /* Views */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		AA000006FFFFFFFF00000000 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA000030FFFFFFFF00000000 /* MainTabView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AA000007FFFFFFFF00000000 /* CalendarReminders */ = {
+			isa = PBXGroup;
+			children = (
+				AA000008FFFFFFFF00000000 /* Models */,
+			);
+			path = CalendarReminders;
+			sourceTree = "<group>";
+		};
+		AA000008FFFFFFFF00000000 /* Models */ = {
+			isa = PBXGroup;
+			children = (
 				AA000012FFFFFFFF00000000 /* Reminder.swift */,
+				BB000005FFFFFFFF00000000 /* ReminderEntity+CoreDataClass.swift */,
+				BB000006FFFFFFFF00000000 /* ReminderEntity+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		AA000002FFFFFFFF00000000 /* ViewModels */ = {
+		AA000009FFFFFFFF00000000 /* Finance */ = {
+			isa = PBXGroup;
+			children = (
+				AA000040FFFFFFFF00000000 /* ViewModels */,
+				AA00000AFFFFFFFF00000000 /* Models */,
+			);
+			path = Finance;
+			sourceTree = "<group>";
+		};
+		AA00000AFFFFFFFF00000000 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA000010FFFFFFFF00000000 /* Transaction.swift */,
+				BB000003FFFFFFFF00000000 /* TransactionEntity+CoreDataClass.swift */,
+				BB000004FFFFFFFF00000000 /* TransactionEntity+CoreDataProperties.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AA00000BFFFFFFFF00000000 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		AA000040FFFFFFFF00000000 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				AA000020FFFFFFFF00000000 /* FarmViewModel.swift */,
@@ -114,19 +185,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		AA000003FFFFFFFF00000000 /* Views */ = {
+		AA000041FFFFFFFF00000000 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AA000030FFFFFFFF00000000 /* MainTabView.swift */,
+				AA000011FFFFFFFF00000000 /* FarmActivity.swift */,
+				BB000001FFFFFFFF00000000 /* FarmActivityEntity+CoreDataClass.swift */,
+				BB000002FFFFFFFF00000000 /* FarmActivityEntity+CoreDataProperties.swift */,
 			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		AA000004FFFFFFFF00000000 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utilities;
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,6 +277,12 @@
 				AA000020FFFFFFFF00000001 /* FarmViewModel.swift in Sources */,
 				AA000021FFFFFFFF00000001 /* FarmManager.swift in Sources */,
 				AA000030FFFFFFFF00000001 /* MainTabView.swift in Sources */,
+				BB000001FFFFFFFF00000001 /* FarmActivityEntity+CoreDataClass.swift in Sources */,
+				BB000002FFFFFFFF00000001 /* FarmActivityEntity+CoreDataProperties.swift in Sources */,
+				BB000003FFFFFFFF00000001 /* TransactionEntity+CoreDataClass.swift in Sources */,
+				BB000004FFFFFFFF00000001 /* TransactionEntity+CoreDataProperties.swift in Sources */,
+				BB000005FFFFFFFF00000001 /* ReminderEntity+CoreDataClass.swift in Sources */,
+				BB000006FFFFFFFF00000001 /* ReminderEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

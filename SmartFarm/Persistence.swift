@@ -58,4 +58,37 @@ struct PersistenceController {
             }
         })
     }
+
+    /// Inserts sample data on first launch only (when the store is empty).
+    /// Replaces the old in-memory `FarmManager.seedSampleData`.
+    func seedIfEmpty() {
+        let context = container.viewContext
+        let request = TransactionEntity.fetchRequest()
+        request.fetchLimit = 1
+        let isEmpty = ((try? context.count(for: request)) ?? 0) == 0
+        guard isEmpty else { return }
+
+        let now = Date()
+        let cal = Calendar.current
+
+        let income = TransactionEntity(context: context)
+        income.apply(Transaction(title: "លក់ស្រូវ", amount: 1_500_000, type: .income,
+                                  category: .sales, currency: .khr, date: now))
+        let expense = TransactionEntity(context: context)
+        expense.apply(Transaction(title: "ទិញជី", amount: 200_000, type: .expense,
+                                   category: .fertilizer, currency: .khr, date: now))
+
+        let water = FarmActivityEntity(context: context)
+        water.apply(FarmActivity(title: "ស្រោចទឹក",
+                                 date: cal.date(byAdding: .day, value: 1, to: now) ?? now))
+        let fertilize = FarmActivityEntity(context: context)
+        fertilize.apply(FarmActivity(title: "បូកជី",
+                                     date: cal.date(byAdding: .day, value: 3, to: now) ?? now))
+
+        do {
+            try context.save()
+        } catch {
+            assertionFailure("Failed to seed sample data: \(error)")
+        }
+    }
 }

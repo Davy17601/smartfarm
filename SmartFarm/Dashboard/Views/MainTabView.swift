@@ -1,29 +1,47 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @EnvironmentObject var farmViewModel: FarmViewModel
-
+    
+    
+    @EnvironmentObject var environment: AppEnvironment
+    @State private var selectedTab = 0
+    
+    // FinanceCoordinator is created here (root owner) and injected
+    // into the entire view hierarchy via .environmentObject(financeCoordinator).
+    // Any view can then trigger Finance tab navigation by mutating
+    // financeCoordinator.selectedTransactionID.
+    @StateObject private var financeCoordinator = FinanceCoordinator()
+    
     var body: some View {
-        TabView {
-            Text("Dashboard")
+        TabView(selection: $selectedTab) {
+            DashboardView(environment: environment, selectedTab: $selectedTab)
                 .tabItem {
-                    Label("Dashboard", systemImage: "chart.bar.fill")
+                    Label(L("tab.dashboard"), systemImage: "chart.bar.fill")
                 }
+                .tag(0)
             
-            Text("Finance")
+            FinanceTabView(repository: environment.transactionRepository)
                 .tabItem {
-                    Label("Finance", systemImage: "dollarsign.circle.fill")
+                    Label(L("tab.finance"), systemImage: "dollarsign.circle.fill")
                 }
-            Text("Calendar")
+                .tag(1)
+            CalendarTabView(activityRepository: environment.activityRepository,
+                            reminderRepository: environment.reminderRepository)
                 .tabItem {
-                    Label("Calendar", systemImage: "calendar")
+                    Label(L("tab.calendar"), systemImage: "calendar")
                 }
-            Text("Setting")
+                .tag(2)
+
+            SettingsView(environment: environment)
                 .tabItem {
-                    Label("Setting", systemImage: "gearshape.fill")
+                    Label(L("tab.settings"), systemImage: "gearshape.fill")
                 }
-            
-           
+                .tag(3)
+        }
+        .environmentObject(financeCoordinator)
+        // A tapped local notification belongs to the Calendar module — switch to it.
+        .onReceive(NotificationService.shared.$tappedItemID) { id in
+            if id != nil { selectedTab = 2 }
         }
     }
 }
@@ -31,6 +49,6 @@ struct MainTabView: View {
 struct MainTabView_Previews: PreviewProvider {
     static var previews: some View {
         MainTabView()
-            .environmentObject(FarmViewModel())
+            .environmentObject(AppEnvironment(persistence: .preview))
     }
 }

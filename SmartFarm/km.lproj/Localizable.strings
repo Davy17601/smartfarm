@@ -1,0 +1,104 @@
+/* Tabs */
+"tab.dashboard" = "ផ្ទាំងគ្រប់គ្រង";
+"tab.finance" = "ហិរញ្ញវត្ថុ";
+"tab.calendar" = "ប្រតិទិន";
+"tab.settings" = "ការកំណត់";
+
+/* Common */
+"common.save" = "រក្សាទុក";
+"common.cancel" = "បោះបង់";
+"common.edit" = "កែប្រែ";
+"common.all" = "ទាំងអស់";
+"common.viewAll" = "មើលទាំងអស់";
+"common.details" = "ព័ត៌មានលម្អិត";
+"common.completed" = "បានបញ្ចប់";
+"common.title" = "ចំណងជើង";
+"common.note" = "កំណត់ចំណាំ";
+"common.date" = "កាលបរិច្ឆេទ";
+"common.time" = "ពេលវេលា";
+"common.version" = "កំណែ";
+
+/* Finance */
+"finance.income" = "ចំណូល";
+"finance.expense" = "ចំណាយ";
+"finance.profitLoss" = "ចំណេញ / ខាត";
+"finance.profitThisMonth" = "ចំណេញ / ខាត ខែនេះ";
+"finance.search" = "ស្វែងរក";
+"finance.amount" = "ចំនួនទឹកប្រាក់";
+"finance.type" = "ប្រភេទ";
+"finance.category" = "ចំណាត់ថ្នាក់";
+"finance.currency" = "រូបិយប័ណ្ណ";
+"finance.addTransaction" = "បន្ថែមប្រតិបត្តិការ";
+"finance.transactionMissing" = "ប្រតិបត្តិការនេះមិនមានទៀតទេ";
+"finance.recent" = "ប្រតិបត្តិការថ្មីៗ";
+"finance.empty" = "មិនមានប្រតិបត្តិការ";
+
+/* Transaction type */
+"type.income" = "ចំណូល";
+"type.expense" = "ចំណាយ";
+
+/* Category */
+"category.seeds" = "គ្រាប់ពូជ";
+"category.fertilizer" = "ជី";
+"category.labor" = "កម្លាំងពលកម្ម";
+"category.tools" = "ឧបករណ៍";
+"category.sales" = "ការលក់";
+"category.other" = "ផ្សេងៗ";
+
+/* Currency */
+"currency.khr" = "រៀល (KHR)";
+"currency.usd" = "ដុល្លារ (USD)";
+
+/* Calendar */
+"calendar.activities" = "សកម្មភាព";
+"calendar.upcomingReminders" = "ការរំឭកខាងមុខ";
+"calendar.noActivities" = "មិនមានសកម្មភាព";
+"calendar.noReminders" = "មិនមានការរំឭក";
+"calendar.addActivity" = "បន្ថែមសកម្មភាព";
+"calendar.editActivity" = "កែប្រែសកម្មភាព";
+"calendar.addReminder" = "បន្ថែមការរំឭក";
+"calendar.editReminder" = "កែប្រែការរំឭក";
+"calendar.repeat" = "ធ្វើម្ដងទៀត";
+
+/* Repeat */
+"repeat.none" = "មិនធ្វើម្ដងទៀត";
+"repeat.daily" = "រាល់ថ្ងៃ";
+"repeat.weekly" = "រាល់សប្ដាហ៍";
+"repeat.monthly" = "រាល់ខែ";
+
+/* Notifications */
+"notif.activity" = "សកម្មភាពកសិកម្ម";
+"notif.reminder" = "ការរំឭក";
+"notif.tomorrow" = "ស្អែក៖ ";
+
+/* Dashboard */
+"dashboard.next7" = "ខាងមុខ ៧ ថ្ងៃ";
+"dashboard.noSchedule" = "គ្មានកាលវិភាគ";
+
+/* Reports */
+"reports.title" = "របាយការណ៍";
+"reports.last6" = "ចំណេញ/ខាត ៦ ខែចុងក្រោយ";
+"reports.exportCSV" = "នាំចេញ CSV";
+"reports.exportPDF" = "នាំចេញ PDF";
+"reports.noData" = "មិនមានទិន្នន័យ";
+"reports.pdfTitle" = "របាយការណ៍ហិរញ្ញវត្ថុ SmartFarm";
+"reports.totalIncome" = "ចំណូលសរុប";
+"reports.totalExpense" = "ចំណាយសរុប";
+"reports.transactions" = "ប្រតិបត្តិការ";
+
+/* Settings */
+"settings.preferences" = "ចំណូលចិត្ត";
+"settings.language" = "ភាសា";
+"settings.displayCurrency" = "រូបិយប័ណ្ណ";
+"settings.data" = "ទិន្នន័យ";
+"settings.reports" = "របាយការណ៍ & គំនូសតាង";
+"settings.backup" = "បម្រុងទុក & ស្ដារ";
+"settings.about" = "អំពី";
+
+/* Backup */
+"backup.description" = "បម្រុងទុកទិន្នន័យទាំងអស់ជា JSON ហើយស្ដារពេលត្រូវការ។";
+"backup.export" = "នាំចេញ (Backup)";
+"backup.restore" = "ស្ដារ (Restore)";
+"backup.exportFailed" = "នាំចេញបរាជ័យ";
+"backup.restoreSuccess" = "ស្ដារទិន្នន័យបានជោគជ័យ ✓";
+"backup.restoreFailed" = "ស្ដារទិន្នន័យបរាជ័យ";

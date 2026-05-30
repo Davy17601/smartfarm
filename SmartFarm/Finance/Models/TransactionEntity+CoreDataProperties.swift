@@ -11,6 +11,8 @@ extension TransactionEntity {
     @NSManaged public var title: String?
     @NSManaged public var amount: Double
     @NSManaged public var type: String?
+    @NSManaged public var category: String?
+    @NSManaged public var currency: String?
     @NSManaged public var date: Date?
     @NSManaged public var note: String?
 

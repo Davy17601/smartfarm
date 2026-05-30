@@ -5,6 +5,8 @@
         <attribute name="title" optional="NO" attributeType="String" defaultValueString=""/>
         <attribute name="amount" optional="NO" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="type" optional="NO" attributeType="String" defaultValueString="Income"/>
+        <attribute name="category" optional="NO" attributeType="String" defaultValueString="Other"/>
+        <attribute name="currency" optional="NO" attributeType="String" defaultValueString="KHR"/>
         <attribute name="date" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="note" optional="YES" attributeType="String"/>
     </entity>

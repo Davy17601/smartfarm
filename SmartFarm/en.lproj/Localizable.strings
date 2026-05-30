@@ -1,0 +1,104 @@
+/* Tabs */
+"tab.dashboard" = "Dashboard";
+"tab.finance" = "Finance";
+"tab.calendar" = "Calendar";
+"tab.settings" = "Settings";
+
+/* Common */
+"common.save" = "Save";
+"common.cancel" = "Cancel";
+"common.edit" = "Edit";
+"common.all" = "All";
+"common.viewAll" = "View all";
+"common.details" = "Details";
+"common.completed" = "Completed";
+"common.title" = "Title";
+"common.note" = "Note";
+"common.date" = "Date";
+"common.time" = "Time";
+"common.version" = "Version";
+
+/* Finance */
+"finance.income" = "Income";
+"finance.expense" = "Expense";
+"finance.profitLoss" = "Profit / Loss";
+"finance.profitThisMonth" = "Profit / Loss (this month)";
+"finance.search" = "Search";
+"finance.amount" = "Amount";
+"finance.type" = "Type";
+"finance.category" = "Category";
+"finance.currency" = "Currency";
+"finance.addTransaction" = "Add transaction";
+"finance.transactionMissing" = "This transaction no longer exists";
+"finance.recent" = "Recent transactions";
+"finance.empty" = "No transactions";
+
+/* Transaction type */
+"type.income" = "Income";
+"type.expense" = "Expense";
+
+/* Category */
+"category.seeds" = "Seeds";
+"category.fertilizer" = "Fertilizer";
+"category.labor" = "Labor";
+"category.tools" = "Tools";
+"category.sales" = "Sales";
+"category.other" = "Other";
+
+/* Currency */
+"currency.khr" = "Riel (KHR)";
+"currency.usd" = "Dollar (USD)";
+
+/* Calendar */
+"calendar.activities" = "Activities";
+"calendar.upcomingReminders" = "Upcoming reminders";
+"calendar.noActivities" = "No activities";
+"calendar.noReminders" = "No reminders";
+"calendar.addActivity" = "Add activity";
+"calendar.editActivity" = "Edit activity";
+"calendar.addReminder" = "Add reminder";
+"calendar.editReminder" = "Edit reminder";
+"calendar.repeat" = "Repeat";
+
+/* Repeat */
+"repeat.none" = "Never";
+"repeat.daily" = "Daily";
+"repeat.weekly" = "Weekly";
+"repeat.monthly" = "Monthly";
+
+/* Notifications */
+"notif.activity" = "Farm activity";
+"notif.reminder" = "Reminder";
+"notif.tomorrow" = "Tomorrow: ";
+
+/* Dashboard */
+"dashboard.next7" = "Next 7 days";
+"dashboard.noSchedule" = "Nothing scheduled";
+
+/* Reports */
+"reports.title" = "Reports";
+"reports.last6" = "Profit/Loss · last 6 months";
+"reports.exportCSV" = "Export CSV";
+"reports.exportPDF" = "Export PDF";
+"reports.noData" = "No data";
+"reports.pdfTitle" = "SmartFarm Financial Report";
+"reports.totalIncome" = "Total income";
+"reports.totalExpense" = "Total expense";
+"reports.transactions" = "Transactions";
+
+/* Settings */
+"settings.preferences" = "Preferences";
+"settings.language" = "Language";
+"settings.displayCurrency" = "Display currency";
+"settings.data" = "Data";
+"settings.reports" = "Reports & Charts";
+"settings.backup" = "Backup & Restore";
+"settings.about" = "About";
+
+/* Backup */
+"backup.description" = "Back up all your data as JSON and restore it when needed.";
+"backup.export" = "Export (Backup)";
+"backup.restore" = "Restore";
+"backup.exportFailed" = "Export failed";
+"backup.restoreSuccess" = "Restore successful ✓";
+"backup.restoreFailed" = "Restore failed";

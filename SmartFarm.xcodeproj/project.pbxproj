@@ -14,12 +14,43 @@
 		5B3BCB1A2FAD97EC009A2991 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B3BCB192FAD97EC009A2991 /* Preview Assets.xcassets */; };
 		5B3BCB1C2FAD97EC009A2991 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3BCB1B2FAD97EC009A2991 /* Persistence.swift */; };
 		5B3BCB1F2FAD97EC009A2991 /* SmartFarm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5B3BCB1D2FAD97EC009A2991 /* SmartFarm.xcdatamodeld */; };
+		5B43EDC52FCB28F900D0E92A /* TransactionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDC42FCB28F900D0E92A /* TransactionDetailView.swift */; };
+		5B43EDC72FCB294400D0E92A /* TransactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDC62FCB294400D0E92A /* TransactionListView.swift */; };
+		5B43EDC92FCB296200D0E92A /* TransactionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDC82FCB296200D0E92A /* TransactionRowView.swift */; };
+		5B43EDCD2FCB2B0D00D0E92A /* FinanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDCC2FCB2B0C00D0E92A /* FinanceViewModel.swift */; };
+		5B43EDD92FCB332D00D0E92A /* JournalEntry+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDD82FCB332D00D0E92A /* JournalEntry+CoreDataClass.swift */; };
+		5B43EDDB2FCB337200D0E92A /* JournalEntry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDDA2FCB337200D0E92A /* JournalEntry+CoreDataProperties.swift */; };
+		5B43EDDD2FCB339600D0E92A /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDDC2FCB339600D0E92A /* Weather.swift */; };
+		5B43EDE12FCB356C00D0E92A /* JournalPhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDE02FCB356C00D0E92A /* JournalPhotoStore.swift */; };
+		5B43EDE42FCB35C500D0E92A /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDE32FCB35C500D0E92A /* JournalViewModel.swift */; };
+		5B43EDE72FCB363300D0E92A /* AddJournalEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDE62FCB363300D0E92A /* AddJournalEntryView.swift */; };
+		5B43EDE92FCB37BD00D0E92A /* EditJournalEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDE82FCB37BD00D0E92A /* EditJournalEntryView.swift */; };
+		5B43EDEB2FCB37F800D0E92A /* JournalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDEA2FCB37F800D0E92A /* JournalDetailView.swift */; };
+		5B43EDED2FCB390400D0E92A /* JournalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDEC2FCB390400D0E92A /* JournalRowView.swift */; };
+		5B43EDEF2FCB394D00D0E92A /* JournalTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDEE2FCB394D00D0E92A /* JournalTabView.swift */; };
+		5B43EDF12FCB398300D0E92A /* PhotoGallaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDF02FCB398300D0E92A /* PhotoGallaryView.swift */; };
+		5B43EDF32FCB3AB800D0E92A /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDF22FCB3AB800D0E92A /* PhotoPicker.swift */; };
+		5B43EDFB2FCB3EEA00D0E92A /* MonthlyReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDFA2FCB3EEA00D0E92A /* MonthlyReport.swift */; };
+		5B43EDFF2FCB3FA400D0E92A /* CSVExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDFE2FCB3FA400D0E92A /* CSVExporter.swift */; };
+		5B43EE012FCB3FD600D0E92A /* PDFGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EE002FCB3FD600D0E92A /* PDFGenerator.swift */; };
+		5B43EE042FCB409C00D0E92A /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EE032FCB409C00D0E92A /* ReportViewModel.swift */; };
+		5B43EE072FCB428E00D0E92A /* BarChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EE062FCB428E00D0E92A /* BarChatView.swift */; };
+		5B43EE092FCB42B000D0E92A /* BarShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EE082FCB42B000D0E92A /* BarShape.swift */; };
+		5B43EE0B2FCB42D400D0E92A /* MonthPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EE0A2FCB42D400D0E92A /* MonthPickerView.swift */; };
+		5B43EE0D2FCB42FF00D0E92A /* ReportTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EE0C2FCB42FF00D0E92A /* ReportTabView.swift */; };
+		5B43EE0F2FCB432000D0E92A /* SummaryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EE0E2FCB432000D0E92A /* SummaryCardView.swift */; };
+		5B43EE122FCB43AA00D0E92A /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EE112FCB43AA00D0E92A /* ShareSheet.swift */; };
+		5B43EE142FCB43E700D0E92A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EE132FCB43E700D0E92A /* CoreDataManager.swift */; };
+		5B43EE162FCB440D00D0E92A /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EE152FCB440D00D0E92A /* Formatters.swift */; };
 		5B72011D2FB6BA1F007F69A5 /* TestUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B72011C2FB6BA1F007F69A5 /* TestUIView.swift */; };
+		5BD68AB92FC94AB700DEE10A /* FinanceTabview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD68AB82FC94AB700DEE10A /* FinanceTabview.swift */; };
+		5BD68ABE2FC94E4600DEE10A /* Coordinators in Resources */ = {isa = PBXBuildFile; fileRef = 5BD68ABD2FC94E4600DEE10A /* Coordinators */; };
+		5BD68AC02FC94F6300DEE10A /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD68ABF2FC94F6300DEE10A /* AddTransactionView.swift */; };
+		5BD68AC22FC94FA900DEE10A /* DynamicFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD68AC12FC94FA900DEE10A /* DynamicFilterView.swift */; };
+		5BD68AC42FC94FFF00DEE10A /* EditTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD68AC32FC94FFF00DEE10A /* EditTransactionView.swift */; };
 		AA000010FFFFFFFF00000001 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000010FFFFFFFF00000000 /* Transaction.swift */; };
 		AA000011FFFFFFFF00000001 /* FarmActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000011FFFFFFFF00000000 /* FarmActivity.swift */; };
 		AA000012FFFFFFFF00000001 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000012FFFFFFFF00000000 /* Reminder.swift */; };
-		AA000020FFFFFFFF00000001 /* FarmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000020FFFFFFFF00000000 /* FarmViewModel.swift */; };
-		AA000021FFFFFFFF00000001 /* FarmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000021FFFFFFFF00000000 /* FarmManager.swift */; };
 		AA000030FFFFFFFF00000001 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000030FFFFFFFF00000000 /* MainTabView.swift */; };
 		BB000001FFFFFFFF00000001 /* FarmActivityEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001FFFFFFFF00000000 /* FarmActivityEntity+CoreDataClass.swift */; };
 		BB000002FFFFFFFF00000001 /* FarmActivityEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000002FFFFFFFF00000000 /* FarmActivityEntity+CoreDataProperties.swift */; };
@@ -38,12 +69,43 @@
 		5B3BCB192FAD97EC009A2991 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5B3BCB1B2FAD97EC009A2991 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		5B3BCB1E2FAD97EC009A2991 /* SmartFarm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SmartFarm.xcdatamodel; sourceTree = "<group>"; };
+		5B43EDC42FCB28F900D0E92A /* TransactionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailView.swift; sourceTree = "<group>"; };
+		5B43EDC62FCB294400D0E92A /* TransactionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListView.swift; sourceTree = "<group>"; };
+		5B43EDC82FCB296200D0E92A /* TransactionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRowView.swift; sourceTree = "<group>"; };
+		5B43EDCC2FCB2B0C00D0E92A /* FinanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceViewModel.swift; sourceTree = "<group>"; };
+		5B43EDD82FCB332D00D0E92A /* JournalEntry+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalEntry+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5B43EDDA2FCB337200D0E92A /* JournalEntry+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalEntry+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		5B43EDDC2FCB339600D0E92A /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		5B43EDE02FCB356C00D0E92A /* JournalPhotoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalPhotoStore.swift; sourceTree = "<group>"; };
+		5B43EDE32FCB35C500D0E92A /* JournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewModel.swift; sourceTree = "<group>"; };
+		5B43EDE62FCB363300D0E92A /* AddJournalEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJournalEntryView.swift; sourceTree = "<group>"; };
+		5B43EDE82FCB37BD00D0E92A /* EditJournalEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditJournalEntryView.swift; sourceTree = "<group>"; };
+		5B43EDEA2FCB37F800D0E92A /* JournalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDetailView.swift; sourceTree = "<group>"; };
+		5B43EDEC2FCB390400D0E92A /* JournalRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalRowView.swift; sourceTree = "<group>"; };
+		5B43EDEE2FCB394D00D0E92A /* JournalTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTabView.swift; sourceTree = "<group>"; };
+		5B43EDF02FCB398300D0E92A /* PhotoGallaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallaryView.swift; sourceTree = "<group>"; };
+		5B43EDF22FCB3AB800D0E92A /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		5B43EDFA2FCB3EEA00D0E92A /* MonthlyReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyReport.swift; sourceTree = "<group>"; };
+		5B43EDFE2FCB3FA400D0E92A /* CSVExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVExporter.swift; sourceTree = "<group>"; };
+		5B43EE002FCB3FD600D0E92A /* PDFGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFGenerator.swift; sourceTree = "<group>"; };
+		5B43EE032FCB409C00D0E92A /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
+		5B43EE062FCB428E00D0E92A /* BarChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChatView.swift; sourceTree = "<group>"; };
+		5B43EE082FCB42B000D0E92A /* BarShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarShape.swift; sourceTree = "<group>"; };
+		5B43EE0A2FCB42D400D0E92A /* MonthPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthPickerView.swift; sourceTree = "<group>"; };
+		5B43EE0C2FCB42FF00D0E92A /* ReportTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTabView.swift; sourceTree = "<group>"; };
+		5B43EE0E2FCB432000D0E92A /* SummaryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCardView.swift; sourceTree = "<group>"; };
+		5B43EE112FCB43AA00D0E92A /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		5B43EE132FCB43E700D0E92A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		5B43EE152FCB440D00D0E92A /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
 		5B72011C2FB6BA1F007F69A5 /* TestUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIView.swift; sourceTree = "<group>"; };
+		5BD68AB82FC94AB700DEE10A /* FinanceTabview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceTabview.swift; sourceTree = "<group>"; };
+		5BD68ABD2FC94E4600DEE10A /* Coordinators */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Coordinators; sourceTree = "<group>"; };
+		5BD68ABF2FC94F6300DEE10A /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
+		5BD68AC12FC94FA900DEE10A /* DynamicFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFilterView.swift; sourceTree = "<group>"; };
+		5BD68AC32FC94FFF00DEE10A /* EditTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTransactionView.swift; sourceTree = "<group>"; };
 		AA000010FFFFFFFF00000000 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		AA000011FFFFFFFF00000000 /* FarmActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmActivity.swift; sourceTree = "<group>"; };
 		AA000012FFFFFFFF00000000 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
-		AA000020FFFFFFFF00000000 /* FarmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmViewModel.swift; sourceTree = "<group>"; };
-		AA000021FFFFFFFF00000000 /* FarmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmManager.swift; sourceTree = "<group>"; };
 		AA000030FFFFFFFF00000000 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		BB000001FFFFFFFF00000000 /* FarmActivityEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FarmActivityEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BB000002FFFFFFFF00000000 /* FarmActivityEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FarmActivityEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -94,7 +156,10 @@
 				AA000005FFFFFFFF00000000 /* Dashboard */,
 				AA000007FFFFFFFF00000000 /* CalendarReminders */,
 				AA000009FFFFFFFF00000000 /* Finance */,
-				AA00000BFFFFFFFF00000000 /* Settings */,
+				5B43EDD42FCB2F9700D0E92A /* Setting */,
+				5B43EDD52FCB30F300D0E92A /* Journal */,
+				5B43EDF42FCB3B9600D0E92A /* Reports */,
+				5B43EE102FCB434300D0E92A /* Shared */,
 				AA000004FFFFFFFF00000000 /* Utilities */,
 			);
 			path = SmartFarm;
@@ -108,9 +173,139 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		5B43EDD42FCB2F9700D0E92A /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		5B43EDD52FCB30F300D0E92A /* Journal */ = {
+			isa = PBXGroup;
+			children = (
+				5B43EDD72FCB32F400D0E92A /* Models */,
+				5B43EDDE2FCB33AA00D0E92A /* Services */,
+				5B43EDE22FCB358200D0E92A /* ViewModels */,
+				5B43EDE52FCB35D200D0E92A /* Views */,
+			);
+			path = Journal;
+			sourceTree = "<group>";
+		};
+		5B43EDD72FCB32F400D0E92A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5B43EDD82FCB332D00D0E92A /* JournalEntry+CoreDataClass.swift */,
+				5B43EDDA2FCB337200D0E92A /* JournalEntry+CoreDataProperties.swift */,
+				5B43EDDC2FCB339600D0E92A /* Weather.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5B43EDDE2FCB33AA00D0E92A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5B43EDE02FCB356C00D0E92A /* JournalPhotoStore.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5B43EDE22FCB358200D0E92A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5B43EDE32FCB35C500D0E92A /* JournalViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		5B43EDE52FCB35D200D0E92A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5B43EDE62FCB363300D0E92A /* AddJournalEntryView.swift */,
+				5B43EDE82FCB37BD00D0E92A /* EditJournalEntryView.swift */,
+				5B43EDEA2FCB37F800D0E92A /* JournalDetailView.swift */,
+				5B43EDEC2FCB390400D0E92A /* JournalRowView.swift */,
+				5B43EDEE2FCB394D00D0E92A /* JournalTabView.swift */,
+				5B43EDF02FCB398300D0E92A /* PhotoGallaryView.swift */,
+				5B43EDF22FCB3AB800D0E92A /* PhotoPicker.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5B43EDF42FCB3B9600D0E92A /* Reports */ = {
+			isa = PBXGroup;
+			children = (
+				5B43EDF52FCB3BC300D0E92A /* Models */,
+				5B43EDFD2FCB3F5000D0E92A /* Services */,
+				5B43EE022FCB402500D0E92A /* ViewModels */,
+				5B43EE052FCB40AE00D0E92A /* Views */,
+			);
+			path = Reports;
+			sourceTree = "<group>";
+		};
+		5B43EDF52FCB3BC300D0E92A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5B43EDFA2FCB3EEA00D0E92A /* MonthlyReport.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5B43EDFD2FCB3F5000D0E92A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5B43EDFE2FCB3FA400D0E92A /* CSVExporter.swift */,
+				5B43EE002FCB3FD600D0E92A /* PDFGenerator.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5B43EE022FCB402500D0E92A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5B43EE032FCB409C00D0E92A /* ReportViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		5B43EE052FCB40AE00D0E92A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5B43EE062FCB428E00D0E92A /* BarChatView.swift */,
+				5B43EE082FCB42B000D0E92A /* BarShape.swift */,
+				5B43EE0A2FCB42D400D0E92A /* MonthPickerView.swift */,
+				5B43EE0C2FCB42FF00D0E92A /* ReportTabView.swift */,
+				5B43EE0E2FCB432000D0E92A /* SummaryCardView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5B43EE102FCB434300D0E92A /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				5B43EE112FCB43AA00D0E92A /* ShareSheet.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		5BD68AB72FC94A8E00DEE10A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5BD68AB82FC94AB700DEE10A /* FinanceTabview.swift */,
+				5BD68ABF2FC94F6300DEE10A /* AddTransactionView.swift */,
+				5BD68AC12FC94FA900DEE10A /* DynamicFilterView.swift */,
+				5BD68AC32FC94FFF00DEE10A /* EditTransactionView.swift */,
+				5B43EDC42FCB28F900D0E92A /* TransactionDetailView.swift */,
+				5B43EDC62FCB294400D0E92A /* TransactionListView.swift */,
+				5B43EDC82FCB296200D0E92A /* TransactionRowView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		AA000004FFFFFFFF00000000 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5B43EE132FCB43E700D0E92A /* CoreDataManager.swift */,
+				5B43EE152FCB440D00D0E92A /* Formatters.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -153,6 +348,8 @@
 		AA000009FFFFFFFF00000000 /* Finance */ = {
 			isa = PBXGroup;
 			children = (
+				5BD68ABD2FC94E4600DEE10A /* Coordinators */,
+				5BD68AB72FC94A8E00DEE10A /* Views */,
 				AA000040FFFFFFFF00000000 /* ViewModels */,
 				AA00000AFFFFFFFF00000000 /* Models */,
 			);
@@ -169,18 +366,10 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		AA00000BFFFFFFFF00000000 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
 		AA000040FFFFFFFF00000000 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				AA000020FFFFFFFF00000000 /* FarmViewModel.swift */,
-				AA000021FFFFFFFF00000000 /* FarmManager.swift */,
+				5B43EDCC2FCB2B0C00D0E92A /* FinanceViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -255,6 +444,7 @@
 			files = (
 				5B3BCB1A2FAD97EC009A2991 /* Preview Assets.xcassets in Resources */,
 				5B3BCB172FAD97EC009A2991 /* Assets.xcassets in Resources */,
+				5BD68ABE2FC94E4600DEE10A /* Coordinators in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,24 +455,54 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B43EDE12FCB356C00D0E92A /* JournalPhotoStore.swift in Sources */,
+				5B43EDE92FCB37BD00D0E92A /* EditJournalEntryView.swift in Sources */,
 				5B3BCB1C2FAD97EC009A2991 /* Persistence.swift in Sources */,
 				5B3BCB152FAD97EA009A2991 /* ContentView.swift in Sources */,
+				5B43EDE72FCB363300D0E92A /* AddJournalEntryView.swift in Sources */,
+				5B43EDD92FCB332D00D0E92A /* JournalEntry+CoreDataClass.swift in Sources */,
 				5B3BCB132FAD97EA009A2991 /* SmartFarmApp.swift in Sources */,
+				5B43EDC52FCB28F900D0E92A /* TransactionDetailView.swift in Sources */,
+				5B43EE0F2FCB432000D0E92A /* SummaryCardView.swift in Sources */,
 				5B3BCB1F2FAD97EC009A2991 /* SmartFarm.xcdatamodeld in Sources */,
 				1619DDC22FB6BDDC00930946 /* SotheaView.swift in Sources */,
 				5B72011D2FB6BA1F007F69A5 /* TestUIView.swift in Sources */,
+				5B43EDC92FCB296200D0E92A /* TransactionRowView.swift in Sources */,
 				AA000012FFFFFFFF00000001 /* Reminder.swift in Sources */,
+				5B43EE0B2FCB42D400D0E92A /* MonthPickerView.swift in Sources */,
 				AA000010FFFFFFFF00000001 /* Transaction.swift in Sources */,
+				5B43EE142FCB43E700D0E92A /* CoreDataManager.swift in Sources */,
+				5B43EE072FCB428E00D0E92A /* BarChatView.swift in Sources */,
+				5B43EE162FCB440D00D0E92A /* Formatters.swift in Sources */,
+				5BD68AB92FC94AB700DEE10A /* FinanceTabview.swift in Sources */,
+				5B43EDDB2FCB337200D0E92A /* JournalEntry+CoreDataProperties.swift in Sources */,
+				5B43EDDD2FCB339600D0E92A /* Weather.swift in Sources */,
+				5B43EDED2FCB390400D0E92A /* JournalRowView.swift in Sources */,
+				5BD68AC02FC94F6300DEE10A /* AddTransactionView.swift in Sources */,
+				5B43EDF12FCB398300D0E92A /* PhotoGallaryView.swift in Sources */,
+				5B43EDF32FCB3AB800D0E92A /* PhotoPicker.swift in Sources */,
+				5B43EDE42FCB35C500D0E92A /* JournalViewModel.swift in Sources */,
+				5B43EE092FCB42B000D0E92A /* BarShape.swift in Sources */,
 				AA000011FFFFFFFF00000001 /* FarmActivity.swift in Sources */,
-				AA000020FFFFFFFF00000001 /* FarmViewModel.swift in Sources */,
-				AA000021FFFFFFFF00000001 /* FarmManager.swift in Sources */,
+				5B43EE012FCB3FD600D0E92A /* PDFGenerator.swift in Sources */,
+				5B43EE042FCB409C00D0E92A /* ReportViewModel.swift in Sources */,
 				AA000030FFFFFFFF00000001 /* MainTabView.swift in Sources */,
 				BB000001FFFFFFFF00000001 /* FarmActivityEntity+CoreDataClass.swift in Sources */,
 				BB000002FFFFFFFF00000001 /* FarmActivityEntity+CoreDataProperties.swift in Sources */,
 				BB000003FFFFFFFF00000001 /* TransactionEntity+CoreDataClass.swift in Sources */,
+				5B43EE0D2FCB42FF00D0E92A /* ReportTabView.swift in Sources */,
+				5B43EDFB2FCB3EEA00D0E92A /* MonthlyReport.swift in Sources */,
+				5B43EDCD2FCB2B0D00D0E92A /* FinanceViewModel.swift in Sources */,
+				5B43EDFF2FCB3FA400D0E92A /* CSVExporter.swift in Sources */,
+				5BD68AC42FC94FFF00DEE10A /* EditTransactionView.swift in Sources */,
 				BB000004FFFFFFFF00000001 /* TransactionEntity+CoreDataProperties.swift in Sources */,
+				5B43EDEB2FCB37F800D0E92A /* JournalDetailView.swift in Sources */,
 				BB000005FFFFFFFF00000001 /* ReminderEntity+CoreDataClass.swift in Sources */,
+				5B43EDEF2FCB394D00D0E92A /* JournalTabView.swift in Sources */,
+				5B43EDC72FCB294400D0E92A /* TransactionListView.swift in Sources */,
+				5B43EE122FCB43AA00D0E92A /* ShareSheet.swift in Sources */,
 				BB000006FFFFFFFF00000001 /* ReminderEntity+CoreDataProperties.swift in Sources */,
+				5BD68AC22FC94FA900DEE10A /* DynamicFilterView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

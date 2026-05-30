@@ -9,12 +9,12 @@ import SwiftUI
 
 @main
 struct SmartFarmApp: App {
-    @StateObject private var farmViewModel = FarmManager.createViewModel()
+
 
     var body: some Scene {
         WindowGroup {
             MainTabView()
-                .environmentObject(farmViewModel)
+              
         }
     }
 }

@@ -1,36 +1,35 @@
 import SwiftUI
 
 struct MainTabView: View {
-   
     var body: some View {
         TabView {
-            Text("Dashboard")
+            DashboardView()
                 .tabItem {
-                    Label("Dashboard", systemImage: "chart.bar.fill")
+                    Label("ផ្ទះ", systemImage: "house.fill")
                 }
-            
+
             FinanceTabview()
                 .tabItem {
-                    Label("Finance", systemImage: "dollarsign.circle.fill")
+                    Label("ហិរញ្ញវត្ថុ", systemImage: "dollarsign.circle.fill")
                 }
-                .tag(0)
-            Text("Calendar")
+
+            Text("ប្រតិទិន")
                 .tabItem {
-                    Label("Calendar", systemImage: "calendar")
+                    Label("ប្រតិទិន", systemImage: "calendar")
                 }
-            Text("Setting")
+
+            Text("របាយការណ៍")
                 .tabItem {
-                    Label("Setting", systemImage: "gearshape.fill")
+                    Label("របាយការណ៍", systemImage: "chart.bar.fill")
                 }
-            
-           
         }
+        .accentColor(Color(red: 0.2, green: 0.6, blue: 0.3))
     }
 }
 
 struct MainTabView_Previews: PreviewProvider {
     static var previews: some View {
         MainTabView()
-           
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

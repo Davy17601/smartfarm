@@ -44,7 +44,6 @@
 		5B43EE162FCB440D00D0E92A /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EE152FCB440D00D0E92A /* Formatters.swift */; };
 		5B72011D2FB6BA1F007F69A5 /* TestUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B72011C2FB6BA1F007F69A5 /* TestUIView.swift */; };
 		5BD68AB92FC94AB700DEE10A /* FinanceTabview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD68AB82FC94AB700DEE10A /* FinanceTabview.swift */; };
-		5BD68ABE2FC94E4600DEE10A /* Coordinators in Resources */ = {isa = PBXBuildFile; fileRef = 5BD68ABD2FC94E4600DEE10A /* Coordinators */; };
 		5BD68AC02FC94F6300DEE10A /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD68ABF2FC94F6300DEE10A /* AddTransactionView.swift */; };
 		5BD68AC22FC94FA900DEE10A /* DynamicFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD68AC12FC94FA900DEE10A /* DynamicFilterView.swift */; };
 		5BD68AC42FC94FFF00DEE10A /* EditTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD68AC32FC94FFF00DEE10A /* EditTransactionView.swift */; };
@@ -52,6 +51,7 @@
 		AA000011FFFFFFFF00000001 /* FarmActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000011FFFFFFFF00000000 /* FarmActivity.swift */; };
 		AA000012FFFFFFFF00000001 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000012FFFFFFFF00000000 /* Reminder.swift */; };
 		AA000030FFFFFFFF00000001 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000030FFFFFFFF00000000 /* MainTabView.swift */; };
+		AECEC902472518095DA9D1C2 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E35A163788907FFCA000177 /* DashboardView.swift */; };
 		BB000001FFFFFFFF00000001 /* FarmActivityEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001FFFFFFFF00000000 /* FarmActivityEntity+CoreDataClass.swift */; };
 		BB000002FFFFFFFF00000001 /* FarmActivityEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000002FFFFFFFF00000000 /* FarmActivityEntity+CoreDataProperties.swift */; };
 		BB000003FFFFFFFF00000001 /* TransactionEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000003FFFFFFFF00000000 /* TransactionEntity+CoreDataClass.swift */; };
@@ -103,6 +103,7 @@
 		5BD68ABF2FC94F6300DEE10A /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
 		5BD68AC12FC94FA900DEE10A /* DynamicFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFilterView.swift; sourceTree = "<group>"; };
 		5BD68AC32FC94FFF00DEE10A /* EditTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTransactionView.swift; sourceTree = "<group>"; };
+		8E35A163788907FFCA000177 /* DashboardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		AA000010FFFFFFFF00000000 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		AA000011FFFFFFFF00000000 /* FarmActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmActivity.swift; sourceTree = "<group>"; };
 		AA000012FFFFFFFF00000000 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
@@ -323,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				AA000030FFFFFFFF00000000 /* MainTabView.swift */,
+				8E35A163788907FFCA000177 /* DashboardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -444,7 +446,6 @@
 			files = (
 				5B3BCB1A2FAD97EC009A2991 /* Preview Assets.xcassets in Resources */,
 				5B3BCB172FAD97EC009A2991 /* Assets.xcassets in Resources */,
-				5BD68ABE2FC94E4600DEE10A /* Coordinators in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +504,7 @@
 				5B43EE122FCB43AA00D0E92A /* ShareSheet.swift in Sources */,
 				BB000006FFFFFFFF00000001 /* ReminderEntity+CoreDataProperties.swift in Sources */,
 				5BD68AC22FC94FA900DEE10A /* DynamicFilterView.swift in Sources */,
+				AECEC902472518095DA9D1C2 /* DashboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

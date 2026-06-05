@@ -2,19 +2,27 @@
 //  CoreDataManager.swift
 //  SmartFarm
 //
-//  Created by Davy on 30/5/26.
-//
 
-import SwiftUI
+import CoreData
 
-struct CoreDataManager: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+class CoreDataManager: ObservableObject {
+    static let shared = CoreDataManager()
+
+    var context: NSManagedObjectContext {
+        PersistenceController.shared.container.viewContext
     }
-}
 
-struct CoreDataManager_Previews: PreviewProvider {
-    static var previews: some View {
-        CoreDataManager()
+    func save() {
+        guard context.hasChanges else { return }
+        do {
+            try context.save()
+        } catch {
+            print("CoreData save error: \(error)")
+        }
+    }
+
+    func delete(_ object: NSManagedObject) {
+        context.delete(object)
+        save()
     }
 }

@@ -19,7 +19,9 @@
   <a href="dashboard.html">ផ្ទះ · Dashboard</a>
   <a href="finance.html" class="active">ហិរញ្ញវត្ថុ · Finance</a>
   <a href="calendar.html">ប្រតិទិន · Calendar</a>
+  <a href="settings.html">ការកំណត់ · Settings</a>
   <a href="reports.html">របាយការណ៍ · Reports</a>
+  <a href="backup.html">បម្រុងទុក · Backup</a>
 </nav>
 
 <main>
@@ -49,10 +51,10 @@
           </div>
         </div>
         <div class="tabbar">
-          <div class="t"><span class="ic">🏠</span>ផ្ទះ</div>
+          <div class="t"><span class="ic">📊</span>ផ្ទះ</div>
           <div class="t on"><span class="ic">💲</span>ហិរញ្ញវត្ថុ</div>
           <div class="t"><span class="ic">📅</span>ប្រតិទិន</div>
-          <div class="t"><span class="ic">📊</span>របាយការណ៍</div>
+          <div class="t"><span class="ic">⚙️</span>ការកំណត់</div>
         </div>
       </div></div>
       <div class="capt">Layout <b>Option A — Fixed Header + Scrolling List</b> (recommended)</div>
@@ -63,9 +65,9 @@
         <li><span class="n">1</span><div><b>Summary row (×3 cards)</b><span>ចំណូល / ចំណាយ / ចំណេញ — always visible</span></div></li>
         <li><span class="n">2</span><div><b>Search bar (ស្វែងរក)</b><span>Custom <code>TextField</code> — not <code>.searchable()</code> (iOS 15+) · matches title/category/note · clear button</span></div></li>
         <li><span class="n">3</span><div><b>Segmented filter</b><span>ទាំងអស់ · ចំណូល · ចំណាយ → combines with search in the <code>@FetchRequest</code> predicate</span></div></li>
-        <li><span class="n">4</span><div><b><code>TransactionRowView</code></b><span>color dot + title + category badge + signed amount + date</span></div></li>
-        <li><span class="n">5</span><div><b><code>AddTransactionView</code></b><span>Sheet form: title, amount, Income/Expense toggle, category, currency, date, note</span></div></li>
-        <li><span class="n">6</span><div><b><code>TransactionDetailView</code></b><span>Hero amount + fields + កែប្រែ (edit) and red លុប (delete)</span></div></li>
+        <li><span class="n">4</span><div><b><code>TransactionRow</code></b><span>color dot + title + category badge + signed amount + date</span></div></li>
+        <li><span class="n">5</span><div><b><code>AddEditTransactionView</code></b><span>Sheet form (shared add + edit): title, amount, Income/Expense, category, currency, date, note</span></div></li>
+        <li><span class="n">6</span><div><b><code>TransactionDetailView</code> · <code>FinanceCoordinator</code></b><span>Detail + edit/delete; coordinator enables deep-linking to a transaction</span></div></li>
       </ul>
       <h3 style="margin-top:14px">Category badge colors</h3>
       <p style="margin:0">

@@ -19,7 +19,9 @@
   <a href="dashboard.html">ផ្ទះ · Dashboard</a>
   <a href="finance.html">ហិរញ្ញវត្ថុ · Finance</a>
   <a href="calendar.html" class="active">ប្រតិទិន · Calendar</a>
+  <a href="settings.html">ការកំណត់ · Settings</a>
   <a href="reports.html">របាយការណ៍ · Reports</a>
+  <a href="backup.html">បម្រុងទុក · Backup</a>
 </nav>
 
 <main>
@@ -50,10 +52,10 @@
           </div>
         </div>
         <div class="tabbar">
-          <div class="t"><span class="ic">🏠</span>ផ្ទះ</div>
+          <div class="t"><span class="ic">📊</span>ផ្ទះ</div>
           <div class="t"><span class="ic">💲</span>ហិរញ្ញវត្ថុ</div>
           <div class="t on"><span class="ic">📅</span>ប្រតិទិន</div>
-          <div class="t"><span class="ic">📊</span>របាយការណ៍</div>
+          <div class="t"><span class="ic">⚙️</span>ការកំណត់</div>
         </div>
       </div></div>
       <div class="capt">Layout <b>Option A — Graphical Calendar + List</b> (recommended)</div>
@@ -62,9 +64,9 @@
       <h3>Expected items</h3>
       <ul class="items">
         <li><span class="n">1</span><div><b>Graphical DatePicker</b><span>Pick a day → list filters to that day · green selected dot · dots mark days with reminders</span></div></li>
-        <li><span class="n">2</span><div><b><code>ReminderRowView</code></b><span>checkmark toggle + title (strike if done) + time + repeat badge + urgency badge · swipe to delete</span></div></li>
-        <li><span class="n">3</span><div><b><code>AddReminderView</code></b><span>Form: title, date+time, repeat (មិនដដែលៗ/ប្រចាំថ្ងៃ/សប្ដាហ៍/ខែ), note</span></div></li>
-        <li><span class="n">4</span><div><b><code>NotificationManager</code></b><span>Schedules <code>-before</code> &amp; <code>-today</code> at 08:00 · cancels on delete/complete</span></div></li>
+        <li><span class="n">2</span><div><b>Reminder row (inline in <code>CalendarTabView</code>)</b><span>checkmark toggle + title (strike if done) + time + repeat badge + urgency badge · swipe to delete</span></div></li>
+        <li><span class="n">3</span><div><b><code>AddEditReminderView</code> · <code>AddEditActivityView</code></b><span>Form: title, date+time, repeat (មិនដដែលៗ/ប្រចាំថ្ងៃ/សប្ដាហ៍/ខែ), note</span></div></li>
+        <li><span class="n">4</span><div><b><code>NotificationService</code></b><span>Schedules <code>-before</code> &amp; <code>-today</code> at 08:00 · cancels on delete/complete</span></div></li>
       </ul>
       <div class="note-box">Implemented as <code>Core/Utilities/NotificationService.swift</code> (UNUserNotificationCenter) — schedules day-before + day-of, cancels on delete/complete.</div>
     </div>

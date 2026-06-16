@@ -19,7 +19,9 @@
   <a href="dashboard.html">ផ្ទះ · Dashboard</a>
   <a href="finance.html">ហិរញ្ញវត្ថុ · Finance</a>
   <a href="calendar.html">ប្រតិទិន · Calendar</a>
+  <a href="settings.html">ការកំណត់ · Settings</a>
   <a href="reports.html">របាយការណ៍ · Reports</a>
+  <a href="backup.html">បម្រុងទុក · Backup</a>
 </nav>
 
 <main>
@@ -40,16 +42,16 @@
     <div class="fnode">4 Tabs</div>
   </div>
   <div class="navmap">
-    <a class="nm" href="dashboard.html"><div class="ic">🏠</div><div class="t">ផ្ទះ</div><div class="e">Dashboard</div></a>
+    <a class="nm" href="dashboard.html"><div class="ic">📊</div><div class="t">ផ្ទះ</div><div class="e">Dashboard</div></a>
     <a class="nm" href="finance.html"><div class="ic">💲</div><div class="t">ហិរញ្ញវត្ថុ</div><div class="e">Finance</div></a>
     <a class="nm" href="calendar.html"><div class="ic">📅</div><div class="t">ប្រតិទិន</div><div class="e">Calendar</div></a>
-    <a class="nm" href="reports.html"><div class="ic">📊</div><div class="t">របាយការណ៍</div><div class="e">Reports</div></a>
+    <a class="nm" href="settings.html"><div class="ic">⚙️</div><div class="t">ការកំណត់</div><div class="e">Settings</div></a>
   </div>
 
   <div class="flowtitle"><span class="tn">Finance</span> Add / edit a transaction</div>
   <div class="flow">
     <div class="fnode start">Tap “+”</div><span class="farrow">→</span>
-    <div class="fnode">AddTransactionView<small>title, amount, type…</small></div><span class="farrow">→</span>
+    <div class="fnode">AddEditTransactionView<small>title, amount, type…</small></div><span class="farrow">→</span>
     <div class="fnode">Tap រក្សាទុក</div><span class="farrow">→</span>
     <div class="fnode data">viewModel.add()<small>save TransactionEntity</small></div><span class="farrow">→</span>
     <div class="fnode data">@FetchRequest reloads</div><span class="farrow">→</span>
@@ -61,7 +63,7 @@
     <div class="fnode start">Tap “+”</div><span class="farrow">→</span>
     <div class="fnode">AddReminderView<small>title, dueDate, repeat</small></div><span class="farrow">→</span>
     <div class="fnode data">addReminder()<small>save ReminderEntity</small></div><span class="farrow">→</span>
-    <div class="fnode note">NotificationManager<small>schedule -before + -today @ 08:00</small></div><span class="farrow">→</span>
+    <div class="fnode note">NotificationService<small>schedule -before + -today @ 08:00</small></div><span class="farrow">→</span>
     <div class="fnode note">🔔 Fires even if app closed</div>
   </div>
   <div class="note-box">Complete or delete a reminder → <code>cancelReminder(id:)</code> removes its pending notifications. Toggling the checkmark flips <code>isCompleted</code> and re-saves.</div>
@@ -71,15 +73,15 @@
     <div class="fnode start">Pick month</div><span class="farrow">→</span>
     <div class="fnode data">fetch transactions</div><span class="farrow">→</span>
     <div class="fnode">Tap CSV / PDF</div><span class="farrow">→</span>
-    <div class="fnode data">CSVExporter / PDFGenerator<small>write temp file → URL</small></div><span class="farrow">→</span>
-    <div class="fnode note">ShareSheet<small>UIActivityViewController</small></div>
+    <div class="fnode data">ReportExporter<small>CSV + PDF → temp file → URL</small></div><span class="farrow">→</span>
+    <div class="fnode note">ActivityShareSheet<small>UIActivityViewController</small></div>
   </div>
 
   <div class="flowtitle"><span class="tn">Reports</span> Backup &amp; restore (JSON)</div>
   <div class="flow">
     <div class="fnode data">All entities</div><span class="farrow">→</span>
     <div class="fnode">Export JSON<small>BackupData → temp file</small></div><span class="farrow">→</span>
-    <div class="fnode note">ShareSheet → iCloud/Files</div>
+    <div class="fnode note">ActivityShareSheet → iCloud/Files</div>
     <span class="farrow" style="margin:0 6px">⇄</span>
     <div class="fnode note">DocumentPicker<small>pick .json</small></div><span class="farrow">→</span>
     <div class="fnode data">decode → insert → save</div>

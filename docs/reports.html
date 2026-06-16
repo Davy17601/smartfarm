@@ -19,13 +19,15 @@
   <a href="dashboard.html">ផ្ទះ · Dashboard</a>
   <a href="finance.html">ហិរញ្ញវត្ថុ · Finance</a>
   <a href="calendar.html">ប្រតិទិន · Calendar</a>
+  <a href="settings.html">ការកំណត់ · Settings</a>
   <a href="reports.html" class="active">របាយការណ៍ · Reports</a>
+  <a href="backup.html">បម្រុងទុក · Backup</a>
 </nav>
 
 <main>
 <section class="view">
   <h2 class="sec">របាយការណ៍ · Reports + Backup</h2>
-  <div class="meta">Owner: <b>Monineath</b> · Tab 4 · Skill <code>/reports</code> · <span class="pill tag-done">done</span></div>
+  <div class="meta">Reached from <a href="settings.html">Settings</a> (not a tab) · <code>ReportsView</code> · Skill <code>/reports</code> · <span class="pill tag-done">done</span></div>
   <div class="purpose">Monthly profit/loss bar chart (GeometryReader — no Swift Charts), CSV/PDF export, and full JSON backup/restore.</div>
   <div class="lead">
     <div>
@@ -58,10 +60,10 @@
           <div class="bbtn">⬇️ នាំចូល JSON</div>
         </div>
         <div class="tabbar">
-          <div class="t"><span class="ic">🏠</span>ផ្ទះ</div>
+          <div class="t"><span class="ic">📊</span>ផ្ទះ</div>
           <div class="t"><span class="ic">💲</span>ហិរញ្ញវត្ថុ</div>
           <div class="t"><span class="ic">📅</span>ប្រតិទិន</div>
-          <div class="t on"><span class="ic">📊</span>របាយការណ៍</div>
+          <div class="t on"><span class="ic">⚙️</span>ការកំណត់</div>
         </div>
       </div></div>
       <div class="capt">Layout <b>Option A — Single Scroll</b> (recommended)</div>
@@ -71,9 +73,9 @@
       <ul class="items">
         <li><span class="n">1</span><div><b>Month selector</b><span>‹ ខែ › → drives summary + transaction set</span></div></li>
         <li><span class="n">2</span><div><b>Summary cards (×3)</b><span>For the selected month</span></div></li>
-        <li><span class="n">3</span><div><b><code>BarChartView</code></b><span>Last 6 months, paired green/red bars via GeometryReader + Rectangle · legend</span></div></li>
-        <li><span class="n">4</span><div><b>Export: <code>CSVExporter</code> / <code>PDFGenerator</code></b><span>Write temp file → <code>ShareSheet</code></span></div></li>
-        <li><span class="n">5</span><div><b>Backup: <code>BackupData</code> + <code>DocumentPicker</code></b><span>Export all entities to JSON · import &amp; restore</span></div></li>
+        <li><span class="n">3</span><div><b><code>MonthlyBarChartView</code></b><span>Last 6 months, paired green/red bars via GeometryReader + Rectangle · legend</span></div></li>
+        <li><span class="n">4</span><div><b>Export: <code>ReportExporter</code></b><span>CSV + PDF → temp file → <code>ActivityShareSheet</code></span></div></li>
+        <li><span class="n">5</span><div><b><code>ReportsViewModel</code></b><span>month navigation + per-currency totals · backup is its own screen → <a href="backup.html">Backup</a></span></div></li>
       </ul>
       <div class="note-box">Implemented as <code>Reports/Views/MonthlyBarChartView.swift</code> (GeometryReader + Rectangle); export via <code>ReportExporter</code>.</div>
     </div>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFarm — Backup</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>SmartFarm — ការបង្ហាញលទ្ធផលរំពឹងទុក &amp; លំហូរដំណើរការ</h1>
+  <p>Visual spec — what each screen should look like — plus the app process flow. Rendered from <code>docs/*.md</code>.</p>
+</header>
+
+<nav class="tabs">
+  <a href="index.html">ទិដ្ឋភាពរួម · Overview</a>
+  <a href="process-flow.html">លំហូរដំណើរការ · Process Flow</a>
+  <a href="dashboard.html">ផ្ទះ · Dashboard</a>
+  <a href="finance.html">ហិរញ្ញវត្ថុ · Finance</a>
+  <a href="calendar.html">ប្រតិទិន · Calendar</a>
+  <a href="settings.html">ការកំណត់ · Settings</a>
+  <a href="reports.html">របាយការណ៍ · Reports</a>
+  <a href="backup.html" class="active">បម្រុងទុក · Backup</a>
+</nav>
+
+<main>
+<section class="view">
+  <h2 class="sec">បម្រុងទុក &amp; ស្ដារ · Backup &amp; Restore</h2>
+  <div class="meta">Pushed from <a href="settings.html">Settings</a> · <code>BackupView</code> + <code>BackupService</code> · <span class="pill tag-done">done</span></div>
+  <div class="purpose">Export every record to one JSON file via the share sheet, and restore from a picked <code>.json</code> file — so data survives a lost or broken phone.</div>
+  <div class="lead">
+    <div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span>📶 🔋</span></div>
+        <div class="navbar"><span class="title" style="font-size:16px">‹ ការកំណត់　បម្រុងទុក</span></div>
+        <div class="body">
+          <div class="scard" style="margin:6px 0 14px">
+            <div class="dt" style="font-size:13px;line-height:1.7">នាំចេញទិន្នន័យទាំងអស់ (ប្រតិបត្តិការ · សកម្មភាព · ការរំឭក) ទៅជាឯកសារ JSON មួយ ដើម្បីរក្សាទុក ឬផ្ទេរទៅឧបករណ៍ផ្សេង។</div>
+          </div>
+          <div style="background:var(--green);color:#fff;border-radius:12px;padding:13px;text-align:center;font-weight:700;font-size:14px;margin-bottom:10px">⬆️ នាំចេញ JSON</div>
+          <div style="background:var(--green);color:#fff;border-radius:12px;padding:13px;text-align:center;font-weight:700;font-size:14px">⬇️ ស្ដារពី JSON</div>
+        </div>
+        <div class="tabbar">
+          <div class="t"><span class="ic">📊</span>ផ្ទះ</div>
+          <div class="t"><span class="ic">💲</span>ហិរញ្ញវត្ថុ</div>
+          <div class="t"><span class="ic">📅</span>ប្រតិទិន</div>
+          <div class="t on"><span class="ic">⚙️</span>ការកំណត់</div>
+        </div>
+      </div></div>
+      <div class="capt">Reached via <b>Settings → បម្រុងទុក &amp; ស្ដារ</b></div>
+    </div>
+    <div class="panel">
+      <h3>Expected items</h3>
+      <ul class="items">
+        <li><span class="n">1</span><div><b>Export (នាំចេញ JSON)</b><span><code>BackupService.exportFile()</code> → encodes all entities to <code>BackupData</code> JSON → <code>ActivityShareSheet</code> (UIActivityViewController)</span></div></li>
+        <li><span class="n">2</span><div><b>Restore (ស្ដារ JSON)</b><span><code>DocumentPicker</code> (.json) → <code>BackupService.restore(from:)</code> → insert &amp; save</span></div></li>
+        <li><span class="n">3</span><div><b>Result message</b><span>success / failed feedback via <code>L("backup.*")</code></span></div></li>
+        <li><span class="n">4</span><div><b>Reusable UI</b><span><code>FarmCard</code> + <code>PrimaryButton</code> from the design system</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+</body>
+</html>

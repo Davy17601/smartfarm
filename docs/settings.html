@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFarm — Settings</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>SmartFarm — ការបង្ហាញលទ្ធផលរំពឹងទុក &amp; លំហូរដំណើរការ</h1>
+  <p>Visual spec — what each screen should look like — plus the app process flow. Rendered from <code>docs/*.md</code>.</p>
+</header>
+
+<nav class="tabs">
+  <a href="index.html">ទិដ្ឋភាពរួម · Overview</a>
+  <a href="process-flow.html">លំហូរដំណើរការ · Process Flow</a>
+  <a href="dashboard.html">ផ្ទះ · Dashboard</a>
+  <a href="finance.html">ហិរញ្ញវត្ថុ · Finance</a>
+  <a href="calendar.html">ប្រតិទិន · Calendar</a>
+  <a href="settings.html" class="active">ការកំណត់ · Settings</a>
+  <a href="reports.html">របាយការណ៍ · Reports</a>
+  <a href="backup.html">បម្រុងទុក · Backup</a>
+</nav>
+
+<main>
+<section class="view">
+  <h2 class="sec">ការកំណត់ · Settings</h2>
+  <div class="meta">Tab 4 · <code>SettingsView</code> · <span class="pill tag-done">done</span></div>
+  <div class="purpose">Language &amp; currency preferences, plus the entry points to <a href="reports.html">Reports</a> and <a href="backup.html">Backup &amp; Restore</a> (both pushed from here via <code>NavigationLink</code> — they are <b>not</b> their own tabs).</div>
+  <div class="lead">
+    <div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span>📶 🔋</span></div>
+        <div class="navbar"><span class="title">ការកំណត់</span></div>
+        <div class="body">
+          <div class="grouphdr">ចំណង់ចំណូលចិត្ត</div>
+          <div class="listcard">
+            <div class="trow"><div class="mid"><div class="ti">ភាសា</div></div><div class="right"><div class="dt" style="font-size:13px;color:var(--ink)">ខ្មែរ ⌄</div></div></div>
+            <div class="trow"><div class="mid"><div class="ti">រូបិយប័ណ្ណបង្ហាញ</div></div><div class="right"><div class="dt" style="font-size:13px;color:var(--ink)">រៀល ៛ ⌄</div></div></div>
+          </div>
+          <div class="grouphdr">ទិន្នន័យ</div>
+          <div class="listcard">
+            <div class="trow"><span style="font-size:15px">📊</span><div class="mid"><div class="ti">របាយការណ៍</div></div><span class="dt">›</span></div>
+            <div class="trow"><span style="font-size:15px">🗄️</span><div class="mid"><div class="ti">បម្រុងទុក &amp; ស្ដារ</div></div><span class="dt">›</span></div>
+          </div>
+          <div class="grouphdr">អំពី</div>
+          <div class="listcard">
+            <div class="trow"><div class="mid"><div class="ti">កំណែ</div></div><div class="right"><div class="dt">1.0</div></div></div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="t"><span class="ic">📊</span>ផ្ទះ</div>
+          <div class="t"><span class="ic">💲</span>ហិរញ្ញវត្ថុ</div>
+          <div class="t"><span class="ic">📅</span>ប្រតិទិន</div>
+          <div class="t on"><span class="ic">⚙️</span>ការកំណត់</div>
+        </div>
+      </div></div>
+      <div class="capt">Real app: <b>4 tabs</b> — Dashboard · Finance · Calendar · <b>Settings</b></div>
+    </div>
+    <div class="panel">
+      <h3>Expected items</h3>
+      <ul class="items">
+        <li><span class="n">1</span><div><b>Preferences section</b><span>Language picker (ខ្មែរ/English) via <code>LocalizationManager</code> — live switch; display-currency picker via <code>AppSettings.displayCurrency</code></span></div></li>
+        <li><span class="n">2</span><div><b>Data section</b><span><code>NavigationLink</code> → <a href="reports.html"><code>ReportsView</code></a> and → <a href="backup.html"><code>BackupView</code></a></span></div></li>
+        <li><span class="n">3</span><div><b>About section</b><span>App version (1.0)</span></div></li>
+        <li><span class="n">4</span><div><b>Bilingual</b><span>All labels via <code>L("settings.*")</code> — km + en <code>Localizable.strings</code></span></div></li>
+      </ul>
+      <div class="note-box">Reports &amp; Backup live <b>under</b> Settings — keeps the bottom tab bar to 4 items.</div>
+    </div>
+  </div>
+</section>
+</main>
+
+</body>
+</html>

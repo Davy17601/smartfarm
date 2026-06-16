@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFarm — Calendar</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>SmartFarm — ការបង្ហាញលទ្ធផលរំពឹងទុក &amp; លំហូរដំណើរការ</h1>
+  <p>Visual spec — what each screen should look like — plus the app process flow. Rendered from <code>docs/*.md</code>.</p>
+</header>
+
+<nav class="tabs">
+  <a href="index.html">ទិដ្ឋភាពរួម · Overview</a>
+  <a href="process-flow.html">លំហូរដំណើរការ · Process Flow</a>
+  <a href="dashboard.html">ផ្ទះ · Dashboard</a>
+  <a href="finance.html">ហិរញ្ញវត្ថុ · Finance</a>
+  <a href="calendar.html" class="active">ប្រតិទិន · Calendar</a>
+  <a href="reports.html">របាយការណ៍ · Reports</a>
+</nav>
+
+<main>
+<section class="view">
+  <h2 class="sec">ប្រតិទិន · Calendar &amp; Reminders</h2>
+  <div class="meta">Owner: <b>Monineath</b> · Tab 3 · Skill <code>/calendar</code> · <span class="pill tag-todo">not built</span></div>
+  <div class="purpose">Schedule farm activities and get local notifications the day before &amp; the day of — even when the app is closed.</div>
+  <div class="lead">
+    <div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span>📶 🔋</span></div>
+        <div class="navbar"><span class="title">ប្រតិទិន</span><span class="plus">+</span></div>
+        <div class="body">
+          <div class="calwrap">
+            <div class="calhdr">‹ មិថុនា ២០២៦ ›</div>
+            <div class="cgrid">
+              <div class="dow">អា</div><div class="dow">ច</div><div class="dow">អ</div><div class="dow">ព</div><div class="dow">ព</div><div class="dow">សុ</div><div class="dow">ស</div>
+              <div class="d">1</div><div class="d">2</div><div class="d has">3</div><div class="d">4</div><div class="d has">5</div><div class="d">6</div><div class="d">7</div>
+              <div class="d">8</div><div class="d">9</div><div class="d">10</div><div class="d">11</div><div class="d">12</div><div class="d">13</div><div class="d">14</div>
+              <div class="d">15</div><div class="d sel">16</div><div class="d has">17</div><div class="d">18</div><div class="d">19</div><div class="d">20</div><div class="d">21</div>
+            </div>
+          </div>
+          <div class="grouphdr">១៦ មិថុនា ២០២៦</div>
+          <div class="listcard">
+            <div class="trow"><span class="check">○</span><div class="mid"><div class="ti">ស្រោចទឹក</div><div style="margin-top:3px"><span class="dt">០៨:០០ ព្រឹក</span> &nbsp;<span class="rep">ប្រចាំថ្ងៃ</span></div></div><span class="ubadge u-today">ថ្ងៃនេះ</span></div>
+            <div class="trow faded"><span class="check on">✓</span><div class="mid"><div class="ti strike">បាច់ជី</div><div style="margin-top:3px"><span class="dt">១០:០០ ព្រឹក</span> &nbsp;<span class="rep">ប្រចាំសប្ដាហ៍</span></div></div></div>
+            <div class="trow"><span class="check">○</span><div class="mid"><div class="ti">បន្លិចទឹក</div><div style="margin-top:3px"><span class="dt">១៦:០០ ល្ងាច</span></div></div></div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="t"><span class="ic">🏠</span>ផ្ទះ</div>
+          <div class="t"><span class="ic">💲</span>ហិរញ្ញវត្ថុ</div>
+          <div class="t on"><span class="ic">📅</span>ប្រតិទិន</div>
+          <div class="t"><span class="ic">📊</span>របាយការណ៍</div>
+        </div>
+      </div></div>
+      <div class="capt">Layout <b>Option A — Graphical Calendar + List</b> (recommended)</div>
+    </div>
+    <div class="panel">
+      <h3>Expected items</h3>
+      <ul class="items">
+        <li><span class="n">1</span><div><b>Graphical DatePicker</b><span>Pick a day → list filters to that day · green selected dot · dots mark days with reminders</span></div></li>
+        <li><span class="n">2</span><div><b><code>ReminderRowView</code></b><span>checkmark toggle + title (strike if done) + time + repeat badge + urgency badge · swipe to delete</span></div></li>
+        <li><span class="n">3</span><div><b><code>AddReminderView</code></b><span>Form: title, date+time, repeat (មិនដដែលៗ/ប្រចាំថ្ងៃ/សប្ដាហ៍/ខែ), note</span></div></li>
+        <li><span class="n">4</span><div><b><code>NotificationManager</code></b><span>Schedules <code>-before</code> &amp; <code>-today</code> at 08:00 · cancels on delete/complete</span></div></li>
+      </ul>
+      <div class="note-box">⚠️ <code>NotificationManager.swift</code> is still missing — build it first (Calendar depends on it).</div>
+    </div>
+  </div>
+</section>
+</main>
+
+</body>
+</html>

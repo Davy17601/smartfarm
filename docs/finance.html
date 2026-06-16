@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFarm — Finance</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>SmartFarm — ការបង្ហាញលទ្ធផលរំពឹងទុក &amp; លំហូរដំណើរការ</h1>
+  <p>Visual spec — what each screen should look like — plus the app process flow. Rendered from <code>docs/*.md</code>.</p>
+</header>
+
+<nav class="tabs">
+  <a href="index.html">ទិដ្ឋភាពរួម · Overview</a>
+  <a href="process-flow.html">លំហូរដំណើរការ · Process Flow</a>
+  <a href="dashboard.html">ផ្ទះ · Dashboard</a>
+  <a href="finance.html" class="active">ហិរញ្ញវត្ថុ · Finance</a>
+  <a href="calendar.html">ប្រតិទិន · Calendar</a>
+  <a href="reports.html">របាយការណ៍ · Reports</a>
+</nav>
+
+<main>
+<section class="view">
+  <h2 class="sec">ហិរញ្ញវត្ថុ · Finance</h2>
+  <div class="meta">Owner: <b>Davy</b> · Tab 2 · Skill <code>/finance</code> · <span class="pill tag-stub">stub → implement</span></div>
+  <div class="purpose">Track daily income &amp; expenses with running profit/loss. KHR (៛) and USD ($) supported. Search by title/category/note, filter by type, tap a row for detail/edit.</div>
+  <div class="lead">
+    <div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span>📶 🔋</span></div>
+        <div class="navbar"><span class="title">ហិរញ្ញវត្ថុ</span><span class="plus">+</span></div>
+        <div class="body">
+          <div class="row3">
+            <div class="scard"><div class="lbl">ចំណូល</div><div class="amt" style="color:var(--income)">1.5M ៛</div></div>
+            <div class="scard"><div class="lbl">ចំណាយ</div><div class="amt" style="color:var(--expense)">800K ៛</div></div>
+            <div class="scard"><div class="lbl">ចំណេញ</div><div class="amt" style="color:var(--profit)">+700K ៛</div></div>
+          </div>
+          <div class="searchbar">🔍 ស្វែងរក...</div>
+          <div class="seg"><div class="on">ទាំងអស់</div><div>ចំណូល</div><div>ចំណាយ</div></div>
+          <div class="grouphdr">មិថុនា ២០២៦</div>
+          <div class="listcard">
+            <div class="trow"><span class="dot" style="background:var(--income)"></span><div class="mid"><div class="ti">លក់ស្រូវ</div><span class="badge" style="background:var(--income)">លក់</span></div><div class="right"><div class="val" style="color:var(--income)">+1,500,000 ៛</div><div class="dt">០៥/០៦</div></div></div>
+            <div class="trow"><span class="dot" style="background:var(--expense)"></span><div class="mid"><div class="ti">ទិញជី</div><span class="badge" style="background:var(--brown)">ជី</span></div><div class="right"><div class="val" style="color:var(--expense)">-250,000 ៛</div><div class="dt">០៣/០៦</div></div></div>
+            <div class="trow"><span class="dot" style="background:var(--expense)"></span><div class="mid"><div class="ti">ថ្លៃឈ្នួលពលករ</div><span class="badge" style="background:var(--purple)">ការងារ</span></div><div class="right"><div class="val" style="color:var(--expense)">-150,000 ៛</div><div class="dt">០២/០៦</div></div></div>
+            <div class="trow"><span class="dot" style="background:var(--income)"></span><div class="mid"><div class="ti">លក់បន្លែ</div><span class="badge" style="background:var(--income)">លក់</span></div><div class="right"><div class="val" style="color:var(--income)">+200,000 ៛</div><div class="dt">០១/០៦</div></div></div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="t"><span class="ic">🏠</span>ផ្ទះ</div>
+          <div class="t on"><span class="ic">💲</span>ហិរញ្ញវត្ថុ</div>
+          <div class="t"><span class="ic">📅</span>ប្រតិទិន</div>
+          <div class="t"><span class="ic">📊</span>របាយការណ៍</div>
+        </div>
+      </div></div>
+      <div class="capt">Layout <b>Option A — Fixed Header + Scrolling List</b> (recommended)</div>
+    </div>
+    <div class="panel">
+      <h3>Expected items</h3>
+      <ul class="items">
+        <li><span class="n">1</span><div><b>Summary row (×3 cards)</b><span>ចំណូល / ចំណាយ / ចំណេញ — always visible</span></div></li>
+        <li><span class="n">2</span><div><b>Search bar (ស្វែងរក)</b><span>Custom <code>TextField</code> — not <code>.searchable()</code> (iOS 15+) · matches title/category/note · clear button</span></div></li>
+        <li><span class="n">3</span><div><b>Segmented filter</b><span>ទាំងអស់ · ចំណូល · ចំណាយ → combines with search in the <code>@FetchRequest</code> predicate</span></div></li>
+        <li><span class="n">4</span><div><b><code>TransactionRowView</code></b><span>color dot + title + category badge + signed amount + date</span></div></li>
+        <li><span class="n">5</span><div><b><code>AddTransactionView</code></b><span>Sheet form: title, amount, Income/Expense toggle, category, currency, date, note</span></div></li>
+        <li><span class="n">6</span><div><b><code>TransactionDetailView</code></b><span>Hero amount + fields + កែប្រែ (edit) and red លុប (delete)</span></div></li>
+      </ul>
+      <h3 style="margin-top:14px">Category badge colors</h3>
+      <p style="margin:0">
+        <span class="badge" style="background:var(--orange)">គ្រាប់ពូជ</span>
+        <span class="badge" style="background:var(--brown)">ជី</span>
+        <span class="badge" style="background:var(--purple)">ការងារ</span>
+        <span class="badge" style="background:var(--gray)">ឧបករណ៍</span>
+        <span class="badge" style="background:var(--income)">លក់</span>
+        <span class="badge" style="background:var(--muted)">ផ្សេងៗ</span>
+      </p>
+    </div>
+  </div>
+</section>
+</main>
+
+</body>
+</html>

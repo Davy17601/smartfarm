@@ -3,8 +3,25 @@
 ## Project Overview
 SwiftUI MVVM app for Cambodian small-scale farmers. Tracks finances, farm activities, and schedules in one place.
 
-**Stack:** Swift 5.5 · SwiftUI · CoreData · Xcode 13 · iOS 14 deployment target  
+**Stack:** Swift 5.0 · SwiftUI · CoreData · Xcode 13 · iOS 14 deployment target  
 **Constraints:** No NavigationStack, SwiftData, Swift Charts, ShareLink, `#Preview`, `@Observable`
+
+---
+
+## Current Status — 2026-06-16
+
+| Area | State |
+|------|-------|
+| Project scaffolding, CoreData model (3 entities), `MainTabView` | ✅ done |
+| Utilities — `CoreDataManager`, `Formatters` | ✅ done |
+| Utilities — `NotificationManager` | ❌ missing (Calendar depends on it) |
+| **Dashboard** tab (`DashboardView`, wired into tabs) | ✅ done |
+| **Finance** tab | ⚠️ stubs only (`FinanceTabview`, VM, views are placeholders) |
+| **Calendar** tab | ❌ not built (tab shows `Text("ប្រតិទិន")`) |
+| **Reports** tab | ⚠️ stubs only (tab shows `Text("របាយការណ៍")`) |
+
+> The Journal module that briefly existed in the tree was removed — it was
+> undocumented and its CoreData entity was never in the model.
 
 ---
 
@@ -44,17 +61,18 @@ SwiftUI MVVM app for Cambodian small-scale farmers. Tracks finances, farm activi
 - [x] `docs/Calendar.md`
 - [x] `docs/Reports.md`
 
-### Phase 1 — Utilities (Leader) [ ]
-- [ ] `Utilities/CoreDataManager.swift` — save/delete helpers
-- [ ] `Utilities/Formatters.swift` — KHR/USD + date formatters
-- [ ] `Utilities/NotificationManager.swift` — UNUserNotificationCenter wrapper
-- [ ] `SmartFarmApp.swift` — inject managedObjectContext into environment
-- [ ] CoreData model — add `category` + `currency` to TransactionEntity
+### Phase 1 — Utilities (Leader) [partial]
+- [x] `Utilities/CoreDataManager.swift` — save/delete helpers
+- [x] `Utilities/Formatters.swift` — KHR/USD + date formatters
+- [ ] `Utilities/NotificationManager.swift` — UNUserNotificationCenter wrapper (still missing)
+- [x] `SmartFarmApp.swift` — inject managedObjectContext into environment
+- [x] CoreData model — `category` + `currency` on TransactionEntity
 
 ### Phase 2 — Finance Module (Davy) [ ]
-- [ ] `Finance/ViewModels/FinanceViewModel.swift` — ObservableObject, CRUD, totals
-- [ ] `Finance/Views/FinanceTabview.swift` — summary cards + filter + list
-- [ ] `Finance/Views/TransactionListView.swift` — @FetchRequest with filter
+- [ ] `Finance/ViewModels/FinanceViewModel.swift` — ObservableObject, CRUD, totals, `searchText`
+- [ ] `Finance/Views/FinanceTabview.swift` — summary cards + search bar + filter + list
+- [ ] Search bar — custom `TextField` (`ស្វែងរក`), **not** `.searchable()` (iOS 15+); matches title/category/note
+- [ ] `Finance/Views/TransactionListView.swift` — @FetchRequest with combined type + search predicate
 - [ ] `Finance/Views/TransactionRowView.swift` — row component
 - [ ] `Finance/Views/AddTransactionView.swift` — add form
 - [ ] `Finance/Views/EditTransactionView.swift` — edit form
@@ -66,10 +84,10 @@ SwiftUI MVVM app for Cambodian small-scale farmers. Tracks finances, farm activi
 - [ ] `CalendarReminders/Views/AddReminderView.swift` — new
 - [ ] `CalendarReminders/Views/ReminderRowView.swift` — new
 
-### Phase 4 — Dashboard (Davy + Monineath) [ ]
-- [ ] `Dashboard/Views/DashboardView.swift` — new
-- [ ] `Dashboard/Views/SummaryCardView.swift` — new
-- [ ] Wire `DashboardView` into `MainTabView`
+### Phase 4 — Dashboard (Davy + Monineath) [x]
+- [x] `Dashboard/Views/DashboardView.swift`
+- [x] `Dashboard/Views/SummaryCardView.swift` (lives in `Reports/Views/`)
+- [x] Wire `DashboardView` into `MainTabView`
 
 ### Phase 5 — Reports + Backup (Monineath) [ ]
 - [ ] `Reports/Models/MonthlyReport.swift`

@@ -20,7 +20,7 @@
 ### SmartFarm ដោះស្រាយបញ្ហាទាំងនេះដោយរបៀបណា?
 
 #### Finance Tracker — ដឹងច្បាស់ថាលុយទៅណា
-កសិករបញ្ចូល income (ប្រាក់ចូល) និង expense (ចំណាយ) រៀងរាល់ថ្ងៃ។ App គណនា profit/loss ស្វ័យប្រវត្តិ ហើយបង្ហាញ summary card ដែលងាយមើល។ គាំទ្ររូបិយប័ណ្ណ Riel (KHR) និង Dollar (USD) ព្រោះកម្ពុជាប្រើប្រាស់ទាំងពីរ។
+កសិករបញ្ចូល income (ប្រាក់ចូល) និង expense (ចំណាយ) រៀងរាល់ថ្ងៃ។ App គណនា profit/loss ស្វ័យប្រវត្តិ ហើយបង្ហាញ summary card ដែលងាយមើល។ គាំទ្ររូបិយប័ណ្ណ Riel (KHR) និង Dollar (USD) ព្រោះកម្ពុជាប្រើប្រាស់ទាំងពីរ។ មាន **search bar** (ស្វែងរក) ដើម្បីរកប្រតិបត្តិការតាមចំណងជើង/ប្រភេទ/កំណត់ចំណាំ និងតម្រង (filter) តាមប្រភេទ income/expense។
 
 #### Calendar & Reminders — មិនភ្លេចការងារសំខាន់
 កសិករកំណត់ schedule សម្រាប់សកម្មភាពកសិកម្ម (ដាំ, បន្លិចទឹក, បាច់ជី, ច្រូតកាត់)។ App ផ្ញើ notification ជូនដំណឹង 1 ថ្ងៃមុន និងនៅថ្ងៃនោះ ដើម្បីឱ្យពួកគេត្រៀមខ្លួន — ទោះបីជា app បិទក្ដី។
@@ -58,7 +58,7 @@ Export ទិន្នន័យទាំងអស់ជា JSON ទៅ iCloud Dr
 |------|-----------|------------|
 **Macos** | 11.x (គ្រប់កំណែ) | Davy និង Monineath ប្រើ នៅលើ Virtual VM |
 | **Xcode** | 13.x (គ្រប់កំណែ) | Davy និង Monineath ប្រើ Xcode 13 នៅលើ Virtual VM |
-| **Swift** | 5.5 | កំណែលំនាំដើមរបស់ Xcode 13 |
+| **Swift** | 5.0 | `SWIFT_VERSION` នៅក្នុង project (Xcode 13 toolchain) |
 | **iOS Deployment Target** | **14.0** | ប្រើបានជាមួយ Xcode 13.x គ្រប់កំណែ |
 | **SwiftUI** | iOS 14+ APIs តែប៉ុណ្ណោះ | គ្មាន SwiftData, គ្មាន Swift Charts, ប្រើ CoreData Persistence |
 | **Third-party dependencies** | គ្មាន | គ្មាន CocoaPods, គ្មាន SPM packages |
@@ -78,7 +78,7 @@ Export ទិន្នន័យទាំងអស់ជា JSON ទៅ iCloud Dr
 
 ### APIs ដែលត្រូវជៀសវាង (មិនអាចប្រើបាននៅ Xcode 13)
 - `NavigationStack`, `NavigationSplitView` — iOS 16+
-- `.searchable()` modifier — ប្រើ custom `TextField` search bar ជំនួស
+- `.searchable()` modifier (iOS 15+) — ប្រើ custom `TextField` search bar ជំនួស (ឧ. search bar ក្នុង Finance — មើល `docs/Finance.md`)
 - `Charts` framework (Swift Charts) — iOS 16+
 - `SwiftData`, `@Model` — iOS 17+
 - `ShareLink` — iOS 16+, ប្រើ `UIActivityViewController` ជំនួស

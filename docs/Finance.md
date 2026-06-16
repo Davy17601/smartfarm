@@ -35,6 +35,7 @@ Let farmers track daily income and expenses. Shows running profit/loss with KHR 
 class FinanceViewModel: ObservableObject {
     @Published var filterType: String = "all"    // "all" | "Income" | "Expense"
     @Published var selectedCurrency: String = "KHR"
+    @Published var searchText: String = ""        // filters list by title / category / note
     
     var context: NSManagedObjectContext
     
@@ -62,6 +63,7 @@ FinanceTabview (NavigationView)
 │   ├── Card: ចំណូល (green)
 │   ├── Card: ចំណាយ (red)
 │   └── Card: ចំណេញ (blue)
+├── SearchBar (custom TextField — "ស្វែងរក")   ← iOS 14-safe, NOT .searchable()
 ├── FilterPicker (Segmented: ទាំងអស់ / ចំណូល / ចំណាយ)
 └── TransactionListView (@FetchRequest)
     └── TransactionRowView (each row)
@@ -81,6 +83,7 @@ Sheet: AddTransactionView
 | Expense | ចំណាយ |
 | Profit | ចំណេញ |
 | All | ទាំងអស់ |
+| Search | ស្វែងរក |
 | Add Transaction | បន្ថែមប្រតិបត្តិការ |
 | Title | ចំណងជើង |
 | Amount | ចំនួនទឹកប្រាក់ |
@@ -117,16 +120,68 @@ Formatters.currency(amount, currency: entity.currency ?? "KHR")
 ---
 
 ## Filter Logic
+The list is narrowed by **two** controls that combine with AND: the segmented
+type filter and the search text.
 ```swift
-// In TransactionListView @FetchRequest predicate:
+// In TransactionListView — build the @FetchRequest predicate:
 var predicate: NSPredicate? {
+    var parts: [NSPredicate] = []
+
     switch filterType {
-    case "Income":  return NSPredicate(format: "type == %@", "Income")
-    case "Expense": return NSPredicate(format: "type == %@", "Expense")
-    default:        return nil
+    case "Income":  parts.append(NSPredicate(format: "type == %@", "Income"))
+    case "Expense": parts.append(NSPredicate(format: "type == %@", "Expense"))
+    default:        break
     }
+
+    let q = searchText.trimmingCharacters(in: .whitespaces)
+    if !q.isEmpty {
+        // case- & diacritic-insensitive match on title OR category OR note
+        parts.append(NSPredicate(
+            format: "title CONTAINS[cd] %@ OR category CONTAINS[cd] %@ OR note CONTAINS[cd] %@",
+            q, q, q))
+    }
+
+    if parts.isEmpty { return nil }
+    return NSCompoundPredicate(andPredicateWithSubpredicates: parts)
 }
 ```
+
+---
+
+## Search Bar (iOS 14-safe)
+> `.searchable()` is **iOS 15+** and forbidden here — build a custom `TextField`
+> search bar instead (this is the one mentioned in the project's forbidden-API note).
+
+Placed between the summary cards and the segmented filter. Empty search shows all
+rows (subject to the type filter); typing filters live via the combined predicate above.
+
+```swift
+HStack(spacing: 8) {
+    Image(systemName: "magnifyingglass")
+        .foregroundColor(.secondary)
+    TextField("ស្វែងរក", text: $viewModel.searchText)
+        .autocapitalization(.none)
+        .disableAutocorrection(true)
+    if !viewModel.searchText.isEmpty {
+        Button(action: { viewModel.searchText = "" }) {
+            Image(systemName: "xmark.circle.fill")
+                .foregroundColor(.secondary)
+        }
+        .buttonStyle(.plain)
+    }
+}
+.padding(8)
+.background(Color(.systemGray6))
+.cornerRadius(10)
+.padding(.horizontal, 16)
+.padding(.bottom, 8)
+```
+
+Behaviour:
+- **Matches** title, category, and note (case- & diacritic-insensitive — Khmer friendly).
+- **Clear button** (`xmark.circle.fill`) appears only when text is present.
+- Combines with the type filter — e.g. *ចំណាយ + "ជី"* shows only fertilizer expenses.
+- Empty-result state: reuse the list's empty placeholder (e.g. "រកមិនឃើញ").
 
 ---
 
@@ -162,6 +217,9 @@ Summary cards and filter are pinned; only the transaction list scrolls. Farmers 
 │  │ 1,500,000│ │  800,000 │ │+700K │ │
 │  │    ៛    │ │    ៛    │  │  ៛  │ │
 │  └──────────┘ └──────────┘ └──────┘ │
+│  ┌─────────────────────────────────┐ │
+│  │ 🔍 ស្វែងរក...                  │ │  ← custom TextField search bar
+│  └─────────────────────────────────┘ │
 │  ┌─────────────────────────────────┐ │
 │  │ [ទាំងអស់] [ចំណូល] [ចំណាយ]     │ │  ← segmented filter (sticky)
 │  └─────────────────────────────────┘ │
@@ -369,4 +427,7 @@ Sheet modal (`.sheet`) with a Form:
 | `Finance/Views/AddTransactionView.swift` | stub → implement |
 | `Finance/Views/EditTransactionView.swift` | stub → implement |
 | `Finance/Views/TransactionDetailView.swift` | stub → implement |
-| `Finance/Views/DynamicFilterView.swift` | stub (can stay or use inline) |
+| `Finance/Views/DynamicFilterView.swift` | stub — host the search bar here, or inline in `FinanceTabview` |
+
+> The search bar (`TextField` bound to `viewModel.searchText`) can live inside
+> `FinanceTabview` directly or in `DynamicFilterView`. No new file required.

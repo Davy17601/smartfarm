@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFarm — Dashboard</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>SmartFarm — ការបង្ហាញលទ្ធផលរំពឹងទុក &amp; លំហូរដំណើរការ</h1>
+  <p>Visual spec — what each screen should look like — plus the app process flow. Rendered from <code>docs/*.md</code>.</p>
+</header>
+
+<nav class="tabs">
+  <a href="index.html">ទិដ្ឋភាពរួម · Overview</a>
+  <a href="process-flow.html">លំហូរដំណើរការ · Process Flow</a>
+  <a href="dashboard.html" class="active">ផ្ទះ · Dashboard</a>
+  <a href="finance.html">ហិរញ្ញវត្ថុ · Finance</a>
+  <a href="calendar.html">ប្រតិទិន · Calendar</a>
+  <a href="reports.html">របាយការណ៍ · Reports</a>
+</nav>
+
+<main>
+<section class="view">
+  <h2 class="sec">ផ្ទះ · Dashboard</h2>
+  <div class="meta">Owner: <b>Davy + Monineath</b> · Tab 1 · Skill <code>/dashboard</code> · <span class="pill tag-done">done</span></div>
+  <div class="purpose">At-a-glance view of farm health: this month's money, upcoming tasks, recent activity — all on the home screen.</div>
+  <div class="lead">
+    <div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar onhero"><span>9:41</span><span>📶 🔋</span></div>
+        <div class="body" style="padding-top:0">
+          <div class="hero">
+            <div class="hi">🌾 សួស្ដី! Farm របស់អ្នក</div>
+            <div class="dt">ថ្ងៃ ១៦ មិថុនា ២០២៦</div>
+          </div>
+          <div class="overlap">
+            <div class="scard"><div class="ic" style="color:var(--income)">⬇️</div><div class="lbl">ចំណូល</div><div class="amt" style="color:var(--income)">1,500,000 ៛</div></div>
+            <div class="scard"><div class="ic" style="color:var(--expense)">⬆️</div><div class="lbl">ចំណាយ</div><div class="amt" style="color:var(--expense)">800,000 ៛</div></div>
+          </div>
+          <div style="display:flex;margin-top:8px"><div class="scard" style="text-align:center"><div class="lbl">ចំណេញ</div><div class="amt" style="color:var(--profit)">+700,000 ៛</div></div></div>
+
+          <div class="secthdr"><span class="h">ការរំឭកខាងមុខ</span><span class="all">មើលទាំងអស់</span></div>
+          <div class="listcard">
+            <div class="trow"><span style="font-size:16px">📅</span><div class="mid"><div class="ti">ស្រោចទឹក</div><div class="dt">១៦/០៦ ០៨:០០</div></div><span class="ubadge u-today">ថ្ងៃនេះ</span></div>
+            <div class="trow"><span style="font-size:16px">📅</span><div class="mid"><div class="ti">បាច់ជី</div><div class="dt">១៧/០៦ ១០:០០</div></div><span class="ubadge u-tom">ស្អែក</span></div>
+          </div>
+
+          <div class="secthdr"><span class="h">ប្រតិបត្តិការចុងក្រោយ</span><span class="all">មើលទាំងអស់</span></div>
+          <div class="listcard">
+            <div class="trow"><span class="dot" style="background:var(--income)"></span><div class="mid"><div class="ti">លក់ស្រូវ</div><div class="dt">លក់</div></div><div class="right"><div class="val" style="color:var(--income)">+1,500,000 ៛</div><div class="dt">០៥/០៦</div></div></div>
+            <div class="trow"><span class="dot" style="background:var(--expense)"></span><div class="mid"><div class="ti">ទិញជី</div><div class="dt">ជី</div></div><div class="right"><div class="val" style="color:var(--expense)">-250,000 ៛</div><div class="dt">០៣/០៦</div></div></div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <div class="t on"><span class="ic">🏠</span>ផ្ទះ</div>
+          <div class="t"><span class="ic">💲</span>ហិរញ្ញវត្ថុ</div>
+          <div class="t"><span class="ic">📅</span>ប្រតិទិន</div>
+          <div class="t"><span class="ic">📊</span>របាយការណ៍</div>
+        </div>
+      </div></div>
+      <div class="capt">Layout <b>Option A — Hero Banner</b> (recommended)</div>
+    </div>
+    <div class="panel">
+      <h3>Expected items</h3>
+      <ul class="items">
+        <li><span class="n">1</span><div><b>Greeting hero</b><span>Green gradient banner · Khmer greeting + today's date</span></div></li>
+        <li><span class="n">2</span><div><b>This-month cards (×3)</b><span>ចំណូល green · ចំណាយ red · ចំណេញ blue/red — sum of current month</span></div></li>
+        <li><span class="n">3</span><div><b>Upcoming reminders</b><span>Next 7 days, ≤5 · urgency badge ថ្ងៃនេះ/ស្អែក · empty state if none</span></div></li>
+        <li><span class="n">4</span><div><b>Recent transactions</b><span>Last 5 · color dot + amount + short date</span></div></li>
+        <li><span class="n">5</span><div><b><code>SummaryCardView</code></b><span>Reusable card: icon + label + amount + accent color</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+</body>
+</html>

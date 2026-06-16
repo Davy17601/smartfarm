@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1619DDC22FB6BDDC00930946 /* SotheaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1619DDC12FB6BDDC00930946 /* SotheaView.swift */; };
 		5B3BCB132FAD97EA009A2991 /* SmartFarmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3BCB122FAD97EA009A2991 /* SmartFarmApp.swift */; };
 		5B3BCB152FAD97EA009A2991 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3BCB142FAD97EA009A2991 /* ContentView.swift */; };
 		5B3BCB172FAD97EC009A2991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B3BCB162FAD97EC009A2991 /* Assets.xcassets */; };
@@ -18,18 +17,6 @@
 		5B43EDC72FCB294400D0E92A /* TransactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDC62FCB294400D0E92A /* TransactionListView.swift */; };
 		5B43EDC92FCB296200D0E92A /* TransactionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDC82FCB296200D0E92A /* TransactionRowView.swift */; };
 		5B43EDCD2FCB2B0D00D0E92A /* FinanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDCC2FCB2B0C00D0E92A /* FinanceViewModel.swift */; };
-		5B43EDD92FCB332D00D0E92A /* JournalEntry+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDD82FCB332D00D0E92A /* JournalEntry+CoreDataClass.swift */; };
-		5B43EDDB2FCB337200D0E92A /* JournalEntry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDDA2FCB337200D0E92A /* JournalEntry+CoreDataProperties.swift */; };
-		5B43EDDD2FCB339600D0E92A /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDDC2FCB339600D0E92A /* Weather.swift */; };
-		5B43EDE12FCB356C00D0E92A /* JournalPhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDE02FCB356C00D0E92A /* JournalPhotoStore.swift */; };
-		5B43EDE42FCB35C500D0E92A /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDE32FCB35C500D0E92A /* JournalViewModel.swift */; };
-		5B43EDE72FCB363300D0E92A /* AddJournalEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDE62FCB363300D0E92A /* AddJournalEntryView.swift */; };
-		5B43EDE92FCB37BD00D0E92A /* EditJournalEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDE82FCB37BD00D0E92A /* EditJournalEntryView.swift */; };
-		5B43EDEB2FCB37F800D0E92A /* JournalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDEA2FCB37F800D0E92A /* JournalDetailView.swift */; };
-		5B43EDED2FCB390400D0E92A /* JournalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDEC2FCB390400D0E92A /* JournalRowView.swift */; };
-		5B43EDEF2FCB394D00D0E92A /* JournalTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDEE2FCB394D00D0E92A /* JournalTabView.swift */; };
-		5B43EDF12FCB398300D0E92A /* PhotoGallaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDF02FCB398300D0E92A /* PhotoGallaryView.swift */; };
-		5B43EDF32FCB3AB800D0E92A /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDF22FCB3AB800D0E92A /* PhotoPicker.swift */; };
 		5B43EDFB2FCB3EEA00D0E92A /* MonthlyReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDFA2FCB3EEA00D0E92A /* MonthlyReport.swift */; };
 		5B43EDFF2FCB3FA400D0E92A /* CSVExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EDFE2FCB3FA400D0E92A /* CSVExporter.swift */; };
 		5B43EE012FCB3FD600D0E92A /* PDFGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EE002FCB3FD600D0E92A /* PDFGenerator.swift */; };
@@ -42,7 +29,6 @@
 		5B43EE122FCB43AA00D0E92A /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EE112FCB43AA00D0E92A /* ShareSheet.swift */; };
 		5B43EE142FCB43E700D0E92A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EE132FCB43E700D0E92A /* CoreDataManager.swift */; };
 		5B43EE162FCB440D00D0E92A /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B43EE152FCB440D00D0E92A /* Formatters.swift */; };
-		5B72011D2FB6BA1F007F69A5 /* TestUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B72011C2FB6BA1F007F69A5 /* TestUIView.swift */; };
 		5BD68AB92FC94AB700DEE10A /* FinanceTabview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD68AB82FC94AB700DEE10A /* FinanceTabview.swift */; };
 		5BD68AC02FC94F6300DEE10A /* AddTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD68ABF2FC94F6300DEE10A /* AddTransactionView.swift */; };
 		5BD68AC22FC94FA900DEE10A /* DynamicFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD68AC12FC94FA900DEE10A /* DynamicFilterView.swift */; };
@@ -61,7 +47,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1619DDC12FB6BDDC00930946 /* SotheaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SotheaView.swift; sourceTree = "<group>"; };
 		5B3BCB0F2FAD97EA009A2991 /* SmartFarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartFarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B3BCB122FAD97EA009A2991 /* SmartFarmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartFarmApp.swift; sourceTree = "<group>"; };
 		5B3BCB142FAD97EA009A2991 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -73,18 +58,6 @@
 		5B43EDC62FCB294400D0E92A /* TransactionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListView.swift; sourceTree = "<group>"; };
 		5B43EDC82FCB296200D0E92A /* TransactionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRowView.swift; sourceTree = "<group>"; };
 		5B43EDCC2FCB2B0C00D0E92A /* FinanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceViewModel.swift; sourceTree = "<group>"; };
-		5B43EDD82FCB332D00D0E92A /* JournalEntry+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalEntry+CoreDataClass.swift"; sourceTree = "<group>"; };
-		5B43EDDA2FCB337200D0E92A /* JournalEntry+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JournalEntry+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		5B43EDDC2FCB339600D0E92A /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		5B43EDE02FCB356C00D0E92A /* JournalPhotoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalPhotoStore.swift; sourceTree = "<group>"; };
-		5B43EDE32FCB35C500D0E92A /* JournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewModel.swift; sourceTree = "<group>"; };
-		5B43EDE62FCB363300D0E92A /* AddJournalEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJournalEntryView.swift; sourceTree = "<group>"; };
-		5B43EDE82FCB37BD00D0E92A /* EditJournalEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditJournalEntryView.swift; sourceTree = "<group>"; };
-		5B43EDEA2FCB37F800D0E92A /* JournalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDetailView.swift; sourceTree = "<group>"; };
-		5B43EDEC2FCB390400D0E92A /* JournalRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalRowView.swift; sourceTree = "<group>"; };
-		5B43EDEE2FCB394D00D0E92A /* JournalTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalTabView.swift; sourceTree = "<group>"; };
-		5B43EDF02FCB398300D0E92A /* PhotoGallaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGallaryView.swift; sourceTree = "<group>"; };
-		5B43EDF22FCB3AB800D0E92A /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		5B43EDFA2FCB3EEA00D0E92A /* MonthlyReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyReport.swift; sourceTree = "<group>"; };
 		5B43EDFE2FCB3FA400D0E92A /* CSVExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVExporter.swift; sourceTree = "<group>"; };
 		5B43EE002FCB3FD600D0E92A /* PDFGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFGenerator.swift; sourceTree = "<group>"; };
@@ -97,7 +70,6 @@
 		5B43EE112FCB43AA00D0E92A /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		5B43EE132FCB43E700D0E92A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5B43EE152FCB440D00D0E92A /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
-		5B72011C2FB6BA1F007F69A5 /* TestUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIView.swift; sourceTree = "<group>"; };
 		5BD68AB82FC94AB700DEE10A /* FinanceTabview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceTabview.swift; sourceTree = "<group>"; };
 		5BD68ABD2FC94E4600DEE10A /* Coordinators */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Coordinators; sourceTree = "<group>"; };
 		5BD68ABF2FC94F6300DEE10A /* AddTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionView.swift; sourceTree = "<group>"; };
@@ -149,8 +121,6 @@
 				5B3BCB122FAD97EA009A2991 /* SmartFarmApp.swift */,
 				5B3BCB142FAD97EA009A2991 /* ContentView.swift */,
 				5B3BCB1B2FAD97EC009A2991 /* Persistence.swift */,
-				5B72011C2FB6BA1F007F69A5 /* TestUIView.swift */,
-				1619DDC12FB6BDDC00930946 /* SotheaView.swift */,
 				5B3BCB162FAD97EC009A2991 /* Assets.xcassets */,
 				5B3BCB1D2FAD97EC009A2991 /* SmartFarm.xcdatamodeld */,
 				5B3BCB182FAD97EC009A2991 /* Preview Content */,
@@ -158,7 +128,6 @@
 				AA000007FFFFFFFF00000000 /* CalendarReminders */,
 				AA000009FFFFFFFF00000000 /* Finance */,
 				5B43EDD42FCB2F9700D0E92A /* Setting */,
-				5B43EDD52FCB30F300D0E92A /* Journal */,
 				5B43EDF42FCB3B9600D0E92A /* Reports */,
 				5B43EE102FCB434300D0E92A /* Shared */,
 				AA000004FFFFFFFF00000000 /* Utilities */,
@@ -179,57 +148,6 @@
 			children = (
 			);
 			path = Setting;
-			sourceTree = "<group>";
-		};
-		5B43EDD52FCB30F300D0E92A /* Journal */ = {
-			isa = PBXGroup;
-			children = (
-				5B43EDD72FCB32F400D0E92A /* Models */,
-				5B43EDDE2FCB33AA00D0E92A /* Services */,
-				5B43EDE22FCB358200D0E92A /* ViewModels */,
-				5B43EDE52FCB35D200D0E92A /* Views */,
-			);
-			path = Journal;
-			sourceTree = "<group>";
-		};
-		5B43EDD72FCB32F400D0E92A /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				5B43EDD82FCB332D00D0E92A /* JournalEntry+CoreDataClass.swift */,
-				5B43EDDA2FCB337200D0E92A /* JournalEntry+CoreDataProperties.swift */,
-				5B43EDDC2FCB339600D0E92A /* Weather.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		5B43EDDE2FCB33AA00D0E92A /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				5B43EDE02FCB356C00D0E92A /* JournalPhotoStore.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		5B43EDE22FCB358200D0E92A /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				5B43EDE32FCB35C500D0E92A /* JournalViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		5B43EDE52FCB35D200D0E92A /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				5B43EDE62FCB363300D0E92A /* AddJournalEntryView.swift */,
-				5B43EDE82FCB37BD00D0E92A /* EditJournalEntryView.swift */,
-				5B43EDEA2FCB37F800D0E92A /* JournalDetailView.swift */,
-				5B43EDEC2FCB390400D0E92A /* JournalRowView.swift */,
-				5B43EDEE2FCB394D00D0E92A /* JournalTabView.swift */,
-				5B43EDF02FCB398300D0E92A /* PhotoGallaryView.swift */,
-				5B43EDF22FCB3AB800D0E92A /* PhotoPicker.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		5B43EDF42FCB3B9600D0E92A /* Reports */ = {
@@ -456,18 +374,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B43EDE12FCB356C00D0E92A /* JournalPhotoStore.swift in Sources */,
-				5B43EDE92FCB37BD00D0E92A /* EditJournalEntryView.swift in Sources */,
 				5B3BCB1C2FAD97EC009A2991 /* Persistence.swift in Sources */,
 				5B3BCB152FAD97EA009A2991 /* ContentView.swift in Sources */,
-				5B43EDE72FCB363300D0E92A /* AddJournalEntryView.swift in Sources */,
-				5B43EDD92FCB332D00D0E92A /* JournalEntry+CoreDataClass.swift in Sources */,
 				5B3BCB132FAD97EA009A2991 /* SmartFarmApp.swift in Sources */,
 				5B43EDC52FCB28F900D0E92A /* TransactionDetailView.swift in Sources */,
 				5B43EE0F2FCB432000D0E92A /* SummaryCardView.swift in Sources */,
 				5B3BCB1F2FAD97EC009A2991 /* SmartFarm.xcdatamodeld in Sources */,
-				1619DDC22FB6BDDC00930946 /* SotheaView.swift in Sources */,
-				5B72011D2FB6BA1F007F69A5 /* TestUIView.swift in Sources */,
 				5B43EDC92FCB296200D0E92A /* TransactionRowView.swift in Sources */,
 				AA000012FFFFFFFF00000001 /* Reminder.swift in Sources */,
 				5B43EE0B2FCB42D400D0E92A /* MonthPickerView.swift in Sources */,
@@ -476,13 +388,7 @@
 				5B43EE072FCB428E00D0E92A /* BarChatView.swift in Sources */,
 				5B43EE162FCB440D00D0E92A /* Formatters.swift in Sources */,
 				5BD68AB92FC94AB700DEE10A /* FinanceTabview.swift in Sources */,
-				5B43EDDB2FCB337200D0E92A /* JournalEntry+CoreDataProperties.swift in Sources */,
-				5B43EDDD2FCB339600D0E92A /* Weather.swift in Sources */,
-				5B43EDED2FCB390400D0E92A /* JournalRowView.swift in Sources */,
 				5BD68AC02FC94F6300DEE10A /* AddTransactionView.swift in Sources */,
-				5B43EDF12FCB398300D0E92A /* PhotoGallaryView.swift in Sources */,
-				5B43EDF32FCB3AB800D0E92A /* PhotoPicker.swift in Sources */,
-				5B43EDE42FCB35C500D0E92A /* JournalViewModel.swift in Sources */,
 				5B43EE092FCB42B000D0E92A /* BarShape.swift in Sources */,
 				AA000011FFFFFFFF00000001 /* FarmActivity.swift in Sources */,
 				5B43EE012FCB3FD600D0E92A /* PDFGenerator.swift in Sources */,
@@ -497,9 +403,7 @@
 				5B43EDFF2FCB3FA400D0E92A /* CSVExporter.swift in Sources */,
 				5BD68AC42FC94FFF00DEE10A /* EditTransactionView.swift in Sources */,
 				BB000004FFFFFFFF00000001 /* TransactionEntity+CoreDataProperties.swift in Sources */,
-				5B43EDEB2FCB37F800D0E92A /* JournalDetailView.swift in Sources */,
 				BB000005FFFFFFFF00000001 /* ReminderEntity+CoreDataClass.swift in Sources */,
-				5B43EDEF2FCB394D00D0E92A /* JournalTabView.swift in Sources */,
 				5B43EDC72FCB294400D0E92A /* TransactionListView.swift in Sources */,
 				5B43EE122FCB43AA00D0E92A /* ShareSheet.swift in Sources */,
 				BB000006FFFFFFFF00000001 /* ReminderEntity+CoreDataProperties.swift in Sources */,

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFarm — Reports</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>SmartFarm — ការបង្ហាញលទ្ធផលរំពឹងទុក &amp; លំហូរដំណើរការ</h1>
+  <p>Visual spec — what each screen should look like — plus the app process flow. Rendered from <code>docs/*.md</code>.</p>
+</header>
+
+<nav class="tabs">
+  <a href="index.html">ទិដ្ឋភាពរួម · Overview</a>
+  <a href="process-flow.html">លំហូរដំណើរការ · Process Flow</a>
+  <a href="dashboard.html">ផ្ទះ · Dashboard</a>
+  <a href="finance.html">ហិរញ្ញវត្ថុ · Finance</a>
+  <a href="calendar.html">ប្រតិទិន · Calendar</a>
+  <a href="reports.html" class="active">របាយការណ៍ · Reports</a>
+</nav>
+
+<main>
+<section class="view">
+  <h2 class="sec">របាយការណ៍ · Reports + Backup</h2>
+  <div class="meta">Owner: <b>Monineath</b> · Tab 4 · Skill <code>/reports</code> · <span class="pill tag-stub">stub → implement</span></div>
+  <div class="purpose">Monthly profit/loss bar chart (GeometryReader — no Swift Charts), CSV/PDF export, and full JSON backup/restore.</div>
+  <div class="lead">
+    <div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span>📶 🔋</span></div>
+        <div class="navbar"><span class="title">របាយការណ៍</span></div>
+        <div class="body">
+          <div class="msel"><span class="ch">‹</span><span class="m">មិថុនា ២០២៦</span><span class="ch">›</span></div>
+          <div class="row3">
+            <div class="scard"><div class="lbl">ចំណូល</div><div class="amt" style="color:var(--income)">1.5M ៛</div></div>
+            <div class="scard"><div class="lbl">ចំណាយ</div><div class="amt" style="color:var(--expense)">800K ៛</div></div>
+            <div class="scard"><div class="lbl">ចំណេញ</div><div class="amt" style="color:var(--profit)">+700K ៛</div></div>
+          </div>
+          <div class="grouphdr">6 ខែចុងក្រោយ</div>
+          <div class="chart">
+            <div class="bars">
+              <div class="bargrp"><div class="barpair"><div class="bar inc" style="height:40%"></div><div class="bar exp" style="height:28%"></div></div><div class="barlbl">មករ</div></div>
+              <div class="bargrp"><div class="barpair"><div class="bar inc" style="height:55%"></div><div class="bar exp" style="height:35%"></div></div><div class="barlbl">កុម្ភ</div></div>
+              <div class="bargrp"><div class="barpair"><div class="bar inc" style="height:48%"></div><div class="bar exp" style="height:50%"></div></div><div class="barlbl">មីនា</div></div>
+              <div class="bargrp"><div class="barpair"><div class="bar inc" style="height:70%"></div><div class="bar exp" style="height:40%"></div></div><div class="barlbl">មេសា</div></div>
+              <div class="bargrp"><div class="barpair"><div class="bar inc" style="height:62%"></div><div class="bar exp" style="height:45%"></div></div><div class="barlbl">ឧសភា</div></div>
+              <div class="bargrp"><div class="barpair"><div class="bar inc" style="height:100%"></div><div class="bar exp" style="height:53%"></div></div><div class="barlbl">មិថុ</div></div>
+            </div>
+            <div class="legend"><span><i style="background:var(--income)"></i>ចំណូល</span><span><i style="background:var(--expense)"></i>ចំណាយ</span></div>
+          </div>
+          <div class="grouphdr">នាំចេញ</div>
+          <div class="ebtns"><div class="ebtn csv">📄 CSV</div><div class="ebtn pdf">📋 PDF</div></div>
+          <div class="grouphdr">បម្រុងទុកទិន្នន័យ</div>
+          <div class="bbtn">⬆️ នាំចេញ JSON</div>
+          <div class="bbtn">⬇️ នាំចូល JSON</div>
+        </div>
+        <div class="tabbar">
+          <div class="t"><span class="ic">🏠</span>ផ្ទះ</div>
+          <div class="t"><span class="ic">💲</span>ហិរញ្ញវត្ថុ</div>
+          <div class="t"><span class="ic">📅</span>ប្រតិទិន</div>
+          <div class="t on"><span class="ic">📊</span>របាយការណ៍</div>
+        </div>
+      </div></div>
+      <div class="capt">Layout <b>Option A — Single Scroll</b> (recommended)</div>
+    </div>
+    <div class="panel">
+      <h3>Expected items</h3>
+      <ul class="items">
+        <li><span class="n">1</span><div><b>Month selector</b><span>‹ ខែ › → drives summary + transaction set</span></div></li>
+        <li><span class="n">2</span><div><b>Summary cards (×3)</b><span>For the selected month</span></div></li>
+        <li><span class="n">3</span><div><b><code>BarChartView</code></b><span>Last 6 months, paired green/red bars via GeometryReader + Rectangle · legend</span></div></li>
+        <li><span class="n">4</span><div><b>Export: <code>CSVExporter</code> / <code>PDFGenerator</code></b><span>Write temp file → <code>ShareSheet</code></span></div></li>
+        <li><span class="n">5</span><div><b>Backup: <code>BackupData</code> + <code>DocumentPicker</code></b><span>Export all entities to JSON · import &amp; restore</span></div></li>
+      </ul>
+      <div class="note-box">Rename <code>BarChatView.swift</code> → <code>BarChartView.swift</code> when implementing.</div>
+    </div>
+  </div>
+</section>
+</main>
+
+</body>
+</html>

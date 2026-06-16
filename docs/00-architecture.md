@@ -12,7 +12,7 @@ Offline-first SwiftUI app for Cambodian smallholder farmers. Tracks **finance**,
 |------|-------|
 | iOS deployment target | **14.0** |
 | Xcode | 13.x (team builds on VM) → project `objectVersion = 55` |
-| Swift | 5.5 |
+| Swift | 5.0 (as set in `project.pbxproj`) |
 | Dependencies | **none** (no SPM/CocoaPods) |
 | Persistence | CoreData |
 

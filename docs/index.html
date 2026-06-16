@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFarm — Overview</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>SmartFarm — ការបង្ហាញលទ្ធផលរំពឹងទុក &amp; លំហូរដំណើរការ</h1>
+  <p>Visual spec — what each screen should look like — plus the app process flow. Rendered from <code>docs/*.md</code>.</p>
+</header>
+
+<nav class="tabs">
+  <a href="index.html" class="active">ទិដ្ឋភាពរួម · Overview</a>
+  <a href="process-flow.html">លំហូរដំណើរការ · Process Flow</a>
+  <a href="dashboard.html">ផ្ទះ · Dashboard</a>
+  <a href="finance.html">ហិរញ្ញវត្ថុ · Finance</a>
+  <a href="calendar.html">ប្រតិទិន · Calendar</a>
+  <a href="reports.html">របាយការណ៍ · Reports</a>
+</nav>
+
+<main>
+<section class="view">
+  <h2 class="sec">ទិដ្ឋភាពរួម · Project Overview</h2>
+  <div class="meta">SwiftUI · MVVM · CoreData · <b>Xcode 13 · iOS 14 · Swift 5.0</b> · no third-party deps · Khmer UI</div>
+  <div class="purpose">A finance + activity + scheduling app for Cambodian small-scale farmers. Four tabs, each owned by a teammate and built via a <code>/skill</code> command from its <code>docs/*.md</code> spec. Each page in this site renders the <b>expected result</b> of one screen; <a href="process-flow.html">Process Flow</a> shows how data moves through the app.</div>
+
+  <div class="grid">
+    <div class="panel">
+      <h3>Tab structure</h3>
+      <table>
+        <tr><th>#</th><th>Tab</th><th>View</th><th>Skill</th><th>Status</th></tr>
+        <tr><td>1</td><td><a href="dashboard.html">ផ្ទះ Dashboard</a></td><td><code>DashboardView</code></td><td><code>/dashboard</code></td><td><span class="pill tag-done">done</span></td></tr>
+        <tr><td>2</td><td><a href="finance.html">ហិរញ្ញវត្ថុ Finance</a></td><td><code>FinanceTabView</code></td><td><code>/finance</code></td><td><span class="pill tag-done">done</span></td></tr>
+        <tr><td>3</td><td><a href="calendar.html">ប្រតិទិន Calendar</a></td><td><code>CalendarTabView</code></td><td><code>/calendar</code></td><td><span class="pill tag-done">done</span></td></tr>
+        <tr><td>4</td><td><a href="reports.html">របាយការណ៍ Reports</a></td><td><code>ReportsView</code></td><td><code>/reports</code></td><td><span class="pill tag-done">done</span></td></tr>
+      </table>
+    </div>
+    <div class="panel">
+      <h3>CoreData entities</h3>
+      <table>
+        <tr><th>Entity</th><th>Key fields</th></tr>
+        <tr><td><code>TransactionEntity</code></td><td>title, amount, type, category, currency, date, note</td></tr>
+        <tr><td><code>ReminderEntity</code></td><td>title, dueDate, note, isCompleted, repeatType</td></tr>
+        <tr><td><code>FarmActivityEntity</code></td><td>title, date, note, isCompleted</td></tr>
+      </table>
+      <p style="font-size:12px;color:var(--muted);margin:10px 0 0">Open any tab above to see that module's mockup and its expected items.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+</body>
+</html>

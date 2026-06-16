@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartFarm — Process Flow</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>SmartFarm — ការបង្ហាញលទ្ធផលរំពឹងទុក &amp; លំហូរដំណើរការ</h1>
+  <p>Visual spec — what each screen should look like — plus the app process flow. Rendered from <code>docs/*.md</code>.</p>
+</header>
+
+<nav class="tabs">
+  <a href="index.html">ទិដ្ឋភាពរួម · Overview</a>
+  <a href="process-flow.html" class="active">លំហូរដំណើរការ · Process Flow</a>
+  <a href="dashboard.html">ផ្ទះ · Dashboard</a>
+  <a href="finance.html">ហិរញ្ញវត្ថុ · Finance</a>
+  <a href="calendar.html">ប្រតិទិន · Calendar</a>
+  <a href="reports.html">របាយការណ៍ · Reports</a>
+</nav>
+
+<main>
+<section class="view">
+  <h2 class="sec">លំហូរដំណើរការ · Process Flow</h2>
+  <div class="meta">The flows the project didn't document yet — app navigation + how data moves through each feature.</div>
+  <div class="legend2">
+    <span><i class="sw s1"></i>UI / action step</span>
+    <span><i class="sw s2"></i>data / CoreData</span>
+    <span><i class="sw s3"></i>notification / system</span>
+  </div>
+
+  <div class="flowtitle">App launch &amp; navigation</div>
+  <div class="flow">
+    <div class="fnode start">App Launch<small>SmartFarmApp</small></div><span class="farrow">→</span>
+    <div class="fnode data">PersistenceController<small>load CoreData store</small></div><span class="farrow">→</span>
+    <div class="fnode">MainTabView<small>inject viewContext</small></div><span class="farrow">→</span>
+    <div class="fnode">4 Tabs</div>
+  </div>
+  <div class="navmap">
+    <a class="nm" href="dashboard.html"><div class="ic">🏠</div><div class="t">ផ្ទះ</div><div class="e">Dashboard</div></a>
+    <a class="nm" href="finance.html"><div class="ic">💲</div><div class="t">ហិរញ្ញវត្ថុ</div><div class="e">Finance</div></a>
+    <a class="nm" href="calendar.html"><div class="ic">📅</div><div class="t">ប្រតិទិន</div><div class="e">Calendar</div></a>
+    <a class="nm" href="reports.html"><div class="ic">📊</div><div class="t">របាយការណ៍</div><div class="e">Reports</div></a>
+  </div>
+
+  <div class="flowtitle"><span class="tn">Finance</span> Add / edit a transaction</div>
+  <div class="flow">
+    <div class="fnode start">Tap “+”</div><span class="farrow">→</span>
+    <div class="fnode">AddTransactionView<small>title, amount, type…</small></div><span class="farrow">→</span>
+    <div class="fnode">Tap រក្សាទុក</div><span class="farrow">→</span>
+    <div class="fnode data">viewModel.add()<small>save TransactionEntity</small></div><span class="farrow">→</span>
+    <div class="fnode data">@FetchRequest reloads</div><span class="farrow">→</span>
+    <div class="fnode">Summary cards + list update</div>
+  </div>
+
+  <div class="flowtitle"><span class="tn">Calendar</span> Add a reminder &amp; schedule notifications</div>
+  <div class="flow">
+    <div class="fnode start">Tap “+”</div><span class="farrow">→</span>
+    <div class="fnode">AddReminderView<small>title, dueDate, repeat</small></div><span class="farrow">→</span>
+    <div class="fnode data">addReminder()<small>save ReminderEntity</small></div><span class="farrow">→</span>
+    <div class="fnode note">NotificationManager<small>schedule -before + -today @ 08:00</small></div><span class="farrow">→</span>
+    <div class="fnode note">🔔 Fires even if app closed</div>
+  </div>
+  <div class="note-box">Complete or delete a reminder → <code>cancelReminder(id:)</code> removes its pending notifications. Toggling the checkmark flips <code>isCompleted</code> and re-saves.</div>
+
+  <div class="flowtitle"><span class="tn">Reports</span> Export CSV / PDF</div>
+  <div class="flow">
+    <div class="fnode start">Pick month</div><span class="farrow">→</span>
+    <div class="fnode data">fetch transactions</div><span class="farrow">→</span>
+    <div class="fnode">Tap CSV / PDF</div><span class="farrow">→</span>
+    <div class="fnode data">CSVExporter / PDFGenerator<small>write temp file → URL</small></div><span class="farrow">→</span>
+    <div class="fnode note">ShareSheet<small>UIActivityViewController</small></div>
+  </div>
+
+  <div class="flowtitle"><span class="tn">Reports</span> Backup &amp; restore (JSON)</div>
+  <div class="flow">
+    <div class="fnode data">All entities</div><span class="farrow">→</span>
+    <div class="fnode">Export JSON<small>BackupData → temp file</small></div><span class="farrow">→</span>
+    <div class="fnode note">ShareSheet → iCloud/Files</div>
+    <span class="farrow" style="margin:0 6px">⇄</span>
+    <div class="fnode note">DocumentPicker<small>pick .json</small></div><span class="farrow">→</span>
+    <div class="fnode data">decode → insert → save</div>
+  </div>
+
+  <div class="flowtitle"><span class="tn">Dashboard</span> Aggregation (read-only)</div>
+  <div class="flow">
+    <div class="fnode data">TransactionEntity</div><span class="farrow">→</span>
+    <div class="fnode">This-month totals</div>
+    <span class="farrow" style="margin:0 6px">+</span>
+    <div class="fnode data">ReminderEntity</div><span class="farrow">→</span>
+    <div class="fnode">Next-7-days list</div><span class="farrow">→</span>
+    <div class="fnode">DashboardView cards</div>
+  </div>
+</section>
+</main>
+
+</body>
+</html>

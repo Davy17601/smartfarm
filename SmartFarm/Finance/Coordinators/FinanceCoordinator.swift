@@ -23,7 +23,7 @@ class FinanceCoordinator: ObservableObject {
 
     // The currently selected tab index (0 = Dashboard, 1 = Finance, etc.)
     // MainTabView should bind to this property via Binding($financeCoordinator.selectedTab)
-    @Published var selectedTab: Int = 1
+    @Published var selectedTab: Int = 0
 
     // Navigate to a specific transaction (can be called from anywhere)
     func navigate(to transaction: Transaction) {

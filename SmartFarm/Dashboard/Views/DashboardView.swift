@@ -7,6 +7,8 @@ struct DashboardView: View {
     @EnvironmentObject private var settings: AppSettings
     @Binding private var selectedTab: Int
 
+    private let transactionRepository: TransactionRepositoryProtocol
+
     // Alert state
     @State private var showClearOldAlert = false
     @State private var showUndoLastAlert = false
@@ -17,6 +19,11 @@ struct DashboardView: View {
     @State private var activityToDelete: FarmActivity? = nil
     @State private var showEditActivitySheet = false
 
+    // Quick Actions state
+    @State private var showAddTransactionSheet = false
+    @State private var showReportsSheet = false
+
+
     // MARK: - Custom Dashboard Colors
     /// Darker, more saturated colors for better contrast
     private let dashboardGreen = Color(red: 0.1, green: 0.35, blue: 0.1)
@@ -26,6 +33,7 @@ struct DashboardView: View {
     init(environment: AppEnvironment, selectedTab: Binding<Int>) {
         _viewModel = StateObject(wrappedValue: environment.makeDashboardViewModel())
         _selectedTab = selectedTab
+        self.transactionRepository = environment.transactionRepository
     }
 
     var body: some View {
@@ -50,8 +58,7 @@ struct DashboardView: View {
                     // Overlapping cards section
                     VStack(spacing: Theme.Spacing.m) {
                         monthSummary
-                        upcomingActivitiesSection
-                        upcomingRemindersSection
+                        quickActionsSection
                         latestTransactionsSection
                         transactionHistorySection
                         categoryPieChartSection
@@ -120,6 +127,23 @@ struct DashboardView: View {
                     }
                 }
             }
+            .sheet(isPresented: $showAddTransactionSheet) {
+                AddEditTransactionView(mode: .add) { _ in
+                    showAddTransactionSheet = false
+                }
+            }
+            .sheet(isPresented: $showReportsSheet) {
+                NavigationView {
+                    ReportsView(repository: transactionRepository)
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button(L("common.close")) {
+                                    showReportsSheet = false
+                                }
+                            }
+                        }
+                }
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
@@ -127,25 +151,53 @@ struct DashboardView: View {
     // MARK: - Greeting text
 
     private var greetingText: some View {
-        HStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: Theme.Spacing.s) {
-                Text(L("dashboard.greeting"))
-                    .font(.title2.weight(.bold))
-                    .foregroundColor(.white)
-                Text("តាមដានចំណូល ចំណាយ")
-                    .font(Theme.Fonts.body.weight(.medium))
-                    .foregroundColor(.white.opacity(0.9))
-                Text(todayDateString)
-                    .font(Theme.Fonts.body)
-                    .foregroundColor(.white.opacity(0.95))
+        VStack(alignment: .trailing, spacing: Theme.Spacing.s) {
+            // Top row: weather info and hamburger menu
+            HStack {
+                Spacer()
+                weatherInfo
+                    .padding(.trailing, 8)
+                hamburgerMenu
             }
-            Spacer()
-            hamburgerMenu
+
+            // Main greeting row
+            HStack(alignment: .top, spacing: Theme.Spacing.m) {
+                VStack(alignment: .leading, spacing: Theme.Spacing.s) {
+                    Text(L("dashboard.greeting"))
+                        .font(.title2.weight(.bold))
+                        .foregroundColor(.white)
+                    Text("តាមដានចំណូល ចំណាយ")
+                        .font(Theme.Fonts.body.weight(.medium))
+                        .foregroundColor(.white.opacity(0.9))
+                    Text(todayDateString)
+                        .font(Theme.Fonts.body)
+                        .foregroundColor(.white.opacity(0.95))
+                }
+                Spacer()
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, Theme.Spacing.m)
         .padding(.top, Theme.Spacing.m)
         .padding(.bottom, 60) // Extra padding to accommodate overlapping cards
+    }
+
+    private var weatherInfo: some View {
+        HStack(spacing: 4) {
+            Image(systemName: "sun.max.fill")
+                .font(.system(size: 14))
+                .foregroundColor(.yellow)
+            Text("32°C")
+                .font(.system(size: 13, weight: .medium))
+                .foregroundColor(.white)
+            Text("ថ្ងៃត្រង់")
+                .font(.system(size: 11))
+                .foregroundColor(.white.opacity(0.85))
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .background(Color.white.opacity(0.15))
+        .cornerRadius(12)
     }
 
     private var hamburgerMenu: some View {
@@ -202,91 +254,60 @@ struct DashboardView: View {
         }
     }
 
-    // MARK: - Upcoming activities
+    // MARK: - Quick Actions
 
-    private var upcomingActivitiesSection: some View {
+    private var quickActionsSection: some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.s) {
-            SectionHeader(L("calendar.activities")) {
-                Button(L("common.viewAll")) { selectedTab = 2 }
-                    .font(Theme.Fonts.caption).foregroundColor(Theme.brand)
-            }
-            let activities = Array(viewModel.upcomingActivities().prefix(5))
-            if activities.isEmpty {
-                FarmCard {
-                    Text(L("calendar.noActivities")).foregroundColor(Theme.secondaryText)
-                }
-            } else {
-                FarmCard {
-                    ForEach(activities) { activity in
-                        activityRow(activity)
-                        if activity.id != activities.last?.id {
-                            Divider()
-                        }
-                    }
-                }
+            SectionHeader("មុខងារហ័ស") { }
+
+            // Single horizontal row of 4 quick action buttons
+            HStack(spacing: Theme.Spacing.s) {
+                quickActionButton(
+                    title: "បញ្ចូលចំណូល",
+                    icon: "plus.circle.fill",
+                    color: .green,
+                    action: { showAddTransactionSheet = true }
+                )
+                quickActionButton(
+                    title: "បញ្ចូលចំណាយ",
+                    icon: "minus.circle.fill",
+                    color: .red,
+                    action: { showAddTransactionSheet = true }
+                )
+                quickActionButton(
+                    title: "របាយការណ៍",
+                    icon: "chart.bar.fill",
+                    color: .blue,
+                    action: { showReportsSheet = true }
+                )
+                quickActionButton(
+                    title: "ការកំណត់",
+                    icon: "gearshape.fill",
+                    color: .gray,
+                    action: { selectedTab = 3 }
+                )
             }
         }
     }
 
-    private func activityRow(_ activity: FarmActivity) -> some View {
-        HStack(spacing: Theme.Spacing.m) {
-            Image(systemName: "leaf.fill")
-                .foregroundColor(dashboardGreen)
-                .frame(width: 24)
-            VStack(alignment: .leading, spacing: 2) {
-                Text(activity.title)
-                    .font(Theme.Fonts.body)
+    private func quickActionButton(title: String, icon: String, color: Color, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            VStack(spacing: 4) {
+                Image(systemName: icon)
+                    .font(.system(size: 24))
+                    .foregroundColor(color)
+                Text(title)
+                    .font(.system(size: 10, weight: .medium))
                     .foregroundColor(Theme.primaryText)
-                Text(LocalizedDate.dateTimeWithAMPM(activity.date))
-                    .font(Theme.Fonts.caption)
-                    .foregroundColor(Theme.secondaryText)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            Spacer()
-            if let badge = viewModel.urgencyBadge(for: activity.date) {
-                urgencyBadge(badge, for: activity.date)
-            }
-            Button(action: {
-                activityToEdit = activity
-                showEditActivitySheet = true
-            }) {
-                Image(systemName: "pencil")
-                    .foregroundColor(Theme.brand)
-                    .frame(width: 20, height: 20)
-            }
-            Button(action: {
-                activityToDelete = activity
-            }) {
-                Image(systemName: "trash")
-                    .foregroundColor(.red)
-                    .frame(width: 20, height: 20)
-            }
-        }
-        .padding(.vertical, 4)
-    }
-
-    // MARK: - Upcoming reminders
-
-    private var upcomingRemindersSection: some View {
-        VStack(alignment: .leading, spacing: Theme.Spacing.s) {
-            SectionHeader(L("dashboard.upcomingReminders")) {
-                Button(L("common.viewAll")) { selectedTab = 2 }
-                    .font(Theme.Fonts.caption).foregroundColor(Theme.brand)
-            }
-            let reminders = Array(viewModel.upcomingReminders().prefix(5))
-            if reminders.isEmpty {
-                FarmCard {
-                    Text(L("dashboard.noReminders")).foregroundColor(Theme.secondaryText)
-                }
-            } else {
-                FarmCard {
-                    ForEach(reminders) { reminder in
-                        reminderRow(reminder)
-                        if reminder.id != reminders.last?.id {
-                            Divider()
-                        }
-                    }
-                }
-            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+            .background(Color(.systemBackground))
+            .cornerRadius(12)
+            .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
         }
     }
 

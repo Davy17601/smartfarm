@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		218C219AFED546EC8A8964A2 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12213A4FE9F44F3801EEE04 /* OnboardingView.swift */; };
 		04118899BEC56FCD3AC199FB /* CalendarTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A91EBE0B4EAA8192495F679 /* CalendarTabView.swift */; };
 		0CD3FC78630399C1A73C1579 /* MonthlyBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D634FC18996BB5B0A982E8 /* MonthlyBarChartView.swift */; };
 		16F8AD142FC92BAD0095E58B /* FinanceTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F8AD132FC92BAD0095E58B /* FinanceTabView.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F12213A4FE9F44F3801EEE04 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		14CEE319739603BD9D4B8492 /* LocalizedDate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LocalizedDate.swift; sourceTree = "<group>"; };
 		16F8AD132FC92BAD0095E58B /* FinanceTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceTabView.swift; sourceTree = "<group>"; };
 		16F8AD162FC92C490095E58B /* FinanceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceCoordinator.swift; sourceTree = "<group>"; };
@@ -116,6 +118,14 @@
 		F97A17C927E1B26B0164FA52 /* SettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FB8D3DB6ED50B96DCB4E435F /* DashboardViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		FF4CE139EF90E9F8CB9E858A /* TransactionDetailView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TransactionDetailView.swift; sourceTree = "<group>"; };
+		0D7D6BA4985949C19A18FEB7 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				F12213A4FE9F44F3801EEE04 /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +252,7 @@
 				FA1CA5023D80E5793E41A1F5 /* Reports */,
 				E920DFCE370DEAEC2E8C6B95 /* Backup */,
 				4F16E6FA69A9C7FF925CDC8C /* Localizable.strings */,
+				0D7D6BA4985949C19A18FEB7 /* Onboarding */,
 			);
 			path = SmartFarm;
 			sourceTree = "<group>";
@@ -554,7 +565,8 @@
 				1ED8F70F019EF8C4A3CC44B3 /* BackupView.swift in Sources */,
 				540A068D27B921C5D732649C /* Localization.swift in Sources */,
 				6855B307091AD28936E7E1E0 /* AppSettings.swift in Sources */,
-				529340F293EC18D84BDE2B9C /* LocalizedDate.swift in Sources */,
+				529340F293EC18D84BDE2B9C /* LocalizedDate.swift in Sources */,				218C219AFED546EC8A8964A2 /* OnboardingView.swift in Sources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

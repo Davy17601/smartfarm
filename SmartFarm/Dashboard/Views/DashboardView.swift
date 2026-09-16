@@ -220,7 +220,7 @@ struct DashboardView: View {
             // Income & Expense side by side
             HStack(spacing: Theme.Spacing.s) {
                 ZStack {
-                    Color.green.opacity(0.12)
+                    Color.green.opacity(0.08)
                         .cornerRadius(12)
                     SummaryCardView(
                         title: "ចំណូលសរុប",
@@ -229,7 +229,7 @@ struct DashboardView: View {
                     )
                 }
                 ZStack {
-                    Color.red.opacity(0.12)
+                    Color.red.opacity(0.08)
                         .cornerRadius(12)
                     SummaryCardView(
                         title: "ចំណាយសរុប",
@@ -240,7 +240,7 @@ struct DashboardView: View {
             }
             // Profit below
             ZStack {
-                Color.blue.opacity(0.12)
+                Color.blue.opacity(0.08)
                     .cornerRadius(12)
                 SummaryCardView(
                     title: "ចំណេញសរុប",

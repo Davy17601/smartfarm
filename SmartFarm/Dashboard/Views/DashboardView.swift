@@ -21,7 +21,6 @@ struct DashboardView: View {
 
     // Quick Actions state
     @State private var showAddTransactionSheet = false
-    @State private var showReportsSheet = false
 
 
     // MARK: - Custom Dashboard Colors
@@ -132,18 +131,6 @@ struct DashboardView: View {
                     showAddTransactionSheet = false
                 }
             }
-            .sheet(isPresented: $showReportsSheet) {
-                NavigationView {
-                    ReportsView(repository: transactionRepository)
-                        .toolbar {
-                            ToolbarItem(placement: .navigationBarLeading) {
-                                Button(L("common.close")) {
-                                    showReportsSheet = false
-                                }
-                            }
-                        }
-                }
-            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
@@ -178,7 +165,7 @@ struct DashboardView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, Theme.Spacing.m)
-        .padding(.top, Theme.Spacing.m)
+        .padding(.top, 8)
         .padding(.bottom, 60) // Extra padding to accommodate overlapping cards
     }
 
@@ -232,25 +219,37 @@ struct DashboardView: View {
         return VStack(spacing: Theme.Spacing.s) {
             // Income & Expense side by side
             HStack(spacing: Theme.Spacing.s) {
-                SummaryCardView(
-                    title: L("finance.income"),
-                    value: CurrencyFormatter.string(viewModel.monthIncome(in: currency), currency: currency),
-                    systemImage: "arrow.down.circle.fill", tint: dashboardGreen
-                )
-                SummaryCardView(
-                    title: L("finance.expense"),
-                    value: CurrencyFormatter.string(viewModel.monthExpense(in: currency), currency: currency),
-                    systemImage: "arrow.up.circle.fill", tint: darkerRed
-                )
+                ZStack {
+                    Color.green.opacity(0.12)
+                        .cornerRadius(12)
+                    SummaryCardView(
+                        title: "ចំណូលសរុប",
+                        value: CurrencyFormatter.string(viewModel.monthIncome(in: currency), currency: currency),
+                        systemImage: "arrow.down.circle.fill", tint: dashboardGreen
+                    )
+                }
+                ZStack {
+                    Color.red.opacity(0.12)
+                        .cornerRadius(12)
+                    SummaryCardView(
+                        title: "ចំណាយសរុប",
+                        value: CurrencyFormatter.string(viewModel.monthExpense(in: currency), currency: currency),
+                        systemImage: "arrow.up.circle.fill", tint: darkerRed
+                    )
+                }
             }
             // Profit below
-            SummaryCardView(
-                title: L("dashboard.profit"),
-                value: CurrencyFormatter.signedString(profit, currency: currency),
-                systemImage: profit >= 0 ? "arrow.up.right" : "arrow.down.right",
-                tint: profit >= 0 ? darkerBlue : darkerRed,
-                centered: true
-            )
+            ZStack {
+                Color.blue.opacity(0.12)
+                    .cornerRadius(12)
+                SummaryCardView(
+                    title: "ចំណេញសរុប",
+                    value: CurrencyFormatter.signedString(profit, currency: currency),
+                    systemImage: profit >= 0 ? "arrow.up.right" : "arrow.down.right",
+                    tint: profit >= 0 ? darkerBlue : darkerRed,
+                    centered: true
+                )
+            }
         }
     }
 
@@ -266,31 +265,35 @@ struct DashboardView: View {
                     title: "បញ្ចូលចំណូល",
                     icon: "plus.circle.fill",
                     color: .green,
+                    backgroundColor: Color.green.opacity(0.15),
                     action: { showAddTransactionSheet = true }
                 )
                 quickActionButton(
                     title: "បញ្ចូលចំណាយ",
                     icon: "minus.circle.fill",
                     color: .red,
+                    backgroundColor: Color.red.opacity(0.15),
                     action: { showAddTransactionSheet = true }
                 )
                 quickActionButton(
                     title: "របាយការណ៍",
                     icon: "chart.bar.fill",
                     color: .blue,
-                    action: { showReportsSheet = true }
+                    backgroundColor: Color.blue.opacity(0.15),
+                    action: { selectedTab = 2 }
                 )
                 quickActionButton(
                     title: "ការកំណត់",
                     icon: "gearshape.fill",
                     color: .gray,
+                    backgroundColor: Color.gray.opacity(0.15),
                     action: { selectedTab = 3 }
                 )
             }
         }
     }
 
-    private func quickActionButton(title: String, icon: String, color: Color, action: @escaping () -> Void) -> some View {
+    private func quickActionButton(title: String, icon: String, color: Color, backgroundColor: Color, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             VStack(spacing: 4) {
                 Image(systemName: icon)
@@ -305,7 +308,7 @@ struct DashboardView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
-            .background(Color(.systemBackground))
+            .background(backgroundColor)
             .cornerRadius(12)
             .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
         }

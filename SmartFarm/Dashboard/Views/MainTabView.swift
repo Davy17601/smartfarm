@@ -23,8 +23,7 @@ struct MainTabView: View {
                 FinanceTabView(repository: environment.transactionRepository)
                     .tag(1)
 
-                CalendarTabView(activityRepository: environment.activityRepository,
-                                reminderRepository: environment.reminderRepository)
+                ReportsView(repository: environment.transactionRepository)
                     .tag(2)
 
                 SettingsView(environment: environment)
@@ -43,10 +42,6 @@ struct MainTabView: View {
             .ignoresSafeArea(.keyboard)
         }
         .environmentObject(financeCoordinator)
-        // A tapped local notification belongs to the Calendar module — switch to it.
-        .onReceive(NotificationService.shared.$tappedItemID) { id in
-            if id != nil { financeCoordinator.selectedTab = 2 }
-        }
     }
 
     private var customTabBar: some View {
@@ -66,8 +61,8 @@ struct MainTabView: View {
             )
 
             tabBarButton(
-                icon: "calendar.circle.fill",
-                label: L("tab.calendar"),
+                icon: "chart.bar.fill",
+                label: "របាយការណ៍",
                 color: .green,
                 index: 2
             )

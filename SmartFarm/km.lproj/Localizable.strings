@@ -1,5 +1,5 @@
 /* Tabs */
-"tab.dashboard" = "ផ្ទាំងគ្រប់គ្រង";
+"tab.dashboard" = "ទំព័រដើម";
 "tab.finance" = "ហិរញ្ញវត្ថុ";
 "tab.calendar" = "ប្រតិទិន";
 "tab.settings" = "ការកំណត់";
@@ -30,7 +30,7 @@
 "finance.currency" = "រូបិយប័ណ្ណ";
 "finance.addTransaction" = "បន្ថែមប្រតិបត្តិការ";
 "finance.transactionMissing" = "ប្រតិបត្តិការនេះមិនមានទៀតទេ";
-"finance.recent" = "ប្រតិបត្តិការថ្មីៗ";
+"finance.recent" = "ប្រតិបត្តិការចុងក្រោយ";
 "finance.empty" = "មិនមានប្រតិបត្តិការ";
 
 /* Transaction type */
@@ -72,12 +72,33 @@
 "notif.tomorrow" = "ស្អែក៖ ";
 
 /* Dashboard */
+"dashboard.greeting" = "🌾 សួស្តី! Farm របស់អ្នក";
+"dashboard.profit" = "ចំណេញ";
+"dashboard.upcomingReminders" = "ការរំលឹកខាងមុខ";
+"dashboard.today" = "ថ្ងៃនេះ";
+"dashboard.tomorrow" = "ស្អែក";
+"dashboard.noReminders" = "គ្មានការរំលឹកខាងមុខ";
 "dashboard.next7" = "ខាងមុខ ៧ ថ្ងៃ";
 "dashboard.noSchedule" = "គ្មានកាលវិភាគ";
+"dashboard.undoLast" = "លុបចុងក្រោយ";
+"dashboard.transactionHistory" = "ប្រវត្តិប្រតិបត្តិការ";
+"dashboard.clearOld" = "សម្អាតប្រវត្តិចាស់";
+"dashboard.clearOldTitle" = "សម្អាតប្រតិបត្តិការចាស់?";
+"dashboard.clearOldMessage" = "តើអ្នកប្រាកដថាចង់លុបប្រតិបត្តិការចាស់ជាង ៣០ ថ្ងៃ? សកម្មភាពនេះមិនអាចត្រឡប់វិញបានទេ។";
+"dashboard.clearOldConfirm" = "សម្អាត";
+"dashboard.undoLastTitle" = "លុបប្រតិបត្តិការចុងក្រោយ?";
+"dashboard.undoLastMessage" = "តើអ្នកប្រាកដថាចង់លុបប្រតិបត្តិការចុងក្រោយបំផុត?";
+"dashboard.undoLastConfirm" = "លុប";
+"dashboard.deleteTransactionTitle" = "លុបប្រតិបត្តិការ?";
+"dashboard.deleteTransactionMessage" = "តើអ្នកប្រាកដថាចង់លុបប្រតិបត្តិការនេះ?";
+"dashboard.deleteActivityTitle" = "លុបសកម្មភាព?";
+"dashboard.deleteActivityMessage" = "តើអ្នកប្រាកដថាចង់លុបសកម្មភាពនេះ?";
+"common.delete" = "លុប";
 
 /* Reports */
 "reports.title" = "របាយការណ៍";
 "reports.last6" = "ចំណេញ/ខាត ៦ ខែចុងក្រោយ";
+"reports.expenseByCategory" = "ចំណាយតាមប្រភេទ";
 "reports.exportCSV" = "នាំចេញ CSV";
 "reports.exportPDF" = "នាំចេញ PDF";
 "reports.noData" = "មិនមានទិន្នន័យ";
@@ -94,6 +115,7 @@
 "settings.reports" = "របាយការណ៍ & គំនូសតាង";
 "settings.backup" = "បម្រុងទុក & ស្ដារ";
 "settings.about" = "អំពី";
+"settings.chartTitle" = "ក្រាហ្វិកចំណូល និងចំណាយ";
 
 /* Backup */
 "backup.description" = "បម្រុងទុកទិន្នន័យទាំងអស់ជា JSON ហើយស្ដារពេលត្រូវការ។";

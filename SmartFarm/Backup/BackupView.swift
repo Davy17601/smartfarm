@@ -36,6 +36,7 @@ struct BackupView: View {
                 }
             }
             .padding(Theme.Spacing.m)
+            .padding(.bottom, 60) // Extra padding to clear tab bar
         }
         .background(Theme.background.ignoresSafeArea())
         .navigationTitle(L("settings.backup"))

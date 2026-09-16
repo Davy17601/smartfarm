@@ -7,9 +7,10 @@ struct SummaryCardView: View {
     let value: String
     var systemImage: String = "circle.fill"
     var tint: Color = Theme.brand
+    var centered: Bool = false
 
     var body: some View {
-        FarmCard {
+        VStack(alignment: centered ? .center : .leading, spacing: Theme.Spacing.s) {
             HStack(spacing: Theme.Spacing.s) {
                 Image(systemName: systemImage)
                     .foregroundColor(tint)
@@ -23,6 +24,8 @@ struct SummaryCardView: View {
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
         }
+        .frame(maxWidth: .infinity, alignment: centered ? .center : .leading)
+        .cardStyle()
     }
 }
 

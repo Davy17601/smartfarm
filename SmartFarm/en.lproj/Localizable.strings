@@ -1,5 +1,5 @@
 /* Tabs */
-"tab.dashboard" = "Dashboard";
+"tab.dashboard" = "Home";
 "tab.finance" = "Finance";
 "tab.calendar" = "Calendar";
 "tab.settings" = "Settings";
@@ -72,12 +72,33 @@
 "notif.tomorrow" = "Tomorrow: ";
 
 /* Dashboard */
+"dashboard.greeting" = "🌾 Hello! Your Farm";
+"dashboard.profit" = "Profit";
+"dashboard.upcomingReminders" = "Upcoming reminders";
+"dashboard.today" = "Today";
+"dashboard.tomorrow" = "Tomorrow";
+"dashboard.noReminders" = "No upcoming reminders";
 "dashboard.next7" = "Next 7 days";
 "dashboard.noSchedule" = "Nothing scheduled";
+"dashboard.undoLast" = "Undo last";
+"dashboard.transactionHistory" = "Transaction History";
+"dashboard.clearOld" = "Clear old";
+"dashboard.clearOldTitle" = "Clear old transactions?";
+"dashboard.clearOldMessage" = "Are you sure you want to delete transactions older than 30 days? This action cannot be undone.";
+"dashboard.clearOldConfirm" = "Clear";
+"dashboard.undoLastTitle" = "Delete last transaction?";
+"dashboard.undoLastMessage" = "Are you sure you want to delete the most recent transaction?";
+"dashboard.undoLastConfirm" = "Delete";
+"dashboard.deleteTransactionTitle" = "Delete transaction?";
+"dashboard.deleteTransactionMessage" = "Are you sure you want to delete this transaction?";
+"dashboard.deleteActivityTitle" = "Delete activity?";
+"dashboard.deleteActivityMessage" = "Are you sure you want to delete this activity?";
+"common.delete" = "Delete";
 
 /* Reports */
 "reports.title" = "Reports";
 "reports.last6" = "Profit/Loss · last 6 months";
+"reports.expenseByCategory" = "Expenses by Category";
 "reports.exportCSV" = "Export CSV";
 "reports.exportPDF" = "Export PDF";
 "reports.noData" = "No data";
@@ -94,6 +115,7 @@
 "settings.reports" = "Reports & Charts";
 "settings.backup" = "Backup & Restore";
 "settings.about" = "About";
+"settings.chartTitle" = "Income & Expense Chart";
 
 /* Backup */
 "backup.description" = "Back up all your data as JSON and restore it when needed.";

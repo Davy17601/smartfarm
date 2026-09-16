@@ -89,14 +89,7 @@ struct CalendarTabView: View {
                 Text(L("calendar.noReminders")).foregroundColor(Theme.secondaryText)
             } else {
                 ForEach(upcoming) { reminder in
-                    completableRow(
-                        title: reminder.title,
-                        subtitle: reminder.note,
-                        time: LocalizedDate.dateTimeString(reminder.dueDate),
-                        isCompleted: reminder.isCompleted,
-                        toggle: { viewModel.toggleReminderCompleted(reminder) },
-                        edit: { editingReminder = reminder }
-                    )
+                    reminderRow(reminder)
                 }
                 .onDelete { offsets in
                     offsets.map { upcoming[$0] }.forEach(viewModel.deleteReminder)
@@ -130,5 +123,52 @@ struct CalendarTabView: View {
         }
         .contentShape(Rectangle())
         .onTapGesture(perform: edit)
+    }
+
+    private func reminderRow(_ reminder: Reminder) -> some View {
+        HStack(spacing: Theme.Spacing.m) {
+            Button {
+                viewModel.toggleReminderCompleted(reminder)
+            } label: {
+                Image(systemName: reminder.isCompleted ? "checkmark.circle.fill" : "circle")
+                    .foregroundColor(reminder.isCompleted ? Theme.income : Theme.secondaryText)
+            }
+            .buttonStyle(BorderlessButtonStyle())
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(reminder.title)
+                    .strikethrough(reminder.isCompleted)
+                    .foregroundColor(reminder.isCompleted ? Theme.secondaryText : Theme.primaryText)
+                if !reminder.note.isEmpty {
+                    Text(reminder.note).font(Theme.Fonts.caption).foregroundColor(Theme.secondaryText)
+                }
+                Text(LocalizedDate.dateTimeString(reminder.dueDate))
+                    .font(Theme.Fonts.caption)
+                    .foregroundColor(Theme.secondaryText)
+            }
+            Spacer()
+
+            if let badge = urgencyBadge(for: reminder.dueDate) {
+                Text(badge)
+                    .font(Theme.Fonts.caption.weight(.semibold))
+                    .foregroundColor(.white)
+                    .padding(.horizontal, Theme.Spacing.s)
+                    .padding(.vertical, 4)
+                    .background(Color.orange)
+                    .cornerRadius(8)
+            }
+        }
+        .contentShape(Rectangle())
+        .onTapGesture { editingReminder = reminder }
+    }
+
+    private func urgencyBadge(for date: Date) -> String? {
+        let calendar = Calendar.current
+        if calendar.isDateInToday(date) {
+            return L("dashboard.today")
+        } else if calendar.isDateInTomorrow(date) {
+            return L("dashboard.tomorrow")
+        }
+        return nil
     }
 }

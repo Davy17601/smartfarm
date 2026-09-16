@@ -71,19 +71,63 @@ struct PersistenceController {
         let now = Date()
         let cal = Calendar.current
 
-        let income = TransactionEntity(context: context)
-        income.apply(Transaction(title: "លក់ស្រូវ", amount: 1_500_000, type: .income,
-                                  category: .sales, currency: .khr, date: now))
-        let expense = TransactionEntity(context: context)
-        expense.apply(Transaction(title: "ទិញជី", amount: 200_000, type: .expense,
-                                   category: .fertilizer, currency: .khr, date: now))
+        // Income transactions (3-4 this month)
+        let income1 = TransactionEntity(context: context)
+        income1.apply(Transaction(title: "លក់ស្រូវ", amount: 1_500_000, type: .income,
+                                  category: .sales, currency: .khr,
+                                  date: cal.date(byAdding: .day, value: -5, to: now) ?? now))
 
-        let water = FarmActivityEntity(context: context)
-        water.apply(FarmActivity(title: "ស្រោចទឹក",
-                                 date: cal.date(byAdding: .day, value: 1, to: now) ?? now))
-        let fertilize = FarmActivityEntity(context: context)
-        fertilize.apply(FarmActivity(title: "បូកជី",
-                                     date: cal.date(byAdding: .day, value: 3, to: now) ?? now))
+        let income2 = TransactionEntity(context: context)
+        income2.apply(Transaction(title: "លក់បន្លែ", amount: 600_000, type: .income,
+                                  category: .sales, currency: .khr,
+                                  date: cal.date(byAdding: .day, value: -3, to: now) ?? now))
+
+        let income3 = TransactionEntity(context: context)
+        income3.apply(Transaction(title: "លក់ផ្លែឈើ", amount: 350_000, type: .income,
+                                  category: .sales, currency: .khr,
+                                  date: cal.date(byAdding: .day, value: -1, to: now) ?? now))
+
+        // Expense transactions (3-4 this month)
+        let expense1 = TransactionEntity(context: context)
+        expense1.apply(Transaction(title: "ទិញជី", amount: 200_000, type: .expense,
+                                   category: .fertilizer, currency: .khr,
+                                   date: cal.date(byAdding: .day, value: -6, to: now) ?? now))
+
+        let expense2 = TransactionEntity(context: context)
+        expense2.apply(Transaction(title: "ថ្នាំសម្លាប់សត្វល្អិត", amount: 150_000, type: .expense,
+                                   category: .other, currency: .khr,
+                                   date: cal.date(byAdding: .day, value: -4, to: now) ?? now))
+
+        let expense3 = TransactionEntity(context: context)
+        expense3.apply(Transaction(title: "គ្រាប់ពូជ", amount: 180_000, type: .expense,
+                                   category: .seeds, currency: .khr,
+                                   date: cal.date(byAdding: .day, value: -2, to: now) ?? now))
+
+        let expense4 = TransactionEntity(context: context)
+        expense4.apply(Transaction(title: "ជួលកម្លាំងពលកម្ម", amount: 250_000, type: .expense,
+                                   category: .labor, currency: .khr, date: now))
+
+        // Reminders (2-3 upcoming in next 7 days) with realistic farming times
+        let reminder1 = ReminderEntity(context: context)
+        // Watering at 6:00 AM (early morning)
+        var wateringDate = cal.date(byAdding: .day, value: 1, to: now) ?? now
+        wateringDate = cal.date(bySettingHour: 6, minute: 0, second: 0, of: wateringDate) ?? wateringDate
+        reminder1.apply(Reminder(title: "ស្រោចទឹក",
+                                 dueDate: wateringDate,
+                                 note: "ដើមបន្លែនៅក្បែរផ្ទះ"))
+
+        let reminder2 = ReminderEntity(context: context)
+        reminder2.apply(Reminder(title: "ប្រមូលផល",
+                                 dueDate: cal.date(byAdding: .day, value: 5, to: now) ?? now,
+                                 note: "ប្រមូលបន្លែពេលព្រឹក"))
+
+        let reminder3 = ReminderEntity(context: context)
+        // Fertilizing at 7:00 AM (mid-morning, avoid midday heat)
+        var fertilizingDate = cal.date(byAdding: .day, value: 3, to: now) ?? now
+        fertilizingDate = cal.date(bySettingHour: 7, minute: 0, second: 0, of: fertilizingDate) ?? fertilizingDate
+        reminder3.apply(Reminder(title: "បាចជី",
+                                 dueDate: fertilizingDate,
+                                 note: "ជីសរីរាង្គសម្រាប់ដំណាំថ្មី"))
 
         do {
             try context.save()

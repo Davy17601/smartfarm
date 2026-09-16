@@ -21,6 +21,10 @@ class FinanceCoordinator: ObservableObject {
     // • UUID → NavigationLink whose tag matches this ID becomes active
     @Published var selectedTransactionID: UUID? = nil
 
+    // The currently selected tab index (0 = Dashboard, 1 = Finance, etc.)
+    // MainTabView should bind to this property via Binding($financeCoordinator.selectedTab)
+    @Published var selectedTab: Int = 1
+
     // Navigate to a specific transaction (can be called from anywhere)
     func navigate(to transaction: Transaction) {
         selectedTransactionID = transaction.id
@@ -29,5 +33,10 @@ class FinanceCoordinator: ObservableObject {
     // Pop back to the list
     func reset() {
         selectedTransactionID = nil
+    }
+
+    // Navigate back to Dashboard by setting selectedTab to 0
+    func backToDashboard() {
+        selectedTab = 0
     }
 }

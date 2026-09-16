@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 /// Income / expense totals for a single calendar month.
 struct MonthlyTotal: Identifiable {
@@ -8,6 +9,14 @@ struct MonthlyTotal: Identifiable {
     let income: Double
     let expense: Double
     var profit: Double { income - expense }
+}
+
+/// Category breakdown for pie chart
+struct CategoryBreakdown: Identifiable {
+    let id = UUID()
+    let category: TransactionCategory
+    let amount: Double
+    let percentage: Double
 }
 
 /// Builds the monthly profit/loss series for the reports screen.
@@ -26,6 +35,29 @@ final class ReportsViewModel: ObservableObject {
         self.currency = currency
         transactions = repository.fetchAll()
         monthlyTotals = computeMonthlyTotals(monthsBack: 6)
+    }
+
+    /// Computes category breakdown for expenses in the selected currency
+    func categoryBreakdown() -> [CategoryBreakdown] {
+        let expenses = transactions.filter { $0.type == .expense && $0.currency == currency }
+        let total = expenses.reduce(0.0) { $0 + $1.amount }
+
+        guard total > 0 else { return [] }
+
+        // Group by category and sum
+        var categoryTotals: [TransactionCategory: Double] = [:]
+        for tx in expenses {
+            categoryTotals[tx.category, default: 0] += tx.amount
+        }
+
+        // Convert to breakdown with percentages
+        return categoryTotals.map { category, amount in
+            CategoryBreakdown(
+                category: category,
+                amount: amount,
+                percentage: (amount / total) * 100
+            )
+        }.sorted { $0.amount > $1.amount } // Sort by amount descending
     }
 
     private func computeMonthlyTotals(monthsBack: Int) -> [MonthlyTotal] {

@@ -1,5 +1,13 @@
 import Foundation
 
+/// Category breakdown for Dashboard pie chart
+struct DashboardCategoryBreakdown: Identifiable {
+    let id = UUID()
+    let category: TransactionCategory
+    let amount: Double
+    let percentage: Double
+}
+
 /// Aggregates data from all repositories for the home Dashboard:
 /// current-month profit/loss, latest transactions, and upcoming items.
 final class DashboardViewModel: ObservableObject {
@@ -53,6 +61,9 @@ final class DashboardViewModel: ObservableObject {
     /// Repository returns newest-first; take the most recent few.
     var latestTransactions: [Transaction] { Array(transactions.prefix(5)) }
 
+    /// All transactions for full history view
+    var allTransactions: [Transaction] { transactions }
+
     func upcomingActivities(within days: Int = 7) -> [FarmActivity] {
         let now = Date()
         let future = Calendar.current.date(byAdding: .day, value: days, to: now) ?? now
@@ -67,5 +78,81 @@ final class DashboardViewModel: ObservableObject {
         return reminders
             .filter { !$0.isCompleted && $0.dueDate >= now && $0.dueDate <= future }
             .sorted { $0.dueDate < $1.dueDate }
+    }
+
+    // MARK: - Urgency helpers
+
+    /// Returns localized urgency badge label for a date ("ថ្ងៃនេះ", "ស្អែក", or nil).
+    func urgencyBadge(for date: Date) -> String? {
+        let calendar = Calendar.current
+        if calendar.isDateInToday(date) {
+            return L("dashboard.today")
+        } else if calendar.isDateInTomorrow(date) {
+            return L("dashboard.tomorrow")
+        }
+        return nil
+    }
+
+    // MARK: - Transaction management
+
+    /// Delete a specific transaction
+    func deleteTransaction(_ transaction: Transaction) {
+        transactionRepository.delete(id: transaction.id)
+        reload()
+    }
+
+    /// Delete the most recently added transaction
+    func deleteLastTransaction() {
+        guard let lastTransaction = transactions.first else { return }
+        deleteTransaction(lastTransaction)
+    }
+
+    /// Clear old transactions (older than 30 days)
+    func clearOldTransactions() {
+        let thirtyDaysAgo = Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? Date()
+        let oldTransactions = transactions.filter { $0.date < thirtyDaysAgo }
+        for transaction in oldTransactions {
+            transactionRepository.delete(id: transaction.id)
+        }
+        reload()
+    }
+
+    // MARK: - Activity management
+
+    /// Update an existing farm activity
+    func updateActivity(_ activity: FarmActivity) {
+        activityRepository.update(activity)
+        reload()
+    }
+
+    /// Delete a specific farm activity
+    func deleteActivity(_ activity: FarmActivity) {
+        activityRepository.delete(id: activity.id)
+        reload()
+    }
+
+    // MARK: - Category breakdown for pie chart
+
+    /// Computes category breakdown for expenses in the selected currency
+    func categoryBreakdown(in currency: Currency) -> [DashboardCategoryBreakdown] {
+        let expenses = transactions.filter { $0.type == .expense && $0.currency == currency }
+        let total = expenses.reduce(0.0) { $0 + $1.amount }
+
+        guard total > 0 else { return [] }
+
+        // Group by category and sum
+        var categoryTotals: [TransactionCategory: Double] = [:]
+        for tx in expenses {
+            categoryTotals[tx.category, default: 0] += tx.amount
+        }
+
+        // Convert to breakdown with percentages
+        return categoryTotals.map { category, amount in
+            DashboardCategoryBreakdown(
+                category: category,
+                amount: amount,
+                percentage: (amount / total) * 100
+            )
+        }.sorted { $0.amount > $1.amount } // Sort by amount descending
     }
 }

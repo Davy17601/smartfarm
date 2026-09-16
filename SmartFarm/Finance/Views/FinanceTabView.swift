@@ -11,21 +11,44 @@ struct FinanceTabView: View {
     @StateObject private var viewModel: FinanceViewModel
     @State private var showingAdd = false
 
+    // MARK: - Custom Finance Colors (matching Dashboard)
+    /// Darker, more saturated colors for better contrast
+    private let dashboardGreen = Color(red: 0.13, green: 0.55, blue: 0.13)
+    private let darkerRed = Color(red: 0.8, green: 0.1, blue: 0.1)
+    private let darkerBlue = Color(red: 0.1, green: 0.3, blue: 0.7)
+
     init(repository: TransactionRepositoryProtocol) {
         _viewModel = StateObject(wrappedValue: FinanceViewModel(repository: repository))
     }
 
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
-                header
-                transactionList
+            ScrollView {
+                VStack(spacing: 12) {
+                    header
+                    transactionListContent
+                }
+                .padding(.bottom, Theme.Spacing.xl)
             }
             .background(Theme.background.ignoresSafeArea())
             .navigationTitle(L("tab.finance"))
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: { coordinator.backToDashboard() }) {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(Theme.brand)
+                    }
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button { showingAdd = true } label: { Image(systemName: "plus") }
+                    Button(action: { showingAdd = true }) {
+                        Image(systemName: "plus")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(.white)
+                            .frame(width: 32, height: 32)
+                            .background(dashboardGreen)
+                            .clipShape(Circle())
+                    }
                 }
             }
             .sheet(isPresented: $showingAdd) {
@@ -45,30 +68,30 @@ struct FinanceTabView: View {
             typeFilter
             categoryChips
         }
-        .padding(Theme.Spacing.m)
+        .padding(.top, Theme.Spacing.s)
+        .padding(.horizontal, Theme.Spacing.m)
+        .padding(.bottom, Theme.Spacing.m)
     }
 
     private var summaryRow: some View {
         let currency = settings.displayCurrency
-        return VStack(spacing: Theme.Spacing.s) {
-            HStack(spacing: Theme.Spacing.s) {
-                SummaryCardView(
-                    title: L("finance.income"),
-                    value: CurrencyFormatter.string(viewModel.totalIncome(in: currency), currency: currency),
-                    systemImage: "arrow.down.circle.fill", tint: Theme.income
-                )
-                SummaryCardView(
-                    title: L("finance.expense"),
-                    value: CurrencyFormatter.string(viewModel.totalExpense(in: currency), currency: currency),
-                    systemImage: "arrow.up.circle.fill", tint: Theme.expense
-                )
-            }
-            let profit = viewModel.profit(in: currency)
-            SummaryCardView(
+        let profit = viewModel.profit(in: currency)
+        return HStack(spacing: Theme.Spacing.s) {
+            FinanceSummaryCard(
+                title: L("finance.income"),
+                value: CurrencyFormatter.string(viewModel.totalIncome(in: currency), currency: currency),
+                systemImage: "arrow.down.circle.fill", tint: dashboardGreen
+            )
+            FinanceSummaryCard(
+                title: L("finance.expense"),
+                value: CurrencyFormatter.string(viewModel.totalExpense(in: currency), currency: currency),
+                systemImage: "arrow.up.circle.fill", tint: darkerRed
+            )
+            FinanceSummaryCard(
                 title: L("finance.profitLoss"),
                 value: CurrencyFormatter.signedString(profit, currency: currency),
                 systemImage: "chart.line.uptrend.xyaxis",
-                tint: profit >= 0 ? Theme.income : Theme.expense
+                tint: profit >= 0 ? darkerBlue : darkerRed
             )
         }
     }
@@ -125,27 +148,38 @@ struct FinanceTabView: View {
 
     // MARK: - List
 
-    private var transactionList: some View {
-        List {
+    private var transactionListContent: some View {
+        VStack(spacing: 0) {
             if viewModel.filteredTransactions.isEmpty {
                 Text(L("finance.empty"))
                     .foregroundColor(Theme.secondaryText)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .listRowBackground(Color.clear)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, Theme.Spacing.xl)
             } else {
-                ForEach(viewModel.filteredTransactions) { transaction in
-                    NavigationLink(
-                        destination: TransactionDetailView(viewModel: viewModel, transactionID: transaction.id),
-                        tag: transaction.id,
-                        selection: $coordinator.selectedTransactionID
-                    ) {
-                        TransactionRow(transaction: transaction)
+                LazyVStack(spacing: 0) {
+                    ForEach(viewModel.filteredTransactions) { transaction in
+                        NavigationLink(
+                            destination: TransactionDetailView(viewModel: viewModel, transactionID: transaction.id),
+                            tag: transaction.id,
+                            selection: $coordinator.selectedTransactionID
+                        ) {
+                            TransactionRow(transaction: transaction)
+                                .padding(.horizontal, Theme.Spacing.m)
+                                .padding(.vertical, Theme.Spacing.s)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+
+                        if transaction.id != viewModel.filteredTransactions.last?.id {
+                            Divider()
+                                .padding(.horizontal, Theme.Spacing.m)
+                        }
                     }
                 }
-                .onDelete { viewModel.delete(at: $0) }
+                .background(Theme.cardBackground)
+                .cornerRadius(Theme.Radius.card)
+                .padding(.horizontal, Theme.Spacing.m)
             }
         }
-        .listStyle(PlainListStyle())
     }
 }
 

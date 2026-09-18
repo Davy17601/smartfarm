@@ -85,7 +85,7 @@ struct DashboardView: View {
                             .padding(.horizontal, Theme.Spacing.m)
                     }
                     .padding(.top, Theme.Spacing.m)
-                    .padding(.bottom, Theme.Spacing.m)
+                    .padding(.bottom, 100)
                 }
             }
             .background(Theme.background.ignoresSafeArea())
@@ -160,65 +160,43 @@ struct DashboardView: View {
     private var topNavigationBar: some View {
         HStack(alignment: .center, spacing: 12) {
             // Left side: rice/farm icon + app name + tagline
-            HStack(spacing: 8) {
+            HStack(spacing: 10) {
                 Image(systemName: "square.grid.3x3.fill")
-                    .font(.system(size: 20))
+                    .font(.system(size: 22))
                     .foregroundColor(dashboardGreen)
 
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text("SmartFarm")
-                        .font(.system(size: 18, weight: .bold))
+                        .font(.system(size: 20, weight: .bold))
                         .foregroundColor(Theme.primaryText)
                     Text("តាមដាន | ចំណាយភ្លាមៗ | ព្រាក់ចំណេញប្រចាំខែ")
-                        .font(.system(size: 11))
+                        .font(.system(size: 12))
                         .foregroundColor(Theme.secondaryText)
                 }
             }
 
             Spacer()
 
-            // Right side: bell icon with red dot + profile avatar
-            HStack(spacing: 12) {
-                // Bell icon with notification badge
-                ZStack(alignment: .topTrailing) {
-                    Button(action: {
-                        // Handle notifications tap
-                    }) {
-                        Image(systemName: "bell.fill")
-                            .font(.system(size: 20))
-                            .foregroundColor(Theme.secondaryText)
-                    }
-
-                    // Red dot badge
-                    Circle()
-                        .fill(Color.red)
-                        .frame(width: 8, height: 8)
-                        .offset(x: 4, y: -2)
-                }
-                .frame(width: 24, height: 24)
-
-                // Profile avatar
+            // Right side: bell icon with notification badge only
+            ZStack(alignment: .topTrailing) {
                 Button(action: {
-                    // Handle profile tap
-                    selectedTab = 3
+                    // Handle notifications tap
                 }) {
-                    Circle()
-                        .fill(LinearGradient(
-                            gradient: Gradient(colors: [dashboardGreen, Color.green.opacity(0.7)]),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ))
-                        .frame(width: 36, height: 36)
-                        .overlay(
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 16))
-                                .foregroundColor(.white)
-                        )
+                    Image(systemName: "bell.fill")
+                        .font(.system(size: 22))
+                        .foregroundColor(Theme.secondaryText)
                 }
+
+                // Red dot badge
+                Circle()
+                    .fill(Color.red)
+                    .frame(width: 8, height: 8)
+                    .offset(x: 4, y: -2)
             }
+            .frame(width: 28, height: 28)
         }
         .padding(.horizontal, 16)
-        .padding(.vertical, 12)
+        .padding(.vertical, 16)
     }
 
     // MARK: - Greeting text

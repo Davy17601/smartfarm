@@ -25,7 +25,7 @@ struct SummaryCardView: View {
                 .minimumScaleFactor(0.6)
         }
         .frame(maxWidth: .infinity, alignment: centered ? .center : .leading)
-        .cardStyle()
+        .padding(Theme.Spacing.m)
     }
 }
 

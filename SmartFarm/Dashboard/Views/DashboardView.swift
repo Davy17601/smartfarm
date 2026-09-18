@@ -39,33 +39,51 @@ struct DashboardView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 0) {
-                    // Green header section (scrolls with content)
+                    // Top navigation bar
+                    topNavigationBar
+                        .background(Color.white)
+
+                    // Header section with background image (scrolls with content)
                     ZStack(alignment: .bottom) {
-                        LinearGradient(
-                            gradient: Gradient(colors: [dashboardGreen, dashboardGreen.opacity(0.85)]),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                        .frame(height: 250)
-                        .clipShape(RoundedBottomRectangle(radius: 24))
-                        .ignoresSafeArea(edges: .top)
+                        ZStack {
+                            // Background image
+                            Image("dashboard_header_background")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(height: 220)
+                                .clipped()
+
+                            // Dark overlay for text contrast
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    Color.black.opacity(0.4),
+                                    Color.black.opacity(0.3)
+                                ]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        }
+                        .frame(height: 220)
 
                         greetingText
                             .padding(.bottom, 40)
                     }
 
-                    // Overlapping cards section
-                    VStack(spacing: Theme.Spacing.m) {
+                    // Cards section - clean separation below background image
+                    VStack(spacing: Theme.Spacing.s) {
                         monthSummary
+                            .padding(.horizontal, 12)
                         quickActionsSection
+                            .padding(.horizontal, 12)
                         latestTransactionsSection
+                            .padding(.horizontal, Theme.Spacing.m)
                         transactionHistorySection
+                            .padding(.horizontal, Theme.Spacing.m)
                         categoryPieChartSection
+                            .padding(.horizontal, Theme.Spacing.m)
                     }
-                    .padding(.horizontal, Theme.Spacing.m)
+                    .padding(.top, Theme.Spacing.m)
                     .padding(.bottom, Theme.Spacing.m)
-                    .offset(y: -75) // Pull cards up to overlap green area (tighter spacing)
-                    .background(Theme.background)
                 }
             }
             .background(Theme.background.ignoresSafeArea())
@@ -135,37 +153,101 @@ struct DashboardView: View {
         .navigationViewStyle(StackNavigationViewStyle())
     }
 
+    // MARK: - Top Navigation Bar
+
+    private var topNavigationBar: some View {
+        HStack(alignment: .center, spacing: 12) {
+            // Left side: rice/farm icon + app name + tagline
+            HStack(spacing: 8) {
+                Image(systemName: "square.grid.3x3.fill")
+                    .font(.system(size: 20))
+                    .foregroundColor(dashboardGreen)
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("SmartFarm")
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(Theme.primaryText)
+                    Text("តាមដាន | ចំណាយភ្លាមៗ | ព្រាក់ចំណេញប្រចាំខែ")
+                        .font(.system(size: 11))
+                        .foregroundColor(Theme.secondaryText)
+                }
+            }
+
+            Spacer()
+
+            // Right side: bell icon with red dot + profile avatar
+            HStack(spacing: 12) {
+                // Bell icon with notification badge
+                ZStack(alignment: .topTrailing) {
+                    Button(action: {
+                        // Handle notifications tap
+                    }) {
+                        Image(systemName: "bell.fill")
+                            .font(.system(size: 20))
+                            .foregroundColor(Theme.secondaryText)
+                    }
+
+                    // Red dot badge
+                    Circle()
+                        .fill(Color.red)
+                        .frame(width: 8, height: 8)
+                        .offset(x: 4, y: -2)
+                }
+                .frame(width: 24, height: 24)
+
+                // Profile avatar
+                Button(action: {
+                    // Handle profile tap
+                    selectedTab = 3
+                }) {
+                    Circle()
+                        .fill(LinearGradient(
+                            gradient: Gradient(colors: [dashboardGreen, Color.green.opacity(0.7)]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ))
+                        .frame(width: 36, height: 36)
+                        .overlay(
+                            Image(systemName: "person.fill")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
+                        )
+                }
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+    }
+
     // MARK: - Greeting text
 
     private var greetingText: some View {
         VStack(alignment: .trailing, spacing: Theme.Spacing.s) {
-            // Top row: weather info and hamburger menu
+            // Top row: weather info
             HStack {
                 Spacer()
                 weatherInfo
-                    .padding(.trailing, 8)
-                hamburgerMenu
             }
 
             // Main greeting row
             HStack(alignment: .top, spacing: Theme.Spacing.m) {
                 VStack(alignment: .leading, spacing: Theme.Spacing.s) {
                     Text(L("dashboard.greeting"))
-                        .font(.title2.weight(.bold))
+                        .font(.system(size: 28, weight: .bold))
                         .foregroundColor(.white)
                     Text("តាមដានចំណូល ចំណាយ")
-                        .font(Theme.Fonts.body.weight(.medium))
+                        .font(.system(size: 18, weight: .medium))
                         .foregroundColor(.white.opacity(0.9))
                     Text(todayDateString)
-                        .font(Theme.Fonts.body)
+                        .font(.system(size: 17))
                         .foregroundColor(.white.opacity(0.95))
                 }
                 Spacer()
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, Theme.Spacing.m)
-        .padding(.top, 8)
+        .padding(.horizontal, 24)
+        .padding(.top, 24)
         .padding(.bottom, 60) // Extra padding to accommodate overlapping cards
     }
 
@@ -187,25 +269,6 @@ struct DashboardView: View {
         .cornerRadius(12)
     }
 
-    private var hamburgerMenu: some View {
-        Menu {
-            Button(action: { selectedTab = 1 }) {
-                Label(L("tab.finance"), systemImage: "dollarsign.circle")
-            }
-            Button(action: { selectedTab = 2 }) {
-                Label(L("tab.calendar"), systemImage: "calendar")
-            }
-            Button(action: { selectedTab = 3 }) {
-                Label(L("tab.settings"), systemImage: "gearshape")
-            }
-        } label: {
-            Image(systemName: "line.3.horizontal")
-                .font(.title2)
-                .foregroundColor(.white)
-                .frame(width: 44, height: 44)
-        }
-    }
-
     private var todayDateString: String {
         LocalizedDate.longStringWithKhmerNumerals(Date())
     }
@@ -219,29 +282,32 @@ struct DashboardView: View {
         return VStack(spacing: Theme.Spacing.s) {
             // Income & Expense side by side
             HStack(spacing: Theme.Spacing.s) {
-                ZStack {
-                    Color.green.opacity(0.08)
-                        .cornerRadius(12)
+                VStack(spacing: 0) {
                     SummaryCardView(
                         title: "ចំណូលសរុប",
                         value: CurrencyFormatter.string(viewModel.monthIncome(in: currency), currency: currency),
                         systemImage: "arrow.down.circle.fill", tint: dashboardGreen
                     )
+                    percentageBadge(percentage: 12, isPositive: true, color: dashboardGreen)
+                        .padding(.top, 4)
                 }
-                ZStack {
-                    Color.red.opacity(0.08)
-                        .cornerRadius(12)
+                .background(Color.green.opacity(0.15))
+                .cornerRadius(12)
+
+                VStack(spacing: 0) {
                     SummaryCardView(
                         title: "ចំណាយសរុប",
                         value: CurrencyFormatter.string(viewModel.monthExpense(in: currency), currency: currency),
                         systemImage: "arrow.up.circle.fill", tint: darkerRed
                     )
+                    percentageBadge(percentage: 5, isPositive: false, color: darkerRed)
+                        .padding(.top, 4)
                 }
+                .background(Color.red.opacity(0.15))
+                .cornerRadius(12)
             }
             // Profit below
-            ZStack {
-                Color.blue.opacity(0.08)
-                    .cornerRadius(12)
+            VStack(spacing: 0) {
                 SummaryCardView(
                     title: "ចំណេញសរុប",
                     value: CurrencyFormatter.signedString(profit, currency: currency),
@@ -249,8 +315,27 @@ struct DashboardView: View {
                     tint: profit >= 0 ? darkerBlue : darkerRed,
                     centered: true
                 )
+                percentageBadge(percentage: 18, isPositive: true, color: darkerBlue)
+                    .padding(.top, 4)
             }
+            .background(Color.blue.opacity(0.15))
+            .cornerRadius(12)
         }
+    }
+
+    private func percentageBadge(percentage: Int, isPositive: Bool, color: Color) -> some View {
+        HStack(spacing: 4) {
+            Image(systemName: isPositive ? "arrow.up" : "arrow.down")
+                .font(.system(size: 10, weight: .semibold))
+                .foregroundColor(color)
+            Text("\(percentage)%")
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundColor(color)
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .background(color.opacity(0.15))
+        .cornerRadius(8)
     }
 
     // MARK: - Quick Actions

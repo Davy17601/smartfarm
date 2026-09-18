@@ -64,10 +64,12 @@ struct DashboardView: View {
                             )
                         }
                         .frame(height: 220)
+                        .cornerRadius(16)
 
                         greetingText
                             .padding(.bottom, 40)
                     }
+                    .padding(.horizontal, 12)
 
                     // Cards section - clean separation below background image
                     VStack(spacing: Theme.Spacing.s) {
@@ -222,49 +224,45 @@ struct DashboardView: View {
     // MARK: - Greeting text
 
     private var greetingText: some View {
-        VStack(alignment: .trailing, spacing: Theme.Spacing.s) {
-            // Top row: weather info
-            HStack {
-                Spacer()
-                weatherInfo
+        HStack(alignment: .top) {
+            // Left side: Main greeting
+            VStack(alignment: .leading, spacing: Theme.Spacing.s) {
+                Text(L("dashboard.greeting"))
+                    .font(.system(size: 28, weight: .bold))
+                    .foregroundColor(.white)
+                Text("តាមដានចំណូល ចំណាយ")
+                    .font(.system(size: 22, weight: .medium))
+                    .foregroundColor(.white.opacity(0.9))
+                Text(todayDateString)
+                    .font(.system(size: 20))
+                    .foregroundColor(.white.opacity(0.95))
             }
 
-            // Main greeting row
-            HStack(alignment: .top, spacing: Theme.Spacing.m) {
-                VStack(alignment: .leading, spacing: Theme.Spacing.s) {
-                    Text(L("dashboard.greeting"))
-                        .font(.system(size: 28, weight: .bold))
-                        .foregroundColor(.white)
-                    Text("តាមដានចំណូល ចំណាយ")
-                        .font(.system(size: 18, weight: .medium))
-                        .foregroundColor(.white.opacity(0.9))
-                    Text(todayDateString)
-                        .font(.system(size: 17))
-                        .foregroundColor(.white.opacity(0.95))
-                }
-                Spacer()
-            }
+            Spacer()
+
+            // Right side: Weather info
+            weatherInfo
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 24)
         .padding(.top, 24)
-        .padding(.bottom, 60) // Extra padding to accommodate overlapping cards
+        .padding(.bottom, 60)
     }
 
     private var weatherInfo: some View {
-        HStack(spacing: 4) {
+        VStack(spacing: 4) {
             Image(systemName: "sun.max.fill")
-                .font(.system(size: 14))
+                .font(.system(size: 28))
                 .foregroundColor(.yellow)
             Text("32°C")
-                .font(.system(size: 13, weight: .medium))
+                .font(.system(size: 18, weight: .bold))
                 .foregroundColor(.white)
             Text("ថ្ងៃត្រង់")
                 .font(.system(size: 11))
                 .foregroundColor(.white.opacity(0.85))
         }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 4)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
         .background(Color.white.opacity(0.15))
         .cornerRadius(12)
     }
@@ -279,48 +277,76 @@ struct DashboardView: View {
     private var monthSummary: some View {
         let currency = settings.displayCurrency
         let profit = viewModel.monthProfit(in: currency)
-        return VStack(spacing: Theme.Spacing.s) {
-            // Income & Expense side by side
-            HStack(spacing: Theme.Spacing.s) {
-                VStack(spacing: 0) {
-                    SummaryCardView(
-                        title: "ចំណូលសរុប",
-                        value: CurrencyFormatter.string(viewModel.monthIncome(in: currency), currency: currency),
-                        systemImage: "arrow.down.circle.fill", tint: dashboardGreen
-                    )
-                    percentageBadge(percentage: 12, isPositive: true, color: dashboardGreen)
-                        .padding(.top, 4)
-                }
-                .background(Color.green.opacity(0.15))
-                .cornerRadius(12)
+        return HStack(spacing: Theme.Spacing.s) {
+            // Income card
+            modernSummaryCard(
+                iconName: "arrow.up",
+                iconColor: dashboardGreen,
+                title: "ចំណូលសរុប",
+                value: CurrencyFormatter.string(viewModel.monthIncome(in: currency), currency: currency),
+                valueColor: dashboardGreen,
+                percentage: 12,
+                isPositive: true
+            )
 
-                VStack(spacing: 0) {
-                    SummaryCardView(
-                        title: "ចំណាយសរុប",
-                        value: CurrencyFormatter.string(viewModel.monthExpense(in: currency), currency: currency),
-                        systemImage: "arrow.up.circle.fill", tint: darkerRed
-                    )
-                    percentageBadge(percentage: 5, isPositive: false, color: darkerRed)
-                        .padding(.top, 4)
-                }
-                .background(Color.red.opacity(0.15))
-                .cornerRadius(12)
-            }
-            // Profit below
-            VStack(spacing: 0) {
-                SummaryCardView(
-                    title: "ចំណេញសរុប",
-                    value: CurrencyFormatter.signedString(profit, currency: currency),
-                    systemImage: profit >= 0 ? "arrow.up.right" : "arrow.down.right",
-                    tint: profit >= 0 ? darkerBlue : darkerRed,
-                    centered: true
-                )
-                percentageBadge(percentage: 18, isPositive: true, color: darkerBlue)
-                    .padding(.top, 4)
-            }
-            .background(Color.blue.opacity(0.15))
-            .cornerRadius(12)
+            // Expense card
+            modernSummaryCard(
+                iconName: "arrow.down",
+                iconColor: darkerRed,
+                title: "ចំណាយសរុប",
+                value: CurrencyFormatter.string(viewModel.monthExpense(in: currency), currency: currency),
+                valueColor: darkerRed,
+                percentage: 5,
+                isPositive: false
+            )
+
+            // Profit card
+            modernSummaryCard(
+                iconName: "chart.bar.fill",
+                iconColor: darkerBlue,
+                title: "ព្រាក់ចំណេញ",
+                value: CurrencyFormatter.signedString(profit, currency: currency),
+                valueColor: darkerBlue,
+                percentage: 18,
+                isPositive: true
+            )
         }
+    }
+
+    private func modernSummaryCard(iconName: String, iconColor: Color, title: String, value: String, valueColor: Color, percentage: Int, isPositive: Bool) -> some View {
+        VStack(spacing: 12) {
+            // Circular icon badge at top
+            ZStack {
+                Circle()
+                    .fill(iconColor)
+                    .frame(width: 44, height: 44)
+                Image(systemName: iconName)
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(.white)
+            }
+
+            // Title label
+            Text(title)
+                .font(.system(size: 12))
+                .foregroundColor(Theme.secondaryText)
+                .multilineTextAlignment(.center)
+
+            // Large amount value
+            Text(value)
+                .font(.system(size: 20, weight: .bold).monospacedDigit())
+                .foregroundColor(valueColor)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+
+            // Percentage badge at bottom
+            percentageBadge(percentage: percentage, isPositive: isPositive, color: iconColor)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 16)
+        .padding(.horizontal, 8)
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.08), radius: 8, x: 0, y: 2)
     }
 
     private func percentageBadge(percentage: Int, isPositive: Bool, color: Color) -> some View {

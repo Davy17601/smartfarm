@@ -54,7 +54,7 @@ struct MainTabView: View {
             )
 
             tabBarButton(
-                icon: "chart.bar.fill",
+                icon: "bag.fill",
                 label: L("tab.finance"),
                 color: .red,
                 index: 1

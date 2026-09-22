@@ -305,7 +305,7 @@ struct FinanceTabView: View {
                     viewModel.selectedCategory = nil
                 }
                 ForEach(uniqueCategories, id: \.self) { category in
-                    chip(title: category, isOn: viewModel.selectedCategory == category) {
+                    chip(title: TransactionCategory.localizedName(for: category), isOn: viewModel.selectedCategory == category) {
                         viewModel.selectedCategory = (viewModel.selectedCategory == category) ? nil : category
                     }
                 }

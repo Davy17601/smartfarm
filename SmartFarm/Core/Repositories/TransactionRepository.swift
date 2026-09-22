@@ -78,7 +78,7 @@ extension Transaction {
             title: title,
             amount: entity.amount,
             type: type,
-            category: TransactionCategory(rawValue: entity.category ?? "") ?? .other,
+            category: entity.category ?? "",
             currency: Currency(rawValue: entity.currency ?? "") ?? .khr,
             date: date,
             note: entity.note ?? ""
@@ -92,7 +92,7 @@ extension TransactionEntity {
         title = transaction.title
         amount = transaction.amount
         type = transaction.type.rawValue
-        category = transaction.category.rawValue
+        category = transaction.category
         currency = transaction.currency.rawValue
         date = transaction.date
         note = transaction.note

@@ -4,6 +4,7 @@ import SwiftUI
 /// deep link. Re-reads from the ViewModel so edits reflect immediately.
 struct TransactionDetailView: View {
     @ObservedObject var viewModel: FinanceViewModel
+    @EnvironmentObject private var settings: AppSettings
     let transactionID: UUID
 
     @State private var showingEdit = false
@@ -30,6 +31,7 @@ struct TransactionDetailView: View {
         .sheet(isPresented: $showingEdit) {
             if let transaction = transaction {
                 AddEditTransactionView(mode: .edit(transaction)) { viewModel.update($0) }
+                    .environmentObject(settings)
             }
         }
     }
@@ -47,7 +49,7 @@ struct TransactionDetailView: View {
 
                 FarmCard {
                     detailRow(L("finance.type"), transaction.type.displayName)
-                    detailRow(L("finance.category"), transaction.category.displayName)
+                    detailRow(L("finance.category"), transaction.category.isEmpty ? "-" : transaction.category)
                     detailRow(L("finance.currency"), transaction.currency.displayName)
                     detailRow(L("common.date"), LocalizedDate.mediumString(transaction.date))
                     if !transaction.note.isEmpty {

@@ -14,7 +14,7 @@ struct MonthlyTotal: Identifiable {
 /// Category breakdown for pie chart
 struct CategoryBreakdown: Identifiable {
     let id = UUID()
-    let category: TransactionCategory
+    let category: String
     let amount: Double
     let percentage: Double
 }
@@ -45,15 +45,15 @@ final class ReportsViewModel: ObservableObject {
         guard total > 0 else { return [] }
 
         // Group by category and sum
-        var categoryTotals: [TransactionCategory: Double] = [:]
+        var categoryTotals: [String: Double] = [:]
         for tx in expenses {
             categoryTotals[tx.category, default: 0] += tx.amount
         }
 
-        // Convert to breakdown with percentages
+        // Convert to breakdown with percentages, using localized category names
         return categoryTotals.map { category, amount in
             CategoryBreakdown(
-                category: category,
+                category: TransactionCategory.localizedName(for: category),
                 amount: amount,
                 percentage: (amount / total) * 100
             )

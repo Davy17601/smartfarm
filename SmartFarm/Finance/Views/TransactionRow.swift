@@ -15,7 +15,7 @@ struct TransactionRow: View {
 
     var body: some View {
         HStack(spacing: Theme.Spacing.m) {
-            Image(systemName: transaction.category.systemImage)
+            Image(systemName: "tag.fill")
                 .foregroundColor(tint)
                 .frame(width: 28)
 
@@ -23,7 +23,8 @@ struct TransactionRow: View {
                 Text(transaction.title)
                     .font(Theme.Fonts.body)
                     .foregroundColor(Theme.primaryText)
-                Text("\(transaction.category.displayName) · \(LocalizedDate.dayMonthString(transaction.date))")
+                let categoryText = transaction.category.isEmpty ? "-" : transaction.category
+                Text("\(categoryText) · \(LocalizedDate.dayMonthString(transaction.date))")
                     .font(Theme.Fonts.caption)
                     .foregroundColor(Theme.secondaryText)
             }
@@ -42,9 +43,9 @@ struct TransactionRow_Previews: PreviewProvider {
     static var previews: some View {
         List {
             TransactionRow(transaction: Transaction(title: "លក់ស្រូវ", amount: 1_500_000,
-                                                     type: .income, category: .sales))
+                                                     type: .income, category: "ការលក់"))
             TransactionRow(transaction: Transaction(title: "ទិញជី", amount: 200_000,
-                                                     type: .expense, category: .fertilizer))
+                                                     type: .expense, category: "ជី"))
         }
     }
 }

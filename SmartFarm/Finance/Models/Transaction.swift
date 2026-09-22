@@ -70,13 +70,13 @@ struct Transaction: Identifiable, Codable, Equatable {
     var title: String
     var amount: Double
     var type: TransactionType
-    var category: TransactionCategory
+    var category: String
     var currency: Currency
     var date: Date
     var note: String
 
     init(id: UUID = UUID(), title: String, amount: Double, type: TransactionType,
-         category: TransactionCategory = .other, currency: Currency = .khr,
+         category: String = "", currency: Currency = .khr,
          date: Date = Date(), note: String = "") {
         self.id = id
         self.title = title
@@ -86,5 +86,20 @@ struct Transaction: Identifiable, Codable, Equatable {
         self.currency = currency
         self.date = date
         self.note = note
+    }
+}
+
+// MARK: - Category localization helper
+
+extension TransactionCategory {
+    /// Returns the localized display name for a category string
+    /// Converts raw enum values (e.g., "Seeds", "Fertilizer") to localized names
+    static func localizedName(for categoryString: String) -> String {
+        // Try to match the raw value to an enum case
+        if let category = TransactionCategory(rawValue: categoryString) {
+            return category.displayName
+        }
+        // If no match, return the original string (handles custom/unknown categories)
+        return categoryString.isEmpty ? L("category.other") : categoryString
     }
 }

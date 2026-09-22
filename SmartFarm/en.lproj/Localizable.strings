@@ -19,8 +19,10 @@
 "common.version" = "Version";
 
 /* Finance */
+"finance.summary" = "Financial Summary";
 "finance.income" = "Income";
 "finance.expense" = "Expense";
+"finance.profit" = "Profit";
 "finance.profitLoss" = "Profit / Loss";
 "finance.profitThisMonth" = "Profit / Loss (this month)";
 "finance.search" = "Search";

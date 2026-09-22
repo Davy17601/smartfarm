@@ -74,38 +74,38 @@ struct PersistenceController {
         // Income transactions (3-4 this month)
         let income1 = TransactionEntity(context: context)
         income1.apply(Transaction(title: "លក់ស្រូវ", amount: 1_500_000, type: .income,
-                                  category: .sales, currency: .khr,
+                                  category: "ការលក់", currency: .khr,
                                   date: cal.date(byAdding: .day, value: -5, to: now) ?? now))
 
         let income2 = TransactionEntity(context: context)
         income2.apply(Transaction(title: "លក់បន្លែ", amount: 600_000, type: .income,
-                                  category: .sales, currency: .khr,
+                                  category: "ការលក់", currency: .khr,
                                   date: cal.date(byAdding: .day, value: -3, to: now) ?? now))
 
         let income3 = TransactionEntity(context: context)
         income3.apply(Transaction(title: "លក់ផ្លែឈើ", amount: 350_000, type: .income,
-                                  category: .sales, currency: .khr,
+                                  category: "ការលក់", currency: .khr,
                                   date: cal.date(byAdding: .day, value: -1, to: now) ?? now))
 
         // Expense transactions (3-4 this month)
         let expense1 = TransactionEntity(context: context)
         expense1.apply(Transaction(title: "ទិញជី", amount: 200_000, type: .expense,
-                                   category: .fertilizer, currency: .khr,
+                                   category: "ជី", currency: .khr,
                                    date: cal.date(byAdding: .day, value: -6, to: now) ?? now))
 
         let expense2 = TransactionEntity(context: context)
         expense2.apply(Transaction(title: "ថ្នាំសម្លាប់សត្វល្អិត", amount: 150_000, type: .expense,
-                                   category: .other, currency: .khr,
+                                   category: "ផ្សេងៗ", currency: .khr,
                                    date: cal.date(byAdding: .day, value: -4, to: now) ?? now))
 
         let expense3 = TransactionEntity(context: context)
         expense3.apply(Transaction(title: "គ្រាប់ពូជ", amount: 180_000, type: .expense,
-                                   category: .seeds, currency: .khr,
+                                   category: "គ្រាប់ពូជ", currency: .khr,
                                    date: cal.date(byAdding: .day, value: -2, to: now) ?? now))
 
         let expense4 = TransactionEntity(context: context)
         expense4.apply(Transaction(title: "ជួលកម្លាំងពលកម្ម", amount: 250_000, type: .expense,
-                                   category: .labor, currency: .khr, date: now))
+                                   category: "កម្លាំងពលកម្ម", currency: .khr, date: now))
 
         // Reminders (2-3 upcoming in next 7 days) with realistic farming times
         let reminder1 = ReminderEntity(context: context)

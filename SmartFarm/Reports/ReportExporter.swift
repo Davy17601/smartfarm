@@ -15,7 +15,7 @@ enum ReportExporter {
                 formatter.string(from: t.date),
                 escape(t.title),
                 t.type.rawValue,
-                t.category.rawValue,
+                escape(t.category),
                 t.currency.rawValue,
                 String(t.amount),
                 escape(t.note)

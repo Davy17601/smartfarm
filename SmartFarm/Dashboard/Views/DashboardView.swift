@@ -21,6 +21,7 @@ struct DashboardView: View {
 
     // Quick Actions state
     @State private var showAddTransactionSheet = false
+    @State private var initialTransactionType: TransactionType = .expense
 
 
     // MARK: - Custom Dashboard Colors
@@ -147,9 +148,16 @@ struct DashboardView: View {
                 }
             }
             .sheet(isPresented: $showAddTransactionSheet) {
-                AddEditTransactionView(mode: .add) { _ in
+                AddEditTransactionView(mode: .add, initialType: initialTransactionType) { transaction in
+                    // Save the transaction using the repository
+                    transactionRepository.add(transaction)
+                    // Reload Dashboard data to reflect the new transaction
+                    viewModel.reloadTransactions()
+                    // Notify other ViewModels (e.g., FinanceViewModel) that data changed
+                    NotificationCenter.default.post(name: .transactionDataDidChange, object: nil)
                     showAddTransactionSheet = false
                 }
+                .environmentObject(settings)
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
@@ -355,14 +363,20 @@ struct DashboardView: View {
                     icon: "plus.circle.fill",
                     color: .green,
                     backgroundColor: Color.green.opacity(0.15),
-                    action: { showAddTransactionSheet = true }
+                    action: {
+                        initialTransactionType = .income
+                        showAddTransactionSheet = true
+                    }
                 )
                 quickActionButton(
                     title: "បញ្ចូលចំណាយ",
                     icon: "minus.circle.fill",
                     color: .red,
                     backgroundColor: Color.red.opacity(0.15),
-                    action: { showAddTransactionSheet = true }
+                    action: {
+                        initialTransactionType = .expense
+                        showAddTransactionSheet = true
+                    }
                 )
                 quickActionButton(
                     title: "របាយការណ៍",
@@ -628,7 +642,7 @@ struct DashboardView: View {
 /// Data for a single pie slice on Dashboard
 struct DashboardPieSliceData: Identifiable {
     let id = UUID()
-    let category: TransactionCategory
+    let category: String
     let amount: Double
     let percentage: Double
     let color: Color
@@ -662,7 +676,7 @@ struct DashboardCategoryPieChartView: View {
                         Circle()
                             .fill(slice.color)
                             .frame(width: 12, height: 12)
-                        Text(slice.category.displayName)
+                        Text(slice.category.isEmpty ? "-" : slice.category)
                             .font(Theme.Fonts.caption)
                             .foregroundColor(Theme.primaryText)
                         Spacer()

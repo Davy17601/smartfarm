@@ -242,7 +242,7 @@ struct ReportsView: View {
                                         .fill(slice.color)
                                         .frame(width: 10, height: 10)
                                     VStack(alignment: .leading, spacing: 2) {
-                                        Text(slice.category.displayName)
+                                        Text(slice.category.isEmpty ? "-" : slice.category)
                                             .font(.system(size: 12))
                                             .foregroundColor(Theme.primaryText)
                                         Text("\(Int(slice.percentage))%")
@@ -299,7 +299,7 @@ struct ReportsView: View {
 /// Data for a single pie slice
 struct PieSliceData: Identifiable {
     let id = UUID()
-    let category: TransactionCategory
+    let category: String
     let amount: Double
     let percentage: Double
     let color: Color

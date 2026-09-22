@@ -1,9 +1,10 @@
 import Foundation
+import Combine
 
 /// Category breakdown for Dashboard pie chart
 struct DashboardCategoryBreakdown: Identifiable {
     let id = UUID()
-    let category: TransactionCategory
+    let category: String
     let amount: Double
     let percentage: Double
 }
@@ -18,6 +19,7 @@ final class DashboardViewModel: ObservableObject {
     private let transactionRepository: TransactionRepositoryProtocol
     private let activityRepository: FarmActivityRepositoryProtocol
     private let reminderRepository: ReminderRepositoryProtocol
+    private var cancellables = Set<AnyCancellable>()
 
     init(transactionRepository: TransactionRepositoryProtocol,
          activityRepository: FarmActivityRepositoryProtocol,
@@ -26,12 +28,23 @@ final class DashboardViewModel: ObservableObject {
         self.activityRepository = activityRepository
         self.reminderRepository = reminderRepository
         reload()
+
+        // Listen for transaction changes from other ViewModels (e.g., FinanceViewModel)
+        NotificationCenter.default.publisher(for: .transactionDataDidChange)
+            .sink { [weak self] _ in
+                self?.reloadTransactions()
+            }
+            .store(in: &cancellables)
     }
 
     func reload() {
         transactions = transactionRepository.fetchAll()
         activities = activityRepository.fetchAll()
         reminders = reminderRepository.fetchAll()
+    }
+
+    func reloadTransactions() {
+        transactions = transactionRepository.fetchAll()
     }
 
     // MARK: - This month
@@ -98,7 +111,9 @@ final class DashboardViewModel: ObservableObject {
     /// Delete a specific transaction
     func deleteTransaction(_ transaction: Transaction) {
         transactionRepository.delete(id: transaction.id)
-        reload()
+        reloadTransactions()
+        // Notify other ViewModels that data changed
+        NotificationCenter.default.post(name: .transactionDataDidChange, object: nil)
     }
 
     /// Delete the most recently added transaction
@@ -114,7 +129,9 @@ final class DashboardViewModel: ObservableObject {
         for transaction in oldTransactions {
             transactionRepository.delete(id: transaction.id)
         }
-        reload()
+        reloadTransactions()
+        // Notify other ViewModels that data changed
+        NotificationCenter.default.post(name: .transactionDataDidChange, object: nil)
     }
 
     // MARK: - Activity management
@@ -141,15 +158,15 @@ final class DashboardViewModel: ObservableObject {
         guard total > 0 else { return [] }
 
         // Group by category and sum
-        var categoryTotals: [TransactionCategory: Double] = [:]
+        var categoryTotals: [String: Double] = [:]
         for tx in expenses {
             categoryTotals[tx.category, default: 0] += tx.amount
         }
 
-        // Convert to breakdown with percentages
+        // Convert to breakdown with percentages, using localized category names
         return categoryTotals.map { category, amount in
             DashboardCategoryBreakdown(
-                category: category,
+                category: TransactionCategory.localizedName(for: category),
                 amount: amount,
                 percentage: (amount / total) * 100
             )

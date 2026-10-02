@@ -93,7 +93,7 @@ struct AddEditTransactionView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(L("common.cancel")) { dismiss() }
+                    BackButton { dismiss() }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(L("common.save")) { save() }

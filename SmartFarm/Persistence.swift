@@ -24,6 +24,7 @@ struct PersistenceController {
         a.title = "ស្រោចទឹក"
         a.date = Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date()
         a.isCompleted = false
+        a.category = FarmActivityCategory.watering.rawValue
         do {
             try viewContext.save()
         } catch {
@@ -80,10 +81,12 @@ struct PersistenceController {
 
         let water = FarmActivityEntity(context: context)
         water.apply(FarmActivity(title: "ស្រោចទឹក",
-                                 date: cal.date(byAdding: .day, value: 1, to: now) ?? now))
+                                 date: cal.date(byAdding: .day, value: 1, to: now) ?? now,
+                                 category: .watering))
         let fertilize = FarmActivityEntity(context: context)
         fertilize.apply(FarmActivity(title: "បូកជី",
-                                     date: cal.date(byAdding: .day, value: 3, to: now) ?? now))
+                                     date: cal.date(byAdding: .day, value: 3, to: now) ?? now,
+                                     category: .fertilizing))
 
         do {
             try context.save()

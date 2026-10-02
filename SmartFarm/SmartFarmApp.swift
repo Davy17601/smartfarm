@@ -13,6 +13,13 @@ struct SmartFarmApp: App {
     @StateObject private var localization = LocalizationManager.shared
     @StateObject private var settings = AppSettings.shared
 
+    init() {
+        // List/Form screens are backed by UITableView pre-iOS16, which paints its
+        // own opaque background beneath any SwiftUI `.background()` modifier — set
+        // it here so the app's soft-green background shows through consistently.
+        UITableView.appearance().backgroundColor = UIColor(Theme.background)
+    }
+
     var body: some Scene {
         WindowGroup {
             MainTabView()

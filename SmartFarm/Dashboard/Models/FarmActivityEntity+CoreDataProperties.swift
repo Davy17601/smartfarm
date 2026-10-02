@@ -12,6 +12,7 @@ extension FarmActivityEntity {
     @NSManaged public var date: Date?
     @NSManaged public var note: String?
     @NSManaged public var isCompleted: Bool
+    @NSManaged public var category: String?
 
 }
 

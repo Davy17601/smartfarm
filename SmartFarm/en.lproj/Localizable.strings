@@ -4,10 +4,29 @@
 "tab.calendar" = "Calendar";
 "tab.settings" = "Settings";
 
+/* Weekday abbreviations (Sunday-first) */
+"weekday.sun" = "Sun";
+"weekday.mon" = "Mon";
+"weekday.tue" = "Tue";
+"weekday.wed" = "Wed";
+"weekday.thu" = "Thu";
+"weekday.fri" = "Fri";
+"weekday.sat" = "Sat";
+
+/* Full weekday names for the Calendar month-grid header (Sunday-first) */
+"weekday.full.sun" = "Sunday";
+"weekday.full.mon" = "Monday";
+"weekday.full.tue" = "Tuesday";
+"weekday.full.wed" = "Wednesday";
+"weekday.full.thu" = "Thursday";
+"weekday.full.fri" = "Friday";
+"weekday.full.sat" = "Saturday";
+
 /* Common */
 "common.save" = "Save";
 "common.cancel" = "Cancel";
 "common.edit" = "Edit";
+"common.delete" = "Delete";
 "common.all" = "All";
 "common.viewAll" = "View all";
 "common.details" = "Details";
@@ -59,6 +78,35 @@
 "calendar.addReminder" = "Add reminder";
 "calendar.editReminder" = "Edit reminder";
 "calendar.repeat" = "Repeat";
+"calendar.category" = "Category";
+"calendar.dayHeader" = "Day";
+"calendar.header.tagline" = "Smart farming assistant";
+"calendar.todayTasks.title" = "Today's tasks";
+"calendar.todayTasks.count" = "%d task(s)";
+"calendar.schedule.title" = "Schedule";
+"calendar.noSchedule" = "Nothing scheduled";
+"calendar.pill.today" = "Today";
+"calendar.pill.later" = "Upcoming";
+"calendar.addChoice.title" = "Add what?";
+"calendar.viewFullSchedule" = "View full schedule";
+
+/* Activity category */
+"activityCategory.watering" = "Watering";
+"activityCategory.fertilizing" = "Fertilizing";
+"activityCategory.care" = "Care";
+"activityCategory.harvest" = "Harvest";
+"activityCategory.planting" = "Planting";
+
+/* Calendar welcome */
+"calendar.welcome.titleLine1" = "Welcome to";
+"calendar.welcome.titleLine2" = "Calendar";
+"calendar.welcome.feature1.title" = "Schedule farm activities";
+"calendar.welcome.feature1.subtitle" = "Plan your daily, weekly, and monthly farm work";
+"calendar.welcome.feature2.title" = "Reminders";
+"calendar.welcome.feature2.subtitle" = "Never miss important tasks with timely notifications";
+"calendar.welcome.feature3.title" = "Link to income & expenses";
+"calendar.welcome.feature3.subtitle" = "Connect your activities directly to your financial records";
+"calendar.welcome.continue" = "Continue";
 
 /* Repeat */
 "repeat.none" = "Never";
@@ -70,14 +118,30 @@
 "notif.activity" = "Farm activity";
 "notif.reminder" = "Reminder";
 "notif.tomorrow" = "Tomorrow: ";
+"notifications.title" = "Notifications";
 
 /* Dashboard */
 "dashboard.next7" = "Next 7 days";
 "dashboard.noSchedule" = "Nothing scheduled";
+"dashboard.title" = "Today";
+"dashboard.todaySchedule" = "Today's schedule";
+"dashboard.noScheduleToday" = "Nothing scheduled today";
+
+/* App welcome (Dashboard/Today tab) */
+"appWelcome.titleLine1" = "Welcome to";
+"appWelcome.titleLine2" = "SmartFarm";
+"appWelcome.tagline" = "Manage your farm easily with technology";
+"appWelcome.feature1.title" = "See today at a glance";
+"appWelcome.feature1.subtitle" = "View today's schedule and key tasks right away";
+"appWelcome.feature2.title" = "Track farm activities";
+"appWelcome.feature2.subtitle" = "Follow your farm work day by day";
+"appWelcome.feature3.title" = "Quick add";
+"appWelcome.feature3.subtitle" = "Add reminders or activities in just a tap";
+"appWelcome.continue" = "Continue";
 
 /* Reports */
 "reports.title" = "Reports";
-"reports.last6" = "Profit/Loss · last 6 months";
+"reports.last6" = "Activities · last 6 months";
 "reports.exportCSV" = "Export CSV";
 "reports.exportPDF" = "Export PDF";
 "reports.noData" = "No data";
@@ -85,15 +149,30 @@
 "reports.totalIncome" = "Total income";
 "reports.totalExpense" = "Total expense";
 "reports.transactions" = "Transactions";
+"reports.byCategory" = "By category";
+"reports.summary" = "Summary";
+"reports.completedActivities" = "Completed activities";
+"reports.upcomingActivities" = "Upcoming activities";
+"reports.completedReminders" = "Completed reminders";
+"reports.upcomingReminders" = "Upcoming reminders";
+"reports.activityPdfTitle" = "SmartFarm Farm Activity Report";
+"reports.activitiesList" = "Activities";
+"reports.remindersList" = "Reminders";
 
 /* Settings */
 "settings.preferences" = "Preferences";
 "settings.language" = "Language";
 "settings.displayCurrency" = "Display currency";
+"settings.weekStartDay" = "Week starts on";
+"settings.weekStart.sunday" = "Sunday";
+"settings.weekStart.monday" = "Monday";
 "settings.data" = "Data";
 "settings.reports" = "Reports & Charts";
 "settings.backup" = "Backup & Restore";
 "settings.about" = "About";
+"about.version" = "Version %@";
+"about.tagline" = "A farm management app for Cambodian smallholder farmers.";
+"about.credit" = "Made with care for Cambodian farmers";
 
 /* Backup */
 "backup.description" = "Back up all your data as JSON and restore it when needed.";

@@ -4,13 +4,39 @@ import SwiftUI
 /// Semantic colors adapt to light/dark mode automatically.
 enum Theme {
     // Brand & semantic colors
-    static let brand          = Color.green
-    static let income         = Color.green
-    static let expense        = Color.red
-    static let background      = Color(.systemGroupedBackground)
-    static let cardBackground  = Color(.secondarySystemGroupedBackground)
+    static let brand           = Color("AppPrimary")
+    static let brandSecondary  = Color("AppSecondary")
+    /// Darker, higher-contrast shade of `brand` for headline text on light
+    /// backgrounds (e.g. the Calendar tab's title and month label) — lightens
+    /// back toward `brand` in dark mode so it stays legible there too.
+    static let brandDeep       = Color("AppPrimaryDeep")
+    static let highlight       = Color("AppHighlight")
+    static let income          = Color.green
+    static let expense         = Color.red
+    static let background      = Color("AppBackground")
+    static let cardBackground  = Color("AppCardBackground")
     static let primaryText     = Color(.label)
     static let secondaryText   = Color(.secondaryLabel)
+
+    /// Fixed accent colors for farm-activity categories — same in light & dark mode.
+    enum Category {
+        static let blue   = Color("CategoryBlue")
+        static let orange = Color("CategoryOrange")
+        static let purple = Color("CategoryPurple")
+        static let amber  = Color("CategoryAmber")
+        static let green  = Color("CategoryGreen")
+
+        /// Pale background tints for category cards — adapted per-mode so they
+        /// stay visible (not washed out) against the dark card background.
+        static let blueTint   = Color("CategoryBlueTint")
+        static let orangeTint = Color("CategoryOrangeTint")
+        static let purpleTint = Color("CategoryPurpleTint")
+        static let amberTint  = Color("CategoryAmberTint")
+        static let greenTint  = Color("CategoryGreenTint")
+    }
+
+    /// Background tint for reminder cards (paired with `brand`), adapted per-mode.
+    static let reminderTint = Color("ReminderTint")
 
     enum Spacing {
         static let xs: CGFloat = 4
@@ -31,6 +57,31 @@ enum Theme {
         static let body    = Font.body
         static let caption = Font.caption
         static let amount  = Font.title3.weight(.semibold).monospacedDigit()
+    }
+}
+
+/// Presentation mapping — `FarmActivityCategory` is a plain Foundation model
+/// type, so its accent color lives here in the DesignSystem layer.
+extension FarmActivityCategory {
+    var color: Color {
+        switch self {
+        case .watering:    return Theme.Category.blue
+        case .fertilizing: return Theme.Category.orange
+        case .care:        return Theme.Category.purple
+        case .harvest:     return Theme.Category.amber
+        case .planting:    return Theme.Category.green
+        }
+    }
+
+    /// Pale card background tint matching this category's accent color.
+    var tintColor: Color {
+        switch self {
+        case .watering:    return Theme.Category.blueTint
+        case .fertilizing: return Theme.Category.orangeTint
+        case .care:        return Theme.Category.purpleTint
+        case .harvest:     return Theme.Category.amberTint
+        case .planting:    return Theme.Category.greenTint
+        }
     }
 }
 

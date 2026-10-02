@@ -92,6 +92,105 @@ enum ReportExporter {
         return y + size.height + 4
     }
 
+    // MARK: - Activity / reminder CSV
+
+    static func csvString(activities: [FarmActivity], reminders: [Reminder]) -> String {
+        let formatter = ISO8601DateFormatter()
+        var rows = ["Section,Date,Title,Completed,Repeat,Note"]
+
+        for a in activities {
+            let fields = [
+                "Activity",
+                formatter.string(from: a.date),
+                escape(a.title),
+                a.isCompleted ? "true" : "false",
+                "",
+                escape(a.note)
+            ]
+            rows.append(fields.joined(separator: ","))
+        }
+        for r in reminders {
+            let fields = [
+                "Reminder",
+                formatter.string(from: r.dueDate),
+                escape(r.title),
+                r.isCompleted ? "true" : "false",
+                r.repeatType.rawValue,
+                escape(r.note)
+            ]
+            rows.append(fields.joined(separator: ","))
+        }
+        return rows.joined(separator: "\n")
+    }
+
+    static func csvFile(activities: [FarmActivity], reminders: [Reminder]) -> URL? {
+        write(csvString(activities: activities, reminders: reminders).data(using: .utf8),
+              filename: "SmartFarm-Activity-Report.csv")
+    }
+
+    // MARK: - Activity / reminder PDF
+
+    static func pdfFile(activities: [FarmActivity],
+                        reminders: [Reminder],
+                        monthlyActivityCounts: [MonthlyActivityCount]) -> URL? {
+        let pageWidth: CGFloat = 612   // US Letter @ 72dpi
+        let pageHeight: CGFloat = 792
+        let margin: CGFloat = 40
+        let renderer = UIGraphicsPDFRenderer(
+            bounds: CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight)
+        )
+
+        let data = renderer.pdfData { context in
+            context.beginPage()
+            var y: CGFloat = margin
+
+            y = draw(L("reports.activityPdfTitle"), at: y, margin: margin,
+                     font: .boldSystemFont(ofSize: 20))
+            y += 8
+
+            y = draw("\(L("reports.completedActivities")): \(activities.filter { $0.isCompleted }.count)",
+                     at: y, margin: margin, font: .systemFont(ofSize: 13))
+            y = draw("\(L("reports.upcomingActivities")): \(activities.filter { !$0.isCompleted && $0.date >= Date() }.count)",
+                     at: y, margin: margin, font: .systemFont(ofSize: 13))
+            y = draw("\(L("reports.completedReminders")): \(reminders.filter { $0.isCompleted }.count)",
+                     at: y, margin: margin, font: .systemFont(ofSize: 13))
+            y = draw("\(L("reports.upcomingReminders")): \(reminders.filter { !$0.isCompleted && $0.dueDate >= Date() }.count)",
+                     at: y, margin: margin, font: .systemFont(ofSize: 13))
+            y += 12
+
+            y = draw(L("reports.activitiesList"), at: y, margin: margin, font: .boldSystemFont(ofSize: 15))
+            y += 4
+            for a in activities {
+                if y > pageHeight - margin {
+                    context.beginPage()
+                    y = margin
+                }
+                let mark = a.isCompleted ? "✓" : "•"
+                let line = "\(mark) \(LocalizedDate.mediumString(a.date))  ·  \(a.title)"
+                y = draw(line, at: y, margin: margin, font: .systemFont(ofSize: 11))
+            }
+            y += 12
+
+            if y > pageHeight - margin {
+                context.beginPage()
+                y = margin
+            }
+            y = draw(L("reports.remindersList"), at: y, margin: margin, font: .boldSystemFont(ofSize: 15))
+            y += 4
+            for r in reminders {
+                if y > pageHeight - margin {
+                    context.beginPage()
+                    y = margin
+                }
+                let mark = r.isCompleted ? "✓" : "•"
+                let line = "\(mark) \(LocalizedDate.mediumString(r.dueDate))  ·  \(r.title)"
+                y = draw(line, at: y, margin: margin, font: .systemFont(ofSize: 11))
+            }
+        }
+
+        return write(data, filename: "SmartFarm-Activity-Report.pdf")
+    }
+
     // MARK: - File helper
 
     private static func write(_ data: Data?, filename: String) -> URL? {

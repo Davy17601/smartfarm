@@ -12,11 +12,16 @@ extension RepeatType {
 }
 
 enum ReminderFormMode {
-    case add
+    case add(Date)
     case edit(Reminder)
 }
 
-/// Shared form for creating / editing a reminder.
+/// Shared form for creating / editing a reminder. Built from `FarmCard`
+/// sections on `Theme.background` (matching the Welcome screen and Calendar
+/// tab) with the app's green accent, instead of a native `Form` on the
+/// app-wide blue `AccentColor` — a plain `Form`'s grouped background and
+/// picker chrome can't be restyled per-screen, so this stays local to this
+/// file, no other screen is affected.
 struct AddEditReminderView: View {
     let mode: ReminderFormMode
     let onSave: (Reminder) -> Void
@@ -34,10 +39,10 @@ struct AddEditReminderView: View {
         self.mode = mode
         self.onSave = onSave
         switch mode {
-        case .add:
+        case .add(let date):
             _editingID = State(initialValue: nil)
             _title = State(initialValue: "")
-            _dueDate = State(initialValue: Date())
+            _dueDate = State(initialValue: date)
             _note = State(initialValue: "")
             _repeatType = State(initialValue: .none)
             _isCompleted = State(initialValue: false)
@@ -55,31 +60,69 @@ struct AddEditReminderView: View {
 
     var body: some View {
         NavigationView {
-            Form {
-                Section {
-                    TextField(L("common.title"), text: $title)
-                    DatePicker(L("common.time"), selection: $dueDate)
-                    Picker(L("calendar.repeat"), selection: $repeatType) {
-                        ForEach(RepeatType.allCases, id: \.self) { Text($0.displayName).tag($0) }
+            ScrollView {
+                VStack(spacing: Theme.Spacing.m) {
+                    FarmCard {
+                        TextField(L("common.title"), text: $title)
+                        Divider()
+                        DatePicker(L("common.time"), selection: $dueDate)
+                            .datePickerStyle(CompactDatePickerStyle())
+                        Divider()
+                        repeatRow
+                        Divider()
+                        TextField(L("common.note"), text: $note)
                     }
-                    TextField(L("common.note"), text: $note)
+                    if editingID != nil {
+                        FarmCard {
+                            Toggle(L("common.completed"), isOn: $isCompleted)
+                        }
+                    }
                 }
-                if editingID != nil {
-                    Section { Toggle(L("common.completed"), isOn: $isCompleted) }
-                }
+                .padding(Theme.Spacing.m)
             }
+            .background(Theme.background.ignoresSafeArea())
             .navigationTitle(editingID == nil ? L("calendar.addReminder") : L("calendar.editReminder"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(L("common.cancel")) { dismiss() }
+                    BackButton { dismiss() }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(L("common.save")) { save() }.disabled(!isValid)
+                    Button(action: save) {
+                        Text(L("common.save")).fontWeight(.bold)
+                    }
+                    .foregroundColor(Theme.brand)
+                    .disabled(!isValid)
                 }
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .accentColor(Theme.brand)
+    }
+
+    /// Custom stand-in for a plain `Picker` row: a native `Picker`'s collapsed
+    /// preview renders its chevron in a fixed system gray regardless of
+    /// `.foregroundColor` or `.accentColor`, so it can't show the app's green
+    /// here. `Menu` keeps the same tap-to-choose behavior with a green chevron.
+    private var repeatRow: some View {
+        Menu {
+            ForEach(RepeatType.allCases, id: \.self) { option in
+                Button {
+                    repeatType = option
+                } label: {
+                    Text(option.displayName)
+                }
+            }
+        } label: {
+            HStack {
+                Text(L("calendar.repeat")).foregroundColor(Theme.primaryText)
+                Spacer()
+                Text(repeatType.displayName).foregroundColor(Theme.secondaryText)
+                Image(systemName: "chevron.up.chevron.down")
+                    .font(.caption2)
+                    .foregroundColor(Theme.brand)
+            }
+        }
     }
 
     private func save() {
@@ -100,6 +143,6 @@ struct AddEditReminderView: View {
 
 struct AddEditReminderView_Previews: PreviewProvider {
     static var previews: some View {
-        AddEditReminderView(mode: .add) { _ in }
+        AddEditReminderView(mode: .add(Date())) { _ in }
     }
 }

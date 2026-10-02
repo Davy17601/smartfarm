@@ -1,71 +1,81 @@
 import Foundation
 
-/// Aggregates data from all repositories for the home Dashboard:
-/// current-month profit/loss, latest transactions, and upcoming items.
+/// Drives the home Dashboard: today's schedule and the upcoming week of
+/// farm activities & reminders.
 final class DashboardViewModel: ObservableObject {
-    @Published private(set) var transactions: [Transaction] = []
     @Published private(set) var activities: [FarmActivity] = []
     @Published private(set) var reminders: [Reminder] = []
 
-    private let transactionRepository: TransactionRepositoryProtocol
     private let activityRepository: FarmActivityRepositoryProtocol
     private let reminderRepository: ReminderRepositoryProtocol
+    private let notifications: NotificationService
 
-    init(transactionRepository: TransactionRepositoryProtocol,
-         activityRepository: FarmActivityRepositoryProtocol,
-         reminderRepository: ReminderRepositoryProtocol) {
-        self.transactionRepository = transactionRepository
+    init(activityRepository: FarmActivityRepositoryProtocol,
+         reminderRepository: ReminderRepositoryProtocol,
+         notifications: NotificationService = .shared) {
         self.activityRepository = activityRepository
         self.reminderRepository = reminderRepository
+        self.notifications = notifications
         reload()
     }
 
     func reload() {
-        transactions = transactionRepository.fetchAll()
         activities = activityRepository.fetchAll()
         reminders = reminderRepository.fetchAll()
     }
 
-    // MARK: - This month
+    // MARK: - Today
 
-    private func monthTransactions(in currency: Currency) -> [Transaction] {
+    func todayActivities() -> [FarmActivity] {
+        activities
+            .filter { Calendar.current.isDateInToday($0.date) }
+            .sorted { $0.date < $1.date }
+    }
+
+    func todayReminders() -> [Reminder] {
+        reminders
+            .filter { Calendar.current.isDateInToday($0.dueDate) }
+            .sorted { $0.dueDate < $1.dueDate }
+    }
+
+    /// Whether any activity or reminder falls on the given day — used by the week strip.
+    func hasSchedule(on date: Date) -> Bool {
         let calendar = Calendar.current
-        return transactions.filter {
-            calendar.isDate($0.date, equalTo: Date(), toGranularity: .month)
-                && $0.currency == currency
-        }
+        return activities.contains { calendar.isDate($0.date, inSameDayAs: date) }
+            || reminders.contains { calendar.isDate($0.dueDate, inSameDayAs: date) }
     }
 
-    func monthIncome(in currency: Currency) -> Double {
-        monthTransactions(in: currency).filter { $0.type == .income }.reduce(0) { $0 + $1.amount }
-    }
-
-    func monthExpense(in currency: Currency) -> Double {
-        monthTransactions(in: currency).filter { $0.type == .expense }.reduce(0) { $0 + $1.amount }
-    }
-
-    func monthProfit(in currency: Currency) -> Double {
-        monthIncome(in: currency) - monthExpense(in: currency)
-    }
-
-    // MARK: - Lists
-
-    /// Repository returns newest-first; take the most recent few.
-    var latestTransactions: [Transaction] { Array(transactions.prefix(5)) }
+    // MARK: - Upcoming (from tomorrow, within `days`)
 
     func upcomingActivities(within days: Int = 7) -> [FarmActivity] {
-        let now = Date()
-        let future = Calendar.current.date(byAdding: .day, value: days, to: now) ?? now
+        let calendar = Calendar.current
+        let startOfTomorrow = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: Date())) ?? Date()
+        let future = calendar.date(byAdding: .day, value: days, to: Date()) ?? Date()
         return activities
-            .filter { !$0.isCompleted && $0.date >= now && $0.date <= future }
+            .filter { !$0.isCompleted && $0.date >= startOfTomorrow && $0.date <= future }
             .sorted { $0.date < $1.date }
     }
 
     func upcomingReminders(within days: Int = 7) -> [Reminder] {
-        let now = Date()
-        let future = Calendar.current.date(byAdding: .day, value: days, to: now) ?? now
+        let calendar = Calendar.current
+        let startOfTomorrow = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: Date())) ?? Date()
+        let future = calendar.date(byAdding: .day, value: days, to: Date()) ?? Date()
         return reminders
-            .filter { !$0.isCompleted && $0.dueDate >= now && $0.dueDate <= future }
+            .filter { !$0.isCompleted && $0.dueDate >= startOfTomorrow && $0.dueDate <= future }
             .sorted { $0.dueDate < $1.dueDate }
+    }
+
+    // MARK: - Quick add
+
+    func addActivity(_ activity: FarmActivity) {
+        activityRepository.add(activity)
+        notifications.schedule(id: activity.id, title: L("notif.activity"), body: activity.title, date: activity.date)
+        reload()
+    }
+
+    func addReminder(_ reminder: Reminder) {
+        reminderRepository.add(reminder)
+        notifications.schedule(id: reminder.id, title: L("notif.reminder"), body: reminder.title, date: reminder.dueDate)
+        reload()
     }
 }

@@ -4,10 +4,29 @@
 "tab.calendar" = "ប្រតិទិន";
 "tab.settings" = "ការកំណត់";
 
+/* Weekday abbreviations (Sunday-first) */
+"weekday.sun" = "អាទិត្យ";
+"weekday.mon" = "ចន្ទ";
+"weekday.tue" = "អង្គារ";
+"weekday.wed" = "ពុធ";
+"weekday.thu" = "ព្រហ";
+"weekday.fri" = "សុក្រ";
+"weekday.sat" = "សៅរ៍";
+
+/* Full weekday names for the Calendar month-grid header (Sunday-first) */
+"weekday.full.sun" = "អាទិត្យ";
+"weekday.full.mon" = "ចន្ទ";
+"weekday.full.tue" = "អង្គារ";
+"weekday.full.wed" = "ពុធ";
+"weekday.full.thu" = "ព្រហស្បតិ៍";
+"weekday.full.fri" = "សុក្រ";
+"weekday.full.sat" = "សៅរ៍";
+
 /* Common */
 "common.save" = "រក្សាទុក";
 "common.cancel" = "បោះបង់";
 "common.edit" = "កែប្រែ";
+"common.delete" = "លុប";
 "common.all" = "ទាំងអស់";
 "common.viewAll" = "មើលទាំងអស់";
 "common.details" = "ព័ត៌មានលម្អិត";
@@ -59,6 +78,35 @@
 "calendar.addReminder" = "បន្ថែមការរំឭក";
 "calendar.editReminder" = "កែប្រែការរំឭក";
 "calendar.repeat" = "ធ្វើម្ដងទៀត";
+"calendar.category" = "ចំណាត់ថ្នាក់";
+"calendar.dayHeader" = "ថ្ងៃទី";
+"calendar.header.tagline" = "ជំនួយការកសិកម្មឆ្លាតវៃ";
+"calendar.todayTasks.title" = "កិច្ចការថ្ងៃនេះ";
+"calendar.todayTasks.count" = "មាន %d កិច្ចការ";
+"calendar.schedule.title" = "កាលវិភាគ";
+"calendar.noSchedule" = "គ្មានកាលវិភាគ";
+"calendar.pill.today" = "នៅថ្ងៃនេះ";
+"calendar.pill.later" = "នៅពេលក្រោយ";
+"calendar.addChoice.title" = "បន្ថែមអ្វី?";
+"calendar.viewFullSchedule" = "មើលកាលវិភាគទាំងមូល";
+
+/* Activity category */
+"activityCategory.watering" = "ស្រោចទឹក";
+"activityCategory.fertilizing" = "ដាក់ជី";
+"activityCategory.care" = "ថែទាំ";
+"activityCategory.harvest" = "ប្រមូលផល";
+"activityCategory.planting" = "ដាំដុះ";
+
+/* Calendar welcome */
+"calendar.welcome.titleLine1" = "សូមស្វាគមន៍មកកាន់";
+"calendar.welcome.titleLine2" = "ប្រតិទិន";
+"calendar.welcome.feature1.title" = "កំណត់ពេលវេលាកសិកម្ម";
+"calendar.welcome.feature1.subtitle" = "រៀបចំតារាងសកម្មភាពកសិកម្មប្រចាំថ្ងៃ សប្តាហ៍ និងខែ";
+"calendar.welcome.feature2.title" = "ការរំឭក";
+"calendar.welcome.feature2.subtitle" = "កុំភ្លេចការងារសំខាន់ៗដោយទទួលការជូនដំណឹងទាន់ពេលវេលា";
+"calendar.welcome.feature3.title" = "ភ្ជាប់ជាមួយចំណូល និងចំណាយ";
+"calendar.welcome.feature3.subtitle" = "តភ្ជាប់សកម្មភាពរបស់អ្នកទៅនឹងកំណត់ត្រាហិរញ្ញវត្ថុដោយផ្ទាល់";
+"calendar.welcome.continue" = "បន្ត";
 
 /* Repeat */
 "repeat.none" = "មិនធ្វើម្ដងទៀត";
@@ -70,14 +118,30 @@
 "notif.activity" = "សកម្មភាពកសិកម្ម";
 "notif.reminder" = "ការរំឭក";
 "notif.tomorrow" = "ស្អែក៖ ";
+"notifications.title" = "ការជូនដំណឹង";
 
 /* Dashboard */
 "dashboard.next7" = "ខាងមុខ ៧ ថ្ងៃ";
 "dashboard.noSchedule" = "គ្មានកាលវិភាគ";
+"dashboard.title" = "ថ្ងៃនេះ";
+"dashboard.todaySchedule" = "កម្មវិធីថ្ងៃនេះ";
+"dashboard.noScheduleToday" = "មិនមានកម្មវិធីសម្រាប់ថ្ងៃនេះ";
+
+/* App welcome (Dashboard/Today tab) */
+"appWelcome.titleLine1" = "សូមស្វាគមន៍មកកាន់";
+"appWelcome.titleLine2" = "SmartFarm";
+"appWelcome.tagline" = "គ្រប់គ្រងដំណាំ ដោយស្រួល ជាមួយបច្ចេកវិទ្យា";
+"appWelcome.feature1.title" = "មើលកម្មវិធីថ្ងៃនេះក្នុងមួយភ្លែត";
+"appWelcome.feature1.subtitle" = "មើលឃើញកាលវិភាគ និងកិច្ចការសំខាន់ៗប្រចាំថ្ងៃភ្លាមៗ";
+"appWelcome.feature2.title" = "តាមដានសកម្មភាពកសិកម្ម";
+"appWelcome.feature2.subtitle" = "តាមដានការងារកសិកម្មរបស់អ្នកជារៀងរាល់ថ្ងៃ";
+"appWelcome.feature3.title" = "បន្ថែមរហ័ស";
+"appWelcome.feature3.subtitle" = "បន្ថែមការរំឭក ឬសកម្មភាពថ្មីបានយ៉ាងឆាប់រហ័ស";
+"appWelcome.continue" = "បន្ត";
 
 /* Reports */
 "reports.title" = "របាយការណ៍";
-"reports.last6" = "ចំណេញ/ខាត ៦ ខែចុងក្រោយ";
+"reports.last6" = "សកម្មភាព · ៦ ខែចុងក្រោយ";
 "reports.exportCSV" = "នាំចេញ CSV";
 "reports.exportPDF" = "នាំចេញ PDF";
 "reports.noData" = "មិនមានទិន្នន័យ";
@@ -85,15 +149,30 @@
 "reports.totalIncome" = "ចំណូលសរុប";
 "reports.totalExpense" = "ចំណាយសរុប";
 "reports.transactions" = "ប្រតិបត្តិការ";
+"reports.byCategory" = "តាមប្រភេទ";
+"reports.summary" = "សង្ខេប";
+"reports.completedActivities" = "សកម្មភាពបានបញ្ចប់";
+"reports.upcomingActivities" = "សកម្មភាពខាងមុខ";
+"reports.completedReminders" = "ការរំឭកបានបញ្ចប់";
+"reports.upcomingReminders" = "ការរំឭកខាងមុខ";
+"reports.activityPdfTitle" = "របាយការណ៍សកម្មភាពកសិកម្ម SmartFarm";
+"reports.activitiesList" = "សកម្មភាព";
+"reports.remindersList" = "ការរំឭក";
 
 /* Settings */
 "settings.preferences" = "ចំណូលចិត្ត";
 "settings.language" = "ភាសា";
 "settings.displayCurrency" = "រូបិយប័ណ្ណ";
+"settings.weekStartDay" = "ថ្ងៃចាប់ផ្តើមសប្តាហ៍";
+"settings.weekStart.sunday" = "ថ្ងៃអាទិត្យ";
+"settings.weekStart.monday" = "ថ្ងៃចន្ទ";
 "settings.data" = "ទិន្នន័យ";
 "settings.reports" = "របាយការណ៍ & គំនូសតាង";
 "settings.backup" = "បម្រុងទុក & ស្ដារ";
 "settings.about" = "អំពី";
+"about.version" = "កំណែ %@";
+"about.tagline" = "កម្មវិធីគ្រប់គ្រងកិច្ចការកសិកម្ម សម្រាប់កសិករខ្នាតតូចកម្ពុជា";
+"about.credit" = "បង្កើតឡើងដោយក្តីស្រឡាញ់ សម្រាប់កសិករកម្ពុជា";
 
 /* Backup */
 "backup.description" = "បម្រុងទុកទិន្នន័យទាំងអស់ជា JSON ហើយស្ដារពេលត្រូវការ។";

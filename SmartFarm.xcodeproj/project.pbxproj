@@ -7,17 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01C6A7E68CA6FA0DBED551F1 /* MonthlyActivityBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296D9C1F95BA9FB08D9DE0AB /* MonthlyActivityBarChartView.swift */; };
 		04118899BEC56FCD3AC199FB /* CalendarTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A91EBE0B4EAA8192495F679 /* CalendarTabView.swift */; };
 		0CD3FC78630399C1A73C1579 /* MonthlyBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D634FC18996BB5B0A982E8 /* MonthlyBarChartView.swift */; };
+		0F53F3D079A045C964F55FAC /* AppWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B1A6C1C5269F437C2D6BBA /* AppWelcomeView.swift */; };
 		16F8AD142FC92BAD0095E58B /* FinanceTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F8AD132FC92BAD0095E58B /* FinanceTabView.swift */; };
 		16F8AD172FC92C490095E58B /* FinanceCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F8AD162FC92C490095E58B /* FinanceCoordinator.swift */; };
 		1ED8F70F019EF8C4A3CC44B3 /* BackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E1630B8417A11CB58BAF66 /* BackupView.swift */; };
 		1FCBDACF1FAEB1872651DFC2 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544E6CA93DA099DEEC2239F6 /* CalendarViewModel.swift */; };
 		269E8A2511A9A1AE638D8A89 /* SummaryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47CDEAD9F43D7EDFFEBD042 /* SummaryCardView.swift */; };
 		27645EB0F2FFD4DE8C099CF2 /* BackupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA6EFCAFA45DF26D358461 /* BackupService.swift */; };
+		29F6D129E7623968CF5FA9ED /* AgendaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5DE7B52F4DA2231C5D0D7A /* AgendaItem.swift */; };
+		33A74252CB8199536CA0AAB5 /* CalendarTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95934419ECBB6DCBABBCA79 /* CalendarTheme.swift */; };
 		374E7CFAF5FB116C17DEA4A3 /* ReportsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F772BB194710E2126B32B1EF /* ReportsViewModel.swift */; };
 		3C068878F36FAC79B70DDB59 /* AddEditReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B89A5A3F44E295F8B88D9B4 /* AddEditReminderView.swift */; };
 		3C9C00E224B97D842DDD137E /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8495955502A1826DDCBEA8ED /* DocumentPicker.swift */; };
+		45DA671872704F533BDFED3C /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A7D2309C18D05163D5651B /* BackButton.swift */; };
 		529340F293EC18D84BDE2B9C /* LocalizedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CEE319739603BD9D4B8492 /* LocalizedDate.swift */; };
 		540A068D27B921C5D732649C /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2EEA510B98B27522E3AEB3 /* Localization.swift */; };
 		540AB925D7CA8D339D886E33 /* FinanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7433561DD054D9E420E7E7CB /* FinanceViewModel.swift */; };
@@ -35,12 +40,14 @@
 		76462DCD158E735B1329A91A /* FarmCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EFDCA77AAEA8C9A488AA0D /* FarmCard.swift */; };
 		768BE8DA82356AB17D0E799D /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C7B4C5DA34E9191B8AA6A9 /* SectionHeader.swift */; };
 		84F62A80A40877C7EB95B718 /* TransactionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C52615BCE25A7DCCB344F /* TransactionRow.swift */; };
+		92B141214AF1C27CE94B988D /* CalendarWelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24076D807F17C89432AF39D /* CalendarWelcomeView.swift */; };
 		9B94BD435D2EFD43389788D0 /* TransactionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4CE139EF90E9F8CB9E858A /* TransactionDetailView.swift */; };
 		A172906B0FAFF6AA20B61967 /* ReminderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE329F5275D84485181EF2F /* ReminderRepository.swift */; };
 		AA000010FFFFFFFF00000001 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000010FFFFFFFF00000000 /* Transaction.swift */; };
 		AA000011FFFFFFFF00000001 /* FarmActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000011FFFFFFFF00000000 /* FarmActivity.swift */; };
 		AA000012FFFFFFFF00000001 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000012FFFFFFFF00000000 /* Reminder.swift */; };
 		AA000030FFFFFFFF00000001 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000030FFFFFFFF00000000 /* MainTabView.swift */; };
+		B905129E6F32CD13BAC27A3A /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1B709A1729973D6ED39D94 /* AboutView.swift */; };
 		BA9B10B7F4848D75DEA42DE2 /* TransactionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F37EF303E2D06E151ADE2E /* TransactionRepository.swift */; };
 		BB000001FFFFFFFF00000001 /* FarmActivityEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001FFFFFFFF00000000 /* FarmActivityEntity+CoreDataClass.swift */; };
 		BB000002FFFFFFFF00000001 /* FarmActivityEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000002FFFFFFFF00000000 /* FarmActivityEntity+CoreDataProperties.swift */; };
@@ -51,11 +58,18 @@
 		BD50A18A0AE41BED4189EF8B /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8D3DB6ED50B96DCB4E435F /* DashboardViewModel.swift */; };
 		CC32963EE21AFF9B3B5814BC /* AddEditTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCD23D16CC80CD1C1DBAA7C /* AddEditTransactionView.swift */; };
 		D171B582FB54BD9D5E4B6459 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E00014420D8B98794049E6C /* PrimaryButton.swift */; };
+		D1E49C0A353DA87009E41EEB /* CalendarTabContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973DF5596DF6E520C9F1CDB7 /* CalendarTabContainerView.swift */; };
 		D6EABDAB52177CD3C7F16917 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97A17C927E1B26B0164FA52 /* SettingsView.swift */; };
+		DAD931CFB6B82D602D57DDE3 /* AgendaListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB73EB75509B47B668E0F7B /* AgendaListView.swift */; };
 		DBAA3E19A2BCEE2C629C9511 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646CCFAB533220776F66B73B /* AppEnvironment.swift */; };
 		E1647E452BD75B8BE5BFCFA5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F16E6FA69A9C7FF925CDC8C /* Localizable.strings */; };
+		EF467872290471486B6C4BF9 /* MonthCalendarGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479BB46186E7D98EDDB72FBB /* MonthCalendarGridView.swift */; };
+		F0F01AAB6CADCDA64955D66E /* DashboardTabContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D14CA5801923A228B77B3 /* DashboardTabContainerView.swift */; };
 		F52ECAFC854DA30F072B0E74 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A69DF63E2BD5A0C1B957AE /* DashboardView.swift */; };
+		F56B6239306D2FBF000F707B /* cartoon-lifestyle-summertime-scene.PNG in Resources */ = {isa = PBXBuildFile; fileRef = F56B6238306D2FBF000F707B /* cartoon-lifestyle-summertime-scene.PNG */; };
+		F585A2E7306C278800A6AB79 /* anime-rainbow-landscape.PNG in Resources */ = {isa = PBXBuildFile; fileRef = F585A2E6306C278800A6AB79 /* anime-rainbow-landscape.PNG */; };
 		F7CC0CFC3EE872895E78B685 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252BDC2E90F2FC2F3464F4B0 /* NotificationService.swift */; };
+		F95B4CF0325E77E7D6EE37B7 /* AgendaRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E10516F9B79236CE51FFB97 /* AgendaRow.swift */; };
 		F9F95BC035D80A1FBD4A1901 /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F62EF3503DE1B702DBBC29 /* CurrencyFormatter.swift */; };
 		FA3824574B6AC970629E4E91 /* ActivityShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF91A8EB50C7BFE2E2EEA3DA /* ActivityShareSheet.swift */; };
 /* End PBXBuildFile section */
@@ -64,15 +78,21 @@
 		14CEE319739603BD9D4B8492 /* LocalizedDate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LocalizedDate.swift; sourceTree = "<group>"; };
 		16F8AD132FC92BAD0095E58B /* FinanceTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceTabView.swift; sourceTree = "<group>"; };
 		16F8AD162FC92C490095E58B /* FinanceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceCoordinator.swift; sourceTree = "<group>"; };
+		1A5DE7B52F4DA2231C5D0D7A /* AgendaItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AgendaItem.swift; sourceTree = "<group>"; };
+		1E10516F9B79236CE51FFB97 /* AgendaRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AgendaRow.swift; sourceTree = "<group>"; };
 		20F37EF303E2D06E151ADE2E /* TransactionRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TransactionRepository.swift; sourceTree = "<group>"; };
 		232EFA6CB70F42DB0AC28DBE /* km */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = km; path = km.lproj/Localizable.strings; sourceTree = "<group>"; };
+		24B1A6C1C5269F437C2D6BBA /* AppWelcomeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppWelcomeView.swift; sourceTree = "<group>"; };
 		252BDC2E90F2FC2F3464F4B0 /* NotificationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		296D9C1F95BA9FB08D9DE0AB /* MonthlyActivityBarChartView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MonthlyActivityBarChartView.swift; sourceTree = "<group>"; };
 		2D2EEA510B98B27522E3AEB3 /* Localization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		33A7D2309C18D05163D5651B /* BackButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		3B89A5A3F44E295F8B88D9B4 /* AddEditReminderView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AddEditReminderView.swift; sourceTree = "<group>"; };
 		41C7B4C5DA34E9191B8AA6A9 /* SectionHeader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		41D634FC18996BB5B0A982E8 /* MonthlyBarChartView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MonthlyBarChartView.swift; sourceTree = "<group>"; };
 		44A69DF63E2BD5A0C1B957AE /* DashboardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		44EFDCA77AAEA8C9A488AA0D /* FarmCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FarmCard.swift; sourceTree = "<group>"; };
+		479BB46186E7D98EDDB72FBB /* MonthCalendarGridView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MonthCalendarGridView.swift; sourceTree = "<group>"; };
 		5089766D349FE12B8A6BA390 /* AddEditActivityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AddEditActivityView.swift; sourceTree = "<group>"; };
 		544E6CA93DA099DEEC2239F6 /* CalendarViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		5A91EBE0B4EAA8192495F679 /* CalendarTabView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CalendarTabView.swift; sourceTree = "<group>"; };
@@ -92,12 +112,17 @@
 		7E00014420D8B98794049E6C /* PrimaryButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		8495955502A1826DDCBEA8ED /* DocumentPicker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		8EE329F5275D84485181EF2F /* ReminderRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReminderRepository.swift; sourceTree = "<group>"; };
+		973DF5596DF6E520C9F1CDB7 /* CalendarTabContainerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CalendarTabContainerView.swift; sourceTree = "<group>"; };
+		A95934419ECBB6DCBABBCA79 /* CalendarTheme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CalendarTheme.swift; sourceTree = "<group>"; };
 		AA000010FFFFFFFF00000000 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		AA000011FFFFFFFF00000000 /* FarmActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmActivity.swift; sourceTree = "<group>"; };
 		AA000012FFFFFFFF00000000 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		AA000030FFFFFFFF00000000 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		AA1B709A1729973D6ED39D94 /* AboutView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		ACCD23D16CC80CD1C1DBAA7C /* AddEditTransactionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AddEditTransactionView.swift; sourceTree = "<group>"; };
 		AF91A8EB50C7BFE2E2EEA3DA /* ActivityShareSheet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityShareSheet.swift; sourceTree = "<group>"; };
+		AFB73EB75509B47B668E0F7B /* AgendaListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AgendaListView.swift; sourceTree = "<group>"; };
+		B58D14CA5801923A228B77B3 /* DashboardTabContainerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DashboardTabContainerView.swift; sourceTree = "<group>"; };
 		BB000001FFFFFFFF00000000 /* FarmActivityEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FarmActivityEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BB000002FFFFFFFF00000000 /* FarmActivityEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FarmActivityEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BB000003FFFFFFFF00000000 /* TransactionEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -107,9 +132,12 @@
 		C1B559CD4ABA0CEA7BD6588E /* en */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C5DCE8EAC3AC847D22A9CEBE /* ReportsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReportsView.swift; sourceTree = "<group>"; };
 		CE4C52615BCE25A7DCCB344F /* TransactionRow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TransactionRow.swift; sourceTree = "<group>"; };
+		D24076D807F17C89432AF39D /* CalendarWelcomeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CalendarWelcomeView.swift; sourceTree = "<group>"; };
 		D3DA6EFCAFA45DF26D358461 /* BackupService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BackupService.swift; sourceTree = "<group>"; };
 		D435732736930ACF921D1B38 /* Theme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		E47CDEAD9F43D7EDFFEBD042 /* SummaryCardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SummaryCardView.swift; sourceTree = "<group>"; };
+		F56B6238306D2FBF000F707B /* cartoon-lifestyle-summertime-scene.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cartoon-lifestyle-summertime-scene.PNG"; path = "../../../Downloads/cartoon-lifestyle-summertime-scene.PNG"; sourceTree = "<group>"; };
+		F585A2E6306C278800A6AB79 /* anime-rainbow-landscape.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "anime-rainbow-landscape.PNG"; path = "../../../Downloads/anime-rainbow-landscape.PNG"; sourceTree = "<group>"; };
 		F772BB194710E2126B32B1EF /* ReportsViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReportsViewModel.swift; sourceTree = "<group>"; };
 		F97A17C927E1B26B0164FA52 /* SettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		FB8D3DB6ED50B96DCB4E435F /* DashboardViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
@@ -132,7 +160,6 @@
 			children = (
 				F772BB194710E2126B32B1EF /* ReportsViewModel.swift */,
 			);
-			name = ViewModels;
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
@@ -160,7 +187,6 @@
 			children = (
 				2D2EEA510B98B27522E3AEB3 /* Localization.swift */,
 			);
-			name = Localization;
 			path = Localization;
 			sourceTree = "<group>";
 		};
@@ -169,8 +195,8 @@
 			children = (
 				41D634FC18996BB5B0A982E8 /* MonthlyBarChartView.swift */,
 				C5DCE8EAC3AC847D22A9CEBE /* ReportsView.swift */,
+				296D9C1F95BA9FB08D9DE0AB /* MonthlyActivityBarChartView.swift */,
 			);
-			name = Views;
 			path = Views;
 			sourceTree = "<group>";
 		};
@@ -179,7 +205,6 @@
 			children = (
 				544E6CA93DA099DEEC2239F6 /* CalendarViewModel.swift */,
 			);
-			name = ViewModels;
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
@@ -190,7 +215,6 @@
 				65E14D3620E22C1EDE6ED23C /* FarmActivityRepository.swift */,
 				8EE329F5275D84485181EF2F /* ReminderRepository.swift */,
 			);
-			name = Repositories;
 			path = Repositories;
 			sourceTree = "<group>";
 		};
@@ -200,8 +224,14 @@
 				5089766D349FE12B8A6BA390 /* AddEditActivityView.swift */,
 				3B89A5A3F44E295F8B88D9B4 /* AddEditReminderView.swift */,
 				5A91EBE0B4EAA8192495F679 /* CalendarTabView.swift */,
+				D24076D807F17C89432AF39D /* CalendarWelcomeView.swift */,
+				973DF5596DF6E520C9F1CDB7 /* CalendarTabContainerView.swift */,
+				479BB46186E7D98EDDB72FBB /* MonthCalendarGridView.swift */,
+				A95934419ECBB6DCBABBCA79 /* CalendarTheme.swift */,
+				1A5DE7B52F4DA2231C5D0D7A /* AgendaItem.swift */,
+				1E10516F9B79236CE51FFB97 /* AgendaRow.swift */,
+				AFB73EB75509B47B668E0F7B /* AgendaListView.swift */,
 			);
-			name = Views;
 			path = Views;
 			sourceTree = "<group>";
 		};
@@ -227,6 +257,8 @@
 				5B3BCB122FAD97EA009A2991 /* SmartFarmApp.swift */,
 				5B3BCB1B2FAD97EC009A2991 /* Persistence.swift */,
 				5B3BCB162FAD97EC009A2991 /* Assets.xcassets */,
+				F56B6238306D2FBF000F707B /* cartoon-lifestyle-summertime-scene.PNG */,
+				F585A2E6306C278800A6AB79 /* anime-rainbow-landscape.PNG */,
 				5B3BCB1D2FAD97EC009A2991 /* SmartFarm.xcdatamodeld */,
 				5B3BCB182FAD97EC009A2991 /* Preview Content */,
 				AA000005FFFFFFFF00000000 /* Dashboard */,
@@ -258,8 +290,8 @@
 				41C7B4C5DA34E9191B8AA6A9 /* SectionHeader.swift */,
 				7E00014420D8B98794049E6C /* PrimaryButton.swift */,
 				E47CDEAD9F43D7EDFFEBD042 /* SummaryCardView.swift */,
+				33A7D2309C18D05163D5651B /* BackButton.swift */,
 			);
-			name = Components;
 			path = Components;
 			sourceTree = "<group>";
 		};
@@ -285,6 +317,8 @@
 			children = (
 				AA000030FFFFFFFF00000000 /* MainTabView.swift */,
 				44A69DF63E2BD5A0C1B957AE /* DashboardView.swift */,
+				24B1A6C1C5269F437C2D6BBA /* AppWelcomeView.swift */,
+				B58D14CA5801923A228B77B3 /* DashboardTabContainerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -334,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				F97A17C927E1B26B0164FA52 /* SettingsView.swift */,
+				AA1B709A1729973D6ED39D94 /* AboutView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -362,7 +397,6 @@
 				D435732736930ACF921D1B38 /* Theme.swift */,
 				81289C6DA5578E5D311ED7E5 /* Components */,
 			);
-			name = DesignSystem;
 			path = DesignSystem;
 			sourceTree = "<group>";
 		};
@@ -371,7 +405,6 @@
 			children = (
 				FB8D3DB6ED50B96DCB4E435F /* DashboardViewModel.swift */,
 			);
-			name = ViewModels;
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
@@ -384,7 +417,6 @@
 				8495955502A1826DDCBEA8ED /* DocumentPicker.swift */,
 				14CEE319739603BD9D4B8492 /* LocalizedDate.swift */,
 			);
-			name = Utilities;
 			path = Utilities;
 			sourceTree = "<group>";
 		};
@@ -396,7 +428,6 @@
 				D79B3E71091E3555AC4CBB56 /* Utilities */,
 				1B351C0BEDCE6B459272AC52 /* Localization */,
 			);
-			name = Core;
 			path = Core;
 			sourceTree = "<group>";
 		};
@@ -406,7 +437,6 @@
 				D3DA6EFCAFA45DF26D358461 /* BackupService.swift */,
 				64E1630B8417A11CB58BAF66 /* BackupView.swift */,
 			);
-			name = Backup;
 			path = Backup;
 			sourceTree = "<group>";
 		};
@@ -416,7 +446,6 @@
 				646CCFAB533220776F66B73B /* AppEnvironment.swift */,
 				775FDFA2A3764BF9A10F9110 /* AppSettings.swift */,
 			);
-			name = App;
 			path = App;
 			sourceTree = "<group>";
 		};
@@ -427,7 +456,6 @@
 				1E2FC1B8FA6F69BB0A14B47C /* Views */,
 				6361C6C201E9E1C107E6CED5 /* ReportExporter.swift */,
 			);
-			name = Reports;
 			path = Reports;
 			sourceTree = "<group>";
 		};
@@ -493,6 +521,8 @@
 				5B3BCB1A2FAD97EC009A2991 /* Preview Assets.xcassets in Resources */,
 				5B3BCB172FAD97EC009A2991 /* Assets.xcassets in Resources */,
 				E1647E452BD75B8BE5BFCFA5 /* Localizable.strings in Resources */,
+				F585A2E7306C278800A6AB79 /* anime-rainbow-landscape.PNG in Resources */,
+				F56B6239306D2FBF000F707B /* cartoon-lifestyle-summertime-scene.PNG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +581,18 @@
 				540A068D27B921C5D732649C /* Localization.swift in Sources */,
 				6855B307091AD28936E7E1E0 /* AppSettings.swift in Sources */,
 				529340F293EC18D84BDE2B9C /* LocalizedDate.swift in Sources */,
+				92B141214AF1C27CE94B988D /* CalendarWelcomeView.swift in Sources */,
+				D1E49C0A353DA87009E41EEB /* CalendarTabContainerView.swift in Sources */,
+				0F53F3D079A045C964F55FAC /* AppWelcomeView.swift in Sources */,
+				F0F01AAB6CADCDA64955D66E /* DashboardTabContainerView.swift in Sources */,
+				45DA671872704F533BDFED3C /* BackButton.swift in Sources */,
+				01C6A7E68CA6FA0DBED551F1 /* MonthlyActivityBarChartView.swift in Sources */,
+				EF467872290471486B6C4BF9 /* MonthCalendarGridView.swift in Sources */,
+				33A74252CB8199536CA0AAB5 /* CalendarTheme.swift in Sources */,
+				29F6D129E7623968CF5FA9ED /* AgendaItem.swift in Sources */,
+				F95B4CF0325E77E7D6EE37B7 /* AgendaRow.swift in Sources */,
+				DAD931CFB6B82D602D57DDE3 /* AgendaListView.swift in Sources */,
+				B905129E6F32CD13BAC27A3A /* AboutView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

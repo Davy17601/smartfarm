@@ -36,8 +36,7 @@ final class AppEnvironment: ObservableObject {
     }
 
     func makeDashboardViewModel() -> DashboardViewModel {
-        DashboardViewModel(transactionRepository: transactionRepository,
-                           activityRepository: activityRepository,
+        DashboardViewModel(activityRepository: activityRepository,
                            reminderRepository: reminderRepository)
     }
 

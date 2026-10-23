@@ -44,20 +44,42 @@ final class ReportsViewModel: ObservableObject {
 
         guard total > 0 else { return [] }
 
-        // Group by category and sum
+        // Group by LOCALIZED category name and sum (fixes duplicate category issue)
         var categoryTotals: [String: Double] = [:]
         for tx in expenses {
-            categoryTotals[tx.category, default: 0] += tx.amount
+            let localizedName = TransactionCategory.localizedName(for: tx.category)
+            categoryTotals[localizedName, default: 0] += tx.amount
         }
 
-        // Convert to breakdown with percentages, using localized category names
-        return categoryTotals.map { category, amount in
+        // Convert to breakdown with percentages, sorted by amount descending
+        let allCategories = categoryTotals.map { category, amount in
             CategoryBreakdown(
-                category: TransactionCategory.localizedName(for: category),
+                category: category,
                 amount: amount,
                 percentage: (amount / total) * 100
             )
-        }.sorted { $0.amount > $1.amount } // Sort by amount descending
+        }.sorted { $0.amount > $1.amount }
+
+        // Limit to top 6 categories, group the rest into "ផ្សេងៗ"
+        let maxCategories = 6
+        if allCategories.count <= maxCategories {
+            return allCategories
+        }
+
+        let topCategories = Array(allCategories.prefix(maxCategories))
+        let otherCategories = Array(allCategories.dropFirst(maxCategories))
+        let otherTotal = otherCategories.reduce(0.0) { $0 + $1.amount }
+        let otherPercentage = (otherTotal / total) * 100
+
+        if otherTotal > 0 {
+            return topCategories + [CategoryBreakdown(
+                category: "ផ្សេងៗ",
+                amount: otherTotal,
+                percentage: otherPercentage
+            )]
+        }
+
+        return topCategories
     }
 
     private func computeMonthlyTotals(monthsBack: Int) -> [MonthlyTotal] {

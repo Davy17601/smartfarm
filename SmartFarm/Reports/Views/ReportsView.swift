@@ -4,6 +4,7 @@ import SwiftUI
 struct ReportsView: View {
     @StateObject private var viewModel: ReportsViewModel
     @EnvironmentObject private var settings: AppSettings
+    @EnvironmentObject private var coordinator: FinanceCoordinator
     @State private var selectedTab = 0
     @State private var selectedMonth = Date()
 
@@ -23,17 +24,22 @@ struct ReportsView: View {
                 // 3. Tab Selector
                 tabSelector
 
-                // 4. Summary Card
-                summaryCard
-
-                // 5. Line/Bar Combo Chart Section
-                chartSection
-
-                // 6. Donut/Pie Chart Section
-                pieChartSection
-
-                // 7. Insight/Tip Box
-                insightBox
+                // 4. Tab-specific content
+                if selectedTab == 0 {
+                    // Overview tab - show everything
+                    summaryCard
+                    chartSection
+                    pieChartSection
+                    insightBox
+                } else if selectedTab == 1 {
+                    // Income/Expense tab
+                    incomeExpenseSummary
+                    incomeExpenseChartSection
+                    pieChartSection
+                } else if selectedTab == 2 {
+                    // Category tab - keep current content
+                    pieChartSection
+                }
             }
             .padding(Theme.Spacing.m)
             .padding(.bottom, 60) // Clear tab bar
@@ -46,12 +52,21 @@ struct ReportsView: View {
     // MARK: - Header
 
     private var header: some View {
-        HStack {
+        HStack(spacing: Theme.Spacing.s) {
+            // Back button
+            Button(action: { coordinator.selectedTab = 1 }) {
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(Theme.primaryText)
+                    .frame(width: 36, height: 36)
+            }
+
+            // Icon and title
             Image(systemName: "chart.bar.fill")
-                .font(.system(size: 16))
+                .font(.system(size: 20))
                 .foregroundColor(Theme.brand)
             Text("របាយការណ៍")
-                .font(.title2.weight(.bold))
+                .font(.system(size: 28, weight: .bold))
                 .foregroundColor(Theme.primaryText)
             Spacer()
         }
@@ -179,7 +194,7 @@ struct ReportsView: View {
 
     private var chartSection: some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.s) {
-            Text("ការនិង្គ្រាក់ចំណេញ")
+            Text("ការវិភាគប្រាក់ចំណេញ")
                 .font(Theme.Fonts.body.weight(.semibold))
                 .foregroundColor(Theme.primaryText)
 
@@ -229,31 +244,43 @@ struct ReportsView: View {
 
             if !slices.isEmpty {
                 FarmCard {
-                    HStack(alignment: .top, spacing: Theme.Spacing.m) {
-                        // Pie chart
+                    VStack(spacing: Theme.Spacing.m) {
+                        // Donut chart centered at top
                         CategoryPieChartView(slices: slices, currency: viewModel.currency)
-                            .frame(width: 140, height: 140)
+                            .frame(width: 200, height: 200)
+                            .padding(.top, Theme.Spacing.m)
 
-                        // Legend
-                        VStack(alignment: .leading, spacing: 8) {
+                        // Legend below: one row per category
+                        VStack(alignment: .leading, spacing: 12) {
                             ForEach(slices) { slice in
-                                HStack(spacing: 8) {
+                                HStack(spacing: 10) {
+                                    // Colored dot
                                     Circle()
                                         .fill(slice.color)
-                                        .frame(width: 10, height: 10)
-                                    VStack(alignment: .leading, spacing: 2) {
-                                        Text(slice.category.isEmpty ? "-" : slice.category)
-                                            .font(.system(size: 12))
-                                            .foregroundColor(Theme.primaryText)
+                                        .frame(width: 12, height: 12)
+
+                                    // Category name
+                                    Text(slice.category.isEmpty ? "-" : slice.category)
+                                        .font(.system(size: 14, weight: .medium))
+                                        .foregroundColor(Theme.primaryText)
+
+                                    Spacer()
+
+                                    // Percentage and amount aligned right
+                                    VStack(alignment: .trailing, spacing: 2) {
                                         Text("\(Int(slice.percentage))%")
-                                            .font(.system(size: 11))
+                                            .font(.system(size: 14, weight: .semibold))
+                                            .foregroundColor(Theme.primaryText)
+                                        Text(CurrencyFormatter.string(slice.amount, currency: viewModel.currency))
+                                            .font(.system(size: 12))
                                             .foregroundColor(Theme.secondaryText)
                                     }
                                 }
                             }
                         }
+                        .padding(.horizontal, Theme.Spacing.s)
+                        .padding(.bottom, Theme.Spacing.m)
                     }
-                    .padding(Theme.Spacing.s)
                 }
             } else {
                 FarmCard {
@@ -266,7 +293,16 @@ struct ReportsView: View {
     }
 
     private func categoryColor(for index: Int) -> Color {
-        let colors: [Color] = [.purple, .red, .orange, .green, .blue, .pink]
+        // More distinct color palette for better visibility
+        let colors: [Color] = [
+            Color(red: 0.58, green: 0.40, blue: 0.74), // Purple
+            Color(red: 0.95, green: 0.42, blue: 0.42), // Red
+            Color(red: 0.20, green: 0.60, blue: 0.86), // Blue
+            Color(red: 0.35, green: 0.71, blue: 0.40), // Green
+            Color(red: 0.98, green: 0.74, blue: 0.20), // Orange/Gold
+            Color(red: 0.93, green: 0.49, blue: 0.68), // Pink
+            Color(red: 0.60, green: 0.60, blue: 0.60)  // Gray for "Other"
+        ]
         return colors[index % colors.count]
     }
 
@@ -291,6 +327,77 @@ struct ReportsView: View {
         .padding(Theme.Spacing.m)
         .background(Color.green.opacity(0.1))
         .cornerRadius(12)
+    }
+
+    // MARK: - Income/Expense Tab Content
+
+    private var incomeExpenseSummary: some View {
+        let latestMonth = viewModel.monthlyTotals.last
+        let income = latestMonth?.income ?? 0
+        let expense = latestMonth?.expense ?? 0
+
+        return HStack(spacing: Theme.Spacing.m) {
+            // Income card
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    Image(systemName: "arrow.up.circle.fill")
+                        .font(.system(size: 24))
+                        .foregroundColor(.green)
+                    Spacer()
+                }
+                Text("ចំណូល")
+                    .font(Theme.Fonts.caption)
+                    .foregroundColor(Theme.secondaryText)
+                Text(CurrencyFormatter.string(income, currency: settings.displayCurrency))
+                    .font(.title3.weight(.bold))
+                    .foregroundColor(Theme.primaryText)
+            }
+            .padding(Theme.Spacing.m)
+            .frame(maxWidth: .infinity)
+            .background(Color.green.opacity(0.1))
+            .cornerRadius(12)
+
+            // Expense card
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    Image(systemName: "arrow.down.circle.fill")
+                        .font(.system(size: 24))
+                        .foregroundColor(.red)
+                    Spacer()
+                }
+                Text("ចំណាយ")
+                    .font(Theme.Fonts.caption)
+                    .foregroundColor(Theme.secondaryText)
+                Text(CurrencyFormatter.string(expense, currency: settings.displayCurrency))
+                    .font(.title3.weight(.bold))
+                    .foregroundColor(Theme.primaryText)
+            }
+            .padding(Theme.Spacing.m)
+            .frame(maxWidth: .infinity)
+            .background(Color.red.opacity(0.1))
+            .cornerRadius(12)
+        }
+    }
+
+    private var incomeExpenseChartSection: some View {
+        VStack(alignment: .leading, spacing: Theme.Spacing.s) {
+            Text("ការវិភាគប្រាក់ចំណេញ")
+                .font(Theme.Fonts.body.weight(.semibold))
+                .foregroundColor(Theme.primaryText)
+
+            // Legend (without profit)
+            HStack(spacing: Theme.Spacing.m) {
+                legendItem(color: .green, label: "ចំណូល")
+                legendItem(color: .red, label: "ចំណាយ")
+            }
+            .font(Theme.Fonts.caption)
+
+            // Chart without profit line
+            FarmCard {
+                ReportsIncomeExpenseChartView(totals: viewModel.monthlyTotals, currency: viewModel.currency)
+                    .frame(height: 220)
+            }
+        }
     }
 }
 
@@ -362,5 +469,6 @@ struct ReportsView_Previews: PreviewProvider {
         let env = AppEnvironment(persistence: .preview)
         ReportsView(repository: env.transactionRepository)
             .environmentObject(AppSettings.shared)
+            .environmentObject(FinanceCoordinator())
     }
 }

@@ -25,7 +25,7 @@ final class ReportsViewModel: ObservableObject {
     @Published private(set) var monthlyTotals: [MonthlyTotal] = []
 
     private(set) var currency: Currency = .khr
-    private let repository: TransactionRepositoryProtocol
+    let repository: TransactionRepositoryProtocol
 
     init(repository: TransactionRepositoryProtocol) {
         self.repository = repository

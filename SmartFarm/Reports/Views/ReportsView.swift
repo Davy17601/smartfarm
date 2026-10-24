@@ -7,6 +7,8 @@ struct ReportsView: View {
     @EnvironmentObject private var coordinator: FinanceCoordinator
     @State private var selectedTab = 0
     @State private var selectedMonth = Date()
+    @State private var showProfitAnalysis = false
+    @State private var showDetailedReport = false
 
     init(repository: TransactionRepositoryProtocol) {
         _viewModel = StateObject(wrappedValue: ReportsViewModel(repository: repository))
@@ -47,6 +49,21 @@ struct ReportsView: View {
         .background(Theme.background.ignoresSafeArea())
         .onAppear { viewModel.reload(currency: settings.displayCurrency) }
         .onChange(of: settings.displayCurrency) { viewModel.reload(currency: $0) }
+        .sheet(isPresented: $showProfitAnalysis) {
+            NavigationView {
+                ProfitAnalysisView(repository: viewModel.repository)
+                    .environmentObject(settings)
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+        }
+        .sheet(isPresented: $showDetailedReport) {
+            NavigationView {
+                DetailedReportView(repository: viewModel.repository)
+                    .environmentObject(settings)
+                    .environmentObject(coordinator)
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+        }
     }
 
     // MARK: - Header
@@ -211,6 +228,38 @@ struct ReportsView: View {
                 MonthlyBarChartView(totals: viewModel.monthlyTotals, currency: viewModel.currency)
                     .frame(height: 220)
             }
+
+            // Detailed report button
+            Button(action: { showDetailedReport = true }) {
+                HStack(spacing: Theme.Spacing.s) {
+                    Image(systemName: "chart.bar.fill")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.white)
+
+                    Text("របាយការណ៍លម្អិត")
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundColor(.white)
+
+                    Spacer()
+
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.white)
+                }
+                .padding(Theme.Spacing.m)
+                .background(
+                    LinearGradient(
+                        gradient: Gradient(colors: [
+                            Color(red: 0.13, green: 0.55, blue: 0.13),
+                            Color(red: 0.10, green: 0.45, blue: 0.10)
+                        ]),
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                )
+                .cornerRadius(12)
+            }
+            .buttonStyle(PlainButtonStyle())
         }
     }
 

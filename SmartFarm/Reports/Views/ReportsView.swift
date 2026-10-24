@@ -6,7 +6,6 @@ struct ReportsView: View {
     @EnvironmentObject private var settings: AppSettings
     @EnvironmentObject private var coordinator: FinanceCoordinator
     @State private var selectedTab = 0
-    @State private var selectedMonth = Date()
     @State private var showProfitAnalysis = false
     @State private var showDetailedReport = false
 
@@ -49,6 +48,14 @@ struct ReportsView: View {
         .background(Theme.background.ignoresSafeArea())
         .onAppear { viewModel.reload(currency: settings.displayCurrency) }
         .onChange(of: settings.displayCurrency) { viewModel.reload(currency: $0) }
+        .onChange(of: viewModel.selectedMonth) { _ in
+            // Reload data when month changes
+            viewModel.reloadForSelectedMonth()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("TransactionDataChanged"))) { _ in
+            // Refresh when transactions change
+            viewModel.reload(currency: settings.displayCurrency)
+        }
         .sheet(isPresented: $showProfitAnalysis) {
             NavigationView {
                 ProfitAnalysisView(repository: viewModel.repository)
@@ -93,8 +100,14 @@ struct ReportsView: View {
     // MARK: - Month Selector
 
     private var monthSelector: some View {
-        HStack {
-            Button(action: { adjustMonth(by: -1) }) {
+        let canGoNext = viewModel.canGoToNextMonth()
+
+        return HStack {
+            Button(action: {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    viewModel.previousMonth()
+                }
+            }) {
                 Image(systemName: "chevron.left")
                     .foregroundColor(Theme.brand)
                     .frame(width: 44, height: 44)
@@ -112,11 +125,16 @@ struct ReportsView: View {
 
             Spacer()
 
-            Button(action: { adjustMonth(by: 1) }) {
+            Button(action: {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    viewModel.nextMonth()
+                }
+            }) {
                 Image(systemName: "chevron.right")
-                    .foregroundColor(Theme.brand)
+                    .foregroundColor(canGoNext ? Theme.brand : Theme.secondaryText.opacity(0.3))
                     .frame(width: 44, height: 44)
             }
+            .disabled(!canGoNext)
         }
         .padding(.horizontal, Theme.Spacing.m)
         .padding(.vertical, Theme.Spacing.s)
@@ -129,13 +147,7 @@ struct ReportsView: View {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "km")
         formatter.dateFormat = "MMMM yyyy"
-        return formatter.string(from: selectedMonth)
-    }
-
-    private func adjustMonth(by months: Int) {
-        if let newDate = Calendar.current.date(byAdding: .month, value: months, to: selectedMonth) {
-            selectedMonth = newDate
-        }
+        return formatter.string(from: viewModel.selectedMonth)
     }
 
     // MARK: - Tab Selector
@@ -166,8 +178,21 @@ struct ReportsView: View {
     // MARK: - Summary Card
 
     private var summaryCard: some View {
-        let profit = viewModel.monthlyTotals.last?.profit ?? 0
-        let percentage = calculateGrowthPercentage()
+        let currentData = viewModel.selectedMonthData()
+        let previousData = viewModel.previousMonthData()
+
+        let showBadge = previousData != nil
+        let percentageChange: Int
+        let isIncrease: Bool
+
+        if let prev = previousData, prev.profit != 0 {
+            let change = ((currentData.profit - prev.profit) / abs(prev.profit)) * 100
+            percentageChange = Int(abs(change))
+            isIncrease = change >= 0
+        } else {
+            percentageChange = 0
+            isIncrease = true
+        }
 
         return HStack {
             Image(systemName: "leaf.fill")
@@ -178,39 +203,39 @@ struct ReportsView: View {
                 Text("ប្រាក់ចំណេញសុទ្ធ")
                     .font(Theme.Fonts.caption)
                     .foregroundColor(Theme.secondaryText)
-                Text(CurrencyFormatter.string(profit, currency: settings.displayCurrency))
+                Text(CurrencyFormatter.string(currentData.profit, currency: settings.displayCurrency))
                     .font(.title3.weight(.bold))
                     .foregroundColor(Theme.primaryText)
             }
 
             Spacer()
 
-            HStack(spacing: 4) {
-                Image(systemName: "arrow.up")
-                    .font(.system(size: 10))
-                Text("\(percentage)%")
-                    .font(.system(size: 14, weight: .semibold))
+            if showBadge {
+                HStack(spacing: 4) {
+                    Image(systemName: isIncrease ? "arrow.up" : "arrow.down")
+                        .font(.system(size: 10))
+                    Text("\(percentageChange)%")
+                        .font(.system(size: 14, weight: .semibold))
+                }
+                .foregroundColor(.white)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(isIncrease ? Color.green : Color.red)
+                .cornerRadius(12)
             }
-            .foregroundColor(.white)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 6)
-            .background(Color.green)
-            .cornerRadius(12)
         }
         .padding(Theme.Spacing.m)
         .background(Color.green.opacity(0.1))
         .cornerRadius(12)
     }
 
-    private func calculateGrowthPercentage() -> Int {
-        // Simplified growth calculation
-        return 18
-    }
-
     // MARK: - Chart Section
 
     private var chartSection: some View {
-        VStack(alignment: .leading, spacing: Theme.Spacing.s) {
+        let hasData = !viewModel.monthlyTotals.isEmpty &&
+                      viewModel.monthlyTotals.contains { $0.income > 0 || $0.expense > 0 }
+
+        return VStack(alignment: .leading, spacing: Theme.Spacing.s) {
             Text("ការវិភាគប្រាក់ចំណេញ")
                 .font(Theme.Fonts.body.weight(.semibold))
                 .foregroundColor(Theme.primaryText)
@@ -225,8 +250,18 @@ struct ReportsView: View {
 
             // Chart
             FarmCard {
-                MonthlyBarChartView(totals: viewModel.monthlyTotals, currency: viewModel.currency)
+                if hasData {
+                    MonthlyBarChartView(totals: viewModel.monthlyTotals, currency: viewModel.currency)
+                        .frame(height: 220)
+                } else {
+                    VStack(spacing: Theme.Spacing.s) {
+                        Text("មិនមានទិន្នន័យក្នុងខែនេះ")
+                            .font(Theme.Fonts.body)
+                            .foregroundColor(Theme.secondaryText)
+                    }
                     .frame(height: 220)
+                    .frame(maxWidth: .infinity)
+                }
             }
 
             // Detailed report button
@@ -381,9 +416,9 @@ struct ReportsView: View {
     // MARK: - Income/Expense Tab Content
 
     private var incomeExpenseSummary: some View {
-        let latestMonth = viewModel.monthlyTotals.last
-        let income = latestMonth?.income ?? 0
-        let expense = latestMonth?.expense ?? 0
+        let currentData = viewModel.selectedMonthData()
+        let income = currentData.income
+        let expense = currentData.expense
 
         return HStack(spacing: Theme.Spacing.m) {
             // Income card
@@ -429,7 +464,10 @@ struct ReportsView: View {
     }
 
     private var incomeExpenseChartSection: some View {
-        VStack(alignment: .leading, spacing: Theme.Spacing.s) {
+        let hasData = !viewModel.monthlyTotals.isEmpty &&
+                      viewModel.monthlyTotals.contains { $0.income > 0 || $0.expense > 0 }
+
+        return VStack(alignment: .leading, spacing: Theme.Spacing.s) {
             Text("ការវិភាគប្រាក់ចំណេញ")
                 .font(Theme.Fonts.body.weight(.semibold))
                 .foregroundColor(Theme.primaryText)
@@ -443,8 +481,18 @@ struct ReportsView: View {
 
             // Chart without profit line
             FarmCard {
-                ReportsIncomeExpenseChartView(totals: viewModel.monthlyTotals, currency: viewModel.currency)
+                if hasData {
+                    ReportsIncomeExpenseChartView(totals: viewModel.monthlyTotals, currency: viewModel.currency)
+                        .frame(height: 220)
+                } else {
+                    VStack(spacing: Theme.Spacing.s) {
+                        Text("មិនមានទិន្នន័យក្នុងខែនេះ")
+                            .font(Theme.Fonts.body)
+                            .foregroundColor(Theme.secondaryText)
+                    }
                     .frame(height: 220)
+                    .frame(maxWidth: .infinity)
+                }
             }
         }
     }

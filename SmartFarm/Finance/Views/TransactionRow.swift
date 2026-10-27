@@ -1,41 +1,82 @@
 import SwiftUI
 
-/// A single transaction cell: category icon, title + meta, signed amount.
+/// A single transaction cell: category icon, title + type label, signed amount + time.
 struct TransactionRow: View {
     let transaction: Transaction
 
-    private var tint: Color {
-        transaction.type == .income ? Theme.income : Theme.expense
+    // Darker, more saturated colors for better contrast
+    private let strongGreen = Color(red: 0.08, green: 0.50, blue: 0.24) // #15803D
+    private let strongRed = Color(red: 0.73, green: 0.11, blue: 0.11) // #B91C1C
+    private let darkText = Color(red: 0.07, green: 0.09, blue: 0.15) // #111827
+    private let grayText = Color(red: 0.29, green: 0.34, blue: 0.39) // #4B5563
+
+    private var categoryIcon: String {
+        guard !transaction.category.isEmpty else { return "tag.fill" }
+        // Try to match TransactionCategory enum cases
+        if let category = TransactionCategory(rawValue: transaction.category) {
+            return category.systemImage
+        }
+        return "tag.fill"
+    }
+
+    private var categoryColor: Color {
+        // Use a softer color for the category icon based on transaction type
+        transaction.type == .income ? Color.green : Color.red
+    }
+
+    private var typeLabel: String {
+        transaction.type == .income ? L("finance.income") : L("finance.expense")
+    }
+
+    private var amountColor: Color {
+        transaction.type == .income ? strongGreen : strongRed
     }
 
     private var signedAmount: String {
-        let prefix = transaction.type == .income ? "+" : "−"
+        let prefix = transaction.type == .income ? "+" : "-"
         return prefix + CurrencyFormatter.string(transaction.amount, currency: transaction.currency)
+    }
+
+    private var timeString: String {
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: transaction.date)
+        let minute = calendar.component(.minute, from: transaction.date)
+        return String(format: "%02d:%02d", hour, minute)
     }
 
     var body: some View {
         HStack(spacing: Theme.Spacing.m) {
-            Image(systemName: "tag.fill")
-                .foregroundColor(tint)
-                .frame(width: 28)
+            // Left: Round colored icon for category
+            Image(systemName: categoryIcon)
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundColor(.white)
+                .frame(width: 40, height: 40)
+                .background(categoryColor)
+                .clipShape(Circle())
 
+            // Middle: Title (bold dark) + Type label (gray)
             VStack(alignment: .leading, spacing: 2) {
                 Text(transaction.title)
-                    .font(Theme.Fonts.body)
-                    .foregroundColor(Theme.primaryText)
-                let categoryText = transaction.category.isEmpty ? "-" : transaction.category
-                Text("\(categoryText) · \(LocalizedDate.dayMonthString(transaction.date))")
-                    .font(Theme.Fonts.caption)
-                    .foregroundColor(Theme.secondaryText)
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(darkText)
+                Text(typeLabel)
+                    .font(.system(size: 13))
+                    .foregroundColor(grayText)
             }
 
             Spacer()
 
-            Text(signedAmount)
-                .font(Theme.Fonts.body.monospacedDigit())
-                .foregroundColor(tint)
+            // Right: Amount (bold colored) + Time (gray)
+            VStack(alignment: .trailing, spacing: 2) {
+                Text(signedAmount)
+                    .font(.system(size: 16, weight: .bold).monospacedDigit())
+                    .foregroundColor(amountColor)
+                Text(timeString)
+                    .font(.system(size: 13))
+                    .foregroundColor(grayText)
+            }
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, Theme.Spacing.s)
     }
 }
 

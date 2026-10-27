@@ -19,10 +19,14 @@
 "common.version" = "Version";
 
 /* Finance */
+"finance.subtitle" = "Manage your income and expenses";
 "finance.summary" = "Financial Summary";
 "finance.income" = "Income";
 "finance.expense" = "Expense";
 "finance.profit" = "Profit";
+"finance.totalIncome" = "Total Income";
+"finance.totalExpense" = "Total Expense";
+"finance.previous" = "Previous";
 "finance.profitLoss" = "Profit / Loss";
 "finance.profitThisMonth" = "Profit / Loss (this month)";
 "finance.search" = "Search";

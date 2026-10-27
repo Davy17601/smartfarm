@@ -51,19 +51,32 @@ final class FinanceViewModel: ObservableObject {
 
     var filteredTransactions: [Transaction] {
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        return transactions.filter { t in
-            let matchesType: Bool
-            switch filter {
-            case .all:     matchesType = true
-            case .income:  matchesType = t.type == .income
-            case .expense: matchesType = t.type == .expense
+        return transactions
+            .filter { t in
+                let matchesType: Bool
+                switch filter {
+                case .all:     matchesType = true
+                case .income:  matchesType = t.type == .income
+                case .expense: matchesType = t.type == .expense
+                }
+                let matchesCategory = selectedCategory == nil || t.category == selectedCategory
+                let matchesSearch = query.isEmpty
+                    || t.title.localizedCaseInsensitiveContains(query)
+                    || t.note.localizedCaseInsensitiveContains(query)
+                return matchesType && matchesCategory && matchesSearch
             }
-            let matchesCategory = selectedCategory == nil || t.category == selectedCategory
-            let matchesSearch = query.isEmpty
-                || t.title.localizedCaseInsensitiveContains(query)
-                || t.note.localizedCaseInsensitiveContains(query)
-            return matchesType && matchesCategory && matchesSearch
+            .sorted { $0.date > $1.date } // newest first
+    }
+
+    /// Groups filtered transactions by calendar day, newest day first
+    var groupedTransactions: [(date: Date, transactions: [Transaction])] {
+        let calendar = Calendar.current
+        let grouped = Dictionary(grouping: filteredTransactions) { transaction in
+            calendar.startOfDay(for: transaction.date)
         }
+        return grouped
+            .map { (date: $0.key, transactions: $0.value.sorted { $0.date > $1.date }) }
+            .sorted { $0.date > $1.date }
     }
 
     // MARK: - Current Month Calculations (synced with Dashboard)
@@ -116,6 +129,36 @@ final class FinanceViewModel: ObservableObject {
             calendar.isDate($0.date, equalTo: date, toGranularity: .month)
                 && $0.currency == currency
         }
+    }
+
+    // MARK: - Previous Month Comparison
+
+    /// Returns the percentage change from previous month for income (nil if previous month has no data)
+    func incomePercentChange(for date: Date, in currency: Currency) -> Double? {
+        let current = monthIncome(for: date, in: currency)
+        guard let previousDate = Calendar.current.date(byAdding: .month, value: -1, to: date) else { return nil }
+        let previous = monthIncome(for: previousDate, in: currency)
+        guard previous > 0 else { return nil }
+        return ((current - previous) / previous) * 100
+    }
+
+    /// Returns the percentage change from previous month for expense (nil if previous month has no data)
+    func expensePercentChange(for date: Date, in currency: Currency) -> Double? {
+        let current = monthExpense(for: date, in: currency)
+        guard let previousDate = Calendar.current.date(byAdding: .month, value: -1, to: date) else { return nil }
+        let previous = monthExpense(for: previousDate, in: currency)
+        guard previous > 0 else { return nil }
+        return ((current - previous) / previous) * 100
+    }
+
+    /// Returns the percentage change from previous month for profit (nil if previous month has no data)
+    func profitPercentChange(for date: Date, in currency: Currency) -> Double? {
+        let current = monthProfit(for: date, in: currency)
+        guard let previousDate = Calendar.current.date(byAdding: .month, value: -1, to: date) else { return nil }
+        let previous = monthProfit(for: previousDate, in: currency)
+        // Handle case where previous is 0 or very close to 0
+        guard abs(previous) > 0.01 else { return nil }
+        return ((current - previous) / abs(previous)) * 100
     }
 
     // MARK: - All-Time Calculations (kept for reference/future use)

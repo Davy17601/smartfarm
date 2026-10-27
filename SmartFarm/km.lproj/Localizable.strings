@@ -19,10 +19,14 @@
 "common.version" = "កំណែ";
 
 /* Finance */
+"finance.subtitle" = "គ្រប់គ្រងចំណូល-ចំណាយរបស់អ្នក";
 "finance.summary" = "សរុបហិរញ្ញវត្ថុ";
 "finance.income" = "ចំណូល";
 "finance.expense" = "ចំណាយ";
 "finance.profit" = "ប្រាក់ចំណេញ";
+"finance.totalIncome" = "ចំណូលសរុប";
+"finance.totalExpense" = "ចំណាយសរុប";
+"finance.previous" = "ពីមុន";
 "finance.profitLoss" = "ចំណេញ / ខាត";
 "finance.profitThisMonth" = "ចំណេញ / ខាត ខែនេះ";
 "finance.search" = "ស្វែងរក";

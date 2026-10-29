@@ -7,7 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		218C219AFED546EC8A8964A2 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12213A4FE9F44F3801EEE04 /* OnboardingView.swift */; };
+						26EB2B7E83634131B2EF137A /* JSONDocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820E675512A64303AC157831 /* JSONDocumentPicker.swift */; };
+E3E8657B63B84DB19DA32B84 /* LanguageSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C6FB0AB498497D805FCC9C /* LanguageSelectionView.swift */; };
+		343F0EC2D71C40E4A42C03E2 /* CurrencySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEE82268221463CB22D2E31 /* CurrencySelectionView.swift */; };
+		92CB8EAE47BD4AE7A50AA14D /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582D921DB454A2EA2E8A992 /* NotificationSettingsView.swift */; };
+		6E1D9BE19002434DBAE58A0C /* BackupDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31490744893D4F4C8AF02383 /* BackupDataView.swift */; };
+		AC2F045A790445CD826B4AAA /* HelpFAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CD26743CEA4774901F7B6D /* HelpFAQView.swift */; };
+		00C914F3DB084BA69CD6198B /* AboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CAC6643F9342BA8A52EA98 /* AboutAppView.swift */; };
+		F62205ECC7AF4E5A9099A5ED /* FarmProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE32EFCCA8D448596DBBECD /* FarmProfileEditView.swift */; };
+218C219AFED546EC8A8964A2 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12213A4FE9F44F3801EEE04 /* OnboardingView.swift */; };
 		04118899BEC56FCD3AC199FB /* CalendarTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A91EBE0B4EAA8192495F679 /* CalendarTabView.swift */; };
 		0CD3FC78630399C1A73C1579 /* MonthlyBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D634FC18996BB5B0A982E8 /* MonthlyBarChartView.swift */; };
 		08A8BBCAA5AA495ABED135D4 /* ProfitAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A5CCE2B468430FB7C2145A /* ProfitAnalysisView.swift */; };
@@ -65,7 +73,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F12213A4FE9F44F3801EEE04 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+						820E675512A64303AC157831 /* JSONDocumentPicker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = JSONDocumentPicker.swift; sourceTree = "<group>"; };
+C1C6FB0AB498497D805FCC9C /* LanguageSelectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LanguageSelectionView.swift; sourceTree = "<group>"; };
+		8CEE82268221463CB22D2E31 /* CurrencySelectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CurrencySelectionView.swift; sourceTree = "<group>"; };
+		C582D921DB454A2EA2E8A992 /* NotificationSettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
+		31490744893D4F4C8AF02383 /* BackupDataView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BackupDataView.swift; sourceTree = "<group>"; };
+		A8CD26743CEA4774901F7B6D /* HelpFAQView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HelpFAQView.swift; sourceTree = "<group>"; };
+		05CAC6643F9342BA8A52EA98 /* AboutAppView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
+		4FE32EFCCA8D448596DBBECD /* FarmProfileEditView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FarmProfileEditView.swift; sourceTree = "<group>"; };
+F12213A4FE9F44F3801EEE04 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		14CEE319739603BD9D4B8492 /* LocalizedDate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LocalizedDate.swift; sourceTree = "<group>"; };
 		16F8AD132FC92BAD0095E58B /* FinanceTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceTabView.swift; sourceTree = "<group>"; };
 		16F8AD162FC92C490095E58B /* FinanceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceCoordinator.swift; sourceTree = "<group>"; };
@@ -354,7 +370,14 @@
 			isa = PBXGroup;
 			children = (
 				F97A17C927E1B26B0164FA52 /* SettingsView.swift */,
-			);
+				C1C6FB0AB498497D805FCC9C /* LanguageSelectionView.swift */,
+				8CEE82268221463CB22D2E31 /* CurrencySelectionView.swift */,
+				C582D921DB454A2EA2E8A992 /* NotificationSettingsView.swift */,
+				31490744893D4F4C8AF02383 /* BackupDataView.swift */,
+				A8CD26743CEA4774901F7B6D /* HelpFAQView.swift */,
+				05CAC6643F9342BA8A52EA98 /* AboutAppView.swift */,
+				4FE32EFCCA8D448596DBBECD /* FarmProfileEditView.swift */,
+				820E675512A64303AC157831 /* JSONDocumentPicker.swift */,	);
 			path = Settings;
 			sourceTree = "<group>";
 		};
@@ -523,7 +546,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B3BCB1C2FAD97EC009A2991 /* Persistence.swift in Sources */,
+												26EB2B7E83634131B2EF137A /* JSONDocumentPicker.swift in Sources */,
+E3E8657B63B84DB19DA32B84 /* LanguageSelectionView.swift in Sources */,
+				343F0EC2D71C40E4A42C03E2 /* CurrencySelectionView.swift in Sources */,
+				92CB8EAE47BD4AE7A50AA14D /* NotificationSettingsView.swift in Sources */,
+				6E1D9BE19002434DBAE58A0C /* BackupDataView.swift in Sources */,
+				AC2F045A790445CD826B4AAA /* HelpFAQView.swift in Sources */,
+				00C914F3DB084BA69CD6198B /* AboutAppView.swift in Sources */,
+				F62205ECC7AF4E5A9099A5ED /* FarmProfileEditView.swift in Sources */,
+5B3BCB1C2FAD97EC009A2991 /* Persistence.swift in Sources */,
 				5B3BCB132FAD97EA009A2991 /* SmartFarmApp.swift in Sources */,
 				5B3BCB1F2FAD97EC009A2991 /* SmartFarm.xcdatamodeld in Sources */,
 				AA000012FFFFFFFF00000001 /* Reminder.swift in Sources */,

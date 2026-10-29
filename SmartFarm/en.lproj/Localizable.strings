@@ -115,13 +115,51 @@
 
 /* Settings */
 "settings.preferences" = "Preferences";
+"settings.general" = "General";
 "settings.language" = "Language";
 "settings.displayCurrency" = "Display currency";
+"settings.notifications" = "Notifications";
 "settings.data" = "Data";
 "settings.reports" = "Reports & Charts";
 "settings.backup" = "Backup & Restore";
+"settings.backupData" = "Backup data";
+"settings.help" = "Help";
+"settings.helpFAQ" = "Help & FAQ";
 "settings.about" = "About";
+"settings.aboutApp" = "About SmartFarm";
+"settings.farmProfile" = "Farm Profile";
 "settings.chartTitle" = "Income & Expense Chart";
+"settings.dailyNotifications" = "Daily notifications";
+"settings.weeklyReports" = "Weekly reports";
+"settings.transactionReminders" = "Transaction reminders";
+"settings.backupNow" = "Backup now";
+"settings.lastBackup" = "Last backup";
+"settings.noBackup" = "No backup yet";
+"settings.backupDescription" = "Back up your financial data to a JSON file for safe keeping.";
+"settings.backupSuccess" = "Backup successful";
+"settings.restore" = "Restore data";
+"settings.restoreHint" = "Select a previously backed up JSON file to restore your data";
+"settings.restoreConfirmTitle" = "Restore data?";
+"settings.restoreConfirmMessage" = "Found %d transactions in file. Do you want to restore?";
+"settings.restoreSuccessTitle" = "Restore successful";
+"settings.restoreSuccessMessage" = "Added %d transactions, skipped %d duplicates";
+"settings.invalidFileTitle" = "Invalid file";
+"settings.invalidFileMessage" = "This file is not a valid SmartFarm backup.";
+"settings.farmName" = "Farm name";
+"settings.village" = "Village";
+"settings.province" = "Province";
+"settings.editProfile" = "Edit profile";
+"settings.appDescription" = "SmartFarm is a farm management app for smallholder farmers to track income, expenses, farm activities and reports.";
+"settings.faq.addTransaction" = "How to add a new transaction?";
+"settings.faq.addTransactionAnswer" = "1. Tap the + button on Dashboard or Finance screen.\n2. Select type: Income or Expense.\n3. Enter amount, category and date.\n4. Tap Save - transaction will appear in the list immediately.";
+"settings.faq.viewReports" = "How to view reports?";
+"settings.faq.viewReportsAnswer" = "1. Tap \"Reports\" tab in the bottom bar.\n2. Use < > arrows to change month.\n3. Tap \"Detailed Report\" to view charts and daily breakdown.";
+"settings.faq.changeLanguage" = "How to change language?";
+"settings.faq.changeLanguageAnswer" = "Go to Settings → Language → Select Khmer or English.";
+"settings.faq.backupData" = "How to backup data?";
+"settings.faq.backupDataAnswer" = "Go to Settings → Backup data → Tap \"Backup now\" and save file in Files. To restore, tap \"Restore data\" and select JSON file.";
+"settings.faq.categories" = "What expense categories are available?";
+"settings.faq.categoriesAnswer" = "Available categories include: Seeds, Fertilizer, Labor, Tools, Sales, and Other. You can select from this list when adding a transaction.";
 
 /* Backup */
 "backup.description" = "Back up all your data as JSON and restore it when needed.";

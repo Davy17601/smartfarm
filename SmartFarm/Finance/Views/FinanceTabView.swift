@@ -129,9 +129,8 @@ struct FinanceTabView: View {
                         // Scrollable banner (extends up and stretches on overscroll)
                         scrollableBanner
 
-                        // White content card that overlaps banner
+                        // White content card
                         whiteContentCard
-                            .offset(y: -12) // Slight overlap
                     }
                     .padding(.bottom, 100) // Extra padding to prevent tab bar overlap
                 }
@@ -203,7 +202,7 @@ struct FinanceTabView: View {
             searchBarCompact
         }
         .padding(.horizontal, 16)
-        .padding(.bottom, 12) // Reduced from 16
+        .padding(.bottom, 20) // Green space below search bar
     }
 
     private var headerRow: some View {
@@ -291,7 +290,7 @@ struct FinanceTabView: View {
         VStack(spacing: 10) {
             // Three summary cards
             summaryCardsRow
-                .padding(.top, Theme.Spacing.m)
+                .padding(.top, 16) // Clear gap from banner
 
             // Existing filter tabs
             pillTabSelector

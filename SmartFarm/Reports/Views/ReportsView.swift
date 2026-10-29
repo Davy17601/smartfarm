@@ -14,38 +14,43 @@ struct ReportsView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: Theme.Spacing.m) {
-                // 1. Header
-                header
+        ZStack {
+            // Page background - same as Settings screen
+            Color(red: 0.92, green: 0.96, blue: 0.91) // #EAF4E7
+                .ignoresSafeArea()
 
-                // 2. Month Selector
-                monthSelector
+            ScrollView {
+                VStack(alignment: .leading, spacing: Theme.Spacing.m) {
+                    // 1. Header
+                    header
 
-                // 3. Tab Selector
-                tabSelector
+                    // 2. Month Selector
+                    monthSelector
 
-                // 4. Tab-specific content
-                if selectedTab == 0 {
-                    // Overview tab - show everything
-                    summaryCard
-                    chartSection
-                    pieChartSection
-                    insightBox
-                } else if selectedTab == 1 {
-                    // Income/Expense tab
-                    incomeExpenseSummary
-                    incomeExpenseChartSection
-                    pieChartSection
-                } else if selectedTab == 2 {
-                    // Category tab - keep current content
-                    pieChartSection
+                    // 3. Tab Selector
+                    tabSelector
+
+                    // 4. Tab-specific content
+                    if selectedTab == 0 {
+                        // Overview tab - show everything
+                        summaryCard
+                        chartSection
+                        pieChartSection
+                        insightBox
+                    } else if selectedTab == 1 {
+                        // Income/Expense tab
+                        incomeExpenseSummary
+                        incomeExpenseChartSection
+                        pieChartSection
+                    } else if selectedTab == 2 {
+                        // Category tab - keep current content
+                        pieChartSection
+                    }
                 }
+                .padding(Theme.Spacing.m)
+                .padding(.bottom, 60) // Clear tab bar
             }
-            .padding(Theme.Spacing.m)
-            .padding(.bottom, 60) // Clear tab bar
         }
-        .background(Theme.background.ignoresSafeArea())
         .onAppear { viewModel.reload(currency: settings.displayCurrency) }
         .onChange(of: settings.displayCurrency) { viewModel.reload(currency: $0) }
         .onChange(of: viewModel.selectedMonth) { _ in
@@ -138,9 +143,9 @@ struct ReportsView: View {
         }
         .padding(.horizontal, Theme.Spacing.m)
         .padding(.vertical, Theme.Spacing.s)
-        .background(Color(.systemBackground))
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+        .background(Color.white)
+        .cornerRadius(18)
+        .shadow(color: Color.black.opacity(0.08), radius: 10, x: 0, y: 3)
     }
 
     private var monthYearText: String {
@@ -159,8 +164,9 @@ struct ReportsView: View {
             tabButton(title: "ជំពូក", index: 2)
         }
         .padding(4)
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
+        .background(Color.white)
+        .cornerRadius(18)
+        .shadow(color: Color.black.opacity(0.08), radius: 10, x: 0, y: 3)
     }
 
     private func tabButton(title: String, index: Int) -> some View {

@@ -146,36 +146,41 @@ struct DetailedReportView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: Theme.Spacing.m) {
-                // 1. Header
-                header
+        ZStack {
+            // Page background - same as Settings and Reports
+            Color(red: 0.92, green: 0.96, blue: 0.91) // #EAF4E7
+                .ignoresSafeArea()
 
-                // 2. Period Selector
-                periodSelector
+            ScrollView {
+                VStack(alignment: .leading, spacing: Theme.Spacing.m) {
+                    // 1. Header
+                    header
 
-                // 3. Date Range Card
-                dateRangeCard
+                    // 2. Period Selector
+                    periodSelector
 
-                // 4. Three Summary Cards
-                summaryCards
+                    // 3. Date Range Card
+                    dateRangeCard
 
-                // 5. Donut Chart - សង្ខេបតាមប្រភេទ
-                donutChartSection
+                    // 4. Three Summary Cards
+                    summaryCards
 
-                // 6. Bar Chart with Segmented Control
-                barChartSection
+                    // 5. Donut Chart - សង្ខេបតាមប្រភេទ
+                    donutChartSection
 
-                // 7. Daily Report Section
-                dailyReportSection
+                    // 6. Bar Chart with Segmented Control
+                    barChartSection
 
-                // 8. Category Analysis (reused from ProfitAnalysisView)
-                categoryAnalysisSection
+                    // 7. Daily Report Section
+                    dailyReportSection
+
+                    // 8. Category Analysis (reused from ProfitAnalysisView)
+                    categoryAnalysisSection
+                }
+                .padding(Theme.Spacing.m)
+                .padding(.bottom, 60)
             }
-            .padding(Theme.Spacing.m)
-            .padding(.bottom, 60)
         }
-        .background(Theme.background.ignoresSafeArea())
         .navigationBarHidden(true)
     }
 
@@ -208,8 +213,9 @@ struct DetailedReportView: View {
             }
         }
         .padding(4)
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
+        .background(Color.white)
+        .cornerRadius(18)
+        .shadow(color: Color.black.opacity(0.08), radius: 10, x: 0, y: 3)
     }
 
     private func periodButton(period: TimePeriod) -> some View {
@@ -243,8 +249,9 @@ struct DetailedReportView: View {
                 .foregroundColor(Theme.secondaryText)
         }
         .padding(Theme.Spacing.m)
-        .background(Theme.cardBackground)
-        .cornerRadius(12)
+        .background(Color.white)
+        .cornerRadius(18)
+        .shadow(color: Color.black.opacity(0.08), radius: 10, x: 0, y: 3)
     }
 
     private func formatDateRange() -> String {
@@ -357,7 +364,7 @@ struct DetailedReportView: View {
         return VStack(alignment: .leading, spacing: Theme.Spacing.s) {
             Text("សង្ខេបតាមប្រភេទ")
                 .font(.system(size: 16, weight: .bold))
-                .foregroundColor(Theme.primaryText)
+                .foregroundColor(Color(red: 0.07, green: 0.09, blue: 0.15)) // #111827
 
             if !slices.isEmpty {
                 FarmCard {
@@ -436,7 +443,7 @@ struct DetailedReportView: View {
         VStack(alignment: .leading, spacing: Theme.Spacing.s) {
             Text("ក្រាហ្វិកប្រាក់ចំណូល-ចំណាយ")
                 .font(.system(size: 16, weight: .bold))
-                .foregroundColor(Theme.primaryText)
+                .foregroundColor(Color(red: 0.07, green: 0.09, blue: 0.15)) // #111827
 
             // Segmented control
             HStack(spacing: 0) {
@@ -445,8 +452,9 @@ struct DetailedReportView: View {
                 chartTypeButton(type: .profit)
             }
             .padding(4)
-            .background(Color(.systemGray6))
-            .cornerRadius(12)
+            .background(Color.white)
+            .cornerRadius(18)
+            .shadow(color: Color.black.opacity(0.08), radius: 10, x: 0, y: 3)
 
             // Bar chart
             FarmCard {
@@ -557,7 +565,7 @@ struct DetailedReportView: View {
         VStack(alignment: .leading, spacing: Theme.Spacing.m) {
             Text("របាយការណ៍ប្រចាំថ្ងៃ")
                 .font(.system(size: 16, weight: .bold))
-                .foregroundColor(Theme.primaryText)
+                .foregroundColor(Color(red: 0.07, green: 0.09, blue: 0.15)) // #111827
 
             let dailyGroups = periodData.dailyBreakdown.filter { $0.hasTransactions }
 
@@ -679,7 +687,7 @@ struct DetailedReportView: View {
         return VStack(alignment: .leading, spacing: Theme.Spacing.m) {
             Text("ការវិភាគប្រាក់ចំណេញតាមប្រភេទ")
                 .font(.system(size: 16, weight: .bold))
-                .foregroundColor(Theme.primaryText)
+                .foregroundColor(Color(red: 0.07, green: 0.09, blue: 0.15)) // #111827
 
             if !topCategories.isEmpty {
                 VStack(spacing: Theme.Spacing.m) {

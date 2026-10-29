@@ -38,58 +38,63 @@ struct DashboardView: View {
 
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(spacing: 0) {
-                    // Top navigation bar
-                    topNavigationBar
-                        .background(Color.white)
+            ZStack {
+                // Page background - same as Settings and Reports
+                Color(red: 0.92, green: 0.96, blue: 0.91) // #EAF4E7
+                    .ignoresSafeArea()
 
-                    // Header section with background image (scrolls with content)
-                    ZStack(alignment: .bottom) {
-                        ZStack {
-                            // Background image
-                            Image("dashboard_header_background")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(height: 220)
-                                .clipped()
+                ScrollView {
+                    VStack(spacing: 0) {
+                        // Top navigation bar
+                        topNavigationBar
+                            .background(Color.white)
 
-                            // Dark overlay for text contrast
-                            LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color.black.opacity(0.4),
-                                    Color.black.opacity(0.3)
-                                ]),
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
+                        // Header section with background image (scrolls with content)
+                        ZStack(alignment: .bottom) {
+                            ZStack {
+                                // Background image
+                                Image("dashboard_header_background")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(height: 220)
+                                    .clipped()
+
+                                // Dark overlay for text contrast
+                                LinearGradient(
+                                    gradient: Gradient(colors: [
+                                        Color.black.opacity(0.4),
+                                        Color.black.opacity(0.3)
+                                    ]),
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                )
+                            }
+                            .frame(height: 220)
+                            .cornerRadius(16)
+
+                            greetingText
+                                .padding(.bottom, 40)
                         }
-                        .frame(height: 220)
-                        .cornerRadius(16)
+                        .padding(.horizontal, 12)
 
-                        greetingText
-                            .padding(.bottom, 40)
+                        // Cards section - clean separation below background image
+                        VStack(spacing: Theme.Spacing.s) {
+                            monthSummary
+                                .padding(.horizontal, 12)
+                            quickActionsSection
+                                .padding(.horizontal, 12)
+                            latestTransactionsSection
+                                .padding(.horizontal, Theme.Spacing.m)
+                            transactionHistorySection
+                                .padding(.horizontal, Theme.Spacing.m)
+                            categoryPieChartSection
+                                .padding(.horizontal, Theme.Spacing.m)
+                        }
+                        .padding(.top, Theme.Spacing.m)
+                        .padding(.bottom, 100)
                     }
-                    .padding(.horizontal, 12)
-
-                    // Cards section - clean separation below background image
-                    VStack(spacing: Theme.Spacing.s) {
-                        monthSummary
-                            .padding(.horizontal, 12)
-                        quickActionsSection
-                            .padding(.horizontal, 12)
-                        latestTransactionsSection
-                            .padding(.horizontal, Theme.Spacing.m)
-                        transactionHistorySection
-                            .padding(.horizontal, Theme.Spacing.m)
-                        categoryPieChartSection
-                            .padding(.horizontal, Theme.Spacing.m)
-                    }
-                    .padding(.top, Theme.Spacing.m)
-                    .padding(.bottom, 100)
                 }
             }
-            .background(Theme.background.ignoresSafeArea())
             .navigationBarHidden(true)
             .onAppear { viewModel.reload() }
             .alert(isPresented: $showClearOldAlert) {
@@ -467,7 +472,7 @@ struct DashboardView: View {
             HStack {
                 Text(L("finance.recent"))
                     .font(Theme.Fonts.heading)
-                    .foregroundColor(Theme.primaryText)
+                    .foregroundColor(Color(red: 0.07, green: 0.09, blue: 0.15)) // #111827
                 Spacer()
                 if !viewModel.latestTransactions.isEmpty {
                     Button(L("dashboard.undoLast")) {
@@ -538,7 +543,7 @@ struct DashboardView: View {
             HStack {
                 Text(L("dashboard.transactionHistory"))
                     .font(Theme.Fonts.heading)
-                    .foregroundColor(Theme.primaryText)
+                    .foregroundColor(Color(red: 0.07, green: 0.09, blue: 0.15)) // #111827
                 Spacer()
                 Button(L("dashboard.clearOld")) {
                     showClearOldAlert = true

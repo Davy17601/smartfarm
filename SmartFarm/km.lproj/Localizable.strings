@@ -115,13 +115,51 @@
 
 /* Settings */
 "settings.preferences" = "ចំណូលចិត្ត";
+"settings.general" = "ទូទៅ";
 "settings.language" = "ភាសា";
 "settings.displayCurrency" = "រូបិយប័ណ្ណ";
+"settings.notifications" = "ការជូនដំណឹង";
 "settings.data" = "ទិន្នន័យ";
 "settings.reports" = "របាយការណ៍ & គំនូសតាង";
 "settings.backup" = "បម្រុងទុក & ស្ដារ";
+"settings.backupData" = "បម្រុងទុកទិន្នន័យ";
+"settings.help" = "ជំនួយ";
+"settings.helpFAQ" = "ជំនួយ និងសំណួរញឹកញាប់";
 "settings.about" = "អំពី";
+"settings.aboutApp" = "អំពីកម្មវិធី SmartFarm";
+"settings.farmProfile" = "ប្រវត្តិរូបកសិដ្ឋាន";
 "settings.chartTitle" = "ក្រាហ្វិកចំណូល និងចំណាយ";
+"settings.dailyNotifications" = "ការជូនដំណឹងប្រចាំថ្ងៃ";
+"settings.weeklyReports" = "របាយការណ៍ប្រចាំសប្តាហ៍";
+"settings.transactionReminders" = "ការរំលឹកការកត់ត្រាប្រតិបត្តិការ";
+"settings.backupNow" = "បម្រុងទុកឥឡូវនេះ";
+"settings.lastBackup" = "ការបម្រុងទុកចុងក្រោយ";
+"settings.noBackup" = "មិនទាន់មាន";
+"settings.backupDescription" = "បម្រុងទុកទិន្នន័យហិរញ្ញវត្ថុរបស់អ្នកទៅឯកសារ JSON ដើម្បីរក្សាទុកដោយសុវត្ថិភាព។";
+"settings.backupSuccess" = "បានបម្រុងទុកដោយជោគជ័យ";
+"settings.restore" = "ស្តារទិន្នន័យ";
+"settings.restoreHint" = "ជ្រើសឯកសារ JSON ដែលបានបម្រុងទុកពីមុន ដើម្បីយកទិន្នន័យមកវិញ";
+"settings.restoreConfirmTitle" = "ស្តារទិន្នន័យ?";
+"settings.restoreConfirmMessage" = "រកឃើញ %d ប្រតិបត្តិការក្នុងឯកសារ។ តើអ្នកចង់ស្តារទិន្នន័យឬ?";
+"settings.restoreSuccessTitle" = "ស្តារបានជោគជ័យ";
+"settings.restoreSuccessMessage" = "បានបន្ថែម %d ប្រតិបត្តិការ, រំលង %d ដែលមានស្រាប់";
+"settings.invalidFileTitle" = "ឯកសារមិនត្រឹមត្រូវ";
+"settings.invalidFileMessage" = "ឯកសារនេះមិនមែនជាការបម្រុងទុក SmartFarm ទេ។";
+"settings.farmName" = "ឈ្មោះកសិដ្ឋាន";
+"settings.village" = "ភូមិ";
+"settings.province" = "ខេត្ត";
+"settings.editProfile" = "កែប្រែប្រវត្តិរូប";
+"settings.appDescription" = "SmartFarm គឺជាកម្មវិធីគ្រប់គ្រងកសិកម្មសម្រាប់កសិករខ្នាតតូច ជួយតាមដានចំណូល ចំណាយ សកម្មភាពកសិកម្ម និងរបាយការណ៍។";
+"settings.faq.addTransaction" = "របៀបបន្ថែមប្រតិបត្តិការថ្មី?";
+"settings.faq.addTransactionAnswer" = "1. ចុចប៊ូតុង + នៅលើទំព័រដើម ឬផ្ទាំងហិរញ្ញវត្ថុ។\n2. ជ្រើសប្រភេទ ចំណូល ឬ ចំណាយ។\n3. បញ្ចូលចំនួនទឹកប្រាក់ ប្រភេទ និងកាលបរិច្ឆេទ។\n4. ចុចរក្សាទុក ប្រតិបត្តិការនឹងបង្ហាញក្នុងបញ្ជីភ្លាមៗ។";
+"settings.faq.viewReports" = "របៀបមើលរបាយការណ៍?";
+"settings.faq.viewReportsAnswer" = "1. ចុចផ្ទាំង \"របាយការណ៍\" នៅរបារខាងក្រោម។\n2. ប្រើព្រួញ < > ដើម្បីប្តូរខែ។\n3. ចុច \"របាយការណ៍លម្អិត\" ដើម្បីមើលក្រាហ្វ និងបញ្ជីប្រចាំថ្ងៃ។";
+"settings.faq.changeLanguage" = "របៀបប្តូរភាសា?";
+"settings.faq.changeLanguageAnswer" = "ចូលការកំណត់ → ភាសា → ជ្រើស ខ្មែរ ឬ English។";
+"settings.faq.backupData" = "របៀបបម្រុងទុកទិន្នន័យ?";
+"settings.faq.backupDataAnswer" = "ចូលការកំណត់ → បម្រុងទុកទិន្នន័យ → ចុច \"បម្រុងទុកឥឡូវនេះ\" ហើយរក្សាទុកឯកសារក្នុង Files។ ដើម្បីយកមកវិញ ចុច \"ស្តារទិន្នន័យ\" ហើយជ្រើសឯកសារ JSON។";
+"settings.faq.categories" = "ប្រភេទចំណាយមានអ្វីខ្លះ?";
+"settings.faq.categoriesAnswer" = "ប្រភេទដែលមានរួមមាន: គ្រាប់ពូជ, ជី, កម្លាំងពលកម្ម, ឧបករណ៍, ការលក់, និងផ្សេងៗ។ អ្នកអាចជ្រើសរើសពីបញ្ជីនេះពេលបន្ថែមប្រតិបត្តិការ។";
 
 /* Backup */
 "backup.description" = "បម្រុងទុកទិន្នន័យទាំងអស់ជា JSON ហើយស្ដារពេលត្រូវការ។";

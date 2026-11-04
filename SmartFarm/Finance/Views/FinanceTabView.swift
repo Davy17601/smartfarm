@@ -10,9 +10,16 @@ struct FinanceTabView: View {
     @EnvironmentObject private var settings: AppSettings
     @StateObject private var viewModel: FinanceViewModel
     @State private var showingAdd = false
+    @State private var showingMonthPicker = false
+    @State private var showingMonthResult = false
     @State private var selectedMonth = Date() // Track currently selected month
+    @State private var tempSelectedMonth = Date()
+    @State private var displayedYear: Int = Calendar.current.component(.year, from: Date())
 
     // MARK: - Custom Finance Colors
+    // Page background (same as Settings, Dashboard, Reports)
+    private let pageBackground = Color(red: 0.92, green: 0.96, blue: 0.91) // #EAF4E7
+
     // Banner gradient colors
     private let bannerGreenDark = Color(red: 0.11, green: 0.42, blue: 0.18) // #1B6B2F
     private let bannerGreenLight = Color(red: 0.18, green: 0.62, blue: 0.27) // #2E9E44
@@ -49,8 +56,8 @@ struct FinanceTabView: View {
     private let unselectedPillGray = Color(red: 0.22, green: 0.26, blue: 0.32) // #374151
     private let lightGrayBackground = Color(red: 0.95, green: 0.95, blue: 0.96)
 
-    // Date header colors
-    private let dateHeaderBackground = Color(red: 0.91, green: 0.94, blue: 0.92) // #E8F0EC
+    // Date header colors (darker than page so it stands out)
+    private let dateHeaderBackground = Color(red: 0.835, green: 0.910, blue: 0.831) // #D5E8D4
     private let darkText = Color(red: 0.07, green: 0.09, blue: 0.15) // #111827
     private let grayText = Color(red: 0.29, green: 0.34, blue: 0.39) // #4B5563
     private let grayDark = Color(red: 0.22, green: 0.26, blue: 0.32) // #374151
@@ -107,21 +114,25 @@ struct FinanceTabView: View {
 
     private func goToPreviousMonth() {
         if let newDate = Calendar.current.date(byAdding: .month, value: -1, to: selectedMonth) {
-            selectedMonth = newDate
+            withAnimation(.easeInOut(duration: 0.3)) {
+                selectedMonth = newDate
+            }
         }
     }
 
     private func goToNextMonth() {
         if let newDate = Calendar.current.date(byAdding: .month, value: 1, to: selectedMonth) {
-            selectedMonth = newDate
+            withAnimation(.easeInOut(duration: 0.3)) {
+                selectedMonth = newDate
+            }
         }
     }
 
     var body: some View {
         NavigationView {
             ZStack(alignment: .top) {
-                // Background
-                Theme.background.ignoresSafeArea()
+                // Page background (light green)
+                pageBackground.ignoresSafeArea()
 
                 // Main ScrollView with everything inside
                 ScrollView {
@@ -135,13 +146,31 @@ struct FinanceTabView: View {
                     .padding(.bottom, 100) // Extra padding to prevent tab bar overlap
                 }
                 .ignoresSafeArea(edges: .top)
+
+                // Month picker overlay
+                if showingMonthPicker {
+                    monthPickerOverlay
+                }
             }
             .navigationBarHidden(true)
             .sheet(isPresented: $showingAdd) {
                 AddEditTransactionView(mode: .add, initialType: .expense) { viewModel.add($0) }
                     .environmentObject(settings)
             }
-            .onAppear { viewModel.reload() }
+            .fullScreenCover(isPresented: $showingMonthResult) {
+                MonthResultScreen(
+                    isPresented: $showingMonthResult,
+                    selectedMonth: selectedMonth,
+                    transactions: viewModel.transactions,
+                    currency: settings.displayCurrency
+                )
+                .environmentObject(settings)
+            }
+            .onAppear {
+                viewModel.reload()
+                tempSelectedMonth = selectedMonth
+                displayedYear = Calendar.current.component(.year, from: selectedMonth)
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
@@ -284,7 +313,7 @@ struct FinanceTabView: View {
         .cornerRadius(12)
     }
 
-    // MARK: - White Content Card
+    // MARK: - Content Area
 
     private var whiteContentCard: some View {
         VStack(spacing: 10) {
@@ -308,9 +337,6 @@ struct FinanceTabView: View {
             transactionListContent
         }
         .padding(.bottom, Theme.Spacing.m)
-        .background(Color.white)
-        .cornerRadius(24)
-        .shadow(color: Color.black.opacity(0.08), radius: 8, x: 0, y: 4)
         .padding(.horizontal, Theme.Spacing.m)
     }
 
@@ -529,27 +555,48 @@ struct FinanceTabView: View {
     // MARK: - Pill-shaped Tab Selector
 
     private var pillTabSelector: some View {
-        HStack(spacing: 4) {
-            ForEach(TransactionFilter.allCases) { filter in
-                Button(action: {
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        viewModel.filter = filter
+        HStack(spacing: 8) {
+            // Type filter tabs
+            HStack(spacing: 4) {
+                ForEach(TransactionFilter.allCases) { filter in
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            viewModel.filter = filter
+                        }
+                    }) {
+                        Text(filter.displayName)
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(viewModel.filter == filter ? .white : darkText)
+                            .padding(.horizontal, 10)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 34)
+                            .background(viewModel.filter == filter ? selectedPillGreen : Color.white)
+                            .cornerRadius(17)
                     }
-                }) {
-                    Text(filter.displayName)
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(viewModel.filter == filter ? .white : darkText)
-                        .padding(.horizontal, 12)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 34)
-                        .background(viewModel.filter == filter ? selectedPillGreen : Color(red: 0.93, green: 0.95, blue: 0.96)) // #EEF3F5
-                        .cornerRadius(17)
                 }
             }
+            .padding(3)
+            .background(Color.white)
+            .cornerRadius(17)
+            .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
+
+            // Calendar button
+            Button(action: {
+                tempSelectedMonth = selectedMonth
+                displayedYear = Calendar.current.component(.year, from: selectedMonth)
+                withAnimation(.easeInOut(duration: 0.28)) {
+                    showingMonthPicker = true
+                }
+            }) {
+                Image(systemName: "calendar")
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(.white)
+                    .frame(width: 40, height: 40)
+                    .background(bannerGreenDark)
+                    .clipShape(Circle())
+                    .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+            }
         }
-        .padding(3)
-        .background(Color(red: 0.93, green: 0.95, blue: 0.96))
-        .cornerRadius(17)
     }
 
     // MARK: - Month Selector
@@ -584,8 +631,9 @@ struct FinanceTabView: View {
         }
         .padding(.horizontal, 12)
         .frame(height: 36)
-        .background(Theme.cardBackground)
+        .background(Color.white)
         .cornerRadius(Theme.Radius.card)
+        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
     }
 
 
@@ -614,9 +662,10 @@ struct FinanceTabView: View {
                 .font(.system(size: 13))
                 .padding(.horizontal, 12)
                 .frame(height: 30)
-                .background(isOn ? Theme.brand : Theme.cardBackground)
+                .background(isOn ? Theme.brand : Color.white)
                 .foregroundColor(isOn ? .white : darkText)
                 .cornerRadius(15)
+                .shadow(color: Color.black.opacity(isOn ? 0 : 0.05), radius: isOn ? 0 : 2, x: 0, y: isOn ? 0 : 1)
         }
         .buttonStyle(ScaleButtonStyle())
     }
@@ -679,6 +728,311 @@ struct FinanceTabView: View {
                     .padding(.horizontal, Theme.Spacing.m)
                 }
             }
+        }
+    }
+
+    // MARK: - Month Picker Overlay
+
+    private var monthPickerOverlay: some View {
+        GeometryReader { geometry in
+            ZStack {
+                // Dim background
+                Color.black.opacity(0.35)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        withAnimation(.easeInOut(duration: 0.28)) {
+                            showingMonthPicker = false
+                        }
+                    }
+
+                // Bottom panel
+                VStack(spacing: 0) {
+                    Spacer()
+
+                    ScrollView {
+                        VStack(spacing: 0) {
+                            // Handle bar
+                            RoundedRectangle(cornerRadius: 2.5)
+                                .fill(Color.gray.opacity(0.4))
+                                .frame(width: 40, height: 5)
+                                .padding(.top, 12)
+                                .padding(.bottom, 12)
+
+                            // Header row
+                            HStack {
+                                Button(action: {
+                                    withAnimation(.easeInOut(duration: 0.28)) {
+                                        showingMonthPicker = false
+                                    }
+                                }) {
+                                    Text("បោះបង់")
+                                        .font(.system(size: 15, weight: .semibold))
+                                        .foregroundColor(Color(red: 0.18, green: 0.49, blue: 0.20)) // #2E7D32
+                                }
+
+                                Spacer()
+
+                                Text("ជ្រើសរើសខែ")
+                                    .font(.system(size: 17, weight: .bold))
+                                    .foregroundColor(darkText)
+
+                                Spacer()
+
+                                // Invisible spacer for centering
+                                Text("បោះបង់")
+                                    .font(.system(size: 15, weight: .semibold))
+                                    .foregroundColor(.clear)
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.bottom, 12)
+
+                            // Year selector
+                            yearSelector
+                                .padding(.horizontal, 20)
+                                .padding(.bottom, 12)
+
+                            // Month grid
+                            monthGrid
+                                .padding(.horizontal, 20)
+                                .padding(.bottom, 12)
+
+                            // "ខែនេះ" button
+                            Button(action: { jumpToCurrentMonth() }) {
+                                Text("ខែនេះ")
+                                    .font(.system(size: 16, weight: .bold))
+                                    .foregroundColor(Color(red: 0.26, green: 0.63, blue: 0.28)) // #43A047
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 50)
+                                    .background(Color.white)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 14)
+                                            .stroke(Color(red: 0.26, green: 0.63, blue: 0.28), lineWidth: 1.5)
+                                    )
+                                    .cornerRadius(14)
+                            }
+                            .padding(.horizontal, 20)
+                            .padding(.bottom, 12)
+
+                            // "យល់ព្រម" button
+                            Button(action: { applyMonthSelection() }) {
+                                Text("យល់ព្រម")
+                                    .font(.system(size: 17, weight: .bold))
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 52)
+                                    .background(bannerGreenDark)
+                                    .cornerRadius(14)
+                            }
+                            .disabled(isFutureMonth(tempSelectedMonth))
+                            .opacity(isFutureMonth(tempSelectedMonth) ? 0.5 : 1.0)
+                            .padding(.horizontal, 20)
+                            .padding(.bottom, 12)
+
+                            // Caption
+                            Text("● ចំណុចបៃតង = ខែដែលមានប្រតិបត្តិការ ចុចលើខែណាមួយ បញ្ជីនឹងបង្ហាញតែខែនេះ")
+                                .font(.system(size: 13))
+                                .foregroundColor(grayText)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 20)
+                                .padding(.bottom, 16)
+                        }
+                    }
+                    .background(Color.white)
+                    .cornerRadius(28, corners: [.topLeft, .topRight])
+                    .frame(maxHeight: geometry.size.height - geometry.safeAreaInsets.top - 80)
+                    .padding(.bottom, geometry.safeAreaInsets.bottom + 49 + 12)
+                }
+            }
+            .transition(.move(edge: .bottom))
+        }
+    }
+
+    private var yearSelector: some View {
+        let yearRange = getYearRange()
+
+        return HStack {
+            Button(action: {
+                if yearRange.contains(displayedYear - 1) {
+                    displayedYear -= 1
+                }
+            }) {
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(darkText)
+                    .frame(width: 40, height: 40)
+            }
+            .disabled(!yearRange.contains(displayedYear - 1))
+            .opacity(yearRange.contains(displayedYear - 1) ? 1 : 0.3)
+
+            Spacer()
+
+            Text(formatYear(displayedYear))
+                .font(.system(size: 24, weight: .bold))
+                .foregroundColor(darkText)
+
+            Spacer()
+
+            Button(action: {
+                if yearRange.contains(displayedYear + 1) {
+                    displayedYear += 1
+                }
+            }) {
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(darkText)
+                    .frame(width: 40, height: 40)
+            }
+            .disabled(!yearRange.contains(displayedYear + 1))
+            .opacity(yearRange.contains(displayedYear + 1) ? 1 : 0.3)
+        }
+    }
+
+    private var monthGrid: some View {
+        let khmerMonths = [
+            "មករា", "កុម្ភៈ", "មីនា", "មេសា", "ឧសភា", "មិថុនា",
+            "កក្កដា", "សីហា", "កញ្ញា", "តុលា", "វិច្ឆិកា", "ធ្នូ"
+        ]
+
+        return LazyVGrid(columns: [
+            GridItem(.flexible(), spacing: 12),
+            GridItem(.flexible(), spacing: 12),
+            GridItem(.flexible(), spacing: 12)
+        ], spacing: 10) {
+            ForEach(0..<12, id: \.self) { monthIndex in
+                monthButton(for: monthIndex, monthName: khmerMonths[monthIndex])
+            }
+        }
+    }
+
+    private func monthButton(for monthIndex: Int, monthName: String) -> some View {
+        let calendar = Calendar.current
+        let components = DateComponents(year: displayedYear, month: monthIndex + 1, day: 1)
+        guard let monthDate = calendar.date(from: components) else {
+            return AnyView(EmptyView())
+        }
+
+        let tempComp = calendar.dateComponents([.year, .month], from: tempSelectedMonth)
+        let monthComp = calendar.dateComponents([.year, .month], from: monthDate)
+        let isSelected = tempComp.year == monthComp.year && tempComp.month == monthComp.month
+        let isFuture = isFutureMonth(monthDate)
+        let hasTransactions = monthHasTransactions(monthDate)
+
+        return AnyView(
+            Button(action: {
+                if !isFuture {
+                    tempSelectedMonth = monthDate
+                }
+            }) {
+                VStack(spacing: 6) {
+                    Text(monthName)
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(isSelected ? .white : darkText)
+
+                    // Transaction indicator dot
+                    if hasTransactions {
+                        Circle()
+                            .fill(isSelected ? Color.white : Color(red: 0.26, green: 0.63, blue: 0.28)) // #43A047
+                            .frame(width: 6, height: 6)
+                    } else {
+                        Color.clear.frame(width: 6, height: 6)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 48)
+                .background(
+                    isSelected ?
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color(red: 0.11, green: 0.42, blue: 0.18), // #2E7D32
+                                Color(red: 0.26, green: 0.63, blue: 0.28)  // #43A047
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ) :
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color(red: 0.95, green: 0.95, blue: 0.95), // #F1F3F2
+                                Color(red: 0.95, green: 0.95, blue: 0.95)
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                )
+                .cornerRadius(14)
+                .opacity(isFuture ? 0.35 : 1.0)
+            }
+            .disabled(isFuture)
+        )
+    }
+
+    private func getYearRange() -> ClosedRange<Int> {
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: Date())
+
+        let oldestYear: Int
+        if let oldestTransaction = viewModel.transactions.min(by: { $0.date < $1.date }) {
+            oldestYear = calendar.component(.year, from: oldestTransaction.date)
+        } else {
+            oldestYear = currentYear - 2
+        }
+
+        return min(oldestYear, currentYear - 2)...currentYear
+    }
+
+    private func formatYear(_ year: Int) -> String {
+        if LocalizationManager.shared.language == .khmer {
+            let arabicToKhmer: [Character: Character] = [
+                "0": "០", "1": "១", "2": "២", "3": "៣", "4": "៤",
+                "5": "៥", "6": "៦", "7": "៧", "8": "៨", "9": "៩"
+            ]
+            return String("\(year)".map { arabicToKhmer[$0] ?? $0 })
+        }
+        return "\(year)"
+    }
+
+    private func isFutureMonth(_ date: Date) -> Bool {
+        let calendar = Calendar.current
+        let now = Date()
+
+        let dateComp = calendar.dateComponents([.year, .month], from: date)
+        let nowComp = calendar.dateComponents([.year, .month], from: now)
+
+        guard let dateYear = dateComp.year, let dateMonth = dateComp.month,
+              let nowYear = nowComp.year, let nowMonth = nowComp.month else {
+            return false
+        }
+
+        if dateYear > nowYear {
+            return true
+        } else if dateYear == nowYear && dateMonth > nowMonth {
+            return true
+        }
+        return false
+    }
+
+    private func monthHasTransactions(_ monthDate: Date) -> Bool {
+        let calendar = Calendar.current
+        return viewModel.transactions.contains { transaction in
+            calendar.isDate(transaction.date, equalTo: monthDate, toGranularity: .month)
+        }
+    }
+
+    private func jumpToCurrentMonth() {
+        let calendar = Calendar.current
+        let now = Date()
+        tempSelectedMonth = now
+        displayedYear = calendar.component(.year, from: now)
+    }
+
+    private func applyMonthSelection() {
+        selectedMonth = tempSelectedMonth
+        withAnimation(.easeInOut(duration: 0.28)) {
+            showingMonthPicker = false
+        }
+
+        // Small delay before showing result screen
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            showingMonthResult = true
         }
     }
 }

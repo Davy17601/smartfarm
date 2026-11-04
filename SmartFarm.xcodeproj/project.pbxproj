@@ -23,6 +23,8 @@ E3E8657B63B84DB19DA32B84 /* LanguageSelectionView.swift in Sources */ = {isa = P
 		16F8AD142FC92BAD0095E58B /* FinanceTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F8AD132FC92BAD0095E58B /* FinanceTabView.swift */; };
 		16F8AD172FC92C490095E58B /* FinanceCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F8AD162FC92C490095E58B /* FinanceCoordinator.swift */; };
 		AA000020FFFFFFFF00000001 /* FinanceSummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000020FFFFFFFF00000000 /* FinanceSummaryCard.swift */; };
+		A1B2C3D4E5F678901234ABCE /* MonthPickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F678901234ABCD /* MonthPickerSheet.swift */; };
+		B2C3D4E5F6789012345ABCDF /* MonthResultScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6789012345ABCDE /* MonthResultScreen.swift */; };
 		1ED8F70F019EF8C4A3CC44B3 /* BackupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E1630B8417A11CB58BAF66 /* BackupView.swift */; };
 		1FCBDACF1FAEB1872651DFC2 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544E6CA93DA099DEEC2239F6 /* CalendarViewModel.swift */; };
 		269E8A2511A9A1AE638D8A89 /* SummaryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47CDEAD9F43D7EDFFEBD042 /* SummaryCardView.swift */; };
@@ -86,6 +88,8 @@ F12213A4FE9F44F3801EEE04 /* OnboardingView.swift */ = {isa = PBXFileReference; l
 		16F8AD132FC92BAD0095E58B /* FinanceTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceTabView.swift; sourceTree = "<group>"; };
 		16F8AD162FC92C490095E58B /* FinanceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceCoordinator.swift; sourceTree = "<group>"; };
 		AA000020FFFFFFFF00000000 /* FinanceSummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceSummaryCard.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F678901234ABCD /* MonthPickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthPickerSheet.swift; sourceTree = "<group>"; };
+		B2C3D4E5F6789012345ABCDE /* MonthResultScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthResultScreen.swift; sourceTree = "<group>"; };
 		20F37EF303E2D06E151ADE2E /* TransactionRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TransactionRepository.swift; sourceTree = "<group>"; };
 		232EFA6CB70F42DB0AC28DBE /* km */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = km; path = km.lproj/Localizable.strings; sourceTree = "<group>"; };
 		252BDC2E90F2FC2F3464F4B0 /* NotificationService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -176,6 +180,8 @@ F12213A4FE9F44F3801EEE04 /* OnboardingView.swift */ = {isa = PBXFileReference; l
 				CE4C52615BCE25A7DCCB344F /* TransactionRow.swift */,
 				ACCD23D16CC80CD1C1DBAA7C /* AddEditTransactionView.swift */,
 				FF4CE139EF90E9F8CB9E858A /* TransactionDetailView.swift */,
+				A1B2C3D4E5F678901234ABCD /* MonthPickerSheet.swift */,
+				B2C3D4E5F6789012345ABCDE /* MonthResultScreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -562,6 +568,8 @@ E3E8657B63B84DB19DA32B84 /* LanguageSelectionView.swift in Sources */,
 				AA000011FFFFFFFF00000001 /* FarmActivity.swift in Sources */,
 				16F8AD142FC92BAD0095E58B /* FinanceTabView.swift in Sources */,
 				AA000020FFFFFFFF00000001 /* FinanceSummaryCard.swift in Sources */,
+				A1B2C3D4E5F678901234ABCE /* MonthPickerSheet.swift in Sources */,
+				B2C3D4E5F6789012345ABCDF /* MonthResultScreen.swift in Sources */,
 				AA000030FFFFFFFF00000001 /* MainTabView.swift in Sources */,
 				BB000001FFFFFFFF00000001 /* FarmActivityEntity+CoreDataClass.swift in Sources */,
 				BB000002FFFFFFFF00000001 /* FarmActivityEntity+CoreDataProperties.swift in Sources */,

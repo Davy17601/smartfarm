@@ -1,12 +1,16 @@
+🇬🇧 English: [README.en.md](README.en.md)
+
+---
+
 # SmartFarm
 
 **កម្មវិធីគ្រប់គ្រងហិរញ្ញវត្ថុកសិកម្ម សម្រាប់កសិករខ្នាតតូចកម្ពុជា**
 
-> An offline-first financial management app for Cambodian smallholder farmers, built with SwiftUI and CoreData. Track income, expenses, and analyze farm profitability in Khmer or English. Supports both KHR (៛) and USD ($) currencies with local data storage.
+> កម្មវិធីគ្រប់គ្រងហិរញ្ញវត្ថុ offline-first សម្រាប់កសិករខ្នាតតូចនៅកម្ពុជា សាងសង់ដោយ SwiftUI និង CoreData។ តាមដានចំណូល ចំណាយ និងវិភាគប្រាក់ចំណេញកសិដ្ឋានជាភាសាខ្មែរ ឬ អង់គ្លេស។ គាំទ្ររូបិយប័ណ្ណ KHR (៛) និង USD ($) ជាមួយការរក្សាទុកទិន្នន័យក្នុងឧបករណ៍។
 
 ---
 
-## 📖 អំពី​កម្មវិធី (About)
+## 📖 អំពី​កម្មវិធី
 
 **SmartFarm** គឺជាកម្មវិធីគ្រប់គ្រងហិរញ្ញវត្ថុកសិដ្ឋាន ដែលរចនាឡើងជាពិសេសសម្រាប់កសិករខ្នាតតូច នៅកម្ពុជា។ កម្មវិធីនេះជួយអ្នកតាមដានចំណូល ចំណាយ និងវិភាគប្រាក់ចំណេញកសិដ្ឋានរបស់អ្នកបានយ៉ាងងាយស្រួល។
 
@@ -20,30 +24,30 @@
 
 ---
 
-## 🖼️ ទស្សនាកម្មវិធី (Screenshots)
+## 🖼️ រូបភាពអេក្រង់កម្មវិធី
 
 <table>
 <tr>
 <td width="33%">
 
-### 🌾 Onboarding
-Welcome screen introducing SmartFarm's core features: track income, manage expenses, and analyze farm profitability.
+### 🌾 ទំព័រស្វាគមន៍
+អេក្រង់ស្វាគមន៍ណែនាំមុខងារសំខាន់របស់ SmartFarm៖ តាមដានចំណូល គ្រប់គ្រងចំណាយ និងវិភាគប្រាក់ចំណេញកសិដ្ឋាន។
 
 <img src="docs/screenshots/01-onboarding.png" alt="Onboarding" width="100%">
 
 </td>
 <td width="33%">
 
-### 📱 Dashboard
-Home screen displaying monthly financial summary (income 1,205,000៛, expense 880,000៛, profit +325,000៛), quick action buttons, and recent transactions.
+### 📱 ទំព័រដើម
+អេក្រង់ដើមបង្ហាញសេចក្តីសង្ខេបហិរញ្ញវត្ថុប្រចាំខែ (ចំណូល 1,205,000៛ ចំណាយ 880,000៛ ចំណេញ +325,000៛) ប៊ូតុងសកម្មភាពរហ័ស និងប្រតិបត្តិការថ្មីៗ។
 
 <img src="docs/screenshots/02-dashboard.png" alt="Dashboard" width="100%">
 
 </td>
 <td width="33%">
 
-### 💰 Finance List
-Transaction management screen with search, filter tabs, monthly summary cards, and chronologically grouped transaction history.
+### 💰 បញ្ជីហិរញ្ញវត្ថុ
+អេក្រង់គ្រប់គ្រងប្រតិបត្តិការជាមួយការស្វែងរក ផ្ទាំងច្រោះ កាតសង្ខេបប្រចាំខែ និងប្រវត្តិប្រតិបត្តិការតាមកាលបរិច្ឆេទ។
 
 <img src="docs/screenshots/03-finance-list.png" alt="Finance List" width="100%">
 
@@ -53,24 +57,24 @@ Transaction management screen with search, filter tabs, monthly summary cards, a
 <tr>
 <td width="33%">
 
-### 📅 Month Picker
-Interactive month selection sheet for viewing historical financial data, showing available months with indicators.
+### 📅 ជ្រើសរើសខែ
+ផ្ទាំងជ្រើសរើសខែសម្រាប់មើលទិន្នន័យហិរញ្ញវត្ថុប្រវត្តិសាស្ត្រ បង្ហាញខែដែលមានទិន្នន័យជាមួយសញ្ញា។
 
 <img src="docs/screenshots/04-finance-month-picker.png" alt="Month Picker" width="100%">
 
 </td>
 <td width="33%">
 
-### 📊 Monthly Result
-Detailed monthly breakdown for October 2026 (ខែ តុលា ២០២៦) showing income 1,950,000៛, expense 960,000៛, and profit 990,000៛ with transaction list.
+### 📊 លទ្ធផលប្រចាំខែ
+សេចក្តីលម្អិតប្រចាំខែសម្រាប់ខែតុលា ២០២៦ (ខែ តុលា ២០២៦) បង្ហាញចំណូល 1,950,000៛ ចំណាយ 960,000៛ និងចំណេញ 990,000៛ ជាមួយបញ្ជីប្រតិបត្តិការ។
 
 <img src="docs/screenshots/05-finance-month-result.png" alt="Monthly Result" width="100%">
 
 </td>
 <td width="33%">
 
-### ➕ Add Transaction
-Transaction entry form with type toggle (Income/Expense), amount field, date picker, currency selector, and notes field.
+### ➕ បញ្ចូលប្រតិបត្តិការ
+ទម្រង់បញ្ចូលប្រតិបត្តិការជាមួយប៊ូតុងប្តូរប្រភេទ (ចំណូល/ចំណាយ) វាលចំនួនទឹកប្រាក់ ជ្រើសរើសកាលបរិច្ឆេទ ជ្រើសរើសរូបិយប័ណ្ណ និងវាលកំណត់ចំណាំ។
 
 <img src="docs/screenshots/06-add-transaction.png" alt="Add Transaction" width="100%">
 
@@ -80,24 +84,24 @@ Transaction entry form with type toggle (Income/Expense), amount field, date pic
 <tr>
 <td width="33%">
 
-### 📈 Reports
-Monthly reports overview with profit summary, weekly bar chart showing income/expense trends, and expense category breakdown pie chart.
+### 📈 របាយការណ៍
+ទិដ្ឋភាពទូទៅរបាយការណ៍ប្រចាំខែជាមួយសេចក្តីសង្ខេបចំណេញ ក្រាហ្វិកប្រចាំសប្តាហ៍បង្ហាញនិន្នាការចំណូល/ចំណាយ និងដ្យាក្រាមបែងចែកប្រភេទចំណាយ។
 
 <img src="docs/screenshots/07-reports.png" alt="Reports" width="100%">
 
 </td>
 <td width="33%">
 
-### 📊 Detailed Report
-Comprehensive analytics view with time period selection (7/30/90 days, 1 year), summary cards, expense category donut chart, and income trend visualization.
+### 📊 របាយការណ៍លម្អិត
+ទិដ្ឋភាពវិភាគទូលំទូលាយជាមួយការជ្រើសរើសពេលវេលា (7/30/90 ថ្ងៃ 1 ឆ្នាំ) កាតសង្ខេប ដ្យាក្រាម donut ប្រភេទចំណាយ និងការបង្ហាញនិន្នាការចំណូល។
 
 <img src="docs/screenshots/08-detailed-report.png" alt="Detailed Report" width="100%">
 
 </td>
 <td width="33%">
 
-### ⚙️ Settings
-Settings hub with farm profile card, language/currency preferences, backup/restore options, and access to help resources.
+### ⚙️ ការកំណត់
+មជ្ឈមណ្ឌលការកំណត់ជាមួយកាតប្រវត្តិរូបកសិដ្ឋាន ចំណូលចិត្តភាសា/រូបិយប័ណ្ណ ជម្រើសបម្រុងទុក/ស្តារ និងការចូលប្រើធនធានជំនួយ។
 
 <img src="docs/screenshots/10-settings.png" alt="Settings" width="100%">
 
@@ -107,24 +111,24 @@ Settings hub with farm profile card, language/currency preferences, backup/resto
 <tr>
 <td width="33%">
 
-### 🌐 Language Selection
-Bilingual support with Khmer (ខ្មែរ) as default and English option for app-wide localization.
+### 🌐 ជ្រើសរើសភាសា
+ការគាំទ្រភាសាទ្វេជាមួយខ្មែរ (ខ្មែរ) ជាលំនាំដើម និងជម្រើសភាសាអង់គ្លេសសម្រាប់ការប្រែភាសាទូទាំងកម្មវិធី។
 
 <img src="docs/screenshots/11-language.png" alt="Language" width="100%">
 
 </td>
 <td width="33%">
 
-### 💵 Currency Selection
-Dual-currency support: Cambodian Riel (រៀល - KHR) and US Dollar (ដុល្លារ - USD) for display preferences.
+### 💵 ជ្រើសរើសរូបិយប័ណ្ណ
+ការគាំទ្ររូបិយប័ណ្ណពីរ៖ រៀលកម្ពុជា (រៀល - KHR) និង ដុល្លារអាមេរិក (ដុល្លារ - USD) សម្រាប់ចំណូលចិត្តបង្ហាញ។
 
 <img src="docs/screenshots/12-currency.png" alt="Currency" width="100%">
 
 </td>
 <td width="33%">
 
-### 💾 Backup & Restore
-Data backup system exporting transactions to JSON format with restore functionality for data recovery.
+### 💾 បម្រុងទុក និងស្តារ
+ប្រព័ន្ធបម្រុងទុកទិន្នន័យនាំចេញប្រតិបត្តិការទៅជាទម្រង់ JSON ជាមួយមុខងារស្តារសម្រាប់ការទាញយកទិន្នន័យឡើងវិញ។
 
 <img src="docs/screenshots/13-backup.png" alt="Backup" width="100%">
 
@@ -134,16 +138,16 @@ Data backup system exporting transactions to JSON format with restore functional
 <tr>
 <td width="33%">
 
-### ❓ Help & FAQ
-Frequently asked questions covering transaction management, reports, language settings, backup procedures, and expense categories.
+### ❓ ជំនួយ និងសំណួរញឹកញាប់
+សំណួរញឹកញាប់គ្របដណ្តប់លើការគ្រប់គ្រងប្រតិបត្តិការ របាយការណ៍ ការកំណត់ភាសា នីតិវិធីបម្រុងទុក និងប្រភេទចំណាយ។
 
 <img src="docs/screenshots/14-faq.png" alt="FAQ" width="100%">
 
 </td>
 <td width="33%">
 
-### ℹ️ About
-App information screen showing SmartFarm version 1.0, app icon, and description of core features.
+### ℹ️ អំពីកម្មវិធី
+អេក្រង់ព័ត៌មានកម្មវិធីបង្ហាញ SmartFarm កំណែ 1.0 រូបតំណាងកម្មវិធី និងការពិពណ៌នាមុខងារសំខាន់។
 
 <img src="docs/screenshots/15-about.png" alt="About" width="100%">
 
@@ -156,9 +160,9 @@ App information screen showing SmartFarm version 1.0, app icon, and description 
 
 ---
 
-## 🏗️ Architecture
+## 🏗️ ស្ថាបត្យកម្ម
 
-SmartFarm follows **MVVM + Repository + Coordinator** pattern with strict separation of concerns:
+SmartFarm អនុវត្តតាមគំរូ **MVVM + Repository + Coordinator** ជាមួយការបំបែកភារកិច្ចយ៉ាងតឹងរឹង៖
 
 ```mermaid
 graph TD
@@ -179,16 +183,16 @@ graph TD
     style E fill:#ffe6f0
 ```
 
-**Key Principles:**
-- **Views** never import CoreData, only render domain models (`Transaction`, `FarmActivity`, `Reminder`)
-- **ViewModels** depend on repository **protocols**, enabling unit testing with mocks
-- **Repositories** are the single source of truth for Entity ↔ Domain struct mapping
-- **AppEnvironment** provides dependency injection for all ViewModels and Repositories
-- **Coordinator** (FinanceCoordinator) manages tab navigation and detail view routing
+**គោលការណ៍សំខាន់៖**
+- **Views** មិនដែល import CoreData ទេ គ្រាន់តែបង្ហាញ domain models (`Transaction`, `FarmActivity`, `Reminder`)
+- **ViewModels** ពឹងផ្អែកលើ repository **protocols** អនុញ្ញាតឱ្យធ្វើតេស្ត unit testing ជាមួយ mocks
+- **Repositories** គឺជាប្រភពទិន្នន័យតែមួយគត់សម្រាប់ការផ្គូផ្គង Entity ↔ Domain struct
+- **AppEnvironment** ផ្តល់ dependency injection សម្រាប់ ViewModels និង Repositories ទាំងអស់
+- **Coordinator** (FinanceCoordinator) គ្រប់គ្រងការរុករកផ្ទាំង និងការបញ្ជូនទៅទិដ្ឋភាពលម្អិត
 
 ---
 
-## 🧭 Navigation Flow
+## 🧭 ចលនាការរុករក
 
 ```mermaid
 graph LR
@@ -220,16 +224,16 @@ graph LR
     style E fill:#ffe6f0
 ```
 
-**User Flow:**
-1. **First Launch**: Onboarding screen → Dashboard
-2. **Main Navigation**: 4 tabs (Dashboard, Finance, Reports, Settings)
-3. **Finance**: Browse transactions, filter by month, add/edit entries
-4. **Reports**: View charts, detailed analytics
-5. **Settings**: Configure language, currency, backup/restore data
+**ចលនាអ្នកប្រើប្រាស់៖**
+1. **ការចាប់ផ្តើមដំបូង**៖ អេក្រង់ស្វាគមន៍ → ទំព័រដើម
+2. **ការរុករកមុខ**៖ ផ្ទាំង 4 (ទំព័រដើម ហិរញ្ញវត្ថុ របាយការណ៍ ការកំណត់)
+3. **ហិរញ្ញវត្ថុ**៖ រកមើលប្រតិបត្តិការ ច្រោះតាមខែ បន្ថែម/កែប្រែធាតុ
+4. **របាយការណ៍**៖ មើលក្រាហ្វិក ការវិភាគលម្អិត
+5. **ការកំណត់**៖ កំណត់រចនាសម្ព័ន្ធភាសា រូបិយប័ណ្ណ បម្រុងទុក/ស្តារទិន្នន័យ
 
 ---
 
-## 💾 Data Flow
+## 💾 ចលនាទិន្នន័យ
 
 ```mermaid
 sequenceDiagram
@@ -262,18 +266,18 @@ sequenceDiagram
     V-->>U: Show Charts
 ```
 
-**Flow Steps:**
-1. User interacts with **SwiftUI View**
-2. View calls **ViewModel** methods
-3. ViewModel uses **Repository Protocol**
-4. Repository performs **CoreData** operations
-5. Entities mapped to **Domain Models**
-6. ViewModel publishes updates via **@Published**
-7. View automatically re-renders
+**ជំហានចលនា៖**
+1. អ្នកប្រើប្រាស់ធ្វើអន្តរកម្មជាមួយ **SwiftUI View**
+2. View ហៅវិធីសាស្ត្រ **ViewModel**
+3. ViewModel ប្រើ **Repository Protocol**
+4. Repository អនុវត្តប្រតិបត្តិការ **CoreData**
+5. Entities ត្រូវបានផ្គូផ្គងទៅ **Domain Models**
+6. ViewModel បោះពុម្ពផ្សាយការធ្វើបច្ចុប្បន្នភាពតាមរយៈ **@Published**
+7. View បង្ហាញឡើងវិញដោយស្វ័យប្រវត្តិ
 
 ---
 
-## 🗄️ CoreData Model
+## 🗄️ គំរូ CoreData
 
 ```mermaid
 erDiagram
@@ -307,18 +311,18 @@ erDiagram
 ```
 
 **Entities:**
-- **TransactionEntity**: Income/expense records with amount, category, currency
-- **FarmActivityEntity**: Farm tasks with completion status
-- **ReminderEntity**: Scheduled reminders with repeat intervals
+- **TransactionEntity**៖ កំណត់ត្រាចំណូល/ចំណាយជាមួយចំនួនទឹកប្រាក់ ប្រភេទ រូបិយប័ណ្ណ
+- **FarmActivityEntity**៖ ភារកិច្ចកសិដ្ឋានជាមួយស្ថានភាពបញ្ចប់
+- **ReminderEntity**៖ ការរំឭកដែលបានកំណត់ពេលជាមួយចន្លោះពេលម្តងទៀត
 
-**Storage:**
-- Persistent store: `SmartFarm.xcdatamodeld`
-- Context: Single `NSManagedObjectContext` owned by `PersistenceController`
-- All saves protected by `hasChanges` guard
+**ការរក្សាទុក៖**
+- ហាងជាអចិន្ត្រៃយ៍៖ `SmartFarm.xcdatamodeld`
+- Context៖ `NSManagedObjectContext` តែមួយគត់គ្រប់គ្រងដោយ `PersistenceController`
+- ការរក្សាទុកទាំងអស់ត្រូវបានការពារដោយ `hasChanges` guard
 
 ---
 
-## 📅 Development Timeline
+## 📅 ពេលវេលាអភិវឌ្ឍន៍
 
 ```mermaid
 gitGraph
@@ -337,16 +341,16 @@ gitGraph
     merge develop tag: "v1.0"
 ```
 
-**Key Milestones:**
-- **Initial Setup** (2024): Architecture docs, module specs, design system
-- **Dashboard** (2024): Main screen with summary cards and quick actions
-- **Finance** (2025): Transaction list, add/edit forms, month filtering
-- **Reports** (2025): Charts, analytics, monthly navigation
-- **Settings** (2025): Preferences, backup/restore, FAQ, About
-- **Onboarding** (2026): Welcome screen for first-time users
-- **Finance Enhancements** (2026): Month picker sheet, monthly result view
+**ចំណុចសំខាន់៖**
+- **ការរៀបចំដំបូង** (2024)៖ ឯកសារស្ថាបត្យកម្ម លក្ខណៈបច្ចេកទេសម៉ូឌុល ប្រព័ន្ធរចនា
+- **ទំព័រដើម** (2024)៖ អេក្រង់មុខជាមួយកាតសង្ខេប និងសកម្មភាពរហ័ស
+- **ហិរញ្ញវត្ថុ** (2025)៖ បញ្ជីប្រតិបត្តិការ ទម្រង់បន្ថែម/កែប្រែ ការច្រោះតាមខែ
+- **របាយការណ៍** (2025)៖ ក្រាហ្វិក ការវិភាគ ការរុករកតាមខែ
+- **ការកំណត់** (2025)៖ ចំណូលចិត្ត បម្រុងទុក/ស្តារ សំណួរញឹកញាប់ អំពី
+- **ទំព័រស្វាគមន៍** (2026)៖ អេក្រង់ស្វាគមន៍សម្រាប់អ្នកប្រើប្រាស់ថ្មី
+- **ការកែលម្អហិរញ្ញវត្ថុ** (2026)៖ ផ្ទាំងជ្រើសរើសខែ ទិដ្ឋភាពលទ្ធផលប្រចាំខែ
 
-**Recent Commits:**
+**Commits ថ្មីៗ៖**
 ```
 ba25d40 Finance: add calendar button with month picker sheet
 fa825b4 Settings redesign with sub-screens, FAQ, backup/restore
@@ -357,84 +361,84 @@ a20e31d Improve DetailedReportView: thinner bar chart
 
 ---
 
-## ✨ Features
+## ✨ មុខងារ
 
-### 📊 Financial Management
-- ✅ **Transaction Tracking**: Record income and expenses with categories
-- ✅ **Multi-Currency**: Support for KHR (៛) and USD ($)
-- ✅ **Monthly Filtering**: View transactions by specific month
-- ✅ **Search & Filter**: Find transactions by keyword, type, or category
-- ✅ **Quick Actions**: Fast access to add income/expense from Dashboard
+### 📊 ការគ្រប់គ្រងហិរញ្ញវត្ថុ
+- ✅ **តាមដានប្រតិបត្តិការ**៖ កត់ត្រាចំណូល និងចំណាយជាមួយប្រភេទ
+- ✅ **រូបិយប័ណ្ណច្រើន**៖ គាំទ្រ KHR (៛) និង USD ($)
+- ✅ **ការច្រោះតាមខែ**៖ មើលប្រតិបត្តិការតាមខែជាក់លាក់
+- ✅ **ស្វែងរក និងច្រោះ**៖ ស្វែងរកប្រតិបត្តិការតាមពាក្យគន្លឹះ ប្រភេទ ឬចំណាត់ថ្នាក់
+- ✅ **សកម្មភាពរហ័ស**៖ ការចូលប្រើរហ័សដើម្បីបន្ថែមចំណូល/ចំណាយពីទំព័រដើម
 
-### 📈 Reports & Analytics
-- ✅ **Profit Analysis**: Monthly/weekly profit trends with percentage changes
-- ✅ **Expense Breakdown**: Category-wise spending with pie charts
-- ✅ **Bar Charts**: Weekly income vs expense visualization
-- ✅ **Time Period Selection**: 7 days, 30 days, 3 months, 1 year views
-- ✅ **Detailed Analytics**: Donut charts, trend lines, summary cards
+### 📈 របាយការណ៍ និងការវិភាគ
+- ✅ **ការវិភាគចំណេញ**៖ និន្នាការចំណេញប្រចាំខែ/សប្តាហ៍ជាមួយភាគរយផ្លាស់ប្តូរ
+- ✅ **ការបែងចែកចំណាយ**៖ ការចំណាយតាមប្រភេទជាមួយក្រាហ្វិក pie
+- ✅ **ក្រាហ្វិកប្រាំង**៖ ការបង្ហាញចំណូលទល់នឹងចំណាយតាមសប្តាហ៍
+- ✅ **ការជ្រើសរើសពេលវេលា**៖ ទិដ្ឋភាព 7 ថ្ងៃ 30 ថ្ងៃ 3 ខែ 1 ឆ្នាំ
+- ✅ **ការវិភាគលម្អិត**៖ ក្រាហ្វិក donut បន្ទាត់និន្នាការ កាតសង្ខេប
 
-### ⚙️ Settings & Preferences
-- ✅ **Bilingual Support**: Khmer (default) and English
-- ✅ **Currency Selection**: KHR or USD display preference
-- ✅ **Data Backup**: Export all transactions to JSON
-- ✅ **Data Restore**: Import transactions from backup file
-- ✅ **Help & FAQ**: In-app guidance and common questions
+### ⚙️ ការកំណត់ និងចំណូលចិត្ត
+- ✅ **ការគាំទ្រភាសាទ្វេ**៖ ខ្មែរ (លំនាំដើម) និង អង់គ្លេស
+- ✅ **ការជ្រើសរើសរូបិយប័ណ្ណ**៖ ចំណូលចិត្តបង្ហាញ KHR ឬ USD
+- ✅ **ការបម្រុងទុកទិន្នន័យ**៖ នាំចេញប្រតិបត្តិការទាំងអស់ទៅ JSON
+- ✅ **ការស្តារទិន្នន័យ**៖ នាំចូលប្រតិបត្តិការពីឯកសារបម្រុងទុក
+- ✅ **ជំនួយ និងសំណួរញឹកញាប់**៖ ការណែនាំក្នុងកម្មវិធី និងសំណួរទូទៅ
 
-### 🎨 User Experience
-- ✅ **Onboarding**: Welcome screen for new users
-- ✅ **Offline-First**: All data stored locally, no internet required
-- ✅ **Dark Mode Ready**: Supports system appearance preferences
-- ✅ **Localized Dates**: Khmer numerals and date formatting
-- ✅ **Custom Components**: Reusable design system (FarmCard, SummaryCardView, etc.)
-
----
-
-## 🛠️ Tech Stack
-
-### Core Technologies
-- **SwiftUI**: Declarative UI framework (iOS 14+)
-- **CoreData**: Local persistence layer
-- **Combine**: Reactive programming (@Published, ObservableObject)
-- **Swift 5.0**: Primary programming language
-- **Xcode 13.x**: Development environment (objectVersion 55)
-
-### Architecture Patterns
-- **MVVM**: Model-View-ViewModel separation
-- **Repository Pattern**: Protocol-based data access layer
-- **Coordinator Pattern**: Navigation and routing (FinanceCoordinator)
-- **Dependency Injection**: AppEnvironment provides ViewModels & Repositories
-- **Domain-Driven Design**: Entity ↔ Domain Model mapping
-
-### Design System
-- **Theme**: Centralized colors, fonts, spacing (`Core/DesignSystem/Theme.swift`)
-- **Components**: Reusable UI elements (FarmCard, PrimaryButton, SectionHeader)
-- **Localization**: LocalizationManager with `L("key")` helper
-- **Utilities**: CurrencyFormatter, LocalizedDate, NotificationService
-
-### Development Tools
-- **xcodeproj gem**: Programmatic Xcode project manipulation
-- **Bundler**: Ruby dependency management
-- **Git**: Version control with feature branches
+### 🎨 បទពិសោធន៍អ្នកប្រើប្រាស់
+- ✅ **ទំព័រស្វាគមន៍**៖ អេក្រង់ស្វាគមន៍សម្រាប់អ្នកប្រើប្រាស់ថ្មី
+- ✅ **Offline-First**៖ ទិន្នន័យទាំងអស់រក្សាទុកក្នុងឧបករណ៍ មិនត្រូវការអ៊ីនធឺណិត
+- ✅ **ត្រៀមជាស្រេចសម្រាប់ Dark Mode**៖ គាំទ្រចំណូលចិត្តរូបរាងប្រព័ន្ធ
+- ✅ **កាលបរិច្ឆេទមូលដ្ឋាន**៖ លេខខ្មែរ និងទម្រង់ទ្រង់ទ្រាយកាលបរិច្ឆេទ
+- ✅ **សមាសធាតុផ្ទាល់ខ្លួន**៖ ប្រព័ន្ធរចនាដែលអាចប្រើឡើងវិញបាន (FarmCard, SummaryCardView ។ល។)
 
 ---
 
-## 📁 Project Structure
+## 🛠️ បណ្តុំបច្ចេកវិទ្យា
+
+### បច្ចេកវិទ្យាសំខាន់
+- **SwiftUI**៖ ក្របខ័ណ្ឌ UI declarative (iOS 14+)
+- **CoreData**៖ ស្រទាប់ persistence មូលដ្ឋាន
+- **Combine**៖ ការសរសេរកម្មវិធី reactive (@Published, ObservableObject)
+- **Swift 5.0**៖ ភាសាសរសេរកម្មវិធីសំខាន់
+- **Xcode 13.x**៖ បរិស្ថានអភិវឌ្ឍន៍ (objectVersion 55)
+
+### គំរូស្ថាបត្យកម្ម
+- **MVVM**៖ ការបំបែក Model-View-ViewModel
+- **Repository Pattern**៖ ស្រទាប់ចូលប្រើទិន្នន័យផ្អែកលើ protocol
+- **Coordinator Pattern**៖ ការរុករក និងការបញ្ជូន (FinanceCoordinator)
+- **Dependency Injection**៖ AppEnvironment ផ្តល់ ViewModels និង Repositories
+- **Domain-Driven Design**៖ ការផ្គូផ្គង Entity ↔ Domain Model
+
+### ប្រព័ន្ធរចនា
+- **Theme**៖ ពណ៌ពុម្ពអក្សរ គម្លាតកណ្តាល (`Core/DesignSystem/Theme.swift`)
+- **Components**៖ ធាតុ UI ដែលអាចប្រើឡើងវិញបាន (FarmCard, PrimaryButton, SectionHeader)
+- **Localization**៖ LocalizationManager ជាមួយ helper `L("key")`
+- **Utilities**៖ CurrencyFormatter, LocalizedDate, NotificationService
+
+### ឧបករណ៍អភិវឌ្ឍន៍
+- **xcodeproj gem**៖ ការរៀបចំគម្រោង Xcode តាមកម្មវិធី
+- **Bundler**៖ ការគ្រប់គ្រង dependency Ruby
+- **Git**៖ ការគ្រប់គ្រងកំណែជាមួយសាខាមុខងារ
+
+---
+
+## 📁 រចនាសម្ព័ន្ធគម្រោង
 
 ```
 SmartFarm/
 ├── App/
-│   ├── SmartFarmApp.swift          # App entry point
-│   ├── AppEnvironment.swift        # DI container
-│   └── AppSettings.swift           # User preferences
+│   ├── SmartFarmApp.swift          # ចំណុចចូលកម្មវិធី
+│   ├── AppEnvironment.swift        # ធុងផ្ទុក DI
+│   └── AppSettings.swift           # ចំណូលចិត្តអ្នកប្រើប្រាស់
 │
 ├── Core/
-│   ├── Repositories/               # Data access layer
+│   ├── Repositories/               # ស្រទាប់ចូលប្រើទិន្នន័យ
 │   │   ├── TransactionRepository.swift
 │   │   ├── FarmActivityRepository.swift
 │   │   └── ReminderRepository.swift
 │   ├── DesignSystem/
-│   │   ├── Theme.swift            # Colors, fonts, spacing
-│   │   └── Components/            # Reusable UI components
+│   │   ├── Theme.swift            # ពណ៌ ពុម្ពអក្សរ គម្លាត
+│   │   └── Components/            # សមាសធាតុ UI ដែលអាចប្រើឡើងវិញបាន
 │   ├── Localization/
 │   │   └── LocalizationManager.swift
 │   └── Utilities/
@@ -445,14 +449,14 @@ SmartFarm/
 │       └── ActivityShareSheet.swift
 │
 ├── Onboarding/
-│   └── OnboardingView.swift       # Welcome screen
+│   └── OnboardingView.swift       # អេក្រង់ស្វាគមន៍
 │
 ├── Dashboard/
 │   ├── Models/
 │   ├── ViewModels/
 │   │   └── DashboardViewModel.swift
 │   └── Views/
-│       ├── MainTabView.swift      # 4-tab navigation
+│       ├── MainTabView.swift      # ការរុករកផ្ទាំង 4
 │       └── DashboardView.swift
 │
 ├── Finance/
@@ -490,72 +494,72 @@ SmartFarm/
 │   └── BackupService.swift
 │
 ├── en.lproj/
-│   └── Localizable.strings        # English translations
+│   └── Localizable.strings        # ការបកប្រែអង់គ្លេស
 ├── km.lproj/
-│   └── Localizable.strings        # Khmer translations
+│   └── Localizable.strings        # ការបកប្រែខ្មែរ
 │
 ├── Persistence.swift              # PersistenceController
-├── SmartFarm.xcdatamodeld/        # CoreData model
+├── SmartFarm.xcdatamodeld/        # គំរូ CoreData
 │
 └── docs/
-    ├── screenshots/               # App screenshots (PNG)
-    ├── 00-architecture.md         # Architecture spec
-    ├── 01-finance.md              # Finance module spec
-    ├── 02-splash.md               # Splash spec
-    ├── 07-reports.md              # Reports spec
-    ├── 08-settings.md             # Settings spec
-    ├── 09-localization.md         # i18n spec
-    ├── index.html                 # Design preview
-    └── question.html              # User survey
+    ├── screenshots/               # រូបភាពអេក្រង់កម្មវិធី (PNG)
+    ├── 00-architecture.md         # លក្ខណៈបច្ចេកទេសស្ថាបត្យកម្ម
+    ├── 01-finance.md              # លក្ខណៈបច្ចេកទេសម៉ូឌុលហិរញ្ញវត្ថុ
+    ├── 02-splash.md               # លក្ខណៈបច្ចេកទេស Splash
+    ├── 07-reports.md              # លក្ខណៈបច្ចេកទេសរបាយការណ៍
+    ├── 08-settings.md             # លក្ខណៈបច្ចេកទេសការកំណត់
+    ├── 09-localization.md         # លក្ខណៈបច្ចេកទេស i18n
+    ├── index.html                 # មើលរចនាជាមុន
+    └── question.html              # ការស្ទង់មតិអ្នកប្រើប្រាស់
 ```
 
 ---
 
-## 🚀 How to Run
+## 🚀 របៀបដំណើរការ
 
-### Prerequisites
-- **macOS**: Big Sur 11.0 or later
-- **Xcode**: 13.x (ships with iOS 15 SDK)
-- **iOS Deployment Target**: 14.0 (minimum supported iOS version)
-- **iOS Simulator**: iOS 15.2+ recommended, or physical device running iOS 14.0+
+### តម្រូវការជាមុន
+- **macOS**៖ Big Sur 11.0 ឬថ្មីជាងនេះ
+- **Xcode**៖ 13.x (មកជាមួយ iOS 15 SDK)
+- **iOS Deployment Target**៖ 14.0 (កំណែ iOS ទាបបំផុតដែលគាំទ្រ)
+- **iOS Simulator**៖ iOS 15.2+ ណែនាំ ឬឧបករណ៍ពិតប្រាកដដែលដំណើរការ iOS 14.0+
 
-### Steps
+### ជំហាន
 
-1. **Clone the repository:**
+1. **Clone repository:**
    ```bash
    git clone https://github.com/Davy17601/smartfarm.git
    cd smartfarm
    ```
 
-2. **Open in Xcode:**
+2. **បើកក្នុង Xcode:**
    ```bash
    open SmartFarm.xcodeproj
    ```
 
-3. **Select target:**
-   - Choose `SmartFarm` scheme
-   - Select an iOS 15.2+ simulator or connected device
+3. **ជ្រើសរើសគោលដៅ:**
+   - ជ្រើសរើស scheme `SmartFarm`
+   - ជ្រើសរើស simulator iOS 15.2+ ឬឧបករណ៍ដែលបានភ្ជាប់
 
-4. **Build and run:**
-   - Press `⌘R` or click the Play button
-   - App will launch with onboarding screen (first time only)
+4. **Build និងដំណើរការ:**
+   - ចុច `⌘R` ឬចុចប៊ូតុង Play
+   - កម្មវិធីនឹងចាប់ផ្តើមជាមួយអេក្រង់ស្វាគមន៍ (លើកដំបូងតែប៉ុណ្ណោះ)
 
-### Adding New Swift Files
+### ការបន្ថែមឯកសារ Swift ថ្មី
 
-New `.swift` files must be registered in the Xcode project:
+ឯកសារ `.swift` ថ្មីត្រូវតែត្រូវបានចុះឈ្មោះក្នុងគម្រោង Xcode៖
 
 ```bash
-# Install xcodeproj gem (one time)
+# ដំឡើង xcodeproj gem (មួយដង)
 bundle install
 
-# Add a new file to the project
+# បន្ថែមឯកសារថ្មីទៅគម្រោង
 bundle exec ruby -e "require 'xcodeproj'; \
   proj = Xcodeproj::Project.open('SmartFarm.xcodeproj'); \
   ref = proj.main_group.find_subpath('SmartFarm/Finance/Views', true).new_file('NewView.swift'); \
   proj.targets.first.add_file_references([ref]); proj.save"
 ```
 
-### Command-Line Build
+### Build តាមបន្ទាត់ពាក្យបញ្ជា
 
 ```bash
 xcodebuild -project SmartFarm.xcodeproj \
@@ -566,53 +570,53 @@ xcodebuild -project SmartFarm.xcodeproj \
 
 ---
 
-## ⚠️ Limitations
+## ⚠️ កំណត់
 
-### Current Constraints
-- **iOS 14.0 Minimum**: Must support Xcode 13 with iOS 14 deployment target
-- **No Swift Charts**: iOS 16+ framework not available, using custom GeometryReader charts
-- **No `.searchable()`**: iOS 15+ modifier unavailable, using custom TextField search
-- **Local Data Only**: All data stored in CoreData, no cloud sync or remote backup
-- **Static FAQ**: Help questions are hardcoded in localization strings, not expandable UI
-- **Single User**: No multi-user support or user accounts
-- **No Export to CSV/PDF**: Backup feature exports JSON only
-- **Manual Currency Entry**: No automatic currency conversion or exchange rates
+### កំហិតបច្ចុប្បន្ន
+- **iOS 14.0 ទាបបំផុត**៖ ត្រូវគាំទ្រ Xcode 13 ជាមួយ iOS 14 deployment target
+- **គ្មាន Swift Charts**៖ ក្របខ័ណ្ឌ iOS 16+ មិនមាន ប្រើក្រាហ្វិក GeometryReader ផ្ទាល់ខ្លួន
+- **គ្មាន `.searchable()`**៖ modifier iOS 15+ មិនមាន ប្រើការស្វែងរក TextField ផ្ទាល់ខ្លួន
+- **ទិន្នន័យមូលដ្ឋានតែប៉ុណ្ណោះ**៖ ទិន្នន័យទាំងអស់រក្សាទុកក្នុង CoreData គ្មានការធ្វើសមកាលកម្ម cloud ឬការបម្រុងទុកពីចម្ងាយ
+- **សំណួរញឹកញាប់ស្ថិតិ**៖ សំណួរជំនួយត្រូវបាន hardcoded ក្នុង localization strings មិនមែន UI ដែលអាចពង្រីកបាន
+- **អ្នកប្រើប្រាស់តែមួយ**៖ គ្មានការគាំទ្រអ្នកប្រើប្រាស់ច្រើន ឬគណនីអ្នកប្រើប្រាស់
+- **គ្មានការនាំចេញទៅ CSV/PDF**៖ មុខងារបម្រុងទុកនាំចេញ JSON តែប៉ុណ្ណោះ
+- **ការបញ្ចូលរូបិយប័ណ្ណដោយដៃ**៖ គ្មានការបំប្លែងរូបិយប័ណ្ណដោយស្វ័យប្រវត្តិ ឬអត្រាប្តូរប្រាក់
 
-### Design Decisions
-- **Offline-First**: Intentional design for farmers with limited internet access
-- **Simple Categories**: Fixed category list for ease of use (not user-customizable)
-- **Monthly View**: Optimized for monthly farm cycles rather than daily tracking
-- **Bilingual Only**: Khmer and English supported; other languages require localization file additions
+### ការសម្រេចចិត្តរចនា
+- **Offline-First**៖ ការរចនាចេតនាសម្រាប់កសិករដែលមានអ៊ីនធឺណិតមានកំណត់
+- **ប្រភេទសាមញ្ញ**៖ បញ្ជីប្រភេទថេរសម្រាប់ភាពងាយស្រួលប្រើប្រាស់ (មិនអាចប្តូរតាមអ្នកប្រើប្រាស់)
+- **ទិដ្ឋភាពប្រចាំខែ**៖ បានធ្វើឱ្យប្រសើរសម្រាប់វដ្តកសិដ្ឋានប្រចាំខែជាជាងការតាមដានប្រចាំថ្ងៃ
+- **ភាសាទ្វេតែប៉ុណ្ណោះ**៖ ខ្មែរ និងអង់គ្លេសគាំទ្រ ភាសាផ្សេងទៀតត្រូវការការបន្ថែមឯកសារ localization
 
-### Known Issues
-- **Xcode 13 Required**: Contributors must use Xcode 13.x for guaranteed compatibility
-- **No Tests**: Unit test suite not yet implemented (architecture supports mock repositories)
-- **Preview Data**: Some previews use placeholder data instead of live CoreData
+### បញ្ហាដែលដឹង
+- **Xcode 13 ត្រូវការ**៖ អ្នករួមចំណែកត្រូវប្រើ Xcode 13.x សម្រាប់ភាពត្រូវគ្នាដែលធានា
+- **គ្មានតេស្ត**៖ test suite unit មិនទាន់ត្រូវបានអនុវត្ត (ស្ថាបត្យកម្មគាំទ្រ mock repositories)
+- **ទិន្នន័យ Preview**៖ previews មួយចំនួនប្រើទិន្នន័យ placeholder ជំនួស CoreData ផ្ទាល់
 
 ---
 
-## 👨‍💻 Author
+## 👨‍💻 អ្នកនិពន្ធ
 
 **SmartFarm v1.0**
 
-Built with ❤️ for Cambodian smallholder farmers.
+សាងសង់ដោយ ❤️ សម្រាប់កសិករខ្នាតតូចកម្ពុជា។
 
-**Developed by:**
+**អភិវឌ្ឍដោយ:**
 - **Davy** - [@Davy17601](https://github.com/Davy17601)
 
 ---
 
-## 📄 License
+## 📄 អាជ្ញាប័ណ្ណ
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+គម្រោងនេះត្រូវបានផ្តល់អាជ្ញាប័ណ្ណក្រោម MIT License - សូមមើលឯកសារ [LICENSE](LICENSE) សម្រាប់ព័ត៌មានលម្អិត។
 
 ---
 
-## 🙏 Acknowledgments
+## 🙏 ការទទួលស្គាល់
 
-- **Cambodian Farmers**: For inspiring this project and providing real-world feedback
-- **SwiftUI Community**: For open-source components and best practices
-- **Design Resources**: Icons, fonts, and visual assets from Apple SF Symbols
+- **កសិករកម្ពុជា**៖ សម្រាប់ការបំផុសគំនិតគម្រោងនេះ និងការផ្តល់មតិកែលម្អពិតប្រាកដ
+- **សហគមន៍ SwiftUI**៖ សម្រាប់សមាសធាតុ open-source និងការអនុវត្តល្អបំផុត
+- **ធនធានរចនា**៖ រូបតំណាង ពុម្ពអក្សរ និងធនធានរូបភាពពី Apple SF Symbols
 
 ---
 

@@ -41,6 +41,11 @@ struct PersistenceController {
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
+        // Explicit (both already default to true) so adding a new optional
+        // attribute — e.g. `FarmActivityEntity.photoData` — lightweight-
+        // migrates existing stores instead of risking a model-mismatch crash.
+        container.persistentStoreDescriptions.first?.shouldInferMappingModelAutomatically = true
+        container.persistentStoreDescriptions.first?.shouldMigrateStoreAutomatically = true
         container.viewContext.automaticallyMergesChangesFromParent = true
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {

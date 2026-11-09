@@ -22,7 +22,7 @@ struct SmartFarmApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            RootView()
                 .environmentObject(environment)
                 .environmentObject(localization)
                 .environmentObject(settings)

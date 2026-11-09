@@ -1,6 +1,17 @@
 import SwiftUI
 import CoreData
 
+/// The bottom-tab-bar's 4 destinations. `AppEnvironment.selectedTab` holds
+/// which one is active, shared app-wide via `.environmentObject` — so any
+/// screen (e.g. the Calendar tab's bell icon, or a Home grid tile) can switch
+/// tabs directly instead of pushing a duplicate page.
+enum AppTab: Int, CaseIterable {
+    case home
+    case calendar
+    case notifications
+    case settings
+}
+
 /// Dependency-injection container for the whole app.
 ///
 /// Owns the `PersistenceController` and exposes the repositories that feature
@@ -13,6 +24,11 @@ final class AppEnvironment: ObservableObject {
     let transactionRepository: TransactionRepositoryProtocol
     let activityRepository: FarmActivityRepositoryProtocol
     let reminderRepository: ReminderRepositoryProtocol
+
+    /// The tab bar's current selection — `MainTabView` binds its `CustomTabBar`
+    /// and the Home tab to this, and other screens (the Calendar tab's bell)
+    /// write to it directly to switch tabs with the same animation.
+    @Published var selectedTab: AppTab = .home
 
     init(persistence: PersistenceController = .shared) {
         self.persistence = persistence

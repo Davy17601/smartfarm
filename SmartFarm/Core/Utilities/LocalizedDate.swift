@@ -76,4 +76,40 @@ enum LocalizedDate {
         configure(formatter)
         return formatter.string(from: date)
     }
+
+    /// "day month year" in the current language's native numerals (Khmer
+    /// digits for Khmer, e.g. "១២ វិច្ឆិកា ២០២៦") — plain `Locale(identifier:
+    /// "km")` formats digits as Arabic numerals, so this forces the Khmer
+    /// numbering system explicitly when the app is in Khmer. Used by
+    /// `headlineString` below and the Calendar tab's day-detail card title.
+    static func dayMonthYearString(_ date: Date) -> String {
+        let isKhmer = LocalizationManager.shared.language == .khmer
+        let formatter = DateFormatter()
+        formatter.locale = isKhmer ? Locale(identifier: "km@numbers=khmr") : locale
+        formatter.setLocalizedDateFormatFromTemplate("dMMMMy")
+        return formatter.string(from: date)
+    }
+
+    /// The Home screen's big "today" headline — "ថ្ងៃ" + full weekday + day +
+    /// month + year, in Khmer numerals (e.g. "ថ្ងៃពុធ ៤ វិច្ឆិកា ២០២៦").
+    static func headlineString(_ date: Date) -> String {
+        let calendar = Calendar.current
+        let weekdayIndex = calendar.component(.weekday, from: date) - 1
+        let weekday = weekdayFullNames.indices.contains(weekdayIndex) ? weekdayFullNames[weekdayIndex] : ""
+        let isKhmer = LocalizationManager.shared.language == .khmer
+        let rest = dayMonthYearString(date)
+        return isKhmer ? "ថ្ងៃ\(weekday) \(rest)" : "\(weekday), \(rest)"
+    }
+
+    /// Renders an integer using the current app language's native numerals —
+    /// Khmer digits for Khmer (its plain `Locale` defaults to Arabic digits,
+    /// same issue as `headlineString` above), Arabic digits for English.
+    static func localizedNumber(_ value: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.locale = LocalizationManager.shared.language == .khmer
+            ? Locale(identifier: "km@numbers=khmr")
+            : locale
+        formatter.numberStyle = .none
+        return formatter.string(from: NSNumber(value: value)) ?? "\(value)"
+    }
 }

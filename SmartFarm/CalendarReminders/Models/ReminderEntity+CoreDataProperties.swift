@@ -13,6 +13,7 @@ extension ReminderEntity {
     @NSManaged public var note: String?
     @NSManaged public var isCompleted: Bool
     @NSManaged public var repeatType: String?
+    @NSManaged public var completedAt: Date?
 
 }
 

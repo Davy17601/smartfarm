@@ -76,7 +76,9 @@ extension FarmActivity {
             date: date,
             note: entity.note ?? "",
             isCompleted: entity.isCompleted,
-            category: FarmActivityCategory(rawValue: entity.category ?? "") ?? .watering
+            category: FarmActivityCategory(rawValue: entity.category ?? "") ?? .watering,
+            photoData: entity.photoData,
+            completedAt: entity.completedAt
         )
     }
 }
@@ -89,5 +91,7 @@ extension FarmActivityEntity {
         note = activity.note
         isCompleted = activity.isCompleted
         category = activity.category.rawValue
+        photoData = activity.photoData
+        completedAt = activity.completedAt
     }
 }

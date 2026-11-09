@@ -76,7 +76,8 @@ extension Reminder {
             dueDate: dueDate,
             note: entity.note ?? "",
             isCompleted: entity.isCompleted,
-            repeatType: RepeatType(rawValue: entity.repeatType ?? "") ?? .none
+            repeatType: RepeatType(rawValue: entity.repeatType ?? "") ?? .none,
+            completedAt: entity.completedAt
         )
     }
 }
@@ -89,5 +90,6 @@ extension ReminderEntity {
         note = reminder.note
         isCompleted = reminder.isCompleted
         repeatType = reminder.repeatType.rawValue
+        completedAt = reminder.completedAt
     }
 }

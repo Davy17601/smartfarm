@@ -27,8 +27,8 @@ struct AgendaRow: View {
                         .foregroundColor(Theme.primaryText)
                         .lineLimit(1)
                     Text(item.subtitle)
-                        .font(Theme.Fonts.caption)
-                        .foregroundColor(Theme.secondaryText)
+                        .font(Theme.Fonts.caption.weight(.medium))
+                        .foregroundColor(CalendarTheme.mutedText)
                 }
 
                 Spacer()
@@ -40,9 +40,7 @@ struct AgendaRow: View {
                     .foregroundColor(Theme.secondaryText.opacity(0.4))
             }
             .padding(Theme.Spacing.m)
-            .background(Theme.cardBackground)
-            .cornerRadius(Theme.Radius.card)
-            .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 1)
+            .farmCard()
         }
         .buttonStyle(ScaleButtonStyle())
         .contextMenu {
@@ -55,11 +53,11 @@ struct AgendaRow: View {
     private var statusPill: some View {
         let isToday = Calendar.current.isDateInToday(item.date)
         return Text(isToday ? L("calendar.pill.today") : L("calendar.pill.later"))
-            .font(.system(size: 11, weight: .semibold))
+            .font(.system(size: 11, weight: .bold))
+            .foregroundColor(.white)
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
-            .background(isToday ? CalendarTheme.todayPillBackground : CalendarTheme.upcomingPillBackground)
-            .foregroundColor(isToday ? CalendarTheme.todayPillText : CalendarTheme.upcomingPillText)
-            .cornerRadius(8)
+            .background(isToday ? CalendarTheme.farmGreen : CalendarTheme.actionBlue)
+            .clipShape(Capsule())
     }
 }

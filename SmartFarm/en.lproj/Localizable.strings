@@ -3,6 +3,20 @@
 "tab.finance" = "Finance";
 "tab.calendar" = "Calendar";
 "tab.settings" = "Settings";
+"tab.home" = "Home";
+
+/* Home screen */
+"home.greeting" = "Hello!";
+"home.greetingSubtitle" = "Farmer";
+"home.todayCard.title" = "Your farming calendar";
+"home.grid.addCrop" = "Add crop";
+"home.grid.stats" = "Statistics";
+"home.upcoming.title" = "Upcoming schedule";
+"home.upcoming.viewAll" = "View all";
+"home.upcoming.empty" = "Nothing scheduled yet";
+"home.pill.today" = "Today";
+"home.pill.tomorrow" = "Tomorrow";
+"home.pill.daysLeft" = "%@ days left";
 
 /* Weekday abbreviations (Sunday-first) */
 "weekday.sun" = "Sun";
@@ -83,12 +97,21 @@
 "calendar.header.tagline" = "Smart farming assistant";
 "calendar.todayTasks.title" = "Today's tasks";
 "calendar.todayTasks.count" = "%d task(s)";
+"calendar.dayActivities.title" = "Activities for %@";
+"calendar.dayActivities.empty" = "No activities on this day yet.";
 "calendar.schedule.title" = "Schedule";
 "calendar.noSchedule" = "Nothing scheduled";
 "calendar.pill.today" = "Today";
 "calendar.pill.later" = "Upcoming";
 "calendar.addChoice.title" = "Add what?";
 "calendar.viewFullSchedule" = "View full schedule";
+
+/* AddEditActivityView (redesigned form) */
+"activity.form.type" = "Activity type";
+"activity.form.cropName" = "Crop name (optional)";
+"activity.form.cropNamePlaceholder" = "e.g. Rice";
+"activity.form.description" = "Description (optional)";
+"activity.form.descriptionPlaceholder" = "e.g. Water the rice crop";
 
 /* Activity category */
 "activityCategory.watering" = "Watering";
@@ -119,6 +142,18 @@
 "notif.reminder" = "Reminder";
 "notif.tomorrow" = "Tomorrow: ";
 "notifications.title" = "Notifications";
+"notifications.segment.upcoming" = "Upcoming";
+"notifications.segment.overdue" = "Overdue";
+"notifications.segment.completed" = "Completed";
+"notifications.empty.upcoming" = "No upcoming notifications.";
+"notifications.empty.overdue" = "Great! Nothing is overdue.";
+"notifications.empty.completed" = "No completed tasks yet.";
+"notif.completedOn" = "Completed on %@";
+"notif.pill.overdueToday" = "Overdue";
+"notif.pill.overdueDays" = "%@ days overdue";
+"notif.swipe.done" = "Done";
+"notif.delete.confirmTitle" = "Delete this item?";
+"notif.delete.confirmMessage" = "This action cannot be undone.";
 
 /* Dashboard */
 "dashboard.next7" = "Next 7 days";
@@ -138,6 +173,11 @@
 "appWelcome.feature3.title" = "Quick add";
 "appWelcome.feature3.subtitle" = "Add reminders or activities in just a tap";
 "appWelcome.continue" = "Continue";
+"appWelcome.splashTitle" = "SMART CALENDAR";
+"appWelcome.splashSubtitle" = "Smart Farming Calendar";
+"appWelcome.splashTagline" = "Grow well, harvest more";
+"appWelcome.start" = "Start";
+"appWelcome.startCaption" = "A farming management app for farmers";
 
 /* Reports */
 "reports.title" = "Reports";

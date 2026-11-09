@@ -15,5 +15,6 @@ struct CalendarTabContainerView_Previews: PreviewProvider {
         let environment = AppEnvironment(persistence: .preview)
         CalendarTabContainerView(activityRepository: environment.activityRepository,
                                   reminderRepository: environment.reminderRepository)
+            .environmentObject(environment)
     }
 }

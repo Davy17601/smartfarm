@@ -3,6 +3,20 @@
 "tab.finance" = "ហិរញ្ញវត្ថុ";
 "tab.calendar" = "ប្រតិទិន";
 "tab.settings" = "ការកំណត់";
+"tab.home" = "ទំព័រដើម";
+
+/* Home screen */
+"home.greeting" = "សួស្តី!";
+"home.greetingSubtitle" = "កសិករ";
+"home.todayCard.title" = "ប្រតិទិនដាំដុះរបស់អ្នក";
+"home.grid.addCrop" = "បញ្ចូលដំណាំ";
+"home.grid.stats" = "ស្ថិតិ";
+"home.upcoming.title" = "កាលវិភាគខាងមុខ";
+"home.upcoming.viewAll" = "មើលទាំងអស់";
+"home.upcoming.empty" = "មិនទាន់មានកាលវិភាគទេ";
+"home.pill.today" = "ថ្ងៃនេះ";
+"home.pill.tomorrow" = "ស្អែក";
+"home.pill.daysLeft" = "%@ ថ្ងៃទៀត";
 
 /* Weekday abbreviations (Sunday-first) */
 "weekday.sun" = "អាទិត្យ";
@@ -74,7 +88,7 @@
 "calendar.noActivities" = "មិនមានសកម្មភាព";
 "calendar.noReminders" = "មិនមានការរំឭក";
 "calendar.addActivity" = "បន្ថែមសកម្មភាព";
-"calendar.editActivity" = "កែប្រែសកម្មភាព";
+"calendar.editActivity" = "កែសម្រួលសកម្មភាព";
 "calendar.addReminder" = "បន្ថែមការរំឭក";
 "calendar.editReminder" = "កែប្រែការរំឭក";
 "calendar.repeat" = "ធ្វើម្ដងទៀត";
@@ -83,12 +97,21 @@
 "calendar.header.tagline" = "ជំនួយការកសិកម្មឆ្លាតវៃ";
 "calendar.todayTasks.title" = "កិច្ចការថ្ងៃនេះ";
 "calendar.todayTasks.count" = "មាន %d កិច្ចការ";
+"calendar.dayActivities.title" = "សកម្មភាពថ្ងៃទី %@";
+"calendar.dayActivities.empty" = "មិនទាន់មានសកម្មភាពនៅថ្ងៃនេះទេ";
 "calendar.schedule.title" = "កាលវិភាគ";
 "calendar.noSchedule" = "គ្មានកាលវិភាគ";
 "calendar.pill.today" = "នៅថ្ងៃនេះ";
 "calendar.pill.later" = "នៅពេលក្រោយ";
 "calendar.addChoice.title" = "បន្ថែមអ្វី?";
 "calendar.viewFullSchedule" = "មើលកាលវិភាគទាំងមូល";
+
+/* AddEditActivityView (redesigned form) */
+"activity.form.type" = "ប្រភេទសកម្មភាព";
+"activity.form.cropName" = "ឈ្មោះដំណាំ (ជាជម្រើស)";
+"activity.form.cropNamePlaceholder" = "ឧ. ស្រូវ";
+"activity.form.description" = "ការពិពណ៌នា (ជាជម្រើស)";
+"activity.form.descriptionPlaceholder" = "ឧ. ស្រោចទឹកដំណាំស្រូវ";
 
 /* Activity category */
 "activityCategory.watering" = "ស្រោចទឹក";
@@ -119,6 +142,18 @@
 "notif.reminder" = "ការរំឭក";
 "notif.tomorrow" = "ស្អែក៖ ";
 "notifications.title" = "ការជូនដំណឹង";
+"notifications.segment.upcoming" = "ខាងមុខ";
+"notifications.segment.overdue" = "ហួសកំណត់";
+"notifications.segment.completed" = "បានធ្វើរួច";
+"notifications.empty.upcoming" = "មិនមានការជូនដំណឹងខាងមុខទេ";
+"notifications.empty.overdue" = "ល្អណាស់! មិនមានការងារហួសកំណត់ទេ";
+"notifications.empty.completed" = "មិនទាន់មានការងារដែលធ្វើរួចទេ";
+"notif.completedOn" = "បានធ្វើនៅ %@";
+"notif.pill.overdueToday" = "ហួសកំណត់";
+"notif.pill.overdueDays" = "ហួស %@ ថ្ងៃ";
+"notif.swipe.done" = "ធ្វើរួច";
+"notif.delete.confirmTitle" = "លុបធាតុនេះ?";
+"notif.delete.confirmMessage" = "សកម្មភាពនេះមិនអាចមិនធ្វើវិញបានទេ។";
 
 /* Dashboard */
 "dashboard.next7" = "ខាងមុខ ៧ ថ្ងៃ";
@@ -138,6 +173,11 @@
 "appWelcome.feature3.title" = "បន្ថែមរហ័ស";
 "appWelcome.feature3.subtitle" = "បន្ថែមការរំឭក ឬសកម្មភាពថ្មីបានយ៉ាងឆាប់រហ័ស";
 "appWelcome.continue" = "បន្ត";
+"appWelcome.splashTitle" = "SMART CALENDAR";
+"appWelcome.splashSubtitle" = "ប្រតិទិនដាំដុះវៃឆ្លាត";
+"appWelcome.splashTagline" = "ដាំដុះបានល្អ  ទទួលផលច្រើន";
+"appWelcome.start" = "ចាប់ផ្ដើម";
+"appWelcome.startCaption" = "កម្មវិធីគ្រប់គ្រងការដាំដុះសម្រាប់កសិករ";
 
 /* Reports */
 "reports.title" = "របាយការណ៍";

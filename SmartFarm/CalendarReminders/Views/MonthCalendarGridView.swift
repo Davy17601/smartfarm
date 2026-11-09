@@ -1,11 +1,14 @@
 import SwiftUI
+import Combine
 
 /// Custom month calendar grid — replaces the system graphical `DatePicker` so
 /// each date cell can show small colored dots for its scheduled activities.
-/// Laid out as one bordered table: a light-green card holds the weekday
-/// header row and every week row together, with hairline dividers between
-/// every cell and square (equal width/height) date cells.
-/// Selected date renders as a solid green filled circle with a bold white number.
+/// Laid out as one solid white `farmCard()` holding the weekday header row
+/// and every week row together, with square (equal width/height) date cells
+/// and no internal grid lines. The selected date renders as a solid green
+/// filled circle with a bold white number; today (when not the selection)
+/// instead gets just a green outline ring. Tapping any date — including an
+/// adjacent-month day, which also switches the visible month — selects it.
 /// Colors here are `CalendarTheme` (green), scoped to the Calendar tab only.
 struct MonthCalendarGridView: View {
     @Binding var selectedDate: Date
@@ -16,9 +19,13 @@ struct MonthCalendarGridView: View {
     /// Measured width of the table card — cell size is derived from this so
     /// each of the 7 columns is square (width == height), not just equal-width.
     @State private var gridWidth: CGFloat = 0
+    /// The day the grid treats as "today". Held as `@State` rather than read
+    /// fresh per render because SwiftUI has no reason to re-render when the
+    /// clock crosses midnight — it is re-read on appear and on every system
+    /// significant-time-change (midnight, timezone change, manual clock edit).
+    @State private var today: Date = Date()
 
     private let headerRowHeight: CGFloat = 36
-    private let cardCornerRadius: CGFloat = 16
 
     init(selectedDate: Binding<Date>, activities: [FarmActivity], calendar: Calendar) {
         _selectedDate = selectedDate
@@ -43,12 +50,7 @@ struct MonthCalendarGridView: View {
             // FROM `cellSize`, so without this the container has nothing to
             // claim a width with and the whole grid collapses to zero.
             .frame(maxWidth: .infinity)
-            .background(CalendarTheme.lightGreenTint)
-            .cornerRadius(cardCornerRadius)
-            .overlay(
-                RoundedRectangle(cornerRadius: cardCornerRadius)
-                    .stroke(CalendarTheme.gridLine, lineWidth: 1)
-            )
+            .farmCard()
             .background(
                 GeometryReader { proxy in
                     Color.clear
@@ -56,6 +58,18 @@ struct MonthCalendarGridView: View {
                         .onChange(of: proxy.size.width) { gridWidth = $0 }
                 }
             )
+        }
+        .onAppear { today = Date() }
+        .onReceive(NotificationCenter.default.publisher(
+            for: UIApplication.significantTimeChangeNotification)) { _ in
+            today = Date()
+        }
+        // A rollover can move "today" into the next month; bring the visible
+        // month along with the selection so the new today is actually on screen.
+        .onChange(of: selectedDate) { newValue in
+            if !calendar.isDate(newValue, equalTo: displayedMonth, toGranularity: .month) {
+                displayedMonth = newValue
+            }
         }
     }
 
@@ -95,18 +109,17 @@ struct MonthCalendarGridView: View {
         }
     }
 
-    /// Top row of the table: full weekday names, bordered the same way as the
-    /// date cells below so columns line up exactly.
+    /// Top row of the table: full weekday names, columns matching the date
+    /// cells below (no dividers between them).
     private var weekdayHeaderRow: some View {
         HStack(spacing: 0) {
             ForEach(weekdaySymbols, id: \.self) { symbol in
                 Text(symbol)
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(.system(size: 12, weight: .bold))
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
-                    .foregroundColor(CalendarTheme.deepGreen)
+                    .foregroundColor(CalendarTheme.farmGreenDark)
                     .frame(width: cellSize, height: headerRowHeight)
-                    .overlay(Rectangle().stroke(CalendarTheme.gridLine, lineWidth: 0.5))
             }
         }
     }
@@ -132,17 +145,26 @@ struct MonthCalendarGridView: View {
     /// light gray, still tappable: tapping it jumps the grid to that month).
     private func dayCell(for day: GridDay) -> some View {
         let isSelected = calendar.isDate(day.date, inSameDayAs: selectedDate)
-        // The selected day renders as a solid circle with just its number —
-        // no category dots underneath are needed there.
-        let categories = isSelected ? [] : (categoriesByDay[calendar.startOfDay(for: day.date)] ?? [])
+        // "Today" is a day-granularity comparison in the device's own calendar
+        // and timezone — never `==` on two `Date` values, which still carry a
+        // time component and so would never match.
+        let isToday = calendar.isDate(day.date, inSameDayAs: today)
+        // Today only gets its outline ring when it isn't also the selection —
+        // the selected day always wins with a solid fill.
+        let isTodayRing = isToday && !isSelected
+        let isEmphasized = isSelected || isToday
+        let categories = categoriesByDay[calendar.startOfDay(for: day.date)] ?? []
         let circleSize = max(28, min(38, cellSize - 14))
 
         return VStack(spacing: 4) {
             Text("\(calendar.component(.day, from: day.date))")
-                .font(.system(size: isSelected ? 17 : 16, weight: isSelected ? .bold : .regular))
-                .foregroundColor(isSelected ? .white : (day.isInCurrentMonth ? Theme.primaryText : CalendarTheme.outOfMonthText))
+                .font(.system(size: isEmphasized ? 17 : 16, weight: isEmphasized ? .bold : .semibold))
+                .foregroundColor(dayNumberColor(isSelected: isSelected, isTodayRing: isTodayRing, isInCurrentMonth: day.isInCurrentMonth))
                 .frame(width: circleSize, height: circleSize)
-                .background(Circle().fill(isSelected ? CalendarTheme.deepGreen : Color.clear))
+                .background(Circle().fill(isSelected ? CalendarTheme.farmGreen : Color.clear))
+                .overlay(
+                    Circle().stroke(CalendarTheme.farmGreen, lineWidth: isTodayRing ? 2 : 0)
+                )
 
             HStack(spacing: 3) {
                 ForEach(Array(categories.prefix(3).enumerated()), id: \.offset) { _, category in
@@ -154,7 +176,6 @@ struct MonthCalendarGridView: View {
             .frame(height: 6)
         }
         .frame(width: cellSize, height: cellSize)
-        .overlay(Rectangle().stroke(CalendarTheme.gridLine, lineWidth: 0.5))
         .contentShape(Rectangle())
         .onTapGesture {
             if !day.isInCurrentMonth {
@@ -162,6 +183,12 @@ struct MonthCalendarGridView: View {
             }
             selectedDate = day.date
         }
+    }
+
+    private func dayNumberColor(isSelected: Bool, isTodayRing: Bool, isInCurrentMonth: Bool) -> Color {
+        if isSelected { return .white }
+        if isTodayRing { return CalendarTheme.farmGreen }
+        return isInCurrentMonth ? CalendarTheme.farmText : CalendarTheme.farmSubtext.opacity(0.45)
     }
 
     // MARK: - Data

@@ -45,4 +45,23 @@ enum AgendaItem: Identifiable {
         case .reminder: return CalendarTheme.deepGreen
         }
     }
+
+    var isCompleted: Bool {
+        switch self {
+        case .activity(let a): return a.isCompleted
+        case .reminder(let r): return r.isCompleted
+        }
+    }
+
+    var completedAt: Date? {
+        switch self {
+        case .activity(let a): return a.completedAt
+        case .reminder(let r): return r.completedAt
+        }
+    }
+
+    /// Sort key for the "បានធ្វើរួច" (completed) group: falls back to `date`
+    /// for items completed before `completedAt` existed, so they still sort
+    /// somewhere sensible instead of all clumping at the same nil position.
+    var completedSortDate: Date { completedAt ?? date }
 }

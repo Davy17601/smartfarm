@@ -1,49 +1,24 @@
 import SwiftUI
 
-/// Shows `AppWelcomeView` before the real Dashboard/Today tab on every launch.
-/// Tapping Continue (or a feature row) reveals the Dashboard for the current
-/// session only; a fresh launch resets `showWelcome` back to true. Since
-/// Dashboard is the app's default (first) tab, this is what greets the user
-/// every time the app opens.
+/// Owns the Dashboard tab's own "quick add" sheet state, independent of
+/// which tab is selected, and passes it through to `DashboardView`.
+///
+/// Onboarding used to be gated here, but that nested it inside `MainTabView`
+/// so the tab bar showed through behind it — it's now owned by `RootView`
+/// instead, shown before `MainTabView` exists at all. See `App/RootView.swift`.
 struct DashboardTabContainerView: View {
     let environment: AppEnvironment
-    @Binding var selectedTab: Int
+    @Binding var selectedTab: AppTab
 
-    @State private var showWelcome = true
-    @State private var showingQuickAddActivity = false
+    @State private var addingActivity = false
 
     var body: some View {
-        Group {
-            if showWelcome {
-                AppWelcomeView(
-                    onContinue: { showWelcome = false },
-                    onFeatureTapped: handleFeatureTapped
-                )
-            } else {
-                DashboardView(environment: environment, selectedTab: $selectedTab)
-            }
-        }
-        .sheet(isPresented: $showingQuickAddActivity) {
-            AddEditActivityView(mode: .add(Date())) { environment.activityRepository.add($0) }
-        }
-    }
-
-    private func handleFeatureTapped(_ action: AppWelcomeView.WelcomeAction) {
-        showWelcome = false
-        switch action {
-        case .previewToday:
-            // Dashboard is already tab 0 (the default), so this just confirms it.
-            selectedTab = 0
-        case .trackActivity:
-            selectedTab = 2 // Calendar tab
-        case .quickAdd:
-            showingQuickAddActivity = true
-        }
+        DashboardView(environment: environment, selectedTab: $selectedTab, addingActivity: $addingActivity)
     }
 }
 
 struct DashboardTabContainerView_Previews: PreviewProvider {
     static var previews: some View {
-        DashboardTabContainerView(environment: AppEnvironment(persistence: .preview), selectedTab: .constant(0))
+        DashboardTabContainerView(environment: AppEnvironment(persistence: .preview), selectedTab: .constant(.home))
     }
 }

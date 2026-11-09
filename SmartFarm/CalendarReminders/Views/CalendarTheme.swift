@@ -4,20 +4,29 @@ import SwiftUI
 /// `Theme` (used by Dashboard/Finance/Reports/Settings) so this one tab can
 /// carry its own green identity without changing any other screen's colors.
 enum CalendarTheme {
-    static let deepGreen      = Color(hex: 0x2E7D4F)
-    /// Lighter partner shade for the header icon's gradient.
-    static let deepGreenLight = Color(hex: 0x4E9B71)
-    static let lightGreenTint = Color(hex: 0xE8F5EC)
-    /// Text color for dates outside the displayed month.
-    static let outOfMonthText = Color(hex: 0xC7CCC6)
+    static let deepGreen      = Color(hex: 0x2E7D32)
+    /// Same green as `deepGreen` — the "farmGreen" referred to by this tab's
+    /// solid fills (today's circle, the header icon badge).
+    static let farmGreen      = deepGreen
+    /// Darker shade for high-contrast text/badges (weekday names, the
+    /// "កាលវិភាគ" section-title capsule) that need more contrast than a flat
+    /// `farmGreen` fill gives on a light card.
+    static let farmGreenDark  = Color(hex: 0x1B5E20)
     static let weekdayGray    = Color(hex: 0x8A9089)
-    /// Hairline divider between the month grid's table cells.
-    static let gridLine       = Color(hex: 0xC7E3D0)
 
-    static let todayPillBackground    = Color(hex: 0xDCF1E2)
-    static let todayPillText          = deepGreen
-    static let upcomingPillBackground = Color(hex: 0xFBEACB)
-    static let upcomingPillText       = Color(hex: 0xB4740E)
+    /// Darker, higher-contrast neutral than `Theme.secondaryText` for
+    /// secondary copy on this tab's cards (schedule subtitles, counts,
+    /// empty states) — `.secondaryLabel` reads too faint against them.
+    static let mutedText = Color(hex: 0x4A504C)
+
+    /// Primary text color for current-month day numbers in the grid.
+    static let farmText    = Color(hex: 0x1A2420)
+    /// Base color for adjacent-month day numbers — dimmed further with
+    /// `.opacity(0.45)` at the call site, rather than baked into a separate
+    /// pre-mixed pale color.
+    static let farmSubtext = Color(hex: 0x54635C)
+    /// Status-pill fill for "upcoming" items — paired with `farmGreen` for "today".
+    static let actionBlue  = Color(hex: 0x1A6BD1)
 
     /// Small dot / icon-badge colors used on the month grid and activity
     /// list — see `FarmActivityCategory.calendarAccent` below.
@@ -26,6 +35,23 @@ enum CalendarTheme {
     static let dotAmber  = Color(hex: 0xE0A02E)
     static let dotPurple = Color(hex: 0x8B5FBF)
     static let dotPink   = Color(hex: 0xE0527A)
+}
+
+/// Solid white card with a crisp shadow — this tab's equivalent of
+/// `DashboardView`'s card style, so Calendar's cards read the same way
+/// against its own photo background instead of the old pale green tints.
+/// Scoped to the Calendar tab only, like the rest of `CalendarTheme`.
+extension View {
+    func farmCard() -> some View {
+        self
+            .background(Color.white)
+            .overlay(
+                RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous)
+                    .stroke(CalendarTheme.farmGreen.opacity(0.12), lineWidth: 1)
+            )
+            .cornerRadius(Theme.Radius.card)
+            .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 4)
+    }
 }
 
 extension FarmActivityCategory {

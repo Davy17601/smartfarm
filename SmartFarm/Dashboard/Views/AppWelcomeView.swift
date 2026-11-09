@@ -1,229 +1,249 @@
 import SwiftUI
 
-/// One-time onboarding screen shown before the Dashboard/Today tab's first use.
-/// Since Dashboard is the app's default tab, this is effectively the app's
-/// first-run welcome screen. Colors/illustration here are local to this view
-/// only — scoped, like `CalendarTheme`, so no other screen's palette changes.
+/// Full-screen onboarding screen shown once at launch, before the main
+/// `TabView` — owned and switched by `RootView` (see `App/RootView.swift`)
+/// so it is never nested inside the tab bar. Stays on screen until the user
+/// taps the start button; `onStart` is called exactly once, at that point.
 struct AppWelcomeView: View {
-    /// A shortcut the user can jump to directly from a feature row, in
-    /// addition to just dismissing the welcome screen via "បន្ត".
-    enum WelcomeAction {
-        case previewToday
-        case trackActivity
-        case quickAdd
-    }
+    let onStart: () -> Void
 
-    let onContinue: () -> Void
-    let onFeatureTapped: (WelcomeAction) -> Void
+    @State private var logoAppeared = false
 
-    private let deepGreen  = Color(red: 0x2E / 255, green: 0x7D / 255, blue: 0x4F / 255)
-    private let blueAccent = Color(red: 0x3B / 255, green: 0x82 / 255, blue: 0xC4 / 255)
+    // MARK: - Palette
 
-    private struct Feature {
-        let systemImage: String
-        let title: String
-        let subtitle: String
-        let action: WelcomeAction
-        let iconColor: Color
-        let badgeBackground: Color
-        let cardTint: Color
-    }
+    private let ringGreen          = Color(red: 0x66 / 255, green: 0xBB / 255, blue: 0x6A / 255)
+    private let buttonStart        = Color(red: 0x43 / 255, green: 0xA0 / 255, blue: 0x47 / 255)
+    private let buttonEnd          = Color(red: 0x2E / 255, green: 0x7D / 255, blue: 0x32 / 255)
+    private let overlayBottomGreen = Color(red: 0x0B / 255, green: 0x3D / 255, blue: 0x1A / 255)
+    private let textShadow         = Color.black.opacity(0.35)
 
-    private var features: [Feature] {
-        [
-            Feature(systemImage: "eye.fill",
-                    title: L("appWelcome.feature1.title"),
-                    subtitle: L("appWelcome.feature1.subtitle"),
-                    action: .previewToday,
-                    iconColor: deepGreen,
-                    badgeBackground: deepGreen.opacity(0.15),
-                    cardTint: deepGreen.opacity(0.08)),
-            Feature(systemImage: "calendar",
-                    title: L("appWelcome.feature2.title"),
-                    subtitle: L("appWelcome.feature2.subtitle"),
-                    action: .trackActivity,
-                    iconColor: blueAccent,
-                    badgeBackground: blueAccent.opacity(0.15),
-                    cardTint: blueAccent.opacity(0.08)),
-            Feature(systemImage: "plus",
-                    title: L("appWelcome.feature3.title"),
-                    subtitle: L("appWelcome.feature3.subtitle"),
-                    action: .quickAdd,
-                    iconColor: .white,
-                    badgeBackground: deepGreen,
-                    cardTint: Color(red: 0xFB / 255, green: 0xF3 / 255, blue: 0xDD / 255))
-        ]
-    }
+    // Text card palette
+    private let cardTitleGreen    = Color(red: 0x1B / 255, green: 0x5E / 255, blue: 0x20 / 255)
+    private let cardSubtitleGreen = Color(red: 0x2E / 255, green: 0x7D / 255, blue: 0x32 / 255)
+    private let cardTaglineColor  = Color(red: 0x37 / 255, green: 0x54 / 255, blue: 0x3A / 255)
+
+    // MARK: - Logo sizing
+
+    /// ~120pt white disc; the ring and the inner glyph are scaled off it so
+    /// the drawing keeps the same proportions it always had.
+    private let logoDiscSize: CGFloat = 120
+    private var logoRingSize: CGFloat { logoDiscSize + 8 }
+    private var logoGlyphSize: CGFloat { logoDiscSize * 0.657 }
 
     var body: some View {
         ZStack {
-            backgroundIllustration
+            GeometryReader { geo in
+                background(in: geo)
+            }
+            .ignoresSafeArea()
 
-            VStack(spacing: Theme.Spacing.l) {
-                Spacer(minLength: Theme.Spacing.xl)
-
-                RoundedRectangle(cornerRadius: Theme.Radius.card * 2, style: .continuous)
-                    .fill(deepGreen)
-                    .frame(width: 92, height: 92)
-                    .overlay(calendarLeafIcon)
-
-                titleCard
-
-                VStack(spacing: Theme.Spacing.s) {
-                    ForEach(features, id: \.title) { feature in
-                        featureRow(feature)
-                    }
+            // Deliberately NOT `.ignoresSafeArea()` here: left to the
+            // system's default safe-area-respecting layout so the logo and
+            // button clear the Dynamic Island / home indicator on every
+            // device without a hardcoded offset. Only ONE `Spacer` in this
+            // stack — a second one above the logo would be just as
+            // flexible as this one and split the leftover height evenly
+            // between them, dragging the logo back down toward the middle
+            // instead of letting it sit right under the safe area.
+            VStack(spacing: 0) {
+                VStack(spacing: 16) {
+                    logo
+                    textCard
                 }
-                .padding(.horizontal, Theme.Spacing.m)
+                .padding(.top, 24)
 
                 Spacer()
 
-                continueButton
-                    .padding(.horizontal, Theme.Spacing.l)
-                    .padding(.bottom, Theme.Spacing.l)
+                VStack(spacing: 8) {
+                    startButton
+                    caption
+                }
+                .padding(.bottom, Theme.Spacing.s)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    // MARK: - Badge icon
+    // MARK: - Background
 
-    /// A calendar glyph filling most of the badge, with a small circular
-    /// leaf badge overlapping its bottom-right corner (notification-badge
-    /// style) to tie the "activity calendar" idea back to the farm theme.
-    private var calendarLeafIcon: some View {
-        Image(systemName: "calendar")
-            .font(.system(size: 52, weight: .semibold))
-            .foregroundColor(.white)
-            .frame(width: 92, height: 92)
-            .overlay(leafBadge, alignment: .bottomTrailing)
+    /// The rice field / farmer photo ("onboarding_bg"), full-bleed behind
+    /// everything, darkened by two gradient washes so the white logo/text
+    /// and the button stay readable without hiding the photo itself: a
+    /// black-to-clear wash behind the top block, and a clear-to-dark-green
+    /// wash behind the bottom block. The middle of the photo (where the
+    /// farmer's hand/tablet are) is left untouched.
+    private func background(in geo: GeometryProxy) -> some View {
+        ZStack {
+            fieldPhoto
+                .frame(width: geo.size.width, height: geo.size.height)
+                .clipped()
+
+            VStack(spacing: 0) {
+                LinearGradient(colors: [Color.black.opacity(0.4), Color.black.opacity(0)],
+                                startPoint: .top, endPoint: .bottom)
+                    .frame(height: geo.size.height * 0.4)
+                Spacer(minLength: 0)
+            }
+
+            VStack(spacing: 0) {
+                Spacer(minLength: 0)
+                LinearGradient(colors: [overlayBottomGreen.opacity(0), overlayBottomGreen.opacity(0.85)],
+                                startPoint: .top, endPoint: .bottom)
+                    .frame(height: geo.size.height * 0.35)
+            }
+        }
+        .frame(width: geo.size.width, height: geo.size.height)
     }
 
-    private var leafBadge: some View {
-        Circle()
-            .fill(Color.white)
-            .frame(width: 30, height: 30)
-            .overlay(
-                Image(systemName: "leaf.fill")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(deepGreen)
-            )
-            .overlay(
-                Circle().stroke(deepGreen, lineWidth: 2)
-            )
-            .offset(x: -8, y: -8)
+    /// Falls back to a plain green gradient if "onboarding_bg" is ever
+    /// missing from the asset catalog, so the layout still reads correctly.
+    private var fieldPhoto: some View {
+        Group {
+            if UIImage(named: "onboarding_bg") != nil {
+                Image("onboarding_bg")
+                    .resizable()
+                    .scaledToFill()
+            } else {
+                TwoStopGradient(start: ringGreen, end: buttonEnd, axis: .vertical)
+            }
+        }
     }
 
-    // MARK: - Title
+    // MARK: - Logo
 
-    private var titleCard: some View {
-        VStack(spacing: 6) {
-            Text(L("appWelcome.titleLine1"))
-                .font(.system(size: 15, weight: .semibold))
-                .foregroundColor(deepGreen)
-            Text(L("appWelcome.titleLine2"))
-                .font(.system(size: 26, weight: .bold))
-                .foregroundColor(deepGreen)
-            Text(L("appWelcome.tagline"))
-                .font(.system(size: 13))
-                .foregroundColor(Theme.secondaryText)
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
+    /// A white circle (~120pt) with a thin bright-green ring around it,
+    /// holding the calendar logo. Scales in from 0.8 and fades in once on
+    /// appear (no looping).
+    private var logo: some View {
+        ZStack {
+            Circle()
+                .stroke(ringGreen, lineWidth: 4)
+                .frame(width: logoRingSize, height: logoRingSize)
+
+            Circle()
+                .fill(Color.white)
+                .frame(width: logoDiscSize, height: logoDiscSize)
+                .shadow(color: Color.black.opacity(0.22), radius: 12, x: 0, y: 6)
+
+            CalendarLogoView(size: logoGlyphSize)
+        }
+        .scaleEffect(logoAppeared ? 1 : 0.8)
+        .opacity(logoAppeared ? 1 : 0)
+        .onAppear {
+            withAnimation(.easeOut(duration: 0.6)) {
+                logoAppeared = true
+            }
+        }
+    }
+
+    // MARK: - Text card
+
+    /// Title/subtitle/tagline sit on a light "glass" card over the photo —
+    /// a blurred, mostly-opaque white panel — so the Khmer lines stay
+    /// readable against a bright photo without needing a text shadow.
+    private var textCard: some View {
+        VStack(spacing: 8) {
+            trackedTitle
+
+            Capsule()
+                .fill(ringGreen)
+                .frame(width: 40, height: 3)
+
+            Text(L("appWelcome.splashSubtitle"))
+                .font(.system(size: 22, weight: .bold, design: .rounded))
+                .foregroundColor(cardSubtitleGreen)
+                .lineSpacing(6)
+                .minimumScaleFactor(0.8)
+
+            Text(L("appWelcome.splashTagline"))
+                .font(.system(size: 16, weight: .medium, design: .rounded))
+                .foregroundColor(cardTaglineColor)
+                .lineSpacing(6)
         }
         .multilineTextAlignment(.center)
-        .padding(.horizontal, Theme.Spacing.l)
-        .padding(.vertical, Theme.Spacing.m)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 16)
         .background(
-            RoundedRectangle(cornerRadius: Theme.Radius.card * 1.5, style: .continuous)
-                .fill(Color.white.opacity(0.94))
-                .shadow(color: Color.black.opacity(0.06), radius: 8, x: 0, y: 3)
-        )
-        .padding(.horizontal, Theme.Spacing.l)
-    }
-
-    // MARK: - Feature row
-
-    private func featureRow(_ feature: Feature) -> some View {
-        Button {
-            onFeatureTapped(feature.action)
-        } label: {
-            HStack(spacing: Theme.Spacing.m) {
-                Circle()
-                    .fill(feature.badgeBackground)
-                    .frame(width: 44, height: 44)
-                    .overlay(
-                        Image(systemName: feature.systemImage)
-                            .font(.system(size: 18, weight: .semibold))
-                            .foregroundColor(feature.iconColor)
-                    )
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(feature.title)
-                        .font(Theme.Fonts.heading)
-                        .foregroundColor(feature.iconColor == .white ? deepGreen : feature.iconColor)
-                    Text(feature.subtitle)
-                        .font(Theme.Fonts.caption)
-                        .foregroundColor(Theme.secondaryText)
-                }
-
-                Spacer()
-
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(Theme.secondaryText.opacity(0.5))
+            ZStack {
+                BlurView(style: .systemUltraThinMaterialLight)
+                Color.white.opacity(0.9)
             }
-            .padding(Theme.Spacing.m)
-            // The tint alone (8-15% opacity) was designed against the old
-            // pastel shape background — against the photo it's nearly
-            // transparent and the row disappears, so a near-opaque white
-            // base goes behind it here (not over the whole image) to keep
-            // the icon/text legible.
-            .background(feature.cardTint)
-            .background(Color.white.opacity(0.92))
-            .cornerRadius(Theme.Radius.card)
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(ScaleButtonStyle())
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .stroke(Color.white.opacity(0.6), lineWidth: 1)
+        )
+        .shadow(color: Color.black.opacity(0.15), radius: 12, x: 0, y: 6)
+        .padding(.horizontal, 24)
     }
 
-    // MARK: - Continue button
+    /// "SMART CALENDAR", manually letter-spaced (SwiftUI's `.tracking()` /
+    /// `.kerning()` modifiers need iOS 16, which this app's iOS 14 target
+    /// can't use) by laying out each character with a small fixed gap.
+    private var trackedTitle: some View {
+        HStack(spacing: 1.5) {
+            ForEach(Array(L("appWelcome.splashTitle").enumerated()), id: \.offset) { _, character in
+                Text(String(character))
+            }
+        }
+        .font(.system(size: 32, weight: .heavy, design: .rounded))
+        .foregroundColor(cardTitleGreen)
+    }
 
-    private var continueButton: some View {
-        Button(action: onContinue) {
-            HStack(spacing: Theme.Spacing.s) {
-                Text(L("appWelcome.continue"))
-                    .font(.system(size: 17, weight: .bold))
+    // MARK: - Start button
+
+    private var startButton: some View {
+        Button(action: handleStart) {
+            HStack(spacing: 8) {
+                Text(L("appWelcome.start"))
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
                 Image(systemName: "arrow.right")
-                    .font(.system(size: 15, weight: .bold))
+                    .font(.system(size: 16, weight: .bold))
             }
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
-            .padding(.vertical, Theme.Spacing.m)
-            .background(deepGreen)
+            .frame(height: 56)
+            .background(
+                TwoStopGradient(start: buttonStart, end: buttonEnd, axis: .horizontal)
+            )
             .clipShape(Capsule())
+            .shadow(color: buttonEnd.opacity(0.4), radius: 14, x: 0, y: 8)
         }
-        .buttonStyle(ScaleButtonStyle())
+        .buttonStyle(StartButtonStyle())
+        .padding(.horizontal, 24)
     }
 
-    // MARK: - Background illustration
+    private var caption: some View {
+        Text(L("appWelcome.startCaption"))
+            .font(.system(size: 13, weight: .regular, design: .rounded))
+            .foregroundColor(Color.white.opacity(0.9))
+            .shadow(color: textShadow, radius: 4, x: 0, y: 1)
+    }
 
-    /// Full-bleed photo background (a rice-paddy landscape under a rainbow),
-    /// filling and cropping to the screen behind all the foreground content.
-    private var backgroundIllustration: some View {
-        GeometryReader { geo in
-            Image("anime-rainbow-landscape")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: geo.size.width, height: geo.size.height)
-                .clipped()
-        }
-        .ignoresSafeArea()
-        .allowsHitTesting(false)
+    private func handleStart() {
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        onStart()
+    }
+}
+
+/// Scales the button down slightly while pressed — plain (non-`value:`)
+/// `.animation()` on purpose, since the `value:`-based overload needs iOS 15.
+private struct StartButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.96 : 1)
+            .animation(.easeOut(duration: 0.15))
     }
 }
 
 struct AppWelcomeView_Previews: PreviewProvider {
     static var previews: some View {
-        AppWelcomeView(onContinue: {}, onFeatureTapped: { _ in })
+        Group {
+            AppWelcomeView(onStart: {})
+                .previewDevice("iPhone SE (3rd generation)")
+            AppWelcomeView(onStart: {})
+                .previewDevice("iPhone 14 Pro")
+        }
     }
 }

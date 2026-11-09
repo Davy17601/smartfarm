@@ -2,11 +2,12 @@ import SwiftUI
 
 /// Calendar tab — redesigned with its own green identity (`CalendarTheme`),
 /// scoped to this screen only. Custom header (replaces the system nav bar),
-/// month grid, a "today's tasks" summary card, and a combined
-/// activity/reminder agenda list below it.
+/// a month grid whose tapped date drives `selectedDayCard`'s inline
+/// activity/reminder list below it, and a combined 7-day agenda list under that.
 struct CalendarTabView: View {
     @StateObject private var viewModel: CalendarViewModel
     @EnvironmentObject private var settings: AppSettings
+    @EnvironmentObject private var environment: AppEnvironment
 
     @State private var addingChoice = false
     @State private var addingActivity = false
@@ -35,11 +36,9 @@ struct CalendarTabView: View {
                                               activities: viewModel.activities,
                                               calendar: weekGridCalendar)
                             .padding(Theme.Spacing.m)
-                            .background(Theme.cardBackground)
-                            .cornerRadius(Theme.Radius.card)
-                            .shadow(color: Color.black.opacity(0.06), radius: 6, x: 0, y: 2)
+                            .farmCard()
 
-                        todaySummaryCard
+                        selectedDayCard
                         scheduleSection
                         viewAllButton
                     }
@@ -47,7 +46,12 @@ struct CalendarTabView: View {
                 }
             }
             .navigationBarHidden(true)
-            .onAppear { viewModel.reload() }
+            .onAppear {
+                viewModel.reload()
+                // The tab's view model outlives any single day, so re-check the
+                // current date on every appearance, not just at construction.
+                viewModel.refreshForCurrentDate()
+            }
             .actionSheet(isPresented: $addingChoice) {
                 ActionSheet(title: Text(L("calendar.addChoice.title")), buttons: [
                     .default(Text(L("calendar.addActivity"))) { addingActivity = true },
@@ -56,7 +60,7 @@ struct CalendarTabView: View {
                 ])
             }
             .sheet(isPresented: $addingActivity) {
-                AddEditActivityView(mode: .add(viewModel.selectedDate)) { viewModel.addActivity($0) }
+                AddEditActivityView(mode: .add(defaultActivityDate)) { viewModel.addActivity($0) }
             }
             .sheet(isPresented: $addingReminder) {
                 AddEditReminderView(mode: .add(viewModel.selectedDate)) { viewModel.addReminder($0) }
@@ -76,9 +80,10 @@ struct CalendarTabView: View {
 
     /// One continuous full-content photo behind the header, month grid, and
     /// schedule — mirrors `DashboardView`'s background treatment: a single
-    /// `GeometryReader`-sized image (no seams) with a white wash to keep it
-    /// soft, bleeding only into the top safe area so it stops above the tab
-    /// bar instead of showing through it.
+    /// `GeometryReader`-sized image (no seams), boosted saturation/contrast,
+    /// and a green gradient wash (darker top/bottom, clearer in the middle)
+    /// instead of a flat white tint, bleeding only into the top safe area so
+    /// it stops above the tab bar instead of showing through it.
     private var backgroundLayer: some View {
         GeometryReader { geo in
             ZStack {
@@ -86,10 +91,20 @@ struct CalendarTabView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: geo.size.width, height: geo.size.height)
-                    .opacity(0.9)
+                    .saturation(1.25)
+                    .contrast(1.08)
                     .clipped()
 
-                Color.white.opacity(0.4)
+                LinearGradient(
+                    colors: [
+                        CalendarTheme.farmGreen.opacity(0.55),
+                        CalendarTheme.farmGreen.opacity(0.15),
+                        Color.clear,
+                        CalendarTheme.farmGreen.opacity(0.35)
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
             }
         }
         .ignoresSafeArea(edges: .top)
@@ -97,37 +112,39 @@ struct CalendarTabView: View {
 
     // MARK: - Header
 
-    /// Custom in-body header (app icon, "SmartFarm" title + tagline, and a
-    /// bell with an unread-style dot when there's something due today) —
-    /// tapping the bell pushes the notifications list.
+    /// Custom in-body header (app icon, "SMART CALENDAR" title + tagline —
+    /// `appWelcome.splashTitle`, the same brand title the onboarding screen
+    /// uses — and a bell with an unread-style dot when there's something due
+    /// today) — tapping the bell switches the bottom tab bar to the
+    /// "ការជូនដំណឹង" tab (`AppEnvironment.selectedTab`) instead of pushing a
+    /// second copy of that same list, so the tab bar's highlight always
+    /// matches what's on screen.
     private var header: some View {
         HStack(spacing: Theme.Spacing.s) {
             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(LinearGradient(colors: [CalendarTheme.deepGreen, CalendarTheme.deepGreenLight],
-                                      startPoint: .topLeading, endPoint: .bottomTrailing))
+                .fill(CalendarTheme.farmGreen)
                 .frame(width: 44, height: 44)
                 .overlay(headerCalendarLeafIcon)
 
             VStack(alignment: .leading, spacing: 2) {
-                Text("SmartFarm")
+                Text(L("appWelcome.splashTitle"))
                     .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(CalendarTheme.deepGreen)
+                    .foregroundColor(.white)
+                    .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
                 Text(L("calendar.header.tagline"))
-                    .font(.system(size: 12))
-                    .foregroundColor(Theme.secondaryText)
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.white.opacity(0.85))
             }
 
             Spacer()
 
-            NavigationLink(destination: AgendaListView(title: L("notifications.title"),
-                                                        items: notificationItems,
-                                                        viewModel: viewModel)) {
+            Button(action: switchToNotificationsTab) {
                 ZStack(alignment: .topTrailing) {
                     Image(systemName: "bell.fill")
                         .font(.system(size: 16))
-                        .foregroundColor(CalendarTheme.deepGreen)
+                        .foregroundColor(CalendarTheme.farmGreen)
                         .frame(width: 36, height: 36)
-                        .background(Circle().fill(CalendarTheme.lightGreenTint))
+                        .background(Circle().fill(Color.white))
                     if hasTodayItems {
                         Circle()
                             .fill(Theme.expense)
@@ -140,17 +157,13 @@ struct CalendarTabView: View {
         }
     }
 
-    /// Upcoming (not yet completed) activities + reminders, sorted by date —
-    /// backs the bell icon's notifications list.
-    private var notificationItems: [AgendaItem] {
-        let now = Date()
-        let activities = viewModel.activities
-            .filter { !$0.isCompleted && $0.date >= now }
-            .map(AgendaItem.activity)
-        let reminders = viewModel.reminders
-            .filter { !$0.isCompleted && $0.dueDate >= now }
-            .map(AgendaItem.reminder)
-        return (activities + reminders).sorted { $0.date < $1.date }
+    /// Switches the shared tab selection to "ការជូនដំណឹង" with the same
+    /// spring animation `CustomTabBar` (`MainTabView.swift`) uses for its own
+    /// taps, so this behaves identically to tapping that tab directly.
+    private func switchToNotificationsTab() {
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
+            environment.selectedTab = .notifications
+        }
     }
 
     /// A calendar glyph with a small circular leaf badge overlapping its
@@ -192,12 +205,15 @@ struct CalendarTabView: View {
         return calendar
     }
 
-    // MARK: - Today's summary
+    // MARK: - Selected day's activities
 
-    private var todaySummaryCard: some View {
-        NavigationLink(destination: AgendaListView(title: L("calendar.todayTasks.title"),
-                                                    items: todayAgendaItems,
-                                                    viewModel: viewModel)) {
+    /// Replaces the old fixed "today" summary — this card always reflects
+    /// whichever date is selected in `MonthCalendarGridView` above (tapping a
+    /// day updates `viewModel.selectedDate`, which this reads directly), and
+    /// lists that day's activities/reminders inline instead of pushing to a
+    /// separate screen, so tapping one opens it for editing right away.
+    private var selectedDayCard: some View {
+        VStack(alignment: .leading, spacing: Theme.Spacing.m) {
             HStack(spacing: Theme.Spacing.m) {
                 ZStack {
                     Circle().fill(CalendarTheme.deepGreen).frame(width: 44, height: 44)
@@ -206,23 +222,85 @@ struct CalendarTabView: View {
                         .foregroundColor(.white)
                 }
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(L("calendar.todayTasks.title"))
-                        .font(Theme.Fonts.heading)
+                    Text(selectedDayTitle)
+                        .font(Theme.Fonts.heading.weight(.bold))
                         .foregroundColor(CalendarTheme.deepGreen)
-                    Text(String(format: L("calendar.todayTasks.count"), todayItemCount))
-                        .font(Theme.Fonts.caption)
-                        .foregroundColor(Theme.secondaryText)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.8)
+                    Text(String(format: L("calendar.todayTasks.count"), selectedDayItems.count))
+                        .font(Theme.Fonts.caption.weight(.medium))
+                        .foregroundColor(CalendarTheme.mutedText)
                 }
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(CalendarTheme.deepGreen.opacity(0.6))
+                Spacer(minLength: 0)
             }
-            .padding(Theme.Spacing.m)
-            .background(CalendarTheme.lightGreenTint)
-            .cornerRadius(Theme.Radius.card)
+
+            if selectedDayItems.isEmpty {
+                selectedDayEmptyState
+            } else {
+                VStack(spacing: Theme.Spacing.s) {
+                    ForEach(selectedDayItems) { item in
+                        AgendaRow(item: item, onTap: { openEditor(for: item) }, onDelete: { delete(item) })
+                    }
+                }
+            }
         }
-        .buttonStyle(ScaleButtonStyle())
+        .padding(Theme.Spacing.m)
+        .farmCard()
+    }
+
+    private var selectedDayTitle: String {
+        String(format: L("calendar.dayActivities.title"), LocalizedDate.dayMonthYearString(viewModel.selectedDate))
+    }
+
+    /// Activities + reminders saved on the selected date, regardless of
+    /// completion, sorted by time.
+    private var selectedDayItems: [AgendaItem] {
+        let activities = viewModel.activities(on: viewModel.selectedDate).map(AgendaItem.activity)
+        let reminders = viewModel.reminders
+            .filter { Calendar.current.isDate($0.dueDate, inSameDayAs: viewModel.selectedDate) }
+            .map(AgendaItem.reminder)
+        return (activities + reminders).sorted { $0.date < $1.date }
+    }
+
+    private var selectedDayEmptyState: some View {
+        VStack(spacing: 12) {
+            Text(L("calendar.dayActivities.empty"))
+                .font(Theme.Fonts.body.weight(.medium))
+                .foregroundColor(CalendarTheme.mutedText)
+                .multilineTextAlignment(.center)
+            Button(action: { addingActivity = true }) {
+                HStack(spacing: 6) {
+                    Image(systemName: "plus")
+                        .font(.system(size: 14, weight: .bold))
+                    Text(L("calendar.addActivity"))
+                        .font(Theme.Fonts.body.weight(.bold))
+                }
+                .foregroundColor(.white)
+                .padding(.horizontal, 18)
+                .padding(.vertical, 10)
+                .background(CalendarTheme.farmGreen)
+                .clipShape(Capsule())
+            }
+            .buttonStyle(ScaleButtonStyle())
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 8)
+    }
+
+    /// The default date+time an activity added for the selected day should
+    /// start with: the actual current time if the selection is today (so a
+    /// same-day activity doesn't default to a moment that's already past),
+    /// otherwise 7:00 AM on the selected day.
+    private var defaultActivityDate: Date {
+        let calendar = Calendar.current
+        let now = Date()
+        if calendar.isDate(viewModel.selectedDate, inSameDayAs: now) {
+            return now
+        }
+        var components = calendar.dateComponents([.year, .month, .day], from: viewModel.selectedDate)
+        components.hour = 7
+        components.minute = 0
+        return calendar.date(from: components) ?? viewModel.selectedDate
     }
 
     private var todayItemCount: Int {
@@ -232,16 +310,6 @@ struct CalendarTabView: View {
     }
 
     private var hasTodayItems: Bool { todayItemCount > 0 }
-
-    /// All of today's activities + reminders, regardless of completion —
-    /// backs the "Today's tasks" pushed screen.
-    private var todayAgendaItems: [AgendaItem] {
-        let activities = viewModel.activities(on: Date()).map(AgendaItem.activity)
-        let reminders = viewModel.reminders
-            .filter { Calendar.current.isDateInToday($0.dueDate) }
-            .map(AgendaItem.reminder)
-        return (activities + reminders).sorted { $0.date < $1.date }
-    }
 
     /// Every activity + reminder the app knows about, sorted by date —
     /// backs the "View full schedule" pushed screen.
@@ -256,13 +324,17 @@ struct CalendarTabView: View {
         VStack(alignment: .leading, spacing: Theme.Spacing.s) {
             HStack {
                 Text(L("calendar.schedule.title"))
-                    .font(Theme.Fonts.heading)
-                    .foregroundColor(Theme.primaryText)
+                    .font(Theme.Fonts.heading.weight(.bold))
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 6)
+                    .background(Capsule().fill(CalendarTheme.farmGreenDark))
                 Spacer()
                 Button(action: { addingChoice = true }) {
                     Image(systemName: "plus.circle.fill")
                         .font(.system(size: 20))
-                        .foregroundColor(CalendarTheme.deepGreen)
+                        .foregroundColor(.white)
+                        .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
                 }
                 .buttonStyle(BorderlessButtonStyle())
             }
@@ -272,11 +344,11 @@ struct CalendarTabView: View {
                 // adding something when there's nothing scheduled yet.
                 Button(action: { addingChoice = true }) {
                     Text(L("calendar.noSchedule"))
-                        .foregroundColor(Theme.secondaryText)
+                        .font(Theme.Fonts.body.weight(.medium))
+                        .foregroundColor(CalendarTheme.mutedText)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(Theme.Spacing.m)
-                        .background(Theme.cardBackground)
-                        .cornerRadius(Theme.Radius.card)
+                        .farmCard()
                 }
                 .buttonStyle(ScaleButtonStyle())
             } else {
@@ -327,11 +399,10 @@ struct CalendarTabView: View {
                 Image(systemName: "chevron.right")
             }
             .font(Theme.Fonts.body.weight(.semibold))
-            .foregroundColor(CalendarTheme.deepGreen)
+            .foregroundColor(CalendarTheme.farmGreen)
             .padding(Theme.Spacing.m)
             .frame(maxWidth: .infinity)
-            .background(CalendarTheme.lightGreenTint)
-            .cornerRadius(Theme.Radius.card)
+            .farmCard()
         }
         .buttonStyle(ScaleButtonStyle())
     }
@@ -342,5 +413,6 @@ struct CalendarTabView_Previews: PreviewProvider {
         let environment = AppEnvironment(persistence: .preview)
         CalendarTabView(activityRepository: environment.activityRepository,
                         reminderRepository: environment.reminderRepository)
+            .environmentObject(environment)
     }
 }

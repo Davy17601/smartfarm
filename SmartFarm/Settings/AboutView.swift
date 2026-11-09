@@ -6,7 +6,7 @@ import SwiftUI
 /// `AppWelcomeView`'s icon, so it reads as part of the same app rather than
 /// a bolted-on screen.
 struct AboutView: View {
-    private let deepGreen = Color(red: 0x2E / 255, green: 0x7D / 255, blue: 0x4F / 255)
+    private let deepGreen = Color(red: 0x2E / 255, green: 0x7D / 255, blue: 0x32 / 255)
 
     /// Falls back to the static "1.0" if the bundle's marketing version is
     /// ever missing (e.g. a stripped test bundle).

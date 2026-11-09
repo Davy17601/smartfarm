@@ -17,6 +17,8 @@
         <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="isCompleted" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="category" optional="YES" attributeType="String" defaultValueString="Watering"/>
+        <attribute name="photoData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="completedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="ReminderEntity" representedClassName="ReminderEntity" syncable="YES">
         <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
@@ -25,6 +27,7 @@
         <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="isCompleted" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="repeatType" optional="NO" attributeType="String" defaultValueString="none"/>
+        <attribute name="completedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <elements>
         <element name="TransactionEntity" positionX="-180" positionY="-18" width="128" height="119"/>

@@ -75,6 +75,16 @@ final class DashboardViewModel: ObservableObject {
             .sorted { $0.dueDate < $1.dueDate }
     }
 
+    /// Not-yet-completed activities/reminders whose date has already passed —
+    /// backs the Home header's bell badge, same definition as
+    /// `CalendarViewModel.overdueNotificationItems`'s count.
+    var overdueCount: Int {
+        let now = Date()
+        let overdueActivities = activities.filter { !$0.isCompleted && $0.date < now }.count
+        let overdueReminders = reminders.filter { !$0.isCompleted && $0.dueDate < now }.count
+        return overdueActivities + overdueReminders
+    }
+
     // MARK: - Quick add
 
     func addActivity(_ activity: FarmActivity) {

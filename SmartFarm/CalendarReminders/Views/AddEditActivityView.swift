@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum ActivityFormMode {
-    case add(Date)
+    case add(Date, FarmActivityCategory)
     case edit(FarmActivity)
 }
 
@@ -41,13 +41,13 @@ struct AddEditActivityView: View {
         self.mode = mode
         self.onSave = onSave
         switch mode {
-        case .add(let date):
+        case .add(let date, let category):
             _editingID = State(initialValue: nil)
             _title = State(initialValue: "")
             _date = State(initialValue: date)
             _note = State(initialValue: "")
             _isCompleted = State(initialValue: false)
-            _category = State(initialValue: .watering)
+            _category = State(initialValue: category)
             _photoData = State(initialValue: nil)
         case .edit(let a):
             _editingID = State(initialValue: a.id)
@@ -421,6 +421,6 @@ struct AddEditActivityView: View {
 
 struct AddEditActivityView_Previews: PreviewProvider {
     static var previews: some View {
-        AddEditActivityView(mode: .add(Date())) { _ in }
+        AddEditActivityView(mode: .add(Date(), .watering)) { _ in }
     }
 }

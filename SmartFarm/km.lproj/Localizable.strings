@@ -9,6 +9,9 @@
 "home.greeting" = "សួស្តី!";
 "home.greetingSubtitle" = "កសិករ";
 "home.todayCard.title" = "ប្រតិទិនដាំដុះរបស់អ្នក";
+"home.quickAdd.title" = "បន្ថែមសកម្មភាព";
+"home.quickAdd.subtitle" = "កត់ត្រាការងារថ្ងៃនេះ";
+"home.quickChip.spray" = "បាញ់ថ្នាំ";
 "home.grid.addCrop" = "បញ្ចូលដំណាំ";
 "home.grid.stats" = "ស្ថិតិ";
 "home.upcoming.title" = "កាលវិភាគខាងមុខ";
@@ -94,7 +97,6 @@
 "calendar.repeat" = "ធ្វើម្ដងទៀត";
 "calendar.category" = "ចំណាត់ថ្នាក់";
 "calendar.dayHeader" = "ថ្ងៃទី";
-"calendar.header.tagline" = "ជំនួយការកសិកម្មឆ្លាតវៃ";
 "calendar.todayTasks.title" = "កិច្ចការថ្ងៃនេះ";
 "calendar.todayTasks.count" = "មាន %d កិច្ចការ";
 "calendar.dayActivities.title" = "សកម្មភាពថ្ងៃទី %@";

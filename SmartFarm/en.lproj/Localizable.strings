@@ -9,6 +9,9 @@
 "home.greeting" = "Hello!";
 "home.greetingSubtitle" = "Farmer";
 "home.todayCard.title" = "Your farming calendar";
+"home.quickAdd.title" = "Add activity";
+"home.quickAdd.subtitle" = "Log today's farm work";
+"home.quickChip.spray" = "Pest spray";
 "home.grid.addCrop" = "Add crop";
 "home.grid.stats" = "Statistics";
 "home.upcoming.title" = "Upcoming schedule";
@@ -94,7 +97,6 @@
 "calendar.repeat" = "Repeat";
 "calendar.category" = "Category";
 "calendar.dayHeader" = "Day";
-"calendar.header.tagline" = "Smart farming assistant";
 "calendar.todayTasks.title" = "Today's tasks";
 "calendar.todayTasks.count" = "%d task(s)";
 "calendar.dayActivities.title" = "Activities for %@";

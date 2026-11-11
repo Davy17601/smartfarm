@@ -25,13 +25,15 @@ struct CalendarTabView: View {
 
     var body: some View {
         NavigationView {
-            ZStack {
-                backgroundLayer
+            // `header` sits above the `ScrollView` in its own row (not inside
+            // it) so the scroll content always starts right below the
+            // header's actual laid-out height instead of guessing at one —
+            // no overlap, and the month row is visible on first appearance.
+            VStack(spacing: 0) {
+                header
 
                 ScrollView {
                     VStack(spacing: Theme.Spacing.m) {
-                        header
-
                         MonthCalendarGridView(selectedDate: $viewModel.selectedDate,
                                               activities: viewModel.activities,
                                               calendar: weekGridCalendar)
@@ -42,9 +44,14 @@ struct CalendarTabView: View {
                         scheduleSection
                         viewAllButton
                     }
-                    .padding(Theme.Spacing.m)
+                    .padding(.horizontal, Theme.Spacing.m)
+                    .padding(.top, Theme.Spacing.m)
+                    // Keeps the last card clear of the floating bottom tab bar.
+                    .padding(.bottom, 110)
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(backgroundLayer)
             .navigationBarHidden(true)
             .onAppear {
                 viewModel.reload()
@@ -60,7 +67,7 @@ struct CalendarTabView: View {
                 ])
             }
             .sheet(isPresented: $addingActivity) {
-                AddEditActivityView(mode: .add(defaultActivityDate)) { viewModel.addActivity($0) }
+                AddEditActivityView(mode: .add(defaultActivityDate, .watering)) { viewModel.addActivity($0) }
             }
             .sheet(isPresented: $addingReminder) {
                 AddEditReminderView(mode: .add(viewModel.selectedDate)) { viewModel.addReminder($0) }
@@ -112,49 +119,76 @@ struct CalendarTabView: View {
 
     // MARK: - Header
 
-    /// Custom in-body header (app icon, "SMART CALENDAR" title + tagline —
-    /// `appWelcome.splashTitle`, the same brand title the onboarding screen
-    /// uses — and a bell with an unread-style dot when there's something due
-    /// today) — tapping the bell switches the bottom tab bar to the
-    /// "ការជូនដំណឹង" tab (`AppEnvironment.selectedTab`) instead of pushing a
-    /// second copy of that same list, so the tab bar's highlight always
-    /// matches what's on screen.
+    /// Custom in-body header: a fixed green-gradient rounded-bottom bar,
+    /// always laid out above the `ScrollView` in `body`'s `VStack` (so the
+    /// scroll content starts right below it) — app icon, "SMART CALENDAR"
+    /// title + today's date, and a bell with an overdue-count badge. Tapping
+    /// the bell switches the bottom tab bar to the "ការជូនដំណឹង" tab
+    /// (`AppEnvironment.selectedTab`) instead of pushing a second copy of
+    /// that same list, so the tab bar's highlight always matches what's on
+    /// screen.
     private var header: some View {
-        HStack(spacing: Theme.Spacing.s) {
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(CalendarTheme.farmGreen)
-                .frame(width: 44, height: 44)
-                .overlay(headerCalendarLeafIcon)
+        HStack(spacing: Theme.Spacing.m) {
+            CalendarLogoView(size: 44)
 
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text(L("appWelcome.splashTitle"))
-                    .font(.system(size: 18, weight: .bold))
+                    .font(.system(size: 20, weight: .heavy))
+                    .tracking(1)
                     .foregroundColor(.white)
-                    .shadow(color: Color.black.opacity(0.25), radius: 3, x: 0, y: 1)
-                Text(L("calendar.header.tagline"))
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(.white.opacity(0.85))
+                // Today's date (not a static tagline) — e.g. "ថ្ងៃច័ន្ទ ៩
+                // វិច្ឆិកា ២០២៦" — `lineSpacing` + `fixedSize` so the full
+                // Khmer string never gets clipped if it needs 2 lines.
+                Text(LocalizedDate.headlineString(Date()))
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(.white.opacity(0.9))
+                    .lineSpacing(3)
+                    .fixedSize(horizontal: false, vertical: true)
             }
 
-            Spacer()
+            Spacer(minLength: 0)
 
             Button(action: switchToNotificationsTab) {
                 ZStack(alignment: .topTrailing) {
+                    Circle()
+                        .fill(Color.white)
+                        .frame(width: 40, height: 40)
+                        .shadow(color: Color.black.opacity(0.15), radius: 4, x: 0, y: 2)
                     Image(systemName: "bell.fill")
-                        .font(.system(size: 16))
+                        .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(CalendarTheme.farmGreen)
-                        .frame(width: 36, height: 36)
-                        .background(Circle().fill(Color.white))
-                    if hasTodayItems {
-                        Circle()
-                            .fill(Theme.expense)
-                            .frame(width: 9, height: 9)
-                            .offset(x: 1, y: -1)
+                        .frame(width: 40, height: 40)
+
+                    if overdueCount > 0 {
+                        Text(LocalizedDate.localizedNumber(min(overdueCount, 99)))
+                            .font(.system(size: 10, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 5)
+                            .padding(.vertical, 2)
+                            .background(Capsule().fill(Theme.expense))
+                            .offset(x: 6, y: -6)
                     }
                 }
             }
             .buttonStyle(ScaleButtonStyle())
         }
+        .padding(.horizontal, 20)
+        .padding(.top, 12)
+        .padding(.bottom, 16)
+        .background(headerBackground)
+    }
+
+    /// Flat, single-color `#2E7D32` bar — a plain `Rectangle` (no corner
+    /// radius, no gradient, no decoration) bled into the top safe area
+    /// (behind the status bar/Dynamic Island) via `ignoresSafeArea` — the
+    /// only place that modifier is used in this header, so it never affects
+    /// the header's own layout height — with a very subtle shadow
+    /// separating it from the content sliding underneath it.
+    private var headerBackground: some View {
+        Rectangle()
+            .fill(CalendarTheme.deepGreen)
+            .ignoresSafeArea(edges: .top)
+            .shadow(color: Color.black.opacity(0.08), radius: 4, x: 0, y: 2)
     }
 
     /// Switches the shared tab selection to "ការជូនដំណឹង" with the same
@@ -164,33 +198,6 @@ struct CalendarTabView: View {
         withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
             environment.selectedTab = .notifications
         }
-    }
-
-    /// A calendar glyph with a small circular leaf badge overlapping its
-    /// bottom-right corner — the same composition used on `AppWelcomeView`'s
-    /// icon badge, scaled down to this header's 44x44 size for visual
-    /// consistency across the app.
-    private var headerCalendarLeafIcon: some View {
-        Image(systemName: "calendar")
-            .font(.system(size: 24, weight: .semibold))
-            .foregroundColor(.white)
-            .frame(width: 44, height: 44)
-            .overlay(headerLeafBadge, alignment: .bottomTrailing)
-    }
-
-    private var headerLeafBadge: some View {
-        Circle()
-            .fill(Color.white)
-            .frame(width: 16, height: 16)
-            .overlay(
-                Image(systemName: "leaf.fill")
-                    .font(.system(size: 7, weight: .semibold))
-                    .foregroundColor(CalendarTheme.deepGreen)
-            )
-            .overlay(
-                Circle().stroke(CalendarTheme.deepGreen, lineWidth: 1)
-            )
-            .offset(x: -3, y: -3)
     }
 
     /// A `Calendar` whose `firstWeekday` follows the user's "week starts on"
@@ -303,13 +310,9 @@ struct CalendarTabView: View {
         return calendar.date(from: components) ?? viewModel.selectedDate
     }
 
-    private var todayItemCount: Int {
-        let activityCount = viewModel.activities(on: Date()).filter { !$0.isCompleted }.count
-        let reminderCount = viewModel.reminders.filter { !$0.isCompleted && Calendar.current.isDateInToday($0.dueDate) }.count
-        return activityCount + reminderCount
-    }
-
-    private var hasTodayItems: Bool { todayItemCount > 0 }
+    /// Backs the header bell's red count badge — same "ហួសកំណត់" (overdue)
+    /// set the Notifications tab's own badge counts, so both read the same number.
+    private var overdueCount: Int { viewModel.overdueNotificationItems.count }
 
     /// Every activity + reminder the app knows about, sorted by date —
     /// backs the "View full schedule" pushed screen.

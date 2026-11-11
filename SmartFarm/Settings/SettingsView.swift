@@ -14,8 +14,7 @@ struct SettingsView: View {
 
     // MARK: - Palette
 
-    private let headerStart = Color(red: 0x43 / 255, green: 0xA0 / 255, blue: 0x47 / 255)
-    private let headerEnd   = Color(red: 0x2E / 255, green: 0x7D / 255, blue: 0x32 / 255)
+    private let headerColor = Color(red: 0x2E / 255, green: 0x7D / 255, blue: 0x32 / 255)
     private let labelGreen  = Color(red: 0x1B / 255, green: 0x5E / 255, blue: 0x20 / 255)
     private let mutedGreen  = Color(red: 0x4E / 255, green: 0x6E / 255, blue: 0x50 / 255)
     private let panelBackground = Color(red: 0xF3 / 255, green: 0xF8 / 255, blue: 0xF1 / 255)
@@ -32,9 +31,11 @@ struct SettingsView: View {
             ZStack(alignment: .top) {
                 panelBackground.ignoresSafeArea()
 
-                TwoStopGradient(start: headerStart, end: headerEnd, axis: .vertical)
+                Rectangle()
+                    .fill(headerColor)
                     .frame(height: headerBlockHeight)
                     .ignoresSafeArea(edges: .top)
+                    .shadow(color: Color.black.opacity(0.08), radius: 4, x: 0, y: 2)
 
                 headerTitleBar
 
@@ -56,7 +57,7 @@ struct SettingsView: View {
             .navigationBarHidden(true)
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .accentColor(headerEnd)
+        .accentColor(headerColor)
     }
 
     // MARK: - Header

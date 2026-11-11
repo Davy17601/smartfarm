@@ -17,6 +17,12 @@ struct DashboardView: View {
     @State private var editingActivity: FarmActivity?
     @State private var editingReminder: Reminder?
     @State private var showingReports = false
+    /// The category the quick-add sheet opens with — set by whichever
+    /// entry point triggered it (the "បន្ថែមសកម្មភាព" card defaults to
+    /// `.watering`, a quick chip sets its own type, the "បញ្ចូលដំណាំ" grid
+    /// tile also goes through this same path) so there's one shared sheet
+    /// instead of a separate one per entry point.
+    @State private var quickAddCategory: FarmActivityCategory = .watering
 
     // MARK: - Palette
     //
@@ -50,17 +56,30 @@ struct DashboardView: View {
             ZStack {
                 backgroundLayer
 
-                ScrollView {
-                    VStack(spacing: Theme.Spacing.m) {
-                        header
-                        todayCard
-                        gridMenu
-                        upcomingSection
+                // `header` sits above the `ScrollView` in its own row (not
+                // inside it) so it — and its own white card background —
+                // stay fixed on screen while only the cards below it scroll.
+                VStack(spacing: 0) {
+                    header
+                        .padding(.horizontal, 20)
+                        .padding(.top, Theme.Spacing.m)
+                        .padding(.bottom, Theme.Spacing.s)
+
+                    ScrollView {
+                        VStack(spacing: Theme.Spacing.m) {
+                            todayCard
+                            quickAddCard
+                            quickAddChips
+                            gridMenu
+                            upcomingSection
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.top, Theme.Spacing.s)
+                        // Keeps the last card clear of the floating bottom tab bar.
+                        .padding(.bottom, 110)
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.top, Theme.Spacing.m)
-                    .padding(.bottom, Theme.Spacing.l)
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
 
                 // Hidden push link — the "ស្ថិតិ" grid tile triggers this
                 // instead of wrapping the whole tile in a `NavigationLink`,
@@ -78,7 +97,7 @@ struct DashboardView: View {
                 viewModel.refreshForCurrentDate()
             }
             .sheet(isPresented: $addingActivity) {
-                AddEditActivityView(mode: .add(Date())) { viewModel.addActivity($0) }
+                AddEditActivityView(mode: .add(Date(), quickAddCategory)) { viewModel.addActivity($0) }
             }
             .sheet(item: $editingActivity) { activity in
                 AddEditActivityView(mode: .edit(activity)) { viewModel.updateActivity($0) }
@@ -142,12 +161,45 @@ struct DashboardView: View {
             }
 
             Spacer()
+
+            Button(action: switchToNotificationsTab) {
+                ZStack(alignment: .topTrailing) {
+                    Circle()
+                        .fill(Color.white)
+                        .frame(width: 40, height: 40)
+                        .shadow(color: Color.black.opacity(0.15), radius: 4, x: 0, y: 2)
+                    Image(systemName: "bell.fill")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(todayCardEnd)
+                        .frame(width: 40, height: 40)
+
+                    if viewModel.overdueCount > 0 {
+                        Text(LocalizedDate.localizedNumber(min(viewModel.overdueCount, 99)))
+                            .font(.system(size: 10, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 5)
+                            .padding(.vertical, 2)
+                            .background(Capsule().fill(Theme.expense))
+                            .offset(x: 6, y: -6)
+                    }
+                }
+            }
+            .buttonStyle(ScaleButtonStyle())
         }
         .padding(.horizontal, Theme.Spacing.m)
         .padding(.vertical, Theme.Spacing.s)
         .background(headerCardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
         .shadow(color: Color.black.opacity(0.08), radius: 10, x: 0, y: 4)
+    }
+
+    /// Switches the shared tab selection to "ការជូនដំណឹង" — same spring
+    /// animation `CalendarTabView`'s own header bell uses, so both behave
+    /// identically.
+    private func switchToNotificationsTab() {
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
+            selectedTab = .notifications
+        }
     }
 
     // MARK: - Today card
@@ -196,6 +248,101 @@ struct DashboardView: View {
         .buttonStyle(ScaleButtonStyle())
     }
 
+    // MARK: - Quick add
+
+    /// Full-width "បន្ថែមសកម្មភាព" shortcut — opens the same
+    /// `AddEditActivityView` sheet as the "បញ្ចូលដំណាំ" grid tile below
+    /// (via the shared `addingActivity`/`quickAddCategory` state), dated
+    /// today, defaulting to the "ស្រោចទឹក" type.
+    private var quickAddCard: some View {
+        Button(action: { startQuickAdd(category: .watering) }) {
+            HStack(spacing: 14) {
+                ZStack {
+                    Circle().fill(todayCardEnd).frame(width: 40, height: 40)
+                    Image(systemName: "plus")
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(.white)
+                }
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(L("home.quickAdd.title"))
+                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                        .foregroundColor(headerTitleGreen)
+                        .lineLimit(1)
+                    Text(L("home.quickAdd.subtitle"))
+                        .font(.system(size: 13, weight: .medium, design: .rounded))
+                        .foregroundColor(headerSubtitleGreen)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.9)
+                }
+
+                Spacer(minLength: 8)
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundColor(headerSubtitleGreen.opacity(0.6))
+            }
+            .padding(.horizontal, 16)
+            .frame(height: 64)
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .shadow(color: Color.black.opacity(0.08), radius: 10, x: 0, y: 4)
+        }
+        .buttonStyle(ScaleButtonStyle())
+    }
+
+    /// One type per quick chip — the most common activity types, so logging
+    /// routine work (watering, fertilizing, harvest, pest spray) is a single
+    /// tap into a pre-filled form. "ដាំដុះ" (planting) has no chip since the
+    /// "បញ្ចូលដំណាំ" grid tile already covers it.
+    private struct QuickChip: Identifiable {
+        let id: FarmActivityCategory
+        let icon: String
+        let label: String
+    }
+
+    private var quickAddChipsData: [QuickChip] {
+        [
+            QuickChip(id: .watering, icon: "drop.fill", label: FarmActivityCategory.watering.displayName),
+            QuickChip(id: .fertilizing, icon: "cross.vial.fill", label: FarmActivityCategory.fertilizing.displayName),
+            QuickChip(id: .harvest, icon: "shippingbox.fill", label: FarmActivityCategory.harvest.displayName),
+            QuickChip(id: .care, icon: "ant.fill", label: L("home.quickChip.spray"))
+        ]
+    }
+
+    private var quickAddChips: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
+                ForEach(quickAddChipsData) { chip in
+                    quickAddChipButton(chip)
+                }
+            }
+        }
+    }
+
+    private func quickAddChipButton(_ chip: QuickChip) -> some View {
+        Button(action: { startQuickAdd(category: chip.id) }) {
+            HStack(spacing: 6) {
+                Image(systemName: chip.icon)
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(chip.id.color)
+                Text(chip.label)
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .foregroundColor(gridLabelColor)
+                    .lineLimit(1)
+            }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .background(Capsule().fill(chip.id.tintColor))
+        }
+        .buttonStyle(ScaleButtonStyle())
+    }
+
+    private func startQuickAdd(category: FarmActivityCategory) {
+        quickAddCategory = category
+        addingActivity = true
+    }
+
     // MARK: - Grid menu
 
     private var gridMenu: some View {
@@ -208,12 +355,18 @@ struct DashboardView: View {
 
     private func gridTileButton(_ tile: GridTile) -> some View {
         Button(action: { handleGridTap(tile.action) }) {
-            VStack(spacing: 8) {
-                Image(systemName: tile.icon)
-                    .font(.system(size: 28, weight: .semibold))
-                    .foregroundColor(tile.iconColor)
+            VStack(spacing: 10) {
+                ZStack {
+                    Circle()
+                        .fill(Color.white)
+                        .frame(width: 48, height: 48)
+                        .shadow(color: Color.black.opacity(0.08), radius: 4, x: 0, y: 2)
+                    Image(systemName: tile.icon)
+                        .font(.system(size: 22, weight: .semibold))
+                        .foregroundColor(tile.iconColor)
+                }
                 Text(L(tile.labelKey))
-                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                    .font(.system(size: 15, weight: .semibold, design: .rounded))
                     .foregroundColor(gridLabelColor)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
@@ -223,21 +376,21 @@ struct DashboardView: View {
             }
             .padding(.horizontal, 8)
             .frame(maxWidth: .infinity)
-            .frame(height: 85)
+            .frame(height: 96)
             .background(tile.background)
-            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
             .overlay(
-                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
                     .stroke(Color.black.opacity(0.05), lineWidth: 1)
             )
-            .shadow(color: Color.black.opacity(0.10), radius: 8, x: 0, y: 3)
+            .shadow(color: Color.black.opacity(0.06), radius: 8, x: 0, y: 3)
         }
         .buttonStyle(ScaleButtonStyle())
     }
 
     private func handleGridTap(_ action: GridTile.Action) {
         switch action {
-        case .addActivity:   addingActivity = true
+        case .addActivity:   startQuickAdd(category: .watering)
         case .notifications: selectedTab = .notifications
         case .reports:        showingReports = true
         case .settings:       selectedTab = .settings
@@ -248,32 +401,40 @@ struct DashboardView: View {
 
     private var upcomingSection: some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.s) {
-            HStack {
-                HStack(spacing: 6) {
-                    Image(systemName: "leaf.fill")
-                        .foregroundColor(viewAllGreen)
-                    Text(L("home.upcoming.title"))
-                        .font(.system(size: 18, weight: .bold, design: .rounded))
-                        .foregroundColor(headerTitleGreen)
-                }
-                Spacer()
-                Button(action: { selectedTab = .calendar }) {
-                    Text(L("home.upcoming.viewAll"))
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                        .foregroundColor(viewAllGreen)
-                }
+            HStack(spacing: 6) {
+                Image(systemName: "leaf.fill")
+                    .foregroundColor(viewAllGreen)
+                Text(L("home.upcoming.title"))
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                    .foregroundColor(headerTitleGreen)
             }
 
             if scheduleEntries.isEmpty {
                 emptyScheduleState
             } else {
                 VStack(spacing: 10) {
-                    ForEach(scheduleEntries) { entry in
+                    ForEach(scheduleEntries.prefix(3)) { entry in
                         scheduleRow(entry)
                     }
                 }
+                viewAllRow
             }
         }
+    }
+
+    private var viewAllRow: some View {
+        Button(action: { selectedTab = .calendar }) {
+            HStack(spacing: 4) {
+                Text(L("home.upcoming.viewAll"))
+                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12, weight: .bold))
+            }
+            .foregroundColor(viewAllGreen)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 10)
+        }
+        .buttonStyle(ScaleButtonStyle())
     }
 
     private var emptyScheduleState: some View {
@@ -284,7 +445,7 @@ struct DashboardView: View {
             Text(L("home.upcoming.empty"))
                 .font(.system(size: 14, weight: .medium, design: .rounded))
                 .foregroundColor(scheduleSubtextGray)
-            Button(action: { addingActivity = true }) {
+            Button(action: { startQuickAdd(category: .watering) }) {
                 Text(L("calendar.addActivity"))
                     .font(.system(size: 14, weight: .semibold, design: .rounded))
                     .foregroundColor(.white)
@@ -321,8 +482,9 @@ struct DashboardView: View {
                     HStack(spacing: 4) {
                         Image(systemName: "calendar")
                             .font(.system(size: 11))
-                        Text(LocalizedDate.dayMonthString(entry.date))
+                        Text("\(LocalizedDate.dayMonthString(entry.date)) · \(LocalizedDate.timeString(entry.date))")
                             .font(.system(size: 13, weight: .medium, design: .rounded))
+                            .lineLimit(1)
                     }
                     .foregroundColor(scheduleSubtextGray)
                 }
@@ -331,7 +493,7 @@ struct DashboardView: View {
 
                 pillBadge(for: entry.date)
             }
-            .padding(Theme.Spacing.m)
+            .padding(12)
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
             .shadow(color: Color.black.opacity(0.05), radius: 6, x: 0, y: 3)
@@ -353,7 +515,7 @@ struct DashboardView: View {
         }
 
         return Text(text)
-            .font(.system(size: 11, weight: .bold, design: .rounded))
+            .font(.system(size: 12, weight: .bold, design: .rounded))
             .foregroundColor(.white)
             .padding(.horizontal, 10)
             .padding(.vertical, 5)
@@ -393,13 +555,14 @@ private struct GridTile: Identifiable {
     let background: Color
     let action: Action
 
-    // Deeper than a barely-tinted white so each card reads as a distinct
-    // pastel shape against the near-white `pageBackground` (#F3F8F1) instead
-    // of nearly blending into it.
-    private static let lightGreen   = Color(red: Double(0xC8) / 255.0, green: Double(0xE6) / 255.0, blue: Double(0xC9) / 255.0)
-    private static let sageGreen    = Color(red: Double(0xB2) / 255.0, green: Double(0xDF) / 255.0, blue: Double(0xDB) / 255.0)
-    private static let lightOrange  = Color(red: Double(0xFF) / 255.0, green: Double(0xE0) / 255.0, blue: Double(0xB2) / 255.0)
-    private static let lightGrayBlue = Color(red: Double(0xCF) / 255.0, green: Double(0xD8) / 255.0, blue: Double(0xDC) / 255.0)
+    // One shade deeper than before (Material's "200" tier instead of "100")
+    // so each card reads as a distinct, more vivid pastel shape against the
+    // near-white `pageBackground` (#F3F8F1) and the white icon circle on top
+    // of it stands out more.
+    private static let lightGreen   = Color(red: Double(0xA5) / 255.0, green: Double(0xD6) / 255.0, blue: Double(0xA7) / 255.0)
+    private static let sageGreen    = Color(red: Double(0x80) / 255.0, green: Double(0xCB) / 255.0, blue: Double(0xC4) / 255.0)
+    private static let lightOrange  = Color(red: Double(0xFF) / 255.0, green: Double(0xCC) / 255.0, blue: Double(0x80) / 255.0)
+    private static let lightGrayBlue = Color(red: Double(0xB0) / 255.0, green: Double(0xBE) / 255.0, blue: Double(0xC5) / 255.0)
 
     static let all: [GridTile] = [
         GridTile(id: "addCrop", labelKey: "home.grid.addCrop", icon: "leaf.fill",

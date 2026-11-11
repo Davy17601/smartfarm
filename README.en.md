@@ -46,15 +46,23 @@ Home screen displaying monthly financial summary (income 1,205,000៛, expense 8
 </td>
 <td width="33%">
 
+### 📊 Expense by Category
+At the bottom of the Dashboard (scroll down), a pie chart and a list showing each expense category with its percentage and amount.
+
+<img src="docs/screenshots/21-dashboard-expense-by-category.png" alt="Expense by Category" width="100%">
+
+</td>
+</tr>
+
+<tr>
+<td width="33%">
+
 ### 💰 Finance List
 Transaction management screen with search, filter tabs, monthly summary cards, and chronologically grouped transaction history.
 
 <img src="docs/screenshots/03-finance-list.png" alt="Finance List" width="100%">
 
 </td>
-</tr>
-
-<tr>
 <td width="33%">
 
 ### 📅 Month Picker
@@ -71,6 +79,9 @@ Detailed monthly breakdown for October 2026 (ខែ តុលា ២០២៦) s
 <img src="docs/screenshots/05-finance-month-result.png" alt="Monthly Result" width="100%">
 
 </td>
+</tr>
+
+<tr>
 <td width="33%">
 
 ### ➕ Add Transaction
@@ -79,9 +90,6 @@ Transaction entry form with type toggle (Income/Expense), amount field, date pic
 <img src="docs/screenshots/06-add-transaction.png" alt="Add Transaction" width="100%">
 
 </td>
-</tr>
-
-<tr>
 <td width="33%">
 
 ### 📈 Reports
@@ -98,6 +106,9 @@ Comprehensive analytics view with time period selection (7/30/90 days, 1 year), 
 <img src="docs/screenshots/08-detailed-report.png" alt="Detailed Report" width="100%">
 
 </td>
+</tr>
+
+<tr>
 <td width="33%">
 
 ### ⚙️ Settings
@@ -106,9 +117,6 @@ Settings hub with farm profile card, language/currency preferences, backup/resto
 <img src="docs/screenshots/10-settings.png" alt="Settings" width="100%">
 
 </td>
-</tr>
-
-<tr>
 <td width="33%">
 
 ### 🌐 Language Selection
@@ -125,6 +133,9 @@ Dual-currency support: Cambodian Riel (រៀល - KHR) and US Dollar (ដុល
 <img src="docs/screenshots/12-currency.png" alt="Currency" width="100%">
 
 </td>
+</tr>
+
+<tr>
 <td width="33%">
 
 ### 💾 Backup & Restore
@@ -133,9 +144,6 @@ Data backup system exporting transactions to JSON format with restore functional
 <img src="docs/screenshots/13-backup.png" alt="Backup" width="100%">
 
 </td>
-</tr>
-
-<tr>
 <td width="33%">
 
 ### ❓ Help & FAQ
@@ -146,21 +154,15 @@ Data backup system exporting transactions to JSON format with restore functional
 </td>
 <td width="33%">
 
-</td>
-<td width="33%">
-
-</td>
-</tr>
-
-<tr>
-<td width="33%">
-
 ### ❓ FAQ Answer 1
 First FAQ answer screen showing blue icon, question, and detailed answer text in white card.
 
 <img src="docs/screenshots/16-faq-answer-1.png" alt="FAQ Answer 1" width="100%">
 
 </td>
+</tr>
+
+<tr>
 <td width="33%">
 
 ### ❓ FAQ Answer 2
@@ -177,9 +179,6 @@ Third FAQ answer screen showing purple icon, question, and detailed answer text 
 <img src="docs/screenshots/18-faq-answer-3.png" alt="FAQ Answer 3" width="100%">
 
 </td>
-</tr>
-
-<tr>
 <td width="33%">
 
 ### ❓ FAQ Answer 4
@@ -188,6 +187,9 @@ Fourth FAQ answer screen showing green icon, question, and detailed answer text 
 <img src="docs/screenshots/19-faq-answer-4.png" alt="FAQ Answer 4" width="100%">
 
 </td>
+</tr>
+
+<tr>
 <td width="33%">
 
 ### ❓ FAQ Answer 5

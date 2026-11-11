@@ -46,15 +46,23 @@
 </td>
 <td width="33%">
 
+### 📊 ចំណាយតាមប្រភេទ
+នៅខាងក្រោមទំព័រដើម (រមូរចុះក្រោម) មានក្រាហ្វិក pie និងបញ្ជីបង្ហាញប្រភេទចំណាយនីមួយៗជាមួយភាគរយ និងចំនួនទឹកប្រាក់។
+
+<img src="docs/screenshots/21-dashboard-expense-by-category.png" alt="Expense by Category" width="100%">
+
+</td>
+</tr>
+
+<tr>
+<td width="33%">
+
 ### 💰 បញ្ជីហិរញ្ញវត្ថុ
 អេក្រង់គ្រប់គ្រងប្រតិបត្តិការជាមួយការស្វែងរក ផ្ទាំងច្រោះ កាតសង្ខេបប្រចាំខែ និងប្រវត្តិប្រតិបត្តិការតាមកាលបរិច្ឆេទ។
 
 <img src="docs/screenshots/03-finance-list.png" alt="Finance List" width="100%">
 
 </td>
-</tr>
-
-<tr>
 <td width="33%">
 
 ### 📅 ជ្រើសរើសខែ
@@ -71,6 +79,9 @@
 <img src="docs/screenshots/05-finance-month-result.png" alt="Monthly Result" width="100%">
 
 </td>
+</tr>
+
+<tr>
 <td width="33%">
 
 ### ➕ បញ្ចូលប្រតិបត្តិការ
@@ -79,9 +90,6 @@
 <img src="docs/screenshots/06-add-transaction.png" alt="Add Transaction" width="100%">
 
 </td>
-</tr>
-
-<tr>
 <td width="33%">
 
 ### 📈 របាយការណ៍
@@ -98,6 +106,9 @@
 <img src="docs/screenshots/08-detailed-report.png" alt="Detailed Report" width="100%">
 
 </td>
+</tr>
+
+<tr>
 <td width="33%">
 
 ### ⚙️ ការកំណត់
@@ -106,9 +117,6 @@
 <img src="docs/screenshots/10-settings.png" alt="Settings" width="100%">
 
 </td>
-</tr>
-
-<tr>
 <td width="33%">
 
 ### 🌐 ជ្រើសរើសភាសា
@@ -125,6 +133,9 @@
 <img src="docs/screenshots/12-currency.png" alt="Currency" width="100%">
 
 </td>
+</tr>
+
+<tr>
 <td width="33%">
 
 ### 💾 បម្រុងទុក និងស្តារ
@@ -133,9 +144,6 @@
 <img src="docs/screenshots/13-backup.png" alt="Backup" width="100%">
 
 </td>
-</tr>
-
-<tr>
 <td width="33%">
 
 ### ❓ ជំនួយ និងសំណួរញឹកញាប់
@@ -146,21 +154,15 @@
 </td>
 <td width="33%">
 
-</td>
-<td width="33%">
-
-</td>
-</tr>
-
-<tr>
-<td width="33%">
-
 ### ❓ ចម្លើយ FAQ ទី ១
 អេក្រង់ចម្លើយសំណួរញឹកញាប់លើកទី១ បង្ហាញរូបតំណាងពណ៌ខៀវ សំណួរ និងចម្លើយលម្អិតនៅក្នុងកាតពណ៌ស។
 
 <img src="docs/screenshots/16-faq-answer-1.png" alt="FAQ Answer 1" width="100%">
 
 </td>
+</tr>
+
+<tr>
 <td width="33%">
 
 ### ❓ ចម្លើយ FAQ ទី ២
@@ -177,9 +179,6 @@
 <img src="docs/screenshots/18-faq-answer-3.png" alt="FAQ Answer 3" width="100%">
 
 </td>
-</tr>
-
-<tr>
 <td width="33%">
 
 ### ❓ ចម្លើយ FAQ ទី ៤
@@ -188,6 +187,9 @@
 <img src="docs/screenshots/19-faq-answer-4.png" alt="FAQ Answer 4" width="100%">
 
 </td>
+</tr>
+
+<tr>
 <td width="33%">
 
 ### ❓ ចម្លើយ FAQ ទី ៥

@@ -182,9 +182,11 @@ struct DashboardView: View {
                     Text("SmartFarm")
                         .font(.system(size: 20, weight: .bold))
                         .foregroundColor(Theme.primaryText)
-                    Text("តាមដាន | ចំណាយភ្លាមៗ | ព្រាក់ចំណេញប្រចាំខែ")
+                    Text("តាមដាន | ចំណាយភ្លាមៗ | ប្រាក់ចំណេញប្រចាំខែ")
                         .font(.system(size: 12))
                         .foregroundColor(Theme.secondaryText)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
                 }
             }
 

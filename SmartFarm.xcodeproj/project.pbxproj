@@ -13,6 +13,7 @@ E3E8657B63B84DB19DA32B84 /* LanguageSelectionView.swift in Sources */ = {isa = P
 		92CB8EAE47BD4AE7A50AA14D /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C582D921DB454A2EA2E8A992 /* NotificationSettingsView.swift */; };
 		6E1D9BE19002434DBAE58A0C /* BackupDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31490744893D4F4C8AF02383 /* BackupDataView.swift */; };
 		AC2F045A790445CD826B4AAA /* HelpFAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CD26743CEA4774901F7B6D /* HelpFAQView.swift */; };
+		CA268B1D3BD36DBFBDB30A7A /* FAQAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271DAAD0A18DCB6330E736B1 /* FAQAnswerView.swift */; };
 		00C914F3DB084BA69CD6198B /* AboutAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CAC6643F9342BA8A52EA98 /* AboutAppView.swift */; };
 		F62205ECC7AF4E5A9099A5ED /* FarmProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE32EFCCA8D448596DBBECD /* FarmProfileEditView.swift */; };
 218C219AFED546EC8A8964A2 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12213A4FE9F44F3801EEE04 /* OnboardingView.swift */; };
@@ -81,6 +82,7 @@ C1C6FB0AB498497D805FCC9C /* LanguageSelectionView.swift */ = {isa = PBXFileRefer
 		C582D921DB454A2EA2E8A992 /* NotificationSettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
 		31490744893D4F4C8AF02383 /* BackupDataView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BackupDataView.swift; sourceTree = "<group>"; };
 		A8CD26743CEA4774901F7B6D /* HelpFAQView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HelpFAQView.swift; sourceTree = "<group>"; };
+		271DAAD0A18DCB6330E736B1 /* FAQAnswerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FAQAnswerView.swift; sourceTree = "<group>"; };
 		05CAC6643F9342BA8A52EA98 /* AboutAppView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AboutAppView.swift; sourceTree = "<group>"; };
 		4FE32EFCCA8D448596DBBECD /* FarmProfileEditView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FarmProfileEditView.swift; sourceTree = "<group>"; };
 F12213A4FE9F44F3801EEE04 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@ F12213A4FE9F44F3801EEE04 /* OnboardingView.swift */ = {isa = PBXFileReference; l
 				C582D921DB454A2EA2E8A992 /* NotificationSettingsView.swift */,
 				31490744893D4F4C8AF02383 /* BackupDataView.swift */,
 				A8CD26743CEA4774901F7B6D /* HelpFAQView.swift */,
+				271DAAD0A18DCB6330E736B1 /* FAQAnswerView.swift */,
 				05CAC6643F9342BA8A52EA98 /* AboutAppView.swift */,
 				4FE32EFCCA8D448596DBBECD /* FarmProfileEditView.swift */,
 				820E675512A64303AC157831 /* JSONDocumentPicker.swift */,	);
@@ -558,6 +561,7 @@ E3E8657B63B84DB19DA32B84 /* LanguageSelectionView.swift in Sources */,
 				92CB8EAE47BD4AE7A50AA14D /* NotificationSettingsView.swift in Sources */,
 				6E1D9BE19002434DBAE58A0C /* BackupDataView.swift in Sources */,
 				AC2F045A790445CD826B4AAA /* HelpFAQView.swift in Sources */,
+				CA268B1D3BD36DBFBDB30A7A /* FAQAnswerView.swift in Sources */,
 				00C914F3DB084BA69CD6198B /* AboutAppView.swift in Sources */,
 				F62205ECC7AF4E5A9099A5ED /* FarmProfileEditView.swift in Sources */,
 5B3BCB1C2FAD97EC009A2991 /* Persistence.swift in Sources */,

@@ -139,9 +139,61 @@ Data backup system exporting transactions to JSON format with restore functional
 <td width="33%">
 
 ### ❓ Help & FAQ
-Frequently asked questions covering transaction management, reports, language settings, backup procedures, and expense categories.
+5 frequently asked questions. Tap any question to open an answer screen that stays open until the user taps the Back button.
 
 <img src="docs/screenshots/14-faq.png" alt="FAQ" width="100%">
+
+</td>
+<td width="33%">
+
+</td>
+<td width="33%">
+
+</td>
+</tr>
+
+<tr>
+<td width="33%">
+
+### ❓ FAQ Answer 1
+First FAQ answer screen showing blue icon, question, and detailed answer text in white card.
+
+<img src="docs/screenshots/16-faq-answer-1.png" alt="FAQ Answer 1" width="100%">
+
+</td>
+<td width="33%">
+
+### ❓ FAQ Answer 2
+Second FAQ answer screen showing orange icon, question, and detailed answer text in white card.
+
+<img src="docs/screenshots/17-faq-answer-2.png" alt="FAQ Answer 2" width="100%">
+
+</td>
+<td width="33%">
+
+### ❓ FAQ Answer 3
+Third FAQ answer screen showing purple icon, question, and detailed answer text in white card.
+
+<img src="docs/screenshots/18-faq-answer-3.png" alt="FAQ Answer 3" width="100%">
+
+</td>
+</tr>
+
+<tr>
+<td width="33%">
+
+### ❓ FAQ Answer 4
+Fourth FAQ answer screen showing green icon, question, and detailed answer text in white card.
+
+<img src="docs/screenshots/19-faq-answer-4.png" alt="FAQ Answer 4" width="100%">
+
+</td>
+<td width="33%">
+
+### ❓ FAQ Answer 5
+Fifth FAQ answer screen showing brown icon, question, and detailed answer text in white card.
+
+<img src="docs/screenshots/20-faq-answer-5.png" alt="FAQ Answer 5" width="100%">
 
 </td>
 <td width="33%">
@@ -150,9 +202,6 @@ Frequently asked questions covering transaction management, reports, language se
 App information screen showing SmartFarm version 1.0, app icon, and description of core features.
 
 <img src="docs/screenshots/15-about.png" alt="About" width="100%">
-
-</td>
-<td width="33%">
 
 </td>
 </tr>
@@ -212,6 +261,7 @@ graph LR
     E -->|Currency| E2[Currency Selection]
     E -->|Backup| E3[Backup & Restore]
     E -->|FAQ| E4[Help & FAQ]
+    E4 -->|Tap Question| E4A[FAQ Answer]
     E -->|About| E5[About App]
 
     B -.Back Button.-> C
@@ -382,7 +432,7 @@ a20e31d Improve DetailedReportView: thinner bar chart
 - ✅ **Currency Selection**: KHR or USD display preference
 - ✅ **Data Backup**: Export all transactions to JSON
 - ✅ **Data Restore**: Import transactions from backup file
-- ✅ **Help & FAQ**: In-app guidance and common questions
+- ✅ **Help & FAQ**: 5 common questions, tap to open answer screen
 
 ### 🎨 User Experience
 - ✅ **Onboarding**: Welcome screen for new users
@@ -577,7 +627,7 @@ xcodebuild -project SmartFarm.xcodeproj \
 - **No Swift Charts**: iOS 16+ framework not available, using custom GeometryReader charts
 - **No `.searchable()`**: iOS 15+ modifier unavailable, using custom TextField search
 - **Local Data Only**: All data stored in CoreData, no cloud sync or remote backup
-- **Static FAQ**: Help questions are hardcoded in localization strings, not expandable UI
+- **Fixed FAQ**: 5 questions hardcoded in localization strings, not expandable UI
 - **Single User**: No multi-user support or user accounts
 - **No Export to CSV/PDF**: Backup feature exports JSON only
 - **Manual Currency Entry**: No automatic currency conversion or exchange rates

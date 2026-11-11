@@ -20,39 +20,47 @@ struct FinanceTabView: View {
     // Page background (same as Settings, Dashboard, Reports)
     private let pageBackground = Color(red: 0.92, green: 0.96, blue: 0.91) // #EAF4E7
 
-    // Banner gradient colors
-    private let bannerGreenDark = Color(red: 0.11, green: 0.42, blue: 0.18) // #1B6B2F
-    private let bannerGreenLight = Color(red: 0.18, green: 0.62, blue: 0.27) // #2E9E44
-    private let addButtonGreen = Color(red: 0.08, green: 0.32, blue: 0.18) // #14532D
+    // Banner gradient colors (dark green)
+    private let bannerGreenDark = Color(red: 0.18, green: 0.49, blue: 0.20) // #2E7D32 (top)
+    private let bannerGreenLight = Color(red: 0.11, green: 0.37, blue: 0.13) // #1B5E20 (bottom)
+    private let bannerButtonBg = Color.white.opacity(0.2) // Semi-transparent white for buttons
 
-    // Summary card background colors
-    private let incomeCardBg = Color(red: 0.85, green: 0.94, blue: 0.87) // #D8F0DD
-    private let expenseCardBg = Color(red: 0.98, green: 0.85, blue: 0.85) // #FBD9D9
-    private let profitCardBg = Color(red: 0.85, green: 0.92, blue: 0.89) // #D9EBE4
+    // Summary card background colors (light soft tones)
+    private let incomeCardBg = Color(red: 0.89, green: 0.95, blue: 0.88) // #E3F2E1 (light green)
+    private let expenseCardBg = Color(red: 0.99, green: 0.91, blue: 0.91) // #FDE8E8 (light red/pink)
+    private let profitCardBg = Color(red: 0.89, green: 0.95, blue: 0.88) // #E3F2E1 (light green)
 
-    // Summary card badge colors
-    private let incomeBadgeGreen = Color(red: 0.11, green: 0.42, blue: 0.18) // #1B6B2F
-    private let expenseBadgeRed = Color(red: 0.86, green: 0.15, blue: 0.15) // #DC2626
-    private let profitBadgeGreen = Color(red: 0.18, green: 0.55, blue: 0.34) // #2E8B57
+    // Summary card icon badge colors (medium colored circles with white icons)
+    private let incomeBadgeGreen = Color(red: 0.26, green: 0.63, blue: 0.28) // #43A047 (medium green circle)
+    private let expenseBadgeRed = Color(red: 0.90, green: 0.22, blue: 0.21) // #E53935 (medium red circle)
+    private let profitBadgeGreen = Color(red: 0.26, green: 0.63, blue: 0.28) // #43A047 (medium green circle)
 
-    // Summary card amount colors
-    private let incomeAmountGreen = Color(red: 0.09, green: 0.40, blue: 0.20) // #166534
-    private let expenseAmountRed = Color(red: 0.86, green: 0.15, blue: 0.15) // #DC2626
-    private let profitAmountDark = Color(red: 0.12, green: 0.16, blue: 0.22) // #1F2937
+    // Icon colors (white icons on colored circles)
+    private let incomeIconColor = Color.white
+    private let expenseIconColor = Color.white
+    private let profitIconColor = Color.white
 
-    // Summary card border colors
-    private let incomeBorder = Color(red: 0.11, green: 0.42, blue: 0.18).opacity(0.35) // #1B6B2F
-    private let expenseBorder = Color(red: 0.86, green: 0.15, blue: 0.15).opacity(0.35) // #DC2626
-    private let profitBorder = Color(red: 0.18, green: 0.55, blue: 0.34).opacity(0.35) // #2E8B57
+    // Summary card text colors (dark text on light backgrounds)
+    private let incomeTitleGreen = Color(red: 0.18, green: 0.49, blue: 0.20) // #2E7D32
+    private let incomeAmountGreen = Color(red: 0.11, green: 0.37, blue: 0.13) // #1B5E20
+    private let expenseTitleRed = Color(red: 0.78, green: 0.16, blue: 0.16) // #C62828
+    private let expenseAmountRed = Color(red: 0.72, green: 0.11, blue: 0.11) // #B71C1C
+    private let profitTitleGreen = Color(red: 0.18, green: 0.49, blue: 0.20) // #2E7D32
+    private let profitAmountGreen = Color(red: 0.11, green: 0.37, blue: 0.13) // #1B5E20
 
-    // Percent pill colors
-    private let percentGreenBg = Color(red: 0.73, green: 0.97, blue: 0.82) // #BBF7D0
-    private let percentGreenText = Color(red: 0.09, green: 0.40, blue: 0.20) // #166534
-    private let percentRedBg = Color(red: 0.99, green: 0.79, blue: 0.79) // #FECACA
-    private let percentRedText = Color(red: 0.73, green: 0.11, blue: 0.11) // #B91C1C
+    // Summary card border colors (light soft borders)
+    private let incomeBorder = Color(red: 0.65, green: 0.84, blue: 0.65) // #A5D6A7 (light green)
+    private let expenseBorder = Color(red: 0.96, green: 0.72, blue: 0.69) // #F5B7B1 (light red/pink)
+    private let profitBorder = Color(red: 0.65, green: 0.84, blue: 0.65) // #A5D6A7 (light green)
+
+    // Percent pill colors (light tinted capsules)
+    private let percentGreenBg = Color(red: 0.78, green: 0.90, blue: 0.79) // #C8E6C9 (light green)
+    private let percentGreenText = Color(red: 0.18, green: 0.49, blue: 0.20) // #2E7D32 (dark green)
+    private let percentRedBg = Color(red: 1.0, green: 0.80, blue: 0.82) // #FFCDD2 (light red)
+    private let percentRedText = Color(red: 0.78, green: 0.16, blue: 0.16) // #C62828 (dark red)
 
     // Pill tab colors
-    private let selectedPillGreen = Color(red: 0.18, green: 0.62, blue: 0.27) // #2E9E44
+    private let selectedPillGreen = Color(red: 0.26, green: 0.63, blue: 0.28) // #43A047 (medium green)
     private let unselectedPillGray = Color(red: 0.22, green: 0.26, blue: 0.32) // #374151
     private let lightGrayBackground = Color(red: 0.95, green: 0.95, blue: 0.96)
 
@@ -242,7 +250,7 @@ struct FinanceTabView: View {
                     .font(.system(size: 18, weight: .semibold))
                     .foregroundColor(.white)
                     .frame(width: 44, height: 44)
-                    .background(Color.white.opacity(0.2))
+                    .background(bannerButtonBg)
                     .clipShape(Circle())
             }
 
@@ -284,7 +292,7 @@ struct FinanceTabView: View {
                     .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(.white)
                     .frame(width: 44, height: 44)
-                    .background(addButtonGreen)
+                    .background(bannerButtonBg)
                     .clipShape(Circle())
                     .shadow(color: Color.black.opacity(0.15), radius: 4, x: 0, y: 2)
             }
@@ -356,7 +364,9 @@ struct FinanceTabView: View {
             // Income card
             summaryCard(
                 icon: "leaf.fill",
+                iconColor: incomeIconColor,
                 badgeColor: incomeBadgeGreen,
+                labelColor: incomeTitleGreen,
                 label: L("finance.totalIncome"),
                 amount: CurrencyFormatter.string(income, currency: currency),
                 amountColor: incomeAmountGreen,
@@ -369,7 +379,9 @@ struct FinanceTabView: View {
             // Expense card
             summaryCard(
                 icon: "wallet.pass.fill",
+                iconColor: expenseIconColor,
                 badgeColor: expenseBadgeRed,
+                labelColor: expenseTitleRed,
                 label: L("finance.totalExpense"),
                 amount: CurrencyFormatter.string(expense, currency: currency),
                 amountColor: expenseAmountRed,
@@ -381,9 +393,10 @@ struct FinanceTabView: View {
 
             // Profit card with custom stacked coins icon
             profitSummaryCard(
+                labelColor: profitTitleGreen,
                 label: L("finance.profit"),
                 amount: CurrencyFormatter.string(profit, currency: currency),
-                amountColor: profit >= 0 ? profitAmountDark : expenseAmountRed,
+                amountColor: profitAmountGreen,
                 percentChange: profitPercent
             )
         }
@@ -391,13 +404,14 @@ struct FinanceTabView: View {
     }
 
     private func profitSummaryCard(
+        labelColor: Color,
         label: String,
         amount: String,
         amountColor: Color,
         percentChange: Double?
     ) -> some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.s) {
-            // Custom stacked coins icon badge
+            // Custom stacked coins icon badge (medium green circle with white coins)
             ZStack {
                 Circle()
                     .fill(profitBadgeGreen)
@@ -406,39 +420,39 @@ struct FinanceTabView: View {
                 // Stacked coins using three ellipses
                 VStack(spacing: -4) {
                     Ellipse()
-                        .fill(Color.white)
+                        .fill(profitIconColor)
                         .frame(width: 16, height: 6)
                         .overlay(
                             Ellipse()
-                                .stroke(Color(red: 0.11, green: 0.42, blue: 0.18), lineWidth: 1)
+                                .stroke(profitIconColor.opacity(0.6), lineWidth: 1)
                         )
 
                     Ellipse()
-                        .fill(Color.white)
+                        .fill(profitIconColor)
                         .frame(width: 16, height: 6)
                         .overlay(
                             Ellipse()
-                                .stroke(Color(red: 0.11, green: 0.42, blue: 0.18), lineWidth: 1)
+                                .stroke(profitIconColor.opacity(0.6), lineWidth: 1)
                         )
 
                     Ellipse()
-                        .fill(Color.white)
+                        .fill(profitIconColor)
                         .frame(width: 16, height: 6)
                         .overlay(
                             Ellipse()
-                                .stroke(Color(red: 0.11, green: 0.42, blue: 0.18), lineWidth: 1)
+                                .stroke(profitIconColor.opacity(0.6), lineWidth: 1)
                         )
                 }
             }
 
-            // Label
+            // Label (dark green text on light background)
             Text(label)
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundColor(grayDark)
+                .font(.system(size: 14, weight: .bold))
+                .foregroundColor(labelColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
 
-            // Amount
+            // Amount (dark green bold text on light background)
             Text(amount)
                 .font(.system(size: 20, weight: .bold).monospacedDigit())
                 .foregroundColor(amountColor)
@@ -473,7 +487,9 @@ struct FinanceTabView: View {
 
     private func summaryCard(
         icon: String,
+        iconColor: Color,
         badgeColor: Color,
+        labelColor: Color,
         label: String,
         amount: String,
         amountColor: Color,
@@ -483,22 +499,22 @@ struct FinanceTabView: View {
         isExpense: Bool
     ) -> some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.s) {
-            // Icon badge
+            // Icon badge (colored circle with white icon)
             Image(systemName: icon)
                 .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(.white)
+                .foregroundColor(iconColor)
                 .frame(width: 44, height: 44)
                 .background(badgeColor)
                 .clipShape(Circle())
 
-            // Label
+            // Label (dark text on light background)
             Text(label)
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundColor(grayDark)
+                .font(.system(size: 14, weight: .bold))
+                .foregroundColor(labelColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
 
-            // Amount
+            // Amount (dark bold text on light background)
             Text(amount)
                 .font(.system(size: 20, weight: .bold).monospacedDigit())
                 .foregroundColor(amountColor)
@@ -592,7 +608,7 @@ struct FinanceTabView: View {
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(.white)
                     .frame(width: 40, height: 40)
-                    .background(bannerGreenDark)
+                    .background(Color(red: 0.26, green: 0.63, blue: 0.28)) // #43A047 (medium green)
                     .clipShape(Circle())
                     .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
             }
